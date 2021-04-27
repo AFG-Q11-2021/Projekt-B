@@ -16,6 +16,10 @@ public class Model
 
     public static int FPS = 60;
     public static boolean running = false;
+    
+    public static Spieler spieler;
+    public static Karte karte;
+    public static Controller controller;
     public Model(){
 
     }
