@@ -1,3 +1,4 @@
+//Autor:Julius/Samuel
 public class Karte
 {
     private int[][] kartenArray;
@@ -15,6 +16,7 @@ public class Karte
     {
         return kartenArray;
     }
+    
     public int getCoordinate(int x, int y)
     {
         return kartenArray[x][y];
