@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-mport.java.awt.event.*;
-=======
 import.java.awt.event.*;
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
-import.java.awt.event.*;
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+
 /**
  * Write a description of class View here.
  *
@@ -18,15 +11,7 @@ import.java.awt.event.*;
 // wird später rüberkopiert
 public class View 
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
-=======
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+
     private boolean fwd;
     private boolean back;
     private boolean left;
@@ -75,11 +60,4 @@ public class View
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> c2c4e1ccabb71efc0a226be7310b13bae1b81e9a
-=======
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
 }
