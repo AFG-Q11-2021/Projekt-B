@@ -8,26 +8,37 @@
 public class Controller
 {
     // instance variables - replace the example below with your own
-    private int x;
+   public static int FPS = 60;
+    public static boolean running = false;
+    
+    public static Spieler spieler;
+    //karte soll nicht angesteuert WERDEN!
+    
+    public static Controller controller;
+    
+    public Controller(){
 
-    /**
-     * Constructor for objects of class Controller
-     */
-    public Controller()
-    {
-        // initialise instance variables
-        x = 0;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public static void main(String[] args){
+        running = true;
+        long lastupdate = System.nanoTime();
+        long currentTime = System.nanoTime();
+        while(running){
+            currentTime = System.nanoTime();
+            if(currentTime - lastupdate > 1000000000/FPS){
+                Update();
+                Render();
+                lastupdate = currentTime;
+            }
+
+        }
+    } 
+
+    //runs each Frame
+    public static void Update(){
+
+    }
+    public static void Render(){
     }
 }

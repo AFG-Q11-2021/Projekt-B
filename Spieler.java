@@ -1,3 +1,4 @@
+// Autoren: Martin ; Lasse//
 public class Spieler
 {
     private int px; // Postion x (Koordinatensystem)//
@@ -7,18 +8,28 @@ public class Spieler
     public Spieler(String usernameNeu)
     {
         username= usernameNeu;
+        int px = 1;
+        int py = 1;
     }
     
     public void geradeausGehen()
     {
-        px++;
+        py--;
     }
-    public void ruekwertsGehen()
+    public void rueckwertsGehen()
+    {
+        py++;
+    }
+    public void linksGehen()
     {
         px--;
     }
-    public Feld getPosition()
-    {//Aktualisiert die Position des Spilers//
+    public void rechtsGehen()
+    {
+        px++;
+    }
+    public Cell getPosition()
+    {//Aktualisiert die Position des Spielers//
         
     }
 }
