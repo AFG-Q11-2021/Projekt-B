@@ -9,18 +9,22 @@ public class Spieler
     private int y; // Postion y (Koordinatensystem)//
     private String username;
 
+
     private int leben;
     
+
 
 
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
 
+
         int x = 1;//Startpunkt des Spielers//
         int y = 1;
         int leben = 5;
         
+
 
 
         int px = 1;//Startpunkt des Spielers//
@@ -30,6 +34,7 @@ public class Spieler
     }
     public void paint (Graphics stift)
     {
+
 
 
     }
