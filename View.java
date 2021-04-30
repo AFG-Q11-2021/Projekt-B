@@ -1,11 +1,62 @@
 
+mport.java.awt.event.*;
 /**
  * Write a description of class View here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Niklas Rösner, Laurens Birkenbach (30.04.2021)
+ * @version 0.1
  */
-public class View
+
+// wird später rüberkopiert
+public class View 
 {
+<<<<<<< HEAD
     
+=======
+    private boolean fwd;
+    private boolean back;
+    private boolean left;
+    private boolean right;
+
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_W){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_S){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_A){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_D){ 
+            fwd = true;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_W){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_S){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_A){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_D){ 
+            fwd = false;
+        }
+    }
+
+>>>>>>> c2c4e1ccabb71efc0a226be7310b13bae1b81e9a
 }
