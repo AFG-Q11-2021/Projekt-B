@@ -12,7 +12,10 @@ public class Spieler
         username= usernameNeu;
         int px = 1;//Startpunkt des Spielers//
         int py = 1;
-
+        stift.setColor(farbe);
+        stift.fillRect(px, py, 20, 20);
+        stift.setColor(Color.BLACK);
+        stift.drawRect(px,py, 20, 20);
     }
     public void paint (Graphics stift)
     {
