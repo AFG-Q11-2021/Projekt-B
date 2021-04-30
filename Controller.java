@@ -12,7 +12,8 @@ public class Controller
     public static boolean running = false;
     
     public static Spieler spieler;
-    public static Karte karte;
+    //karte soll nicht angesteuert WERDEN!
+    
     public static Controller controller;
     
     public Controller(){
