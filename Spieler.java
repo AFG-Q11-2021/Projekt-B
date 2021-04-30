@@ -13,7 +13,7 @@ public class Spieler
     {
         px++;
     }
-    public void ruekwertsGehen()
+    public void rueckwertsGehen()
     {
         px--;
     }
