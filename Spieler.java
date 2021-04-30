@@ -1,4 +1,6 @@
 // Autoren: Martin ; Lasse//
+import java.awt.Graphics;
+import java.awt.Color;
 public class Spieler
 {
     private int px; // Postion x (Koordinatensystem)//
@@ -8,10 +10,14 @@ public class Spieler
     public Spieler(String usernameNeu)
     {
         username= usernameNeu;
-        int px = 1;
+        int px = 1;//Startpunkt des Spielers//
         int py = 1;
+        
     }
-    
+    public void paint (Graphics stift)
+    {
+        
+    }
     public void geradeausGehen()
     {
         py--;
@@ -28,8 +34,9 @@ public class Spieler
     {
         px++;
     }
-    public Cell getPosition()
+    public Karte getPosition()
     {//Aktualisiert die Position des Spielers//
         
     }
+    
 }
