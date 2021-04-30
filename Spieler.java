@@ -5,11 +5,15 @@ public class Spieler
     private int py; // Postion y (Koordinatensystem)//
     private String username;
     
-    public Spieler(String usernameNeu)
+    public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
         int px = 1;
         int py = 1;
+        stift.setColor(farbe);
+        stift.fillRect(px, py, 20, 20);
+        stift.setColor(Color.BLACK);
+        stift.drawRect(px, py, 20, 20);
     }
     
     public void geradeausGehen()
