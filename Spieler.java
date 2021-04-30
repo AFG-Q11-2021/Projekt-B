@@ -16,7 +16,7 @@ public class Spieler
     {
         py--;
     }
-    public void ruekwertsGehen()
+    public void rueckwertsGehen()
     {
         py++;
     }
