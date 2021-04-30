@@ -19,17 +19,25 @@ public class Spieler
     
     public void geradeausGehen()
     {
-        y--;
+       if(y>0)
+       {
+          y--;
+       }
     }
-
     public void rueckwertsGehen()
     {
-        y++;
+        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
+        {
+           y++;
+        }
     }
 
     public void linksGehen()
     {
-        x--;
+        if(x>0)
+        {
+           x--;
+        }
     }
 
     public void rechtsGehen()
