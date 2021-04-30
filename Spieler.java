@@ -1,6 +1,14 @@
 // Autoren: Martin ; Lasse//
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 import java.awt.Graphics;
 import java.awt.Color;
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+=======
+import java.awt.Graphics;
+import java.awt.Color;
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
 public class Spieler
 {
     private int px; // Postion x (Koordinatensystem)//
@@ -10,6 +18,11 @@ public class Spieler
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
+<<<<<<< HEAD
+<<<<<<< HEAD
+        int px = 1;
+        int py = 1;
+=======
         int px = 1;//Startpunkt des Spielers//
         int py = 1;
 
@@ -19,6 +32,18 @@ public class Spieler
         stift.drawRect(px,py, 20, 20);
 
         
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+=======
+        int px = 1;//Startpunkt des Spielers//
+        int py = 1;
+
+        stift.setColor(farbe);
+        stift.fillRect(px, py, 20, 20);
+        stift.setColor(Color.BLACK);
+        stift.drawRect(px,py, 20, 20);
+
+        
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
     }
     public void paint (Graphics stift)
     {
@@ -40,7 +65,15 @@ public class Spieler
     {
         px++;
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public Cell getPosition()
+=======
     public Karte getPosition()
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+=======
+    public Karte getPosition()
+>>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
     {//Aktualisiert die Position des Spielers//
         
     }
