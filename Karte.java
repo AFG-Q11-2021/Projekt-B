@@ -1,4 +1,5 @@
 //Autor:Julius/Samuel
+//not for use!!! only data type like int. Not for use
 public class Karte
 {
     private int[][] kartenArray;
