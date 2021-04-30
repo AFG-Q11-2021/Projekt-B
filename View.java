@@ -1,33 +1,57 @@
-
+import.java.awt.event.*;
 /**
  * Write a description of class View here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Niklas Rösner, Laurens Birkenbach (30.04.2021)
+ * @version 0.1
  */
-public class View
+
+// wird später rüberkopiert
+public class View 
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    private boolean fwd;
+    private boolean back;
+    private boolean left;
+    private boolean right;
 
-    /**
-     * Constructor for objects of class View
-     */
-    public View()
-    {
-        // initialise instance variables
-        x = 0;
+    public void keyTyped(KeyEvent e) {
+
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_W){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_S){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_A){ 
+            fwd = true;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_D){ 
+            fwd = true;
+        }
     }
+
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_W){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_S){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_A){ 
+            fwd = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_D){ 
+            fwd = false;
+        }
+    }
+
 }
