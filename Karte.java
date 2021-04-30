@@ -1,5 +1,5 @@
 //Autor:Julius/Samuel
-public abstract class Karte
+public class Karte
 {
     private int[][] kartenArray;
     public Karte(int x, int y)
