@@ -3,42 +3,34 @@ import java.awt.Graphics;
 import java.awt.Color;
 public class Spieler
 {
-    private int px; // Postion x (Koordinatensystem)//
-    private int py; // Postion y (Koordinatensystem)//
+    private int x; // Postion x (Koordinatensystem)//
+    private int y; // Postion y (Koordinatensystem)//
     private String username;
+    private int leben;
     
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
-        int px = 1;//Startpunkt des Spielers//
-        int py = 1;
-
-        stift.setColor(farbe);
-        stift.fillRect(px, py, 20, 20);
-        stift.setColor(Color.BLACK);
-        stift.drawRect(px,py, 20, 20);
-
-        
-    }
-    public void paint (Graphics stift)
-    {
+        int x = 1;//Startpunkt des Spielers//
+        int y = 1;
+        int leben = 5;
         
     }
     public void geradeausGehen()
     {
-        py--;
+        y--;
     }
     public void rueckwertsGehen()
     {
-        py++;
+        y++;
     }
     public void linksGehen()
     {
-        px--;
+        x--;
     }
     public void rechtsGehen()
     {
-        px++;
+        x++;
     }
     public Karte getPosition()
     {//Aktualisiert die Position des Spielers//
