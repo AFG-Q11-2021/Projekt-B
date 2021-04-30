@@ -1,23 +1,18 @@
 // Autoren: Martin ; Lasse//
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import java.awt.Graphics;
 import java.awt.Color;
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
-import java.awt.Graphics;
-import java.awt.Color;
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+
 public class Spieler
 {
-    private int px; // Postion x (Koordinatensystem)//
-    private int py; // Postion y (Koordinatensystem)//
+    private int x; // Postion x (Koordinatensystem)//
+    private int y; // Postion y (Koordinatensystem)//
     private String username;
-    
+    private int leben;
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         int px = 1;
@@ -73,6 +68,34 @@ public class Spieler
 >>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
     {//Aktualisiert die Position des Spielers//
         
+=======
+        int x = 1;//Startpunkt des Spielers//
+        int y = 1;
+        int leben = 5;
+>>>>>>> 20ae19b908190b92fb1fffc5261aefc02e1ec02a
     }
     
+    public void geradeausGehen()
+    {
+        y--;
+    }
+
+    public void rueckwertsGehen()
+    {
+        y++;
+    }
+
+    public void linksGehen()
+    {
+        x--;
+    }
+
+    public void rechtsGehen()
+    {
+        x++;
+    }
+
+    public Karte getPosition()
+    {//Aktualisiert die Position des Spielers//
+    }
 }
