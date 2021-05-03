@@ -9,6 +9,7 @@ public class Spieler
     private int py; // Postion y (Koordinatensystem)//
     private String username;
     private int leben;
+    private Color farbe;
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
@@ -22,6 +23,7 @@ public class Spieler
         stift.drawRect(px,py, 20, 20);
 
     }
+    
     public void paint (Graphics stift)
     {
 
@@ -55,38 +57,5 @@ public class Spieler
         int y = 1;
         int leben = 5;
 
-    }
-
-    public void geradeausGehen()
-    {
-        if(y>0)
-        {
-            y--;
-        }
-    }
-
-    public void rueckwertsGehen()
-    {
-        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
-        {
-            y++;
-        }
-    }
-
-    public void linksGehen()
-    {
-        if(x>0)
-        {
-            x--;
-        }
-    }
-
-    public void rechtsGehen()
-    {
-        x++;
-    }
-
-    public Karte getPosition()
-    {//Aktualisiert die Position des Spielers//
     }
 }

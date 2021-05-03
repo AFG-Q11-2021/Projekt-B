@@ -25,7 +25,7 @@ public class Controller
     public static void main(String[] args){
         running = true;
         //spieler = new Spieler();
-        fenster = new Frame();
+        fenster = new Frame("Raycaster");
         //Canvas canvas = fenster.getCanvas();
        // darsteller = new KartenDarsteller(canvas);
         

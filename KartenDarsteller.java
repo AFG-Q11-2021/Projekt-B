@@ -5,18 +5,20 @@ public class KartenDarsteller
 {
     private Karte kartetest;//für den Darsteller umschreiben
     private Canvas canvas;
+    private int csizeX;
+    private int csizeY;
     public KartenDarsteller(Canvas tcanvas)
     {
         canvas = tcanvas;
         kartetest = new Karte(4,4);
         kartetest.setKartenArray(2, 2, 1);
-        int csizeX = canvas.getMaximumSize().getWidth()/kartetest.getSizeX();
-        int csizeY = canvas.getMaximumSize().getHeight()/kartetest.getSizeY();
+        csizeX = (int)canvas.getMaximumSize().getWidth()/kartetest.getSizeX();
+        csizeY = (int)canvas.getMaximumSize().getHeight()/kartetest.getSizeY();
     }
-    
+
     public void castPic()
     {
-        Graphics graph;
+        Graphics graph = canvas.getGraphics();
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0){
@@ -25,5 +27,5 @@ public class KartenDarsteller
             }
         }
     }
-    
+
 }
