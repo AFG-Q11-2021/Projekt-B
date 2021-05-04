@@ -5,52 +5,38 @@ import java.awt.Color;
 
 public class Spieler
 {
-    private int x; // Postion x (Koordinatensystem)//
-    private int y; // Postion y (Koordinatensystem)//
+    private int px; // Postion x (Koordinatensystem)//
+    private int py; // Postion y (Koordinatensystem)//
     private String username;
     private int leben;
+    private Color farbe;
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
+
         int px = 1;//Startpunkt des Spielers//
-
         int py = 1;//Startpunkt des Spielers//
+        int leben = 5;
 
-        stift.setColor(farbe);
-        stift.fillRect(px, py, 20, 20);
-        stift.setColor(Color.BLACK);
-        stift.drawRect(px,py, 20, 20);
-
-        
 
     }
-    public void paint (Graphics stift)
-    {
-        
-    }
-    public void geradeausGehen()
-    {
-        py--;
-    }
-    public void rueckwertsGehen()
-    {
-        py++;
-    }
+    
+
     public void linksGehen()
     {
-        px--;
-    }
-    public void rechtsGehen()
-    {
-        px++;
+        x--;
     }
 
-    
+    public void rechtsGehen()
+    {
+        x++;
+    }
+
+
     public Karte getPosition()
+
     {//Aktualisiert die Position des Spielers//
-        int x = 1;//Startpunkt des Spielers//
-        int y = 1;
-        int leben;
+
     }
     
     public void geradeausGehen()
@@ -68,20 +54,6 @@ public class Spieler
         }
     }
 
-    public void linksGehen()
-    {
-        if(x>0)
-        {
-           x--;
-        }
+
     }
 
-    public void rechtsGehen()
-    {
-        x++;
-    }
-
-    public Karte getPosition()
-    {//Aktualisiert die Position des Spielers//
-    }
-}
