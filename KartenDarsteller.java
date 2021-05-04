@@ -16,16 +16,19 @@ public class KartenDarsteller
         csizeY = (int)canvas.getMaximumSize().getHeight()/kartetest.getSizeY();
     }
 
-    public void castPic()
+    public void paint(Graphics graph)
     {
-        Graphics graph = canvas.getGraphics();
-        for(int x=0;x<kartetest.getSizeX();x++){
-            for(int y=0;y<kartetest.getSizeY();y++){
+        
+        for(int x = 0 ;x < kartetest.getSizeX() ;x++){
+            for(int y = 0 ;y < kartetest.getSizeY() ;y++){
                 if(kartetest.getCoordinate(x, y)!=0){
-                    graph.drawRect(x*csizeX,y*csizeY,csizeX,csizeY);
+                    Color color = new Color(100,0,0);
+                    graph.setColor(color);
+                    graph.fillRect(x*csizeX,y*csizeY,csizeX,csizeY);
                 }
             }
         }
+        canvas.update(graph);
     }
 
 }
