@@ -12,22 +12,9 @@ public class Spieler
     public Spieler(String usernameNeu, Graphics stift)
     {
         username= usernameNeu;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        int px = 1;
-        int py = 1;
-=======
         int px = 1;//Startpunkt des Spielers//
-        int py = 1;
 
-
-
-        
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
-        int px = 1;//Startpunkt des Spielers//
-        int py = 1;
+        int py = 1;//Startpunkt des Spielers//
 
         stift.setColor(farbe);
         stift.fillRect(px, py, 20, 20);
@@ -35,7 +22,7 @@ public class Spieler
         stift.drawRect(px,py, 20, 20);
 
         
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
+
     }
     public void paint (Graphics stift)
     {
@@ -57,22 +44,13 @@ public class Spieler
     {
         px++;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public Cell getPosition()
-=======
+
+    
     public Karte getPosition()
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
-=======
-    public Karte getPosition()
->>>>>>> a0bcf831b97d90f83ae8ce214e7affb08ffe235d
     {//Aktualisiert die Position des Spielers//
-        
-=======
         int x = 1;//Startpunkt des Spielers//
         int y = 1;
-        int leben = 5;
->>>>>>> 20ae19b908190b92fb1fffc5261aefc02e1ec02a
+        int leben;
     }
     
     public void geradeausGehen()
