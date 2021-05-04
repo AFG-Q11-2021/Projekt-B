@@ -14,6 +14,7 @@ public class Spieler
     {
         username= usernameNeu;
 
+
         int px = 1;//Startpunkt des Spielers//
         int py = 1;//Startpunkt des Spielers//
         int leben = 5;
@@ -21,6 +22,7 @@ public class Spieler
 
     }
     
+
 
     public void linksGehen()
     {
@@ -36,6 +38,7 @@ public class Spieler
     public Karte getPosition()
 
     {//Aktualisiert die Position des Spielers//
+
 
     }
     
@@ -56,4 +59,4 @@ public class Spieler
 
 
     }
-
+ 
