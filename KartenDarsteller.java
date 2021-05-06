@@ -19,7 +19,7 @@ public class KartenDarsteller
     public void paint(Graphics graph)
     {
         
-        for(int x = 0 ;x < kartetest.getSizeX() ;x++){
+        /*for(int x = 0 ;x < kartetest.getSizeX() ;x++){
             for(int y = 0 ;y < kartetest.getSizeY() ;y++){
                 if(kartetest.getCoordinate(x, y)!=0){
                     Color color = new Color(100,0,0);
@@ -27,8 +27,11 @@ public class KartenDarsteller
                     graph.fillRect(x*csizeX,y*csizeY,csizeX,csizeY);
                 }
             }
-        }
-        canvas.update(graph);
+        }*/
+        Color color = new Color(100,0,0);
+        graph.setColor(color);
+        graph.drawRect(50, 50, 50, 50);
+        canvas.paint(graph);
     }
 
 }

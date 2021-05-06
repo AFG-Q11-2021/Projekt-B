@@ -1,6 +1,6 @@
 //Autor:Julius/Samuel
 //not for use!!! only data type like int. Not for use
-//Nicht dies hier benutzen, das ist bloß ein Datentyp. Für Geländedaten bitte den aktiven Verwalter anfragen, der handled dann speichertasks und andere
+//Nicht dies hier benutzen, das ist bloß ein Datentyp. Für Geländedaten bitte den aktiven Verwalter(kommt später irgendwann) anfragen, der handled dann Speichertasks und andere
 public class Karte
 {
     private int[][] kartenArray;

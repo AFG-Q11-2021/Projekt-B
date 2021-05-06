@@ -49,6 +49,7 @@ public class Spieler
           y--;
         }
     }
+    
     public void rueckwertsGehen()
     {
         if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
