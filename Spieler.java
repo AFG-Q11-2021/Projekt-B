@@ -10,10 +10,11 @@ public class Spieler
     private String username;
     private int leben;
     private double rotation;
-    
-    public Spieler(String usernameNeu, Graphics stift)
+    private Karte karte;
+    public Spieler(String usernameNeu, Graphics stift, Karte kartet)
     {
         username= usernameNeu;
+        karte=kartet;
         int px = 1;//Startpunkt des Spielers//
         int py = 1;//Startpunkt des Spielers//
         int leben = 5;
@@ -31,7 +32,7 @@ public class Spieler
 
     public void rechtsGehen()
     {
-        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
+        if(y<karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
         {
             x=x+(1*Math.cos(rotation+90));
             y=y+(1*Math.sin(rotation+90));
@@ -43,7 +44,7 @@ public class Spieler
 
     {//Aktualisiert die Position des Spielers//
 
-
+        return new Karte();
     }
     
     public void geradeausGehen()
@@ -57,7 +58,7 @@ public class Spieler
     
     public void rueckwertsGehen()
     {
-        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
+        if(y<karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
         {
            x=x-(1*Math.cos(rotation));
            y=y-(1*Math.sin(rotation));
