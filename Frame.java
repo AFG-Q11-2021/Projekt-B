@@ -30,17 +30,17 @@ public class Frame extends JFrame implements ActionListener
         super(title);
 
         schliessen = new JButton("Single Player");
-        schliessen.setBounds(550,600,500,50);
+        schliessen.setBounds(280,590,750,50);
         schliessen.addActionListener(this);
         add(schliessen);
 
         auswahl = new JButton("Multiplayer");
-        auswahl.setBounds(550,650,500,50);
+        auswahl.setBounds(280,650,750,50);
         auswahl.addActionListener(this);
         add(auswahl);
 
         ende = new JButton("Beenden");
-        ende.setBounds(550,770,500,50);
+        ende.setBounds(280,770,750,50);
         ende.addActionListener(this);
         add (ende);
 
