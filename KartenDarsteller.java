@@ -1,6 +1,6 @@
 //Author: Samuel T , Julius R
 // Don't touch my baby
-//das hier ist nicht die endlösung. Wir wollen bloß sehen was wir machen 
+//das hier ist nicht die Endlösung. Wir wollen bloß sehen was wir machen 
 import java.awt.*;
 public class KartenDarsteller
 {
