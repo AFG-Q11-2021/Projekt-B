@@ -17,6 +17,7 @@ public class Spieler
         int px = 1;//Startpunkt des Spielers//
         int py = 1;//Startpunkt des Spielers//
         int leben = 5;
+        double rotation=90.0;
     }
 
     public void linksGehen()
