@@ -12,7 +12,7 @@ public class KartenDarsteller
     {
         Canvas canvas = tcanvas;
         graph = tgraph;
-        kartetest = new Karte(4,4);
+        kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)canvas.getMaximumSize().getWidth()/kartetest.getSizeX();
         csizeY = (int)canvas.getMaximumSize().getHeight()/kartetest.getSizeY();
