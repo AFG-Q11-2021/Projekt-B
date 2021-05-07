@@ -4,12 +4,13 @@ import java.awt.*;
 public class KartenDarsteller
 {
     private Karte kartetest;//für den Darsteller umschreiben
-    private Canvas canvas;
+    private Graphics graph;
     private int csizeX;
     private int csizeY;
-    public KartenDarsteller(Canvas tcanvas)
+    public KartenDarsteller(Graphics tgraph, Canvas tcanvas)
     {
-        canvas = tcanvas;
+        Canvas canvas = tcanvas;
+        graph = tgraph;
         kartetest = new Karte(4,4);
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)canvas.getMaximumSize().getWidth()/kartetest.getSizeX();
@@ -18,7 +19,6 @@ public class KartenDarsteller
 
     public void castPic()
     {
-        Graphics graph = canvas.getGraphics();
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0){
