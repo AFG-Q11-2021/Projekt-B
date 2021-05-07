@@ -16,6 +16,7 @@ public class Controller
     public static Game game;
     // public static KartenDarsteller darsteller;
     public static Frame frame;
+    public static KartenDarsteller darsteller;
     //karte soll nicht angesteuert WERDEN!
 
     public static Controller controller;
@@ -33,7 +34,9 @@ public class Controller
 
         frame.setLayout(null);
         frame.setVisible(true);
-
+        
+        darsteller = new KartenDarsteller(game.graphics,game);
+        
         long lastupdate = System.nanoTime();
         long currentTime = System.nanoTime();
         while(running){
@@ -56,6 +59,7 @@ public class Controller
     public static void Render(){
         if(Controller.game != null){
             game.render();
+            darsteller.castPic();
         }
     }
 }
