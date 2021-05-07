@@ -2,7 +2,7 @@
 import java.io.*;
 public class KartenVerwalter
 {
-    Karte activeMap;
+    private Karte activeMap;
     
     public KartenVerwalter()
     {
@@ -21,8 +21,8 @@ public class KartenVerwalter
     
     private Karte getMapFromStorage(int buildIndex)
     {
-        Karte gesucht;
-        String g = buildIndex+".txt";
+        Karte gesucht = new Karte();
+        String g = buildIndex + ".txt";
         //soll eine karte aus den Speicher Auslesen
         this.karteLaden(gesucht,g);
         return gesucht;
@@ -40,13 +40,10 @@ public class KartenVerwalter
                     if(x < karte.getSizeX()){
                         karte.setKartenArray(x,y,Integer.parseInt(lineArray[x]));
                     }
-
                 }
-
             } catch (Exception e){
                 //Klingelin
             }
-
         }
     }
     
