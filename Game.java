@@ -11,6 +11,7 @@ import java.awt.image.*;
 public class Game extends Canvas
 {
     public JFrame frame1;
+    public Graphics graphics;
     private String title = "Game";
     private final int WIDTH = 1000;
     private final int HEIGHT = 1000;
@@ -34,8 +35,11 @@ public class Game extends Canvas
         this.createBufferStrategy(2);
         BufferStrategy bs = this.getBufferStrategy();
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         g.fillRect(0,0,WIDTH,HEIGHT);
+        this.graphics = g;
+        bs.show();
+        
     }
 
 }
