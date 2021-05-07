@@ -5,10 +5,11 @@ import java.awt.Color;
 
 public class Spieler
 {
-    private int x; // Postion x (Koordinatensystem)//
-    private int y; // Postion y (Koordinatensystem)//
+    private double x; // Postion x (Koordinatensystem)//
+    private double y; // Postion y (Koordinatensystem)//
     private String username;
     private int leben;
+    private double rotation;
     
     public Spieler(String usernameNeu, Graphics stift)
     {
@@ -16,13 +17,15 @@ public class Spieler
         int px = 1;//Startpunkt des Spielers//
         int py = 1;//Startpunkt des Spielers//
         int leben = 5;
+        double rotation=90.0;
     }
 
     public void linksGehen()
     {
         if(x>0)
         {
-            x--;
+            x=x+(1*Math.cos(rotation-90));
+            y=y+(1*Math.sin(rotation-90));
         }
     }
 
@@ -30,7 +33,8 @@ public class Spieler
     {
         if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
         {
-            x++;
+            x=x+(1*Math.cos(rotation+90));
+            y=y+(1*Math.sin(rotation+90));
         }
     }
 
@@ -46,21 +50,28 @@ public class Spieler
     {
         if(y>0)
         {
-          y--;
-        }
+           x=x+(1*Math.cos(rotation));
+           y=y+(1*Math.sin(rotation));
+        } 
     }
     
     public void rueckwertsGehen()
     {
         if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
         {
-           y++;
+           x=x-(1*Math.cos(rotation));
+           y=y-(1*Math.sin(rotation));
         }
     }
     
-    public void rotation()
+    public void linksdrehen()
     {
-        
+        rotation--;
+    }
+    
+    public void rechtsdrehen()
+    {
+        rotation++;
     }
     }
  

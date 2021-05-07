@@ -1,6 +1,6 @@
 //Author: Samuel T , Julius R
 // Don't touch my baby
-//das hier ist nicht die endlösung. Wir wollen bloß sehen was wir machen 
+//das hier ist nicht die Endlösung. Wir wollen bloß sehen was wir machen 
 import java.awt.*;
 public class KartenDarsteller
 {
@@ -12,7 +12,7 @@ public class KartenDarsteller
     {
         Canvas canvas = tcanvas;
         graph = tgraph;
-        kartetest = new Karte(4,4);
+        kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)canvas.getMaximumSize().getWidth()/kartetest.getSizeX();
         csizeY = (int)canvas.getMaximumSize().getHeight()/kartetest.getSizeY();

@@ -6,11 +6,11 @@ public class Karte
     private int[][] kartenArray;
     private int x1;
     private int y1;
-    public Karte(int x, int y)
+    public Karte()
     {
+        int x= 64;
+        int y= 64;
         kartenArray = new int[x][y];// setzt die Kartengröße
-        x1=x;
-        y1=y;
     }
     
     public void setKartenArray(int xCoord , int yCoord, int filler)
