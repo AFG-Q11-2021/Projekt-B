@@ -11,9 +11,10 @@ public class Controller
    public static int FPS = 60;
     public static boolean running = false;
     
-    public static Spieler spieler;
-    public static Frame fenster;
-    public static KartenDarsteller darsteller;
+  //  public static Spieler spieler;
+  //  public static Frame fenster;
+   // public static KartenDarsteller darsteller;
+    public static Game game;
     //karte soll nicht angesteuert WERDEN!
     
     public static Controller controller;
@@ -25,7 +26,9 @@ public class Controller
     public static void main(String[] args){
         running = true;
         //spieler = new Spieler();
-        fenster = new Frame("Raycaster");
+        game = new Game();
+     
+       // fenster = new Frame("Raycaster");
         //Canvas canvas = fenster.getCanvas();
        // darsteller = new KartenDarsteller(canvas);
         
@@ -37,7 +40,7 @@ public class Controller
             currentTime = System.nanoTime();
             if(currentTime - lastupdate > 1000000000/FPS){
                 Update();
-                Render();
+                game.render();
                 lastupdate = currentTime;
             }
 
