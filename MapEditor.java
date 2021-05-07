@@ -31,7 +31,7 @@ public class MapEditor
         }
     }
 
-    public static void karteSpeichern(Karte karte, String dateiName){
+    public static void karteSpeichern(Karte karte, String dateiName){ //Bitte nur positive int Werte als Dateiname verwenden! LG Julius
         File file =new File(dateiName);
         
         try{
