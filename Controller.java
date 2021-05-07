@@ -2,7 +2,7 @@
 /**
  * Controller Class
  *
- * @author Christus Scherübl, Laurens Birkenbach, Niklas Rösner (07.05.2021 n. Chr.)
+ * @author Laurens Birkenbach, Christopher Scherübl, Niklas Rösner (07.05.2021 n. Chr.)
  * @version 0.2
  */
 
