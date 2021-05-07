@@ -5,10 +5,11 @@ import java.awt.Color;
 
 public class Spieler
 {
-    private int x; // Postion x (Koordinatensystem)//
-    private int y; // Postion y (Koordinatensystem)//
+    private double x; // Postion x (Koordinatensystem)//
+    private double y; // Postion y (Koordinatensystem)//
     private String username;
     private int leben;
+    private double rotation;
     
     public Spieler(String usernameNeu, Graphics stift)
     {
@@ -46,7 +47,7 @@ public class Spieler
     {
         if(y>0)
         {
-          y--;
+          x=x+(1*Math.cos(rotation));
         }
     }
     
