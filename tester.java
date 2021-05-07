@@ -10,8 +10,9 @@ public class tester
         Graphics graphics = cani.getGraphics();
         fame.setSize(600,600);
         karte = new KartenDarsteller(graphics, cani);
-        karte.castPic();
         fame.add(cani);
+        cani.update(karte.castPic());
+        
         fame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fame.setVisible(true);
     }

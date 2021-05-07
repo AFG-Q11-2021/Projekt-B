@@ -18,18 +18,18 @@ public class KartenDarsteller
         csizeY = (int)canvas.getMaximumSize().getHeight()/kartetest.getSizeY();
     }
 
-    public void castPic()
+    public Graphics castPic()
     {
 
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
-                if(kartetest.getCoordinate(x, y)!=0){
-                    Color color = new Color(100,0,0);
-                    graph.setColor(color);
+                if(kartetest.getCoordinate(x, y)!=0)
+                {
                     graph.fillRect(x*csizeX,y*csizeY,csizeX,csizeY);
                 }
             }
         }
+        return graph;
     }
 
 }
