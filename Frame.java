@@ -9,7 +9,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Frame extends JFrame implements ActionListener
-
 {
 
     private JButton schliessen;

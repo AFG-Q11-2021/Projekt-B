@@ -12,6 +12,8 @@ public class Controller
     public static boolean running = false;
     
     public static Spieler spieler;
+    public static Frame fenster;
+    public static KartenDarsteller darsteller;
     //karte soll nicht angesteuert WERDEN!
     
     public static Controller controller;
@@ -22,6 +24,13 @@ public class Controller
 
     public static void main(String[] args){
         running = true;
+        //spieler = new Spieler();
+        fenster = new Frame("Raycaster");
+        //Canvas canvas = fenster.getCanvas();
+       // darsteller = new KartenDarsteller(canvas);
+        
+        
+        
         long lastupdate = System.nanoTime();
         long currentTime = System.nanoTime();
         while(running){
