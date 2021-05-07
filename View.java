@@ -29,15 +29,15 @@ public class View
         }
         //rückwärts
         if(e.getKeyCode() == KeyEvent.VK_S){ 
-            fwd = true;
+            back = true;
         }
         //links
         if(e.getKeyCode() == KeyEvent.VK_A){ 
-            fwd = true;
+            left = true;
         }
         //rechts
         if(e.getKeyCode() == KeyEvent.VK_D){ 
-            fwd = true;
+            right = true;
         }
     }
 
@@ -48,15 +48,15 @@ public class View
         }
         //rückwärts
         if(e.getKeyCode() == KeyEvent.VK_S){ 
-            fwd = false;
+            back = false;
         }
         //links
         if(e.getKeyCode() == KeyEvent.VK_A){ 
-            fwd = false;
+            left = false;
         }
         //rechts
         if(e.getKeyCode() == KeyEvent.VK_D){ 
-            fwd = false;
+            right = false;
         }
     }
 
