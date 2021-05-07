@@ -10,11 +10,12 @@ public class MapEditor
 {
 
     public static void karteLaden(Karte karte, String dateiName){
+        try{
         FileReader fr = new FileReader(dateiName);
         BufferedReader br = new BufferedReader(fr);
 
         for(int y = 0; y < karte.getSizeY();y++){
-            try{
+            
                 String line = br.readLine();
                 String[] lineArray = line.split(" ");
                 for(int x = 0; x < lineArray.length;x++){
@@ -24,25 +25,26 @@ public class MapEditor
 
                 }
 
-            } catch (Exception e){
-                //Klingelin
-            }
-
+            } 
+        br.close();
         }
+        catch (Exception e){
+            //Klingelin
     }
+}
 
-    public static void karteSpeichern(Karte karte, String dateiName){ //Bitte nur positive int Werte als Dateiname verwenden! LG Julius
-        File file =new File(dateiName);
+public static void karteSpeichern(Karte karte, String dateiName){ //Bitte nur positive int Werte als Dateiname verwenden! LG Julius
+File file =new File(dateiName);
 
-        try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file)); 
-            //Writer für Text
+try{
+BufferedWriter writer = new BufferedWriter(new FileWriter(file)); 
+//Writer für Text
 
-        }
-        catch(Exception e){
-            //Klingeling
-        }
+}
+catch(Exception e){
+//Klingeling
+}
 
-    } 
+} 
 
 }
