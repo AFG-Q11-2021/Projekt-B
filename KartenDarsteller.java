@@ -1,5 +1,6 @@
 //Author: Samuel T , Julius R
-// Don't touch my baby 
+// Don't touch my baby
+//das hier ist nicht die endlösung. Wir wollen bloß sehen was wir machen 
 import java.awt.*;
 public class KartenDarsteller
 {
@@ -19,10 +20,13 @@ public class KartenDarsteller
 
     public void castPic()
     {
+
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0){
-                    graph.drawRect(x*csizeX,y*csizeY,csizeX,csizeY);
+                    Color color = new Color(100,0,0);
+                    graph.setColor(color);
+                    graph.fillRect(x*csizeX,y*csizeY,csizeX,csizeY);
                 }
             }
         }
