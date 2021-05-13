@@ -1,10 +1,10 @@
 //Author: Samuel T , Julius R
 import java.io.*;
-public class KartenVerwalter
+public class Kartenverwalter
 {
     private Karte activeMap;
 
-    public KartenVerwalter()
+    public Kartenverwalter()
     {
 
     }

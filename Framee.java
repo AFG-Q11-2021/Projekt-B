@@ -8,13 +8,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Frame extends JFrame implements ActionListener
+public class Framee extends JFrame implements ActionListener
 {
     private JButton schliessen;
     private JButton auswahl;
     private JButton ende;
-    
-    public Frame(String title)
+    private static Kartendarsteller darsteller;
+    public Framee(String title)
     {
         super(title);
 
@@ -40,10 +40,12 @@ public class Frame extends JFrame implements ActionListener
             if(e.getSource() == schliessen)
             {
                 fenster();
+                this.setVisible(false);
             }
             if(e.getSource() == auswahl)
             {
                 auswahl();
+                this.setVisible(false);
             }
             if(e.getSource() == ende)
             {
@@ -54,7 +56,10 @@ public class Frame extends JFrame implements ActionListener
 
     public static void fenster()
     {
-        Controller.game = new Game();
+        Game gamee = new Game();
+        darsteller = new Kartendarsteller(gamee.getGraphics(),gamee);
+        Controller.Setgame(gamee);
+        Controller.Setkartendarsteller(darsteller);
     }
 
     public static void auswahl()

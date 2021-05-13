@@ -6,7 +6,7 @@
  * @version 0.2
  */
 
-import java.awt.*;
+//import java.awt.*;
 import javax.swing.*;
 public class Controller
 {
@@ -15,8 +15,8 @@ public class Controller
     public static boolean running = false;
     public static Game game;
     // public static KartenDarsteller darsteller;
-    public static Frame frame;
-    public static KartenDarsteller darsteller;
+    public static Framee frame;
+    public static Kartendarsteller darsteller;
     //karte soll nicht angesteuert WERDEN!
 
     public static Controller controller;
@@ -28,14 +28,14 @@ public class Controller
     public static void main(String[] args){
         running = true;
         //Startmenü öffnen
-        frame = new Frame("Startmenü");
+        frame = new Framee("Startmenü");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1290,1100);
 
         frame.setLayout(null);
         frame.setVisible(true);
         
-        darsteller = new KartenDarsteller(game.graphics,game);
+        //darsteller = new Kartendarsteller(game.graphics,game);//macht hier keinen Sinn-->in Framee gewandert
         
         long lastupdate = System.nanoTime();
         long currentTime = System.nanoTime();
@@ -57,9 +57,18 @@ public class Controller
     }
 
     public static void Render(){
-        if(Controller.game != null){
+        if(game != null){
             game.render();
-            darsteller.castPic();
+            //darsteller.castPic();
         }
     }
+    
+    public static void Setgame(Game tmepi){
+        game=tmepi;
+    }
+    
+    public static void Setkartendarsteller(Kartendarsteller temp){
+        darsteller=temp;
+    }
+    
 }

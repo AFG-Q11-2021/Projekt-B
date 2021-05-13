@@ -9,7 +9,9 @@ public class Karte
     public Karte()
     {
         int x= 64;
+        x1 = x;
         int y= 64;
+        y1 = y;
         kartenArray = new int[x][y];// setzt die Kartengröße
     }
     

@@ -2,13 +2,13 @@
 // Don't touch my baby
 //das hier ist nicht die Endlösung. Wir wollen bloß sehen was wir machen 
 import java.awt.*;
-public class KartenDarsteller
+public class Kartendarsteller
 {
     private Karte kartetest;//für den Darsteller umschreiben
     private Graphics graph;
     private int csizeX;
     private int csizeY;
-    public KartenDarsteller(Graphics tgraph, Canvas tcanvas)
+    public Kartendarsteller(Graphics tgraph, Canvas tcanvas)
     {
         Canvas canvas = tcanvas;
         graph = tgraph;
@@ -21,6 +21,13 @@ public class KartenDarsteller
     public Graphics castPic()
     {
 
+        // this.createBufferStrategy(2);
+        // BufferStrategy bs = this.getBufferStrategy();
+        // Graphics g = bs.getDrawGraphics();
+        // g.setColor(Color.GREEN);
+        // g.fillRect(0,0,WIDTH,HEIGHT);
+        // this.graphics = g;
+        // bs.show();
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0)
