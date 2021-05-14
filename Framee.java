@@ -13,7 +13,7 @@ public class Framee extends JFrame implements ActionListener
     private JButton schliessen;
     private JButton auswahl;
     private JButton ende;
-    private static Kartendarsteller darsteller;
+    
     public Framee(String title)
     {
         super(title);
@@ -57,9 +57,9 @@ public class Framee extends JFrame implements ActionListener
     public static void fenster()
     {
         Game gamee = new Game();
-        darsteller = new Kartendarsteller(gamee.getGraphics(),gamee);
+        
         Controller.Setgame(gamee);
-        Controller.Setkartendarsteller(darsteller);
+        
     }
 
     public static void auswahl()
