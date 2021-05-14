@@ -34,7 +34,7 @@ public class Game extends Canvas
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
         
-                kartetest = new Karte();
+        kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
         csizeY = (int)HEIGHT/kartetest.getSizeY();

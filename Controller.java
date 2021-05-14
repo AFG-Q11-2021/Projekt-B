@@ -16,7 +16,7 @@ public class Controller
     public static Game game;
     // public static KartenDarsteller darsteller;
     public static Framee frame;
-    public static Kartendarsteller darsteller;
+    //public static Kartendarsteller darsteller;
     //karte soll nicht angesteuert WERDEN!
 
     public static Controller controller;
@@ -59,7 +59,7 @@ public class Controller
     public static void Render(){
         if(game != null){
             game.render();
-            //darsteller.castPic();
+            
         }
     }
     
@@ -68,8 +68,6 @@ public class Controller
         
     }
     
-    public static void Setkartendarsteller(Kartendarsteller temp){
-        darsteller=temp;
-    }
+    
     
 }
