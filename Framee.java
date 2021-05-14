@@ -13,7 +13,7 @@ public class Framee extends JFrame implements ActionListener
     private JButton schliessen;
     private JButton auswahl;
     private JButton ende;
-    private static Kartendarsteller darsteller;
+    
     public Framee(String title)
     {
         super(title);
