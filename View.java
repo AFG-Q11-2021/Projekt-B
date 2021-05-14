@@ -23,20 +23,24 @@ public class View
 
     public void keyPressed(KeyEvent e) {
 
-        //vorwärts
+        
         if(e.getKeyCode() == KeyEvent.VK_W){ 
+            //vorwärts
             fwd = true;
         }
-        //rückwärts
+        
         if(e.getKeyCode() == KeyEvent.VK_S){ 
+            //rückwärts
             back = true;
         }
-        //links
+        
         if(e.getKeyCode() == KeyEvent.VK_A){ 
+            //links
             left = true;
         }
-        //rechts
+        
         if(e.getKeyCode() == KeyEvent.VK_D){ 
+            //rechts
             right = true;
         }
     }
