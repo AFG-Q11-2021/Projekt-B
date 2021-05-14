@@ -57,7 +57,15 @@ public class Framee extends JFrame implements ActionListener
     public static void fenster()
     {
         Game gamee = new Game();
+<<<<<<< HEAD
+=======
+        
+>>>>>>> dbc02da1c5d4afe444ec469985abe4baa42c9c71
         Controller.Setgame(gamee);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> dbc02da1c5d4afe444ec469985abe4baa42c9c71
     }
 
     public static void auswahl()
