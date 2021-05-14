@@ -65,6 +65,7 @@ public class Controller
     
     public static void Setgame(Game tmepi){
         game=tmepi;
+        
     }
     
     public static void Setkartendarsteller(Kartendarsteller temp){
