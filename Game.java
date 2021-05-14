@@ -38,6 +38,8 @@ public class Game extends Canvas
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
         csizeY = (int)HEIGHT/kartetest.getSizeY();
+        System.out.println(csizeX);
+        System.out.println(csizeY);
     }
 
     public void render()
