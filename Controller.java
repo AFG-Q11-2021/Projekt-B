@@ -58,8 +58,8 @@ public class Controller
 
     public static void Render(){
         if(game != null){
-            game.render();
-            //darsteller.castPic();
+            //game.render();
+            darsteller.castPic();
         }
     }
     
