@@ -11,12 +11,12 @@ public class Spieler
     private int leben;
     private double rotation;
     private Karte karte;
-    public Spieler(String usernameNeu, Graphics stift, Karte kartet)
+    
+    public Spieler(String usernameNeu)
     {
         username= usernameNeu;
-        karte=kartet;
-        int px = 1;//Startpunkt des Spielers//
-        int py = 1;//Startpunkt des Spielers//
+        int x = 1;//Startpunkt des Spielers//
+        int y = 1;//Startpunkt des Spielers//
         int leben = 5;
         double rotation=90.0;
     }
@@ -38,7 +38,6 @@ public class Spieler
             y=y+(1*Math.sin(rotation+90));
         }
     }
-
 
     public Karte getPosition()
 
