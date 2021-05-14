@@ -1,4 +1,3 @@
-
 /**
  * Controller Class
  *
@@ -11,15 +10,14 @@ import javax.swing.*;
 public class Controller
 {
     // instance variables - replace the example below with your own
-    public static int FPS = 60;
-    public static boolean running = false;
-    public static Game game;
-    // public static KartenDarsteller darsteller;
+    private static int FPS = 60;
+    private static boolean running = false;
+    private static Game game;
+    private static Spieler spieler;
     public static Framee frame;
-    //public static Kartendarsteller darsteller;
+    private static Multiplayer multiplayer;
     //karte soll nicht angesteuert WERDEN!
-
-    public static Controller controller;
+    public static Controller controller;//Wieso das?
 
     public Controller(){
 
@@ -31,7 +29,6 @@ public class Controller
         frame = new Framee("Startmenü");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1290,1100);
-
         frame.setLayout(null);
         frame.setVisible(true);
         
@@ -65,8 +62,15 @@ public class Controller
     
     public static void Setgame(Game tmepi){
         game=tmepi;
+        spieler = new Spieler("SpielerOne");
     }
     
+    public static void Setmultiplayer(Multiplayer multi){
+        multiplayer = multi;
+    }
     
+    public static Spieler Getspieler(){
+        return spieler;
+    }
     
 }

@@ -1,5 +1,4 @@
 //Author: Samuel T , Julius R
-//hallo
 import java.io.*;
 public class KartenVerwalter
 {
@@ -47,12 +46,12 @@ public class KartenVerwalter
                 }
 
 
-
-
+ 
             }
         } catch (Exception e){
             //Klingelin
         }
+
     }
 
 }
