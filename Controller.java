@@ -14,6 +14,7 @@ public class Controller
     public static int FPS = 60;
     public static boolean running = false;
     public static Game game;
+    public static Spieler spieler;
     // public static KartenDarsteller darsteller;
     public static Framee frame;
     //public static Kartendarsteller darsteller;
@@ -65,7 +66,7 @@ public class Controller
     
     public static void Setgame(Game tmepi){
         game=tmepi;
-        
+        spieler = new Spieler("SpielerOne");
     }
     
     

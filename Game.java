@@ -50,6 +50,7 @@ public class Game extends Canvas
         
         g.setColor(Color.BLACK);
         
+        //Karte malen
          for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0)
@@ -61,6 +62,12 @@ public class Game extends Canvas
                 }
             }
         }
+        
+        //Spieler malen
+        Spieler s = Controller.spieler;
+        
+        g.setColor(Color.RED);
+        g.fillOval((int) (s.getX() *  csizeX),(int) s.getY()*csizeY,10,10);
         
         this.graphics = g;
         bs.show();
