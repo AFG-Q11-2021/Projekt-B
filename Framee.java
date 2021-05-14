@@ -57,16 +57,13 @@ public class Framee extends JFrame implements ActionListener
     public static void fenster()
     {
         Game gamee = new Game();
-        
+
         Controller.Setgame(gamee);
-        
+
     }
 
     public static void auswahl()
     {
-        JFrame auswahl = new JFrame("Multiplayer Menü");
-        auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        auswahl.setSize(650,350);
-        auswahl.setVisible(true);
+        Multiplayer multiplayer = new Multiplayer("Multiplayer");
     }
 }

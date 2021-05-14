@@ -1,3 +1,9 @@
+/**
+ * Frame Class
+ *
+ * @author Christopher Scherübl (14.05.2021 n.Chr);
+ * @version 0.1
+ */
 import java.awt.*;
 import javax.swing.*;
 
