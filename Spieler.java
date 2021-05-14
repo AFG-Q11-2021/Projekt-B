@@ -58,7 +58,7 @@ public class Spieler
     
     public void rueckwertsGehen()
     {
-        if(y<karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
+        if(y<karte.getSizeY()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
         {
            x=x-(1*Math.cos(rotation));
            y=y-(1*Math.sin(rotation));
