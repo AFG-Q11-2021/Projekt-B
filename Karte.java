@@ -8,11 +8,9 @@ public class Karte
     private int y1;
     public Karte()
     {
-        int x= 64;
-        x1 = x;
-        int y= 64;
-        y1 = y;
-        kartenArray = new int[x][y];// setzt die Kartengröße
+        x1= 64;
+        y1=64;
+        kartenArray = new int[x1][y1];// setzt die Kartengröße
     }
     
     public void setKartenArray(int xCoord , int yCoord, int filler)

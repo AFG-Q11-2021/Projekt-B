@@ -35,7 +35,7 @@ public class Controller
         frame.setLayout(null);
         frame.setVisible(true);
         
-        //darsteller = new Kartendarsteller(game.graphics,game);//macht hier keinen Sinn-->in Framee gewandert
+        
         
         long lastupdate = System.nanoTime();
         long currentTime = System.nanoTime();
