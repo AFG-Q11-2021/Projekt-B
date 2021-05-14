@@ -1,37 +1,44 @@
 /**
  * Frame Class
  *
- * @author Christopher Scherübl (14.05.2021 n.Chr);
+ * @author Christopher Scherübl und Julius R.(14.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
-import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Multiplayer extends JFrame implements ActionListener
 {
+    private JPanel panel;
+    private JLabel label;
+    private JTextField name;
     private JButton starten;
 
     public Multiplayer(String title)
     {
         super(title);
+        setTitle("Multiplayer");
+        setSize(1000,1000);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JFrame multiplayer1 = new JFrame();
-        multiplayer1.setTitle("Multiplayer");
-        multiplayer1.setSize(1000,1000);
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("Spielername");
-        panel.add(label);
-        JTextField name = new JTextField("", 20);
+        panel        = new JPanel();
+        label        = new JLabel("Spielername");
+        name         = new JTextField("", 20);
+        starten      = new JButton("Spiel starten");
+
         name.setForeground(Color.BLACK);
         name.setBackground(Color.WHITE);
+        
+        starten.addActionListener(this);
+
+        panel.add(label);
         panel.add(name);
-        JButton starten = new JButton("Spiel starten");
         panel.add(starten);
 
-        multiplayer1.add(panel);
-        multiplayer1.setVisible(true);
+        add(panel);
+        setVisible(true);
+
     }
 
     public void actionPerformed(ActionEvent e)
@@ -48,4 +55,5 @@ public class Multiplayer extends JFrame implements ActionListener
         Game gamee = new Game();
         Controller.Setgame(gamee);
     }
+
 }

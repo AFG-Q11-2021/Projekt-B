@@ -13,7 +13,7 @@ public class Framee extends JFrame implements ActionListener
     private JButton schliessen;
     private JButton auswahl;
     private JButton ende;
-    
+
     public Framee(String title)
     {
         super(title);
@@ -43,12 +43,12 @@ public class Framee extends JFrame implements ActionListener
                 fenster();
                 this.setVisible(false);
             }
-            if(e.getSource() == auswahl)
+            else if(e.getSource() == auswahl)
             {
                 auswahl();
                 this.setVisible(false);
             }
-            if(e.getSource() == ende)
+            else if(e.getSource() == ende)
             {
                 System.exit(0);
             }
@@ -58,13 +58,12 @@ public class Framee extends JFrame implements ActionListener
     public static void fenster()
     {
         Game gamee = new Game();
-
         Controller.Setgame(gamee);
-
     }
 
     public static void auswahl()
     {
         Multiplayer multiplayer = new Multiplayer("Multiplayer");
+        Controller.Setmultiplayer(multiplayer);
     }
 }
