@@ -35,7 +35,8 @@ public class Framee extends JFrame implements ActionListener
 
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e)
+    {
         {
             if(e.getSource() == schliessen)
             {

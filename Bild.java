@@ -7,11 +7,11 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Can extends JPanel
+public class Bild extends JPanel
 {
     Image bild;
     
-    public Can()
+    public Bild()
     {
         setFocusable(true);
         ImageIcon b = new ImageIcon("");
