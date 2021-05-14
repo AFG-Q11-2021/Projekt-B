@@ -3,22 +3,22 @@ import java.io.*;
 public class KartenVerwalter
 {
     Karte activeMap;
-    
+
     public KartenVerwalter()
     {
-        
+
     }
-    
+
     public void setActiveMap(int bI)
     {
         activeMap = this.getMapFromStorage(bI);
     }
-    
+
     public Karte getMap()
     {
         return activeMap;
     }
-    
+
     private Karte getMapFromStorage(int buildIndex)
     {
         Karte gesucht=new Karte();
@@ -27,13 +27,14 @@ public class KartenVerwalter
         this.karteLaden(gesucht,g);
         return gesucht;
     }
-    
+
     private void karteLaden(Karte karte, String dateiName){
-        FileReader fr = new FileReader(dateiName);
-        BufferedReader br = new BufferedReader(fr);
-        
-        for(int y = 0; y < karte.getSizeY();y++){
-            try{
+        try{
+            FileReader fr = new FileReader(dateiName);
+            BufferedReader br = new BufferedReader(fr);
+
+            for(int y = 0; y < karte.getSizeY();y++){
+
                 String line = br.readLine();
                 String[] lineArray = line.split(" ");
                 for(int x = 0; x < lineArray.length;x++){
@@ -41,19 +42,16 @@ public class KartenVerwalter
                         karte.setKartenArray(x,y,Integer.parseInt(lineArray[x]));
                     }
 
- 
 
                 }
 
- 
 
-            } catch (Exception e){
-                //Klingelin
+
+
             }
-
- 
-
+        } catch (Exception e){
+            //Klingelin
         }
     }
-    
+
 }
