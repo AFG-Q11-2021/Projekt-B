@@ -1,4 +1,3 @@
-
 /**
  * Controller Class
  *
@@ -16,6 +15,7 @@ public class Controller
     public static Game game;
     // public static KartenDarsteller darsteller;
     public static Framee frame;
+    public static Multiplayer multiplayer;
     public static Kartendarsteller darsteller;
     //karte soll nicht angesteuert WERDEN!
 
