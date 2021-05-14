@@ -29,9 +29,10 @@ public class Multiplayer extends JFrame implements ActionListener
         panel.add(name);
         JButton starten = new JButton("Spiel starten");
         panel.add(starten);
-
+        
         multiplayer1.add(panel);
         multiplayer1.setVisible(true);
+        multiplayer1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void actionPerformed(ActionEvent e)
