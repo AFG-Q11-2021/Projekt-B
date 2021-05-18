@@ -82,6 +82,10 @@ public class Spieler
         return this.y;
     }
     
+    public double getRotation(){
+        return rotation;
+    }
+    
     public void Setkarte(Karte k){
         karte = k;
     }
