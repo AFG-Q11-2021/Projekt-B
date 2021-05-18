@@ -57,7 +57,7 @@ public class Spieler
     
     public void linksdrehen()
     {
-        rotation -= .03;
+        rotation -= 1;
         if(rotation <0){
             rotation += 360;
         }
@@ -65,7 +65,7 @@ public class Spieler
     
     public void rechtsdrehen()
     {
-        rotation += .03;
+        rotation += 1;
         if(rotation > 360){
             rotation -= 360;
         }

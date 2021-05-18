@@ -76,7 +76,7 @@ public class Game extends Canvas implements KeyListener
         Graphics g = bs.getDrawGraphics();
 
         //Karte malen
-      /*  g.setColor(Color.BLACK);
+        g.setColor(Color.BLACK);
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
                 if(kartetest.getCoordinate(x, y)!=0){
@@ -104,8 +104,8 @@ public class Game extends Canvas implements KeyListener
             case 3: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+10);
 
         }
-*/
-        CastTest.paintMap(g,kartetest,s);
+
+       // CastTest.paintMap(g,kartetest,s);
         this.graphics = g;
         bs.show();
 

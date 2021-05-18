@@ -7,7 +7,7 @@ public class CastTest
     public static void paintMap(Graphics g,Karte k, Spieler s){
         double xPos = s.getX();
         double yPos = s.getY();
-        double rot = s.getRotation();
+        double rot = Math.toRadians(s.getRotation());
         double dirX = Math.sin(rot);
         double dirY = Math.cos(rot);
         double mag = Math.sqrt(dirX*dirX+dirY*dirY);
@@ -24,8 +24,12 @@ public class CastTest
         
 
         Game game = Controller.Getgame();
+        
+        g.setColor(new Color(180,70,0));
+        g.fillRect(0,game.getHeight()/2,game.getWidth(),game.getHeight()/2);
+        
         for(int x = 0; x < game.getWidth();x++){
-            double camX = 2 * x/ ((double) (game.getWidth()) - 1);
+            double camX = (2 * x/ (double) (game.getWidth())) - 1;
             double rayDirX = dirX + planeX * camX;
             double rayDirY = dirY + planeY * camX;
 
