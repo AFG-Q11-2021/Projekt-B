@@ -32,10 +32,13 @@ public class Framee extends JFrame implements ActionListener
         ende.setBounds(280,770,750,50);
         ende.addActionListener(this);
         add(ende);
+        
+        add(new Bild());
 
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e)
+    {
         {
             if(e.getSource() == schliessen)
             {

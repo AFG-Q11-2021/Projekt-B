@@ -1,20 +1,20 @@
 /**
  * Frame Class
  *
- * @author Christopher Scherübl (14.05.2021 n.Chr);
+ * @author Christopher Scherübl (18.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
 import javax.swing.*;
 
-public class Can extends JPanel
+public class Bild extends JPanel
 {
     Image bild;
     
-    public Can()
+    public Bild()
     {
         setFocusable(true);
-        ImageIcon b = new ImageIcon("");
+        ImageIcon b = new ImageIcon("bild/gun.png");
         bild = b.getImage();
     }
     
