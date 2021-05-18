@@ -66,6 +66,10 @@ public class Controller
         //spieler.Setkarte(karte);
     }
     
+    public Game Getgame(){
+        return game;
+    }
+
     public static void setMultiplayer(Multiplayer multi){
         multiplayer = multi;
     }
