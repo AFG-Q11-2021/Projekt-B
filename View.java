@@ -4,7 +4,7 @@ import java.awt.event.*;
 /**
  * Write a description of class View here.
  *
- * @author Niklas Rösner, Laurens Birkenbach (30.04.2021)
+ * @author Niklas Rösner, Laurens Birkenbach, Julius Rommel (30.04.2021)
  * @version 0.1
  */
 
@@ -26,21 +26,25 @@ public class View
         
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             //vorwärts
+            //spielr.geradegehen();
             fwd = true;
         }
         
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             //rückwärts
+            //spielr.rueckwertsgehen();
             back = true;
         }
         
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             //links
+            //spielr.linksgehen();
             left = true;
         }
         
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             //rechts
+            //spielr.rechtsgehen()
             right = true;
         }
     }

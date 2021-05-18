@@ -1,7 +1,4 @@
-// Autoren: Martin ; Lasse//
-
-import java.awt.Graphics;
-import java.awt.Color;
+// Autoren: Martin ; Lasse; Laurens//
 
 public class Spieler
 {
@@ -37,7 +34,7 @@ public class Spieler
         }
     }
 
-    public void geradeausGehen()
+    public void geradeGehen()
     {
         double radrot = Math.toRadians(rotation);
         double xnew = x + speed*(Math.sin(radrot));

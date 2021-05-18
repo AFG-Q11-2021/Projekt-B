@@ -1,7 +1,7 @@
 /**
  * Game Class
  *
- * @author Christopher Scherübl, Laurens Birkenbach (07.05.2021 n.Chr);
+ * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
@@ -19,10 +19,11 @@ public class Game extends Canvas implements KeyListener
     private final int HEIGHT = 1000;
 
     private Karte kartetest;//für den Darsteller umschreiben
-    private Graphics graph;
+    private Graphics g;
+    private BufferStrategy bs;
     private int csizeX;
     private int csizeY;
-    
+
     private boolean fwd;
     private boolean back;
     private boolean left;
@@ -45,15 +46,20 @@ public class Game extends Canvas implements KeyListener
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
         csizeY = (int)HEIGHT/kartetest.getSizeY();
+
+        this.createBufferStrategy(2);
+        bs = this.getBufferStrategy();
+        g = bs.getDrawGraphics();
+
         this.addKeyListener(this);
     }
 
     public void render()
     {
-        
-        Spieler s = Controller.Getspieler();
+
+        Spieler s = Controller.getSpieler();
         if(fwd){
-            s.geradeausGehen();
+            s.geradeGehen();
         }
         if(back){
             s.rueckwaertsGehen();
@@ -64,7 +70,7 @@ public class Game extends Canvas implements KeyListener
         if(left){
             s.rechtsdrehen();
         }
-        
+
         this.createBufferStrategy(2);
         BufferStrategy bs = this.getBufferStrategy();
         Graphics g = bs.getDrawGraphics();
@@ -83,50 +89,46 @@ public class Game extends Canvas implements KeyListener
         }
 
         //Spieler malen
-     
+
         g.setColor(Color.RED);
-<<<<<<< HEAD
         g.fillOval((int)s.getX()*csizeX,(int)(s.getY()*csizeY), 10, 10);
-=======
-
-
-        g.fillOval((int) (s.getX()*csizeX),(int)(s.getY()*csizeY), 10, 10);
->>>>>>> d9e90b1f3987c955b0c37bcf94e8f1babb59e681
         switch((int)s.getRotation()/90){
             case 1: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)-10);
-            case 0: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+10, (int)(s.getY()*csizeY)+5);
-            case 2: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)-10, (int)(s.getY()*csizeY)+5);
-            case 3: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+10);
-        }
 
+            case 0: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+10, (int)(s.getY()*csizeY)+5);
+
+            case 2: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)-10, (int)(s.getY()*csizeY)+5);
+
+            case 3: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+10);
+
+        }
 
         this.graphics = g;
         bs.show();
 
     }
-    
-     public void keyTyped(KeyEvent e) {
+
+    public void keyTyped(KeyEvent e) {
 
     }
 
     public void keyPressed(KeyEvent e) {
 
-        
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             //vorwärts
             fwd = true;
         }
-        
+
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             //rückwärts
             back = true;
         }
-        
+
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             //links
             left = true;
         }
-        
+
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             //rechts
             right = true;
