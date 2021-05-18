@@ -85,16 +85,19 @@ public class Game extends Canvas implements KeyListener
         //Spieler malen
      
         g.setColor(Color.RED);
+<<<<<<< HEAD
+        g.fillOval((int)s.getX()*csizeX,(int)(s.getY()*csizeY), 10, 10);
+=======
 
 
         g.fillOval((int) (s.getX()*csizeX),(int)(s.getY()*csizeY), 10, 10);
+>>>>>>> d9e90b1f3987c955b0c37bcf94e8f1babb59e681
         switch((int)s.getRotation()/90){
-            case 1: g.drawLine((int)s.getX()*csizeX+5, (int)s.getY()*csizeY+5, (int)s.getX()*csizeX+5, (int)s.getY()*csizeY-10);
-            case 0: g.drawLine((int)s.getX()*csizeX+5, (int)s.getY()*csizeY+5, (int)s.getX()*csizeX+10, (int)s.getY()*csizeY+5);
-            case 2: g.drawLine((int)s.getX()*csizeX+5, (int)s.getY()*csizeY+5, (int)s.getX()*csizeX-10, (int)s.getY()*csizeY+5);
-            case 3: g.drawLine((int)s.getX()*csizeX+5, (int)s.getY()*csizeY+5, (int)s.getX()*csizeX+5, (int)s.getY()*csizeY+10);
+            case 1: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)-10);
+            case 0: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+10, (int)(s.getY()*csizeY)+5);
+            case 2: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)-10, (int)(s.getY()*csizeY)+5);
+            case 3: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+10);
         }
-        
 
 
         this.graphics = g;
