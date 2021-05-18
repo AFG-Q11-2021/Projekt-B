@@ -58,10 +58,10 @@ public class Game extends Canvas implements KeyListener
         if(back){
             s.rueckwaertsGehen();
         }
-        if(left){
+        if(right){
             s.linksdrehen();
         }
-        if(right){
+        if(left){
             s.rechtsdrehen();
         }
         
