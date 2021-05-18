@@ -4,7 +4,6 @@
  * @author Christopher Scherübl, Timon Weiss (07.05.2021 n.Chr);
  * @version 0.2
  */
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -57,12 +56,12 @@ public class Framee extends JFrame implements ActionListener
     public static void fenster()
     {
         Game gamee = new Game();
-        Controller.Setgame(gamee);
+        Controller.setGame(gamee);
     }
 
     public static void auswahl()
     {
         Multiplayer multiplayer = new Multiplayer("Multiplayer");
-        Controller.Setmultiplayer(multiplayer);
+        Controller.setMultiplayer(multiplayer);
     }
 }

@@ -1,7 +1,7 @@
 /**
  * Game Class
  *
- * @author Christopher Scherübl, Laurens Birkenbach (07.05.2021 n.Chr);
+ * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
@@ -17,7 +17,8 @@ public class Game extends Canvas
     private final int HEIGHT = 1000;
 
     private Karte kartetest;//für den Darsteller umschreiben
-    private Graphics graph;
+    private Graphics g;
+    private BufferStrategy bs;
     private int csizeX;
     private int csizeY;
 
@@ -38,14 +39,15 @@ public class Game extends Canvas
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
         csizeY = (int)HEIGHT/kartetest.getSizeY();
+        
+        this.createBufferStrategy(2);
+    bs = this.getBufferStrategy();
+    g = bs.getDrawGraphics();
+
     }
 
     public void render()
     {
-        this.createBufferStrategy(2);
-        BufferStrategy bs = this.getBufferStrategy();
-        Graphics g = bs.getDrawGraphics();
-
         //Karte malen
         g.setColor(Color.BLACK);
         for(int x=0;x<kartetest.getSizeX();x++){
@@ -60,7 +62,7 @@ public class Game extends Canvas
         }
 
         //Spieler malen
-        Spieler s = Controller.Getspieler();
+        Spieler s = Controller.getSpieler();
 
         g.setColor(Color.RED);
         g.fillOval((int)s.getX()*csizeX,(int)s.getY()*csizeY, 10, 10);

@@ -60,17 +60,17 @@ public class Controller
         }
     }
     
-    public static void Setgame(Game tmepi){
+    public static void setGame(Game tmepi){
         game=tmepi;
         spieler = new Spieler("SpielerOne");
         //spieler.Setkarte(karte);
     }
     
-    public static void Setmultiplayer(Multiplayer multi){
+    public static void setMultiplayer(Multiplayer multi){
         multiplayer = multi;
     }
     
-    public static Spieler Getspieler(){
+    public static Spieler getSpieler(){
         return spieler;
     }
     
