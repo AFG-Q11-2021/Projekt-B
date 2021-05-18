@@ -66,7 +66,7 @@ public class Controller
         //spieler.Setkarte(karte);
     }
     
-    public Game Getgame(){
+    public static Game Getgame(){
         return game;
     }
 

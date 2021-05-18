@@ -17,7 +17,7 @@ public class Spieler
         y = 1;//Startpunkt des Spielers//
         leben = 20;
         rotation= 90.0;
-        speed = .05f;
+        speed = .02f;
     }
 
     public void linksGehen()
@@ -57,7 +57,7 @@ public class Spieler
     
     public void linksdrehen()
     {
-        rotation--;
+        rotation -= .03;
         if(rotation <0){
             rotation += 360;
         }
@@ -65,7 +65,7 @@ public class Spieler
     
     public void rechtsdrehen()
     {
-        rotation++;
+        rotation += .03;
         if(rotation > 360){
             rotation -= 360;
         }
