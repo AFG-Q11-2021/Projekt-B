@@ -48,4 +48,7 @@ public class Raycaster
                 texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
             }
     }
+}
+
+
 
