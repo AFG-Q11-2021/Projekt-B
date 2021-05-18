@@ -1,12 +1,11 @@
 //Author of the System: Julius R and Samuel T
 //only the Caster should be called from the outside
 //to tell the caster which map to use go to...
-<<<<<<< HEAD
-import Java.util.*;
-=======
+
+
 import java.util.*;
 import java.awt.Color;
->>>>>>> d9e90b1f3987c955b0c37bcf94e8f1babb59e681
+
 public class Raycaster
 {
     public KartenVerwalter karte;
