@@ -1,15 +1,16 @@
 //Author of the System: Julius R and Samuel T
 //only the Caster should be called from the outside
 //to tell the caster which map to use go to...
-import Java.util;
+import java.util.*;
+import java.awt.Color;
 public class Raycaster
 {
-    public KartenVerwaĺter karte;
+    public KartenVerwalter karte;
     public Game verwalter;
     private int texWidth = 64, texHeight = 64;
     public Raycaster(KartenVerwalter tempKarte, Controller con)
     {
-        karte = tempkarte;
+        karte = tempKarte;
         verwalter = con.Getgame();
     }
 
@@ -22,16 +23,17 @@ public class Raycaster
         double time = 0; //time of current frame
         double oldTime = 0; //time of previous frame
 
-        int[][] buffer = new int[screenHeight][screenWidth]; // y-coordinate first because it works per scanline
-        Vector<int> texture = new Vector<int>(8);
+        int[][] buffer = new int[verwalter.getHeight()][verwalter.getWidth()]; // y-coordinate first because it works per scanline
+        Vector<Color> texture = new Vector<Color>();
         for(int i = 0; i < 8; i++)
         {
             texture[i].setSize(texWidth * texHeight);
         }
-        screen(screenWidth,screenHeight, 0, "Raycaster");
+        //screen(screenWidth,screenHeight, 0, "Raycaster");
 
         //generate some textures
         for(int x = 0; x < texWidth; x++)
+        {
             for(int y = 0; y < texHeight; y++)
             {
                 int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
@@ -47,5 +49,7 @@ public class Raycaster
                 texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
                 texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
             }
+        }
     }
+}
 
