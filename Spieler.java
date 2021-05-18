@@ -7,6 +7,7 @@ public class Spieler
 {
     private double x; // Postion x (Koordinatensystem)//
     private double y; // Postion y (Koordinatensystem)//
+    private double speed;
     private String username;
     private int leben;
     private double rotation;
@@ -19,15 +20,12 @@ public class Spieler
         y = 1;//Startpunkt des Spielers//
         leben = 20;
         rotation= 90.0;
+        speed = .05f;
     }
 
     public void linksGehen()
     {
-        if(x>0)
-        {
-            x=x+(1*Math.cos(rotation-90));
-            y=y+(1*Math.sin(rotation-90));
-        }
+        
     }
 
     public void rechtsGehen()
@@ -41,30 +39,39 @@ public class Spieler
 
     public void geradeausGehen()
     {
-        if(y>0)
-        {
-           x=x+(1*Math.cos(rotation));
-           y=y+(1*Math.sin(rotation));
-        } 
+        double radrot = Math.toRadians(rotation);
+        double xnew = x + speed*(Math.sin(radrot));
+        double ynew = y + speed*(Math.cos(radrot));
+        
+        x = xnew;
+        y = ynew;
     }
     
-    public void rueckwertsGehen()
+    public void rueckwaertsGehen()
     {
-        if(y<karte.getSizeY()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
-        {
-           x=x-(1*Math.cos(rotation));
-           y=y-(1*Math.sin(rotation));
-        }
+        double radrot = Math.toRadians(rotation);
+        double xnew = x - speed*(Math.sin(radrot));
+        double ynew = y - speed*(Math.cos(radrot));
+        
+        x = xnew;
+        y = ynew;
     }
+    
     
     public void linksdrehen()
     {
         rotation--;
+        if(rotation <0){
+            rotation += 360;
+        }
     }
     
     public void rechtsdrehen()
     {
         rotation++;
+        if(rotation > 360){
+            rotation -= 360;
+        }
     }
     
     public double getX(){
