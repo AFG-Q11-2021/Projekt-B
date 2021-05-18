@@ -7,7 +7,6 @@ public class Spieler
 {
     private double x; // Postion x (Koordinatensystem)//
     private double y; // Postion y (Koordinatensystem)//
-    
     private String username;
     private int leben;
     private double rotation;
@@ -17,8 +16,8 @@ public class Spieler
     {
         username= usernameNeu;
         x = 1;//Startpunkt des Spielers//
-         y = 1;//Startpunkt des Spielers//
-        int leben = 20;
+        y = 1;//Startpunkt des Spielers//
+        leben = 20;
         rotation= 90.0;
     }
 
@@ -40,8 +39,6 @@ public class Spieler
         }
     }
 
-    
-    
     public void geradeausGehen()
     {
         if(y>0)
@@ -76,6 +73,10 @@ public class Spieler
     
     public double getY(){
         return this.y;
+    }
+    
+    public void Setkarte(Karte k){
+        karte = k;
     }
     
     }

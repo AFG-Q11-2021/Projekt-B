@@ -1,7 +1,7 @@
 /**
  * Controller Class
  *
- * @author Laurens Birkenbach, Christopher Scherübl, Niklas Rösner (07.05.2021 n. Chr.)
+ * @author Laurens Birkenbach, Christopher Scherübl, Niklas Rösner, Julius Rommel (07.05.2021 n. Chr.)
  * @version 0.2
  */
 
@@ -14,7 +14,7 @@ public class Controller
     private static boolean running = false;
     private static Game game;
     private static Spieler spieler;
-    public static Framee frame;
+    private static Framee frame;
     private static Multiplayer multiplayer;
     //karte soll nicht angesteuert WERDEN!
     public static Controller controller;//Wieso das?
@@ -63,6 +63,7 @@ public class Controller
     public static void Setgame(Game tmepi){
         game=tmepi;
         spieler = new Spieler("SpielerOne");
+        //spieler.Setkarte(karte);
     }
     
     public static void Setmultiplayer(Multiplayer multi){
