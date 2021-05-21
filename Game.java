@@ -76,6 +76,7 @@ public class Game extends Canvas implements KeyListener
         }
 
         //Karte malen
+
         CastTest.paintMap(g,kartetest,s);
 
         g.setColor(Color.BLACK);
