@@ -18,16 +18,18 @@ public class Game extends Canvas implements KeyListener
     private final int WIDTH = 1000;
     private final int HEIGHT = 1000;
 
+    private Spieler s;
+    
     private Karte kartetest;//für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
     private int csizeX;
     private int csizeY;
 
-    private boolean fwd;
-    private boolean back;
-    private boolean left;
-    private boolean right;
+    private boolean fwd=false;
+    private boolean back=false;
+    private boolean left=false;
+    private boolean right=false;
 
     public Game()
     {
@@ -41,7 +43,7 @@ public class Game extends Canvas implements KeyListener
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
-
+        
         kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
@@ -56,24 +58,22 @@ public class Game extends Canvas implements KeyListener
 
     public void render()
     {
-
-        Spieler s = Controller.getSpieler();
-        if(fwd){
+        if(fwd=true){
             s.geradeGehen();
+            //System.out.println("gerade");
         }
-        if(back){
+        if(back=true){
             s.rueckwaertsGehen();
+            //System.out.println("zurück");
         }
-        if(right){
+        if(right=true){
             s.linksdrehen();
+            //System.out.println("links");
         }
-        if(left){
+        if(left=true){
             s.rechtsdrehen();
+            //System.out.println("rechts");
         }
-
-        this.createBufferStrategy(2);
-        BufferStrategy bs = this.getBufferStrategy();
-        Graphics g = bs.getDrawGraphics();
 
         //Karte malen
         g.setColor(Color.BLACK);
@@ -87,13 +87,10 @@ public class Game extends Canvas implements KeyListener
                 }
             }
         }
-
-    
-
+        
+        //Spieler malen
         g.setColor(Color.RED);
         g.fillOval((int)(s.getX()*csizeX),(int)(s.getY()*csizeY), 10, 10);
-        
-        
         switch((int)s.getRotation()/90){
             case 1: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)-10);
 
@@ -105,10 +102,9 @@ public class Game extends Canvas implements KeyListener
 
         }
 
-       // CastTest.paintMap(g,kartetest,s);
+        // CastTest.paintMap(g,kartetest,s);
         this.graphics = g;
         bs.show();
-
     }
 
     public void keyTyped(KeyEvent e) {
@@ -116,25 +112,25 @@ public class Game extends Canvas implements KeyListener
     }
 
     public void keyPressed(KeyEvent e) {
-
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             //vorwärts
             fwd = true;
+            System.out.println("gerade");
         }
-
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             //rückwärts
             back = true;
+            System.out.println("zurück");
         }
-
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             //links
             left = true;
+            System.out.println("links");
         }
-
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             //rechts
             right = true;
+            System.out.println("rechts");
         }
     }
 
@@ -142,27 +138,35 @@ public class Game extends Canvas implements KeyListener
         //vorwärts
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             fwd = false;
+            System.out.println("gerade");
         }
         //rückwärts
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             back = false;
+            System.out.println("zurück");
         }
         //links
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             left = false;
+            System.out.println("links");
         }
         //rechts
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             right = false;
+            System.out.println("rechts");
         }
     }
-    
+
     public int getWidth(){
         return WIDTH;
     }
-    
+
     public int getHeight(){
         return HEIGHT;
+    }
+    
+    public void setSpieler(Spieler spiler){
+        s=spiler;
     }
 
 }

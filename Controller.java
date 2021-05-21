@@ -61,9 +61,9 @@ public class Controller
     }
     
     public static void setGame(Game tmepi){
-        game=tmepi;
         spieler = new Spieler("SpielerOne");
-        //spieler.Setkarte(karte);
+        game=tmepi;
+        game.setSpieler(spieler);
     }
     
     public static Game Getgame(){
