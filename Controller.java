@@ -45,7 +45,7 @@ public class Controller
             }
 
         }
-        game.graphics.dispose();
+        game.getGraphics().dispose();
     } 
 
     //runs each Frame

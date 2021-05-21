@@ -61,7 +61,7 @@ public class Framee extends JFrame implements ActionListener
 
     public static void fenster()
     {
-        Game gamee = new Game();
+        Singleplayergame gamee = new Singleplayergame();
         Controller.setGame(gamee);
     }
 

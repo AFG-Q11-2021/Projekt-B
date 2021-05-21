@@ -52,7 +52,7 @@ public class Multiplayer extends JFrame implements ActionListener
 
     public static void starten1()
     {
-        Game gamee = new Game();
+        Multiplayergame gamee = new Multiplayergame();
         Controller.setGame(gamee);
     }
 
