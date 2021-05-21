@@ -8,28 +8,28 @@ public class CastTest
         double xPos = s.getX();
         double yPos = s.getY();
         double rot = Math.toRadians(s.getRotation());
-        double dirX = Math.sin(rot);
-        double dirY = Math.cos(rot);
-        double mag = Math.sqrt(dirX*dirX+dirY*dirY);
-        dirX/= mag;
-        dirY/= mag;
 
-        double planeX0 = 0;
-        double planeY0 = .66;
-        
-        double planeX = planeX0 * Math.cos(rot) - planeY0 * Math.sin(rot);
-        double planeY = planeX0 * Math.sin(rot) + planeY0 * Math.cos(rot);
-        
-        
-        
+        double dirX = -1;
+        double dirY = 0;
 
+        double oldDirX = dirX;
+        dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
+        dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
+
+        double planeX = 0.66;
+        double planeY = 0;
+
+        double oldPlaneX = planeX;
+        planeX = planeX * Math.cos(rot+90) - planeY * Math.sin(rot+90);
+        planeY = oldPlaneX * Math.sin(rot+90) + planeY * Math.cos(rot+90);
+
+        
         Game game = Controller.Getgame();
-        
         g.setColor(new Color(180,70,0));
         g.fillRect(0,game.getHeight()/2,game.getWidth(),game.getHeight()/2);
-        
+
         for(int x = 0; x < game.getWidth();x++){
-            double camX = (2 * x/ (double) (game.getWidth())) - 1;
+            double camX = (2 * x/ ((double) game.getWidth())) - 1;
             double rayDirX = dirX + planeX * camX;
             double rayDirY = dirY + planeY * camX;
 
@@ -39,8 +39,8 @@ public class CastTest
             double sideDistX;
             double sideDistY;
 
-            double deltaDistX = Math.abs(1/rayDirX);
-            double deltaDistY = Math.abs(1/rayDirY);
+            double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+            double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
 
             double perpWallDist;
 
@@ -79,7 +79,7 @@ public class CastTest
                     mapY += stepY;
                     side = 1;
                 }
-                if(mapX >= k.getSizeX()-1 ||mapX < 0 || mapY >= k.getSizeY()-1 ||mapY < 0) return;
+                if(mapX >= k.getSizeX()-1 ||mapX < 0 || mapY >= k.getSizeY()-1 ||mapY < 0) {break;}
                 if(k.getCoordinate(mapX,mapY) > 0){
                     hit = 1;
                 }
@@ -90,14 +90,16 @@ public class CastTest
 
             int columnHeight = (int) (game.getHeight()/perpWallDist);
             int topPixel = (game.getHeight()-columnHeight)/2;
+
+            if(topPixel < 0) topPixel = 0;
             if(side == 1){
                 g.setColor(new Color(40,40,40));
             } else {
                 g.setColor(new Color(60,60,60));
             }
             g.fillRect(x,topPixel,1,columnHeight);
-            
         }
+    }
 
-    }   
-}
+}   
+

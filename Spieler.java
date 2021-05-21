@@ -16,7 +16,7 @@ public class Spieler
         x = 1;//Startpunkt des Spielers//
         y = 1;//Startpunkt des Spielers//
         leben = 20;
-        rotation= 90.0;
+       // rotation= 90.0;
         speed = .02f;
     }
 

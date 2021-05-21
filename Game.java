@@ -19,7 +19,7 @@ public class Game extends Canvas implements KeyListener
     private final int HEIGHT = 1000;
 
     private Spieler s;
-    
+
     private Karte kartetest;//für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
@@ -43,7 +43,7 @@ public class Game extends Canvas implements KeyListener
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
-        
+
         kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         csizeX = (int)WIDTH/kartetest.getSizeX();
@@ -66,16 +66,18 @@ public class Game extends Canvas implements KeyListener
             s.rueckwaertsGehen();
             //System.out.println("zurück");
         }
-        if(right=true){
+        if(left=true){
             s.linksdrehen();
             //System.out.println("links");
         }
-        if(left=true){
+        if(right=true){
             s.rechtsdrehen();
             //System.out.println("rechts");
         }
 
         //Karte malen
+        CastTest.paintMap(g,kartetest,s);
+
         g.setColor(Color.BLACK);
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
@@ -87,7 +89,7 @@ public class Game extends Canvas implements KeyListener
                 }
             }
         }
-        
+
         //Spieler malen
         g.setColor(Color.RED);
         g.fillOval((int)(s.getX()*csizeX),(int)(s.getY()*csizeY), 10, 10);
@@ -102,7 +104,6 @@ public class Game extends Canvas implements KeyListener
 
         }
 
-        // CastTest.paintMap(g,kartetest,s);
         this.graphics = g;
         bs.show();
     }
@@ -164,7 +165,7 @@ public class Game extends Canvas implements KeyListener
     public int getHeight(){
         return HEIGHT;
     }
-    
+
     public void setSpieler(Spieler spiler){
         s=spiler;
     }
