@@ -14,7 +14,7 @@ public class Bild extends JPanel
     public Bild()
     {
         setFocusable(true);
-        ImageIcon b = new ImageIcon("bild/gun.png");
+        ImageIcon b = new ImageIcon("bild/game.png");
         bild = b.getImage();
     }
     
