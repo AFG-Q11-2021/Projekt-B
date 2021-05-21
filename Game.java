@@ -56,6 +56,8 @@ public class Game extends Canvas implements KeyListener
 
     public void render()
     {
+        g.setColor(new Color(0,0,0));
+        g.drawRect(0, 0, WIDTH, HEIGHT);
         if(fwd==true){
             s.geradeGehen();
             System.out.println("geradeaufruf");
@@ -74,9 +76,17 @@ public class Game extends Canvas implements KeyListener
         }
 
         //Karte malen
-
         CastTest.paintMap(g,kartetest,s);
+        paintMap();
 
+        //Spieler malen
+        paintPlayer();
+
+        this.graphics = g;
+        bs.show();
+    }
+
+    public void paintMap(){
         g.setColor(Color.BLACK);
         for(int x=0;x<kartetest.getSizeX();x++){
             for(int y=0;y<kartetest.getSizeY();y++){
@@ -88,23 +98,23 @@ public class Game extends Canvas implements KeyListener
                 }
             }
         }
+    }
 
-        //Spieler malen
+    public void paintPlayer(){
+        int xc = (int)(s.getX()*csizeX);
+        int yc = (int)(s.getY()*csizeY);
         g.setColor(Color.RED);
-        g.fillOval((int)(s.getX()*csizeX),(int)(s.getY()*csizeY), 10, 10);
+        g.fillOval(xc,yc, 10, 10);
         switch((int)s.getRotation()/90){
-            case 1: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)-10);
+            case 1: g.drawLine(xc+5, yc+5, xc+5, yc-10);
 
-            case 0: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+10, (int)(s.getY()*csizeY)+5);
+            case 0: g.drawLine(xc+5, yc+5, xc+10, yc+5);
 
-            case 2: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)-10, (int)(s.getY()*csizeY)+5);
+            case 2: g.drawLine(xc+5, yc+5, xc-10, yc+5);
 
-            case 3: g.drawLine((int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+5, (int)(s.getX()*csizeX)+5, (int)(s.getY()*csizeY)+10);
+            case 3: g.drawLine(xc+5, yc+5, xc+5, yc+10);
 
         }
-
-        this.graphics = g;
-        bs.show();
     }
 
     public void keyTyped(KeyEvent e) {
