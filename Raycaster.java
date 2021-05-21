@@ -1,4 +1,4 @@
-/*//Author of the System: Julius R and Samuel T
+//Author of the System: Julius R and Samuel T
 //only the Caster should be called from the outside
 //to tell the caster which map to use go to...
 
@@ -19,7 +19,7 @@ public class Raycaster
 
     public void update()
     {
-        double posX = 22.0, posY = 11.5;  //x and y start position
+       /* double posX = 22.0, posY = 11.5;  //x and y start position
         double dirX = -1.0, dirY = 0.0; //initial direction vector
         double planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
 
@@ -52,7 +52,7 @@ public class Raycaster
                 texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
                 texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
             }
-        }
+        }*/
     }
-}*/
+}
 

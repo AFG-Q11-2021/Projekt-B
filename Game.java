@@ -1,6 +1,4 @@
 /**
- * Game Class
- *
  * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
  */
@@ -58,21 +56,21 @@ public class Game extends Canvas implements KeyListener
 
     public void render()
     {
-        if(fwd=true){
+        if(fwd==true){
             s.geradeGehen();
-            //System.out.println("gerade");
+            System.out.println("geradeaufruf");
         }
-        if(back=true){
+        if(back==true){
             s.rueckwaertsGehen();
-            //System.out.println("zurück");
+            System.out.println("zurückaufruf");
         }
-        if(left=true){
+        if(left==true){
             s.linksdrehen();
-            //System.out.println("links");
+            System.out.println("linksaufruf");
         }
-        if(right=true){
+        if(right==true){
             s.rechtsdrehen();
-            //System.out.println("rechts");
+            System.out.println("rechtsaufruf");
         }
 
         //Karte malen
@@ -117,22 +115,22 @@ public class Game extends Canvas implements KeyListener
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             //vorwärts
             fwd = true;
-            System.out.println("gerade");
+            System.out.println("geradep");
         }
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             //rückwärts
             back = true;
-            System.out.println("zurück");
+            System.out.println("zurückp");
         }
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             //links
             left = true;
-            System.out.println("links");
+            System.out.println("linksp");
         }
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             //rechts
             right = true;
-            System.out.println("rechts");
+            System.out.println("rechtsp");
         }
     }
 
@@ -140,22 +138,22 @@ public class Game extends Canvas implements KeyListener
         //vorwärts
         if(e.getKeyCode() == KeyEvent.VK_W){ 
             fwd = false;
-            System.out.println("gerade");
+            System.out.println("gerader");
         }
         //rückwärts
         if(e.getKeyCode() == KeyEvent.VK_S){ 
             back = false;
-            System.out.println("zurück");
+            System.out.println("zurückr");
         }
         //links
         if(e.getKeyCode() == KeyEvent.VK_A){ 
             left = false;
-            System.out.println("links");
+            System.out.println("linksr");
         }
         //rechts
         if(e.getKeyCode() == KeyEvent.VK_D){ 
             right = false;
-            System.out.println("rechts");
+            System.out.println("rechtsr");
         }
     }
 
