@@ -12,6 +12,7 @@ public class Framee extends JFrame implements ActionListener
     private JButton schliessen;
     private JButton auswahl;
     private JButton ende;
+    private Bild build;
 
     public Framee(String title)
     {
@@ -32,7 +33,9 @@ public class Framee extends JFrame implements ActionListener
         ende.addActionListener(this);
         add(ende);
         
-        add(new Bild());
+        build = new Bild();
+        build.setBounds(0, 0, 1290, 1100);
+        add(build);
 
     }
 
