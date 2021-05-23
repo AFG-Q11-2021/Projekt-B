@@ -1,16 +1,19 @@
 
 import java.awt.*;
 import java.util.*;
-
+    /*Autor: Laurens Birkenbach
+     * Zuletzt geändert: 23.05.2021
+     * Inhalt: Raycastng-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
+ */
 public class CastTest
 {
     public static void paintMap(Graphics g,Karte k, Spieler s){
         double xPos = s.getX();
         double yPos = s.getY();
-        double rot = Math.toRadians(s.getRotation());
+        double rot = Math.toRadians(-s.getRotation());
 
-        double dirX = -1;
-        double dirY = 0;
+        double dirX = 0;
+        double dirY = 1;
 
         double oldDirX = dirX;
         dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
@@ -20,8 +23,8 @@ public class CastTest
         double planeY = 0;
 
         double oldPlaneX = planeX;
-        planeX = planeX * Math.cos(rot+90) - planeY * Math.sin(rot+90);
-        planeY = oldPlaneX * Math.sin(rot+90) + planeY * Math.cos(rot+90);
+        planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
+        planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
         
         Game game = Controller.Getgame();
@@ -97,7 +100,7 @@ public class CastTest
             } else {
                 g.setColor(new Color(60,60,60));
             }
-            g.fillRect(x,topPixel,1,columnHeight);
+            g.fillRect(game.getWidth() - x,topPixel,1,columnHeight);
         }
     }
 

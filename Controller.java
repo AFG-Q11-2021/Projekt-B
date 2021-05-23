@@ -17,7 +17,7 @@ public class Controller
     private static Framee frame;
     private static Multiplayer multiplayer;
     //karte soll nicht angesteuert WERDEN!
-    public static Controller controller;//Wieso das?
+   
 
     public Controller(){
 
