@@ -1,81 +1,72 @@
 // Autoren: Martin ; Lasse; Laurens//
 
-public class Spieler
-{
-    private double x; // Postion x (Koordinatensystem)//
-    private double y; // Postion y (Koordinatensystem)//
-    private double speed;
-    private String username;
-    private int leben;
-    private double rotation;
+public class Spieler {
+	private double x; // Postion x (Koordinatensystem)//
+	private double y; // Postion y (Koordinatensystem)//
+	private double speed;
+	private String username;
+	private int leben;
+	private double rotation;
 
-    public Spieler(String usernameNeu)
-    {
-        username= usernameNeu;
-        x = 1;//Startpunkt des Spielers//
-        y = 1;//Startpunkt des Spielers//
-        leben = 20;
-       // rotation= 90.0;
-        speed = .02f;
-    }
+	public Spieler(String usernameNeu) {
+		username = usernameNeu;
+		x = 1;// Startpunkt des Spielers//
+		y = 1;// Startpunkt des Spielers//
+		leben = 20;
+		// rotation= 90.0;
+		speed = .02f;
+	}
 
-    public void linksGehen()
-    {
+	public void linksGehen() {
 
-    }
+	}
 
-    public void rechtsGehen()
-    {
+	public void rechtsGehen() {
 
-    }
+	}
 
-    public void geradeGehen()
-    {
-        double radrot = Math.toRadians(rotation);
-        double xnew = x + speed*(Math.sin(radrot));
-        double ynew = y + speed*(Math.cos(radrot));
+	public void geradeGehen() {
+		double radrot = Math.toRadians(rotation);
+		double xnew = x + speed * (Math.sin(radrot));
+		double ynew = y + speed * (Math.cos(radrot));
 
-        x = xnew;
-        y = ynew;
-    }
+		x = xnew;
+		y = ynew;
+	}
 
-    public void rueckwaertsGehen()
-    {
-        double radrot = Math.toRadians(rotation);
-        double xnew = x - speed*(Math.sin(radrot));
-        double ynew = y - speed*(Math.cos(radrot));
+	public void rueckwaertsGehen() {
+		double radrot = Math.toRadians(rotation);
+		double xnew = x - speed * (Math.sin(radrot));
+		double ynew = y - speed * (Math.cos(radrot));
 
-        x = xnew;
-        y = ynew;
-    }
+		x = xnew;
+		y = ynew;
+	}
 
-    public void linksdrehen()
-    {
-        rotation -= 1;
-        if(rotation <0){
-            rotation += 360;
-        }
-    }
+	public void linksdrehen() {
+		rotation += 1;
+		if (rotation < 0) {
+			rotation += 360;
+		}
+	}
 
-    public void rechtsdrehen()
-    {
-        rotation += 1;
-        if(rotation > 360){
-            rotation -= 360;
-        }
-    }
+	public void rechtsdrehen() {
+		rotation -= 1;
+		if (rotation > 360) {
+			rotation -= 360;
+		}
+	}
 
-    public double getX(){
-        return this.x;
-    }
+	public double getX() {
+		return this.x;
+	}
 
-    public double getY(){
-        return this.y;
-    }
+	public double getY() {
+		return this.y;
+	}
 
-    public double getRotation(){
-        return rotation;
-    }
+	public double getRotation() {
+		return rotation;
+	}
 
 }
-

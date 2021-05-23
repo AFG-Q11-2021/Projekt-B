@@ -1,3 +1,4 @@
+
 /**
  * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
@@ -8,31 +9,29 @@ import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Singleplayergame extends Canvas implements KeyListener, Game
-{
+public class Singleplayergame extends Canvas implements KeyListener, Game {
     public JFrame frame1;
-    public Graphics graphics;
+
     private String title = "Game";
     private final int WIDTH = 1000;
     private final int HEIGHT = 1000;
 
     private Spieler s;
 
-    private Karte kartetest;//für den Darsteller umschreiben
+    private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
     private int csizeX;
     private int csizeY;
 
-    private boolean fwd=false;
-    private boolean back=false;
-    private boolean left=false;
-    private boolean right=false;
+    private boolean fwd = false;
+    private boolean back = false;
+    private boolean left = false;
+    private boolean right = false;
 
-    public Singleplayergame()
-    {
+    public Singleplayergame() {
         JFrame frame1 = new JFrame();
-        Dimension size = new Dimension(WIDTH,HEIGHT);
+        Dimension size = new Dimension(WIDTH, HEIGHT);
 
         this.setPreferredSize(size);
         frame1.setTitle(title);
@@ -44,73 +43,76 @@ public class Singleplayergame extends Canvas implements KeyListener, Game
 
         kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
-        csizeX = (int)WIDTH/kartetest.getSizeX();
-        csizeY = (int)HEIGHT/kartetest.getSizeY();
+        kartetest.setKartenArray(3, 2, 1);
+        kartetest.setKartenArray(4, 2, 1);
+        kartetest.setKartenArray(4, 3, 1);
+        csizeX = (int) WIDTH / kartetest.getSizeX();
+        csizeY = (int) HEIGHT / kartetest.getSizeY();
 
-        this.createBufferStrategy(2);
+        this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
-        g = bs.getDrawGraphics();
 
         this.addKeyListener(this);
     }
 
-    public void render()
-    {
-        g.setColor(new Color(0,0,0));
-        g.drawRect(0, 0, WIDTH, HEIGHT);
-        if(fwd==true){
+    public void render() {
+
+        g = bs.getDrawGraphics();
+        g.setColor(new Color(37, 150, 190));
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+        if (fwd == true) {
             s.geradeGehen();
-            System.out.println("geradeaufruf");
+            // System.out.println("geradeaufruf");
         }
-        if(back==true){
+        if (back == true) {
             s.rueckwaertsGehen();
-            System.out.println("zurückaufruf");
+            // System.out.println("zurückaufruf");
         }
-        if(left==true){
+        if (left == true) {
             s.linksdrehen();
-            System.out.println("linksaufruf");
+            // System.out.println("linksaufruf");
         }
-        if(right==true){
+        if (right == true) {
             s.rechtsdrehen();
-            System.out.println("rechtsaufruf");
+            // System.out.println("rechtsaufruf");
         }
 
-        //Karte malen
-        CastTest.paintMap(g,kartetest,s);
+        // Karte malen
+        CastTest.paintMap(g, kartetest, s);
         paintMap();
 
-        //Spieler malen
+        // Spieler malen
         paintPlayer();
 
-        this.graphics = g;
+        g.dispose();
         bs.show();
+
     }
 
-    public void paintMap(){
+    public void paintMap() {
         g.setColor(Color.BLACK);
-        for(int x=0;x<kartetest.getSizeX();x++){
-            for(int y=0;y<kartetest.getSizeY();y++){
-                if(kartetest.getCoordinate(x, y)!=0){
-                    g.fillRect(x*csizeX,y*csizeY,csizeX,csizeY);
-                }
-                else{
-                    g.drawRect(x*csizeX,y*csizeY,csizeX,csizeY);
+        for (int x = 0; x < kartetest.getSizeX(); x++) {
+            for (int y = 0; y < kartetest.getSizeY(); y++) {
+                if (kartetest.getCoordinate(x, y) != 0) {
+                    g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
+                } else {
+                    g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
                 }
             }
         }
     }
 
-    public void paintPlayer(){
-        int xc = (int)(s.getX()*csizeX);
-        int yc = (int)(s.getY()*csizeY);
+    public void paintPlayer() {
+        int xc = (int) (s.getX() * csizeX);
+        int yc = (int) (s.getY() * csizeY);
         g.setColor(Color.RED);
-        g.fillOval(xc,yc, 10, 10);
-        switch((int)s.getRotation()/90){
-            case 1: g.drawLine(xc+5, yc+5, xc+5, yc-10);
-            case 0: g.drawLine(xc+5, yc+5, xc+10, yc+5);
-            case 2: g.drawLine(xc+5, yc+5, xc-10, yc+5);
-            case 3: g.drawLine(xc+5, yc+5, xc+5, yc+10);
-        }
+
+        g.fillOval(xc - 5, yc - 5, 10, 10);
+        double rotRad = Math.toRadians(s.getRotation());
+        int xl = (int) (Math.sin(rotRad) * 20);
+        int yl = (int) (Math.cos(rotRad) * 20);
+        g.drawLine(xc, yc, xc + xl, yc + yl);
+
     }
 
     public void keyTyped(KeyEvent e) {
@@ -118,65 +120,66 @@ public class Singleplayergame extends Canvas implements KeyListener, Game
     }
 
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_W){ 
-            //vorwärts
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            // vorwärts
             fwd = true;
-            System.out.println("geradep");
+            // System.out.println("geradep");
         }
-        if(e.getKeyCode() == KeyEvent.VK_S){ 
-            //rückwärts
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            // rückwärts
             back = true;
-            System.out.println("zurückp");
+            // System.out.println("zurückp");
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){ 
-            //links
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            // links
             left = true;
-            System.out.println("linksp");
+            // System.out.println("linksp");
         }
-        if(e.getKeyCode() == KeyEvent.VK_D){ 
-            //rechts
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            // rechts
             right = true;
-            System.out.println("rechtsp");
+            // System.out.println("rechtsp");
         }
+
     }
 
     public void keyReleased(KeyEvent e) {
-        //vorwärts
-        if(e.getKeyCode() == KeyEvent.VK_W){ 
+        // vorwärts
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             fwd = false;
-            System.out.println("gerader");
+            // System.out.println("gerader");
         }
-        //rückwärts
-        if(e.getKeyCode() == KeyEvent.VK_S){ 
+        // rückwärts
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             back = false;
-            System.out.println("zurückr");
+            // System.out.println("zurückr");
         }
-        //links
-        if(e.getKeyCode() == KeyEvent.VK_A){ 
+        // links
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
-            System.out.println("linksr");
+            // System.out.println("linksr");
         }
-        //rechts
-        if(e.getKeyCode() == KeyEvent.VK_D){ 
+        // rechts
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
-            System.out.println("rechtsr");
+            // System.out.println("rechtsr");
         }
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return WIDTH;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return HEIGHT;
     }
 
-    public Graphics getGraphics(){
-        return this.graphics;
+    public Graphics getGraphics() {
+        return this.g;
     }
 
-    public void setSpieler(Spieler spiler){
-        s=spiler;
+    public void setSpieler(Spieler spieler) {
+        s = spieler;
     }
 
 }
