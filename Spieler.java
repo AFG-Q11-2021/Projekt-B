@@ -8,7 +8,6 @@ public class Spieler
     private String username;
     private int leben;
     private double rotation;
-    private Karte karte;
 
     public Spieler(String usernameNeu)
     {
@@ -76,10 +75,6 @@ public class Spieler
 
     public double getRotation(){
         return rotation;
-    }
-
-    public void Setkarte(Karte k){
-        karte = k;
     }
 
 }

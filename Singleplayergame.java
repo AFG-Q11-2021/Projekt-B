@@ -107,13 +107,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game
         g.fillOval(xc,yc, 10, 10);
         switch((int)s.getRotation()/90){
             case 1: g.drawLine(xc+5, yc+5, xc+5, yc-10);
-
             case 0: g.drawLine(xc+5, yc+5, xc+10, yc+5);
-
             case 2: g.drawLine(xc+5, yc+5, xc-10, yc+5);
-
             case 3: g.drawLine(xc+5, yc+5, xc+5, yc+10);
-
         }
     }
 
@@ -174,7 +170,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game
     public int getHeight(){
         return HEIGHT;
     }
-    
+
     public Graphics getGraphics(){
         return this.graphics;
     }

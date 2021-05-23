@@ -43,7 +43,6 @@ public class Controller
                 Render();
                 lastupdate = currentTime;
             }
-
         }
         game.getGraphics().dispose();
     } 

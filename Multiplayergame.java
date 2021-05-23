@@ -98,18 +98,10 @@ public class Multiplayergame extends Canvas implements KeyListener, Game
         int xc = (int)(s.getX() * csizeX) + 5;
         int yc = (int)(s.getY() * csizeY) + 5;
         switch ((int) s.getRotation() / 90) {
-            case 1:
-            g.drawLine(xc, yc, xc, yc - 5);
-
-            case 0:
-            g.drawLine(xc, yc, xc + 5, yc);
-
-            case 2:
-            g.drawLine(xc, yc, xc - 5, yc);
-
-            case 3:
-            g.drawLine(xc, yc, xc, yc + 5);
-
+            case 1:g.drawLine(xc, yc, xc, yc - 5);
+            case 0:g.drawLine(xc, yc, xc + 5, yc);
+            case 2:g.drawLine(xc, yc, xc - 5, yc);
+            case 3:g.drawLine(xc, yc, xc, yc + 5);
         }
 
     }
