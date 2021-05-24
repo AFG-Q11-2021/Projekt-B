@@ -138,6 +138,11 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             g.setColor(Color.RED);
             g.fillOval(xc - 5, yc - 5, 10, 10);
             g.drawLine(xc, yc, xc + xl, yc + yl);
+            String tempi = susi[i].getUsername();
+            char[] tulo = new char[tempi.length()];
+            tempi.getChars(0,tempi.length(),tulo,0);
+            g.setColor(Color.GREEN);
+            g.drawChars(tulo, 0, tempi.length(), xc-10, yc-6);
         }
     }
 

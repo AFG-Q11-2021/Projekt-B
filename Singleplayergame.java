@@ -95,11 +95,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         int xl = (int) (Math.sin(rotRad) * 20);
         int yc = (int) (s.getY() * csizeY);
         int yl = (int) (Math.cos(rotRad) * 20);
-
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
-
     }
 
     public void keyTyped(KeyEvent e) {
