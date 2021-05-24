@@ -25,7 +25,7 @@ public class CastTest {
         planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
         planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
-        Game game = Controller.Getgame();
+        Game game = Controller.getGame();
         g.setColor(new Color(180, 70, 0));
         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
 

@@ -7,8 +7,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 import java.awt.event.*;
-import java.util.*;
 
+@SuppressWarnings("serial")
 public class Singleplayergame extends Canvas implements KeyListener, Game {
     public JFrame frame1;
 
@@ -29,7 +29,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
     private boolean left = false;
     private boolean right = false;
 
-    public Singleplayergame() {
+    public Singleplayergame(Karte k) {
         JFrame frame1 = new JFrame();
         Dimension size = new Dimension(WIDTH, HEIGHT);
 
@@ -41,11 +41,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
 
-        kartetest = new Karte();
-        kartetest.setKartenArray(2, 2, 1);
-        kartetest.setKartenArray(3, 2, 1);
-        kartetest.setKartenArray(4, 2, 1);
-        kartetest.setKartenArray(4, 3, 1);
+        kartetest = k;
         csizeX = (int) WIDTH / kartetest.getSizeX();
         csizeY = (int) HEIGHT / kartetest.getSizeY();
 
@@ -60,23 +56,14 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        if (fwd == true) {
+        if (fwd == true)
             s.geradeGehen();
-            // System.out.println("geradeaufruf");
-        }
-        if (back == true) {
+        if (back == true)
             s.rueckwaertsGehen();
-            // System.out.println("zurückaufruf");
-        }
-        if (left == true) {
+        if (left == true)
             s.linksdrehen();
-            // System.out.println("linksaufruf");
-        }
-        if (right == true) {
+        if (right == true)
             s.rechtsdrehen();
-            // System.out.println("rechtsaufruf");
-        }
-
         // Karte malen
         CastTest.paintMap(g, kartetest, s);
         paintMap();
@@ -103,14 +90,14 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
     }
 
     public void paintPlayer() {
-        int xc = (int) (s.getX() * csizeX);
-        int yc = (int) (s.getY() * csizeY);
-        g.setColor(Color.RED);
-
-        g.fillOval(xc - 5, yc - 5, 10, 10);
         double rotRad = Math.toRadians(s.getRotation());
+        int xc = (int) (s.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
+        int yc = (int) (s.getY() * csizeY);
         int yl = (int) (Math.cos(rotRad) * 20);
+
+        g.setColor(Color.RED);
+        g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
 
     }
@@ -123,22 +110,18 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             // vorwärts
             fwd = true;
-            // System.out.println("geradep");
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             // rückwärts
             back = true;
-            // System.out.println("zurückp");
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
             // links
             left = true;
-            // System.out.println("linksp");
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             // rechts
             right = true;
-            // System.out.println("rechtsp");
         }
 
     }
@@ -147,22 +130,18 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         // vorwärts
         if (e.getKeyCode() == KeyEvent.VK_W) {
             fwd = false;
-            // System.out.println("gerader");
         }
         // rückwärts
         if (e.getKeyCode() == KeyEvent.VK_S) {
             back = false;
-            // System.out.println("zurückr");
         }
         // links
         if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
-            // System.out.println("linksr");
         }
         // rechts
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
-            // System.out.println("rechtsr");
         }
     }
 

@@ -5,7 +5,6 @@
  * @version 0.2
  */
 
-//import java.awt.*;
 import javax.swing.*;
 
 public class Controller {
@@ -15,7 +14,7 @@ public class Controller {
 	private static Game game;
 	private static Spieler spieler;
 	private static Framee frame;
-	private static Multiplayer multiplayer;
+	private static Karte kartetest;
 	// karte soll nicht angesteuert WERDEN!
 
 	public Controller() {
@@ -24,13 +23,20 @@ public class Controller {
 
 	public static void main(String[] args) {
 		running = true;
+		
+		kartetest = new Karte();
+		kartetest.setKartenArray(2, 2, 1);
+		kartetest.setKartenArray(3, 2, 1);
+		kartetest.setKartenArray(4, 2, 1);
+		kartetest.setKartenArray(4, 3, 1);
+		
 		// Startmenü öffnen
-		frame = new Framee("Startmenü");
+		frame = new Framee("Startmenü", kartetest);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1290, 1100);
 		frame.setLayout(null);
 		frame.setVisible(true);
-
+		
 		long lastupdate = System.nanoTime();
 		long currentTime = System.nanoTime();
 		while (running) {
@@ -57,21 +63,19 @@ public class Controller {
 	}
 
 	public static void setGame(Game tmepi) {
-		spieler = new Spieler("SpielerOne");
 		game = tmepi;
-		game.setSpieler(spieler);
 	}
 
-	public static Game Getgame() {
+	public static Game getGame() {
 		return game;
-	}
-
-	public static void setMultiplayer(Multiplayer multi) {
-		multiplayer = multi;
 	}
 
 	public static Spieler getSpieler() {
 		return spieler;
+	}
+	
+	public static void setSpieler(Spieler spiler){
+		spieler = spiler;
 	}
 
 }
