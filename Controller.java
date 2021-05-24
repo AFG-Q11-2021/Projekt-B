@@ -18,14 +18,10 @@ public class Controller {
 
     public  static TextureManager textureManager;
 
-
     public Controller() {
 
     }
 
-
-
- 
     public static void main(String[] args) {
         running = true;
         
@@ -55,37 +51,32 @@ public class Controller {
         game.getGraphics().dispose();
     }
 
-    // runs each Frame
-    public static void Update() {
+    
 
-        long lastupdate = System.nanoTime();
-        long currentTime = System.nanoTime();
-        while (running) {
-            currentTime = System.nanoTime();
-            if (currentTime - lastupdate > 1000000000 / FPS) {
-                Update();
-                Render();
-                lastupdate = currentTime;
-            }
-        }
-        game.getGraphics().dispose();
+    public static void Update() {
 
     }
 
-   
     public static void Render() {
         if (game != null) {
             game.render();
         }
     }
+    
+  
+
+
     public static void setGame(Game tmepi) {
         game = tmepi;
     }
 
     public static Game getGame() {
         return game;
-
     }
+
+    
+
+   
 
 
 
@@ -99,5 +90,8 @@ public class Controller {
     public static void setSpieler(Spieler spieler){
         spieler = spieler;
     }
+ 
+    
+ 
 
 }
