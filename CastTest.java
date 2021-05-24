@@ -7,6 +7,9 @@ import java.awt.*;
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
+        int stepSize = 1;
+        int texRes = 32;
+        
         double xPos = s.getX();
         double yPos = s.getY();
         double rot = Math.toRadians(-s.getRotation());
@@ -29,7 +32,8 @@ public class CastTest {
         g.setColor(new Color(180, 70, 0));
         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
 
-        for (int x = 0; x < game.getWidth(); x++) {
+        for (int fx = 0; fx < game.getWidth()/stepSize; fx++) {
+            int x = fx * stepSize;
             double camX = (2 * x / ((double) game.getWidth())) - 1;
             double rayDirX = dirX + planeX * camX;
             double rayDirY = dirY + planeY * camX;
@@ -93,6 +97,22 @@ public class CastTest {
             int columnHeight = (int) (game.getHeight() / perpWallDist);
             int topPixel = (game.getHeight() - columnHeight) / 2;
 
+           // if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
+           //     break;
+           // }
+            int texID = k.getCoordinate(mapX,mapY) -1;
+
+            //calculate value of wallX
+            double wallX; //where exactly the wall was hit
+            if (side == 0) wallX = yPos + perpWallDist * rayDirY;
+            else           wallX = xPos + perpWallDist * rayDirX;
+            wallX -= Math.floor((wallX));
+
+            //x coordinate on the texture
+            int texX = (int) (wallX * texRes);
+            if(side == 0 && rayDirX > 0) texX = texRes - texX - 1;
+            if(side == 1 && rayDirY < 0) texX = texRes - texX - 1;
+
             if (topPixel < 0)
                 topPixel = 0;
             if (side == 1) {
@@ -100,7 +120,11 @@ public class CastTest {
             } else {
                 g.setColor(new Color(60, 60, 60));
             }
-            g.fillRect(game.getWidth() - x, topPixel, 1, columnHeight);
+            int xdraw = game.getWidth() - x;
+            g.drawImage(Controller.textureManager.getTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+                        texX,0,texX+1,texRes,null);
+           // g.fillRect(xdraw, topPixel, 1, columnHeight);
+            
         }
     }
 
