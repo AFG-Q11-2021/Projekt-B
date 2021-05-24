@@ -30,7 +30,7 @@ public class Controller {
         kartetest.setKartenArray(3, 2, 1);
         kartetest.setKartenArray(4, 2, 1);
         kartetest.setKartenArray(4, 3, 1);
-        
+        textureManager = new TextureManager();
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
