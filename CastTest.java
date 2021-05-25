@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 1;
+        int stepSize = 2;
         int texRes = 32;
 
         double xPos = s.getX();
