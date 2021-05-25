@@ -1,10 +1,3 @@
-/**
- * Controller Class
- *
- * @author Laurens Birkenbach, Christopher Scherübl, Niklas Rösner, Julius Rommel (07.05.2021 n. Chr.)
- * @version 0.2
- */
-
 import javax.swing.*;
 
 public class Controller {
@@ -81,6 +74,10 @@ public class Controller {
 
     public static void setTextureManager(TextureManager textureManagr) {
         textureManager = textureManagr;
+    }
+    
+    public Framee getFramee() {
+        return frame;
     }
 
 }

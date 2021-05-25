@@ -8,13 +8,22 @@ public class Spieler {
     private int leben;
     private double rotation;
 
+    public Spieler(String usernameNeu, double s) {
+        setUsername(usernameNeu);
+        x = 5;// Startpunkt des Spielers//
+        y = 5;// Startpunkt des Spielers//
+        setLeben(20);
+        // rotation= 90.0;
+        speed =s;
+    }
+    
     public Spieler(String usernameNeu) {
         setUsername(usernameNeu);
         x = 5;// Startpunkt des Spielers//
         y = 5;// Startpunkt des Spielers//
         setLeben(20);
         // rotation= 90.0;
-        speed = .05f;
+        speed =0.05;
     }
 
     public void linksGehen() {
@@ -44,14 +53,14 @@ public class Spieler {
     }
 
     public void linksdrehen() {
-        rotation += 3;
+        rotation += 1;
         if (rotation < 0) {
             rotation += 360;
         }
     }
 
     public void rechtsdrehen() {
-        rotation -= 3;
+        rotation -= 1;
         if (rotation > 360) {
             rotation -= 360;
         }
@@ -60,7 +69,7 @@ public class Spieler {
     public double getX() {
         return this.x;
     }
-
+    
     public void setX(double xt) {
         this.x = xt;
     }
@@ -68,7 +77,7 @@ public class Spieler {
     public double getY() {
         return this.y;
     }
-
+    
     public void setY(double yt) {
         this.y = yt;
     }
@@ -76,7 +85,7 @@ public class Spieler {
     public double getRotation() {
         return rotation;
     }
-
+    
     public void setRotation(double rt) {
         this.rotation =rt;
     }
