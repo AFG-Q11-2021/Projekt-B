@@ -1,5 +1,7 @@
 
 import java.awt.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
 /*Autor: Laurens Birkenbach
  * Zuletzt geändert: 23.05.2021
@@ -115,14 +117,18 @@ public class CastTest {
 
             if (topPixel < 0)
                 topPixel = 0;
-            if (side == 1) {
-                g.setColor(new Color(40, 40, 40));
-            } else {
-                g.setColor(new Color(60, 60, 60));
-            }
+
             int xdraw = game.getWidth() - x;
-            g.drawImage(Controller.getTextureManager().getTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
-                texX,0,texX+1,texRes,null);
+            BufferedImage imgRaw = Controller.getTextureManager().getTexture(texID);
+
+            if (side == 1) {
+                g.drawImage(imgRaw,xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+                    texX,0,texX+1,texRes,null);
+            } else {
+                 g.drawImage(Controller.getTextureManager().getDarkTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+                    texX,0,texX+1,texRes,null);
+            }
+
             // g.fillRect(xdraw, topPixel, 1, columnHeight);
 
         }

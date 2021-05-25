@@ -10,11 +10,11 @@ public class Spieler {
 
     public Spieler(String usernameNeu) {
         setUsername(usernameNeu);
-        x = 1;// Startpunkt des Spielers//
-        y = 1;// Startpunkt des Spielers//
+        x = 5;// Startpunkt des Spielers//
+        y = 5;// Startpunkt des Spielers//
         setLeben(20);
         // rotation= 90.0;
-        speed = .02f;
+        speed = .05f;
     }
 
     public void linksGehen() {
@@ -44,14 +44,14 @@ public class Spieler {
     }
 
     public void linksdrehen() {
-        rotation += 1;
+        rotation += 3;
         if (rotation < 0) {
             rotation += 360;
         }
     }
 
     public void rechtsdrehen() {
-        rotation -= 1;
+        rotation -= 3;
         if (rotation > 360) {
             rotation -= 360;
         }
