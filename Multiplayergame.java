@@ -43,6 +43,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     public void render() {
         g = bs.getDrawGraphics();
+        g.setColor(new Color(37, 150, 190));
+        g.fillRect(0, 0, WIDTH, HEIGHT);
         bewegeSpieler();
 
         // Karte malen
@@ -51,7 +53,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
         // Spieler malen
         paintPlayer(s);
-        paintpotentialPlayers(s);
+        //paintpotentialPlayers(s);
 
         g.dispose();
         bs.show();
@@ -132,7 +134,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     private Connection aufbau(Connection ver) {
         try {
-            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11", "abitur");
+            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
             return ver;
         } catch (SQLException e) {
             System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
@@ -157,8 +159,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double y9 = s.getY();
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                    + " WHERE name = '" + s.getUsername() + "'";
-            datenbankupdaten(sql);
+                + " WHERE name = '" + s.getUsername() + "'";
+            //datenbankupdaten(sql);
         }
         if (back == true) {
             s.rueckwaertsGehen();
@@ -166,8 +168,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double y9 = s.getY();
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                    + " WHERE name = '" + s.getUsername() + "'";
-            datenbankupdaten(sql);
+                + " WHERE name = '" + s.getUsername() + "'";
+            //datenbankupdaten(sql);
         }
         if (left == true) {
             s.linksdrehen();
@@ -175,8 +177,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double y9 = s.getY();
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                    + " WHERE name = '" + s.getUsername() + "'";
-            datenbankupdaten(sql);
+                + " WHERE name = '" + s.getUsername() + "'";
+            //datenbankupdaten(sql);
         }
         if (right == true) {
             s.rechtsdrehen();
@@ -184,8 +186,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double y9 = s.getY();
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                    + " WHERE name = '" + s.getUsername() + "'";
-            datenbankupdaten(sql);
+                + " WHERE name = '" + s.getUsername() + "'";
+            //datenbankupdaten(sql);
         }
     }
 
