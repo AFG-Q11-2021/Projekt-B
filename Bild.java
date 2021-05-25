@@ -1,7 +1,6 @@
 
 /**
  * Bild Class
- *
  * @author Christopher Scherübl (18.05.2021 n.Chr);
  * @version 0.1
  */

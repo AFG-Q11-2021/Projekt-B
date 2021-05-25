@@ -15,8 +15,7 @@ public class Controller {
     private static Spieler spieler;
     private static Framee frame;
     private static Karte kartetest;
-
-    public  static TextureManager textureManager;
+    private  static TextureManager textureManager;
 
     public Controller() {
 
@@ -30,7 +29,7 @@ public class Controller {
         kartetest.setKartenArray(3, 2, 1);
         kartetest.setKartenArray(4, 2, 1);
         kartetest.setKartenArray(4, 3, 1);
-        textureManager = new TextureManager();
+        setTextureManager(new TextureManager());
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,8 +71,16 @@ public class Controller {
         return spieler;
     }
 
-    public static void setSpieler(Spieler spieler){
-        spieler = spieler;
+    public static void setSpieler(Spieler spiler){
+        spieler = spiler;
+    }
+
+    public static TextureManager getTextureManager() {
+        return textureManager;
+    }
+
+    public static void setTextureManager(TextureManager textureManagr) {
+        textureManager = textureManagr;
     }
 
 }

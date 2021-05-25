@@ -121,7 +121,7 @@ public class CastTest {
                 g.setColor(new Color(60, 60, 60));
             }
             int xdraw = game.getWidth() - x;
-            g.drawImage(Controller.textureManager.getTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+            g.drawImage(Controller.getTextureManager().getTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
                 texX,0,texX+1,texRes,null);
             // g.fillRect(xdraw, topPixel, 1, columnHeight);
 
