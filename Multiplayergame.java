@@ -160,7 +160,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-            //datenbankupdaten(sql);
+            datenbankupdaten(sql);
         }
         if (back == true) {
             s.rueckwaertsGehen();
@@ -169,7 +169,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-            //datenbankupdaten(sql);
+            datenbankupdaten(sql);
         }
         if (left == true) {
             s.linksdrehen();
@@ -178,7 +178,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-            //datenbankupdaten(sql);
+            datenbankupdaten(sql);
         }
         if (right == true) {
             s.rechtsdrehen();
@@ -187,7 +187,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-            //datenbankupdaten(sql);
+            datenbankupdaten(sql);
         }
     }
 
