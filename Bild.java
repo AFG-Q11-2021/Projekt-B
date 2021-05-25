@@ -19,7 +19,7 @@ public class Bild extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D f2 = (Graphics2D) g;
-        f2.drawImage(bild,0,0,1290 ,1100,
+        f2.drawImage(bild,0,0,1290 ,1000,
                 0,0,bild.getWidth(null),bild.getHeight(null),null);
     }
 }

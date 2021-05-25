@@ -35,7 +35,7 @@ public class Framee extends JFrame implements ActionListener {
         add(ende);
 
         build = new Bild();
-        build.setBounds(0, 0, 1290, 1100);
+        build.setBounds(0, 0, 1290, 1000);
         add(build);
 
         kartetest = k;
