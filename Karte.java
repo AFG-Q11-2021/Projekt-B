@@ -21,7 +21,7 @@ public class Karte {
     }
 
     public int getCoordinate(int x, int y) {
-        if(x >= getSizeX() - 1 || x < 0 || y >= getSizeY() - 1 || y < 0){
+        if(x >= getSizeX() - 1 || x < 1 || y >= getSizeY() - 1 || y < 1){
             return 1;
         }
         return kartenArray[x][y];
