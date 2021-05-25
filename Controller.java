@@ -24,7 +24,7 @@ public class Controller {
 
     public static void main(String[] args) {
         running = true;
-        
+
         kartetest = new Karte();
         kartetest.setKartenArray(2, 2, 1);
         kartetest.setKartenArray(3, 2, 1);
@@ -37,7 +37,7 @@ public class Controller {
         frame.setSize(1290, 1100);
         frame.setLayout(null);
         frame.setVisible(true);
-        
+
         long lastupdate = System.nanoTime();
         long currentTime = System.nanoTime();
         while (running) {
@@ -51,10 +51,7 @@ public class Controller {
         game.getGraphics().dispose();
     }
 
-    
-
     public static void Update() {
-
     }
 
     public static void Render() {
@@ -62,9 +59,6 @@ public class Controller {
             game.render();
         }
     }
-    
-  
-
 
     public static void setGame(Game tmepi) {
         game = tmepi;
@@ -74,24 +68,12 @@ public class Controller {
         return game;
     }
 
-    
-
-   
-
-
-
     public static Spieler getSpieler() {
         return spieler;
     }
 
-
-    
-
     public static void setSpieler(Spieler spieler){
         spieler = spieler;
     }
- 
-    
- 
 
 }

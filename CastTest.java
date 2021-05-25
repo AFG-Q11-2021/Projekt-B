@@ -9,7 +9,7 @@ public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
         int stepSize = 1;
         int texRes = 32;
-        
+
         double xPos = s.getX();
         double yPos = s.getY();
         double rot = Math.toRadians(-s.getRotation());
@@ -97,9 +97,9 @@ public class CastTest {
             int columnHeight = (int) (game.getHeight() / perpWallDist);
             int topPixel = (game.getHeight() - columnHeight) / 2;
 
-           // if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
-           //     break;
-           // }
+            // if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
+            //     break;
+            // }
             int texID = k.getCoordinate(mapX,mapY) -1;
 
             //calculate value of wallX
@@ -122,9 +122,9 @@ public class CastTest {
             }
             int xdraw = game.getWidth() - x;
             g.drawImage(Controller.textureManager.getTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
-                        texX,0,texX+1,texRes,null);
-           // g.fillRect(xdraw, topPixel, 1, columnHeight);
-            
+                texX,0,texX+1,texRes,null);
+            // g.fillRect(xdraw, topPixel, 1, columnHeight);
+
         }
     }
 
