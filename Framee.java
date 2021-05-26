@@ -16,7 +16,7 @@ public class Framee extends JFrame implements ActionListener {
     private JButton ende;
     private Bild build;
     private static Karte kartetest;
-    private double spielers;
+    private double spielerspeed;
 
     public Framee(String title, Karte k) {
         super(title);
@@ -46,7 +46,7 @@ public class Framee extends JFrame implements ActionListener {
         add(build);
 
         kartetest = k;
-        spielers = 0.05;
+        spielerspeed = 0.05;
 
     }
 
@@ -69,7 +69,7 @@ public class Framee extends JFrame implements ActionListener {
 
     private void fenster() {
         Singleplayergame gamee = new Singleplayergame(kartetest);
-        Spieler sppileri = new Spieler("Spieler", spielers );
+        Spieler sppileri = new Spieler("Spieler", spielerspeed );
         Controller.setSpieler(sppileri);
         gamee.setSpieler(sppileri);
         Controller.setGame(gamee);
@@ -77,11 +77,11 @@ public class Framee extends JFrame implements ActionListener {
 
     private void auswahl() {
         @SuppressWarnings("unused")
-        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest);
+        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed);
     }
     
     private void setting() {
-        new Settings(this, spielers);
+        new Settings(this, spielerspeed);
     }
     
     public void returne() {
@@ -89,10 +89,10 @@ public class Framee extends JFrame implements ActionListener {
     }
 
     public double getSpeed() {
-        return spielers;
+        return spielerspeed;
     }
 
     public void setSpeed(double spielers) {
-        this.spielers = spielers;
+        this.spielerspeed = spielers;
     }
 }
