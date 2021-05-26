@@ -80,11 +80,13 @@ public class Multiplayer extends JFrame implements ActionListener {
             st.close();
         } catch (SQLException e) {
             System.out.println("Fehler beim Einfügen des Datensatzes: " + e);
+            System.exit(0);
         }
         try {
             verbindung.close();
         } catch (SQLException e) {
             System.err.println("Fehler beim schließen der Verbindung:" + e);
+            System.exit(0);
         }
     }
 }

@@ -28,11 +28,10 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     public Multiplayergame(Karte k) {
         frame1 = new JFrame();
-        setupframe();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
         this.addKeyListener(this);
-
+        setupframe();
         kartetest = k;
         csizeX = (int) WIDTH / kartetest.getSizeX();
         csizeY = (int) HEIGHT / kartetest.getSizeY();
