@@ -31,10 +31,29 @@ public class CastTest {
         planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
         Game game = Controller.getGame();
+
+        //drawSky
+        float fov = 52.85f;
+        int sourceWidth = (int) ((fov/360)*1000);
+        for(int dx = 0; dx < game.getWidth()/stepSize;dx++){
+            int x = dx * stepSize;
+            double camX = (2 * x / ((double) game.getWidth())) - 1;
+            double rayDirX = dirX + planeX * camX;
+            double rayDirY = dirY + planeY * camX;
+            double rayAngle = (-rot + (camX*0.583));
+            
+            int texX = (int) ((rayAngle/6.283) * 1000);
+            if(texX < 0){ texX += 1000;}
+            if(texX > 1000) {texX -= 1000;};
+            int xdraw = game.getWidth()-x;
+             g.drawImage(Controller.getTextureManager().getSkyTexture(0),xdraw-stepSize-1,0,xdraw+stepSize ,game.getHeight(),
+                    texX,200,texX+1,400,null);
+            
+        }
+
         g.setColor(new Color(180, 70, 0));
         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
 
-        
         
         for (int fx = 0; fx < game.getWidth()/stepSize; fx++) {
             int x = fx * stepSize;
@@ -117,23 +136,20 @@ public class CastTest {
             if(side == 0 && rayDirX > 0) texX = texRes - texX - 1;
             if(side == 1 && rayDirY < 0) texX = texRes - texX - 1;
 
-              texX = texRes-texX-1;
-                int xdraw = game.getWidth() - x;
-                BufferedImage imgRaw = Controller.getTextureManager().getTexture(texID);
+            texX = texRes-texX-1;
+            int xdraw = game.getWidth() - x;
+            BufferedImage imgRaw = Controller.getTextureManager().getTexture(texID);
 
-                if (side == 1) {
-                    g.drawImage(imgRaw,xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
-                        texX,0,texX+1,texRes,null);
-                } else {
-                    g.drawImage(Controller.getTextureManager().getDarkTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
-                        texX,0,texX+1,texRes,null);
-                }
+            if (side == 1) {
+                g.drawImage(imgRaw,xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+                    texX,0,texX+1,texRes,null);
+            } else {
+                g.drawImage(Controller.getTextureManager().getDarkTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
+                    texX,0,texX+1,texRes,null);
+            }
 
-            
 
-          
             // g.fillRect(xdraw, topPixel, 1, columnHeight);
-
         }
     }
 
