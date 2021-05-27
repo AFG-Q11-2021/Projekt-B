@@ -9,7 +9,7 @@ import java.awt.image.*;
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 2;
+        int stepSize = 1;
         int texRes = 32;
 
         double xPos = s.getX();
@@ -54,10 +54,11 @@ public class CastTest {
 
         }
 
-        // g.setColor(new Color(180, 70, 0));
-        // g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
+         g.setColor(new Color(90, 90, 90));
+         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
 
         //Floor Casting?
+        BufferedImage floorImage = new BufferedImage(screenWidth,screenHeight/2 +1,BufferedImage.TYPE_INT_RGB);
         for(int iy = game.getHeight()/(2*stepSize); iy < game.getHeight()/stepSize;iy++){
             // rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
             int y = iy*stepSize;
@@ -102,8 +103,18 @@ public class CastTest {
                 //color = (color >> 1) & 8355711; // make a bit darker
                // buffer[y][x] = color;
                 int drawX = screenWidth-x;
-                 g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
-                tx,ty,tx+1,ty+1,null);
+                
+                Color c = new Color(Controller.getTextureManager().getDarkTexture(0).getRGB(tx,ty));
+                int red = c.getRed();
+                int green = c.getGreen();
+                int blue = c.getBlue();
+                int rgb = red;
+                rgb = (rgb<<8) + green;
+                rgb = (rgb<<8) + blue;
+                
+                floorImage.setRGB(x,y-screenHeight/2,rgb);
+                // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
+                //tx,ty,tx+1,ty+1,null);
                 
 
                 //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
@@ -111,7 +122,9 @@ public class CastTest {
                 // color = (color >> 1) & 8355711; // make a bit darker
                 // buffer[screenHeight - y - 1][x] = color;
             }
+            
         }
+        g.drawImage(floorImage,0,screenHeight/2,null);
 
         //WallCasting
         for (int fx = 0; fx < game.getWidth()/stepSize; fx++) {
