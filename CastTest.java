@@ -9,8 +9,8 @@ import java.awt.image.*;
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 1;
-        int floorRes = 1;
+        int stepSize = 4;
+        int floorRes = 2;
         int texRes = 32;
 
         double xPos = s.getX();
@@ -61,7 +61,7 @@ public class CastTest {
 
         //Floor Casting?
         BufferedImage floorImage = new BufferedImage(screenWidth/floorRes,screenHeight/(2*floorRes),BufferedImage.TYPE_INT_RGB);
-        for(int iy = screenHeight/(2*floorRes); iy < screenHeight/floorRes;iy++){
+        for(int iy = screenHeight/(2*floorRes); iy < screenHeight/(floorRes);iy++){
             // rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
             int y = iy*floorRes;
             double rayDirX0 = dirX - planeX;
@@ -83,7 +83,7 @@ public class CastTest {
             double floorX = xPos + rowDistance * rayDirX0;
             double floorY = yPos + rowDistance * rayDirY0;
 
-            for(int ix = 0; ix < screenWidth/stepSize; ++ix)
+            for(int ix = 0; ix < screenWidth/floorRes; ++ix)
             {
                 int x = ix*floorRes;
                 // the cell coord is simply got from the integer parts of floorX and floorY
@@ -104,6 +104,7 @@ public class CastTest {
                 //color = texture[floorTexture][texRes * ty + tx];
                 //color = (color >> 1) & 8355711; // make a bit darker
                // buffer[y][x] = color;
+               
                 int drawX = screenWidth-x;
                 
                 Color c = new Color(texManager.getDarkTexture(0).getRGB(tx,ty));
@@ -112,7 +113,8 @@ public class CastTest {
                 rgb = (rgb<<8) + c.getGreen();
                 rgb = (rgb<<8) + c.getBlue();
                 
-                floorImage.setRGB(x,y-screenHeight/2,rgb);
+                
+                floorImage.setRGB(ix,iy - (screenHeight/2),rgb);
                 // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
                 //tx,ty,tx+1,ty+1,null);
                 
@@ -124,7 +126,7 @@ public class CastTest {
             }
             
         }
-        g.drawImage(floorImage,0,screenHeight/2,null);
+        g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth,screenHeight/2,null);
 
         //WallCasting
         for (int fx = 0; fx < screenWidth/stepSize; fx++) {

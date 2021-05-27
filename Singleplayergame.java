@@ -66,10 +66,10 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
             s.rechtsdrehen();
         // Karte malen
         CastTest.paintMap(g, kartetest, s);
-        paintMap();
+       // paintMap();
 
         // Spieler malen
-        paintPlayer();
+       // paintPlayer();
 
         g.dispose();
         bs.show();
