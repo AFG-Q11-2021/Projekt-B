@@ -10,7 +10,7 @@ import java.awt.image.*;
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
         int stepSize = 4;
-        int floorRes = 4;
+        int floorRes = 2;
         int texRes = 32;
 
         double xPos = s.getX();
@@ -75,8 +75,8 @@ public class CastTest {
 
             // calculate the real world step vector we have to add for each x (parallel to camera plane)
             // adding step by step avoids multiplications with a weight in the inner loop
-            double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / screenWidth;
-            double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / screenWidth;
+            double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / (screenWidth/floorRes);
+            double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / (screenWidth/floorRes);
 
             // real world coordinates of the leftmost column. This will be updated as we step to the right.
             double floorX = xPos + rowDistance * rayDirX0;
@@ -84,7 +84,7 @@ public class CastTest {
 
             for(int ix = 0; ix < screenWidth/floorRes; ix++)
             {
-                int x = ix*floorRes;
+               // int x = ix*floorRes;
                 // the cell coord is simply got from the integer parts of floorX and floorY
 
                 int cellX = (int)(floorX);
