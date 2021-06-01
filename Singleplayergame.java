@@ -9,7 +9,7 @@ import java.awt.image.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class Singleplayergame extends Canvas implements KeyListener, Game {
+public class Singleplayergame extends Canvas implements KeyListener, Game, Returner {
     public JFrame frame1;
 
     private String title = "Game";
@@ -31,15 +31,15 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
 
     public Singleplayergame(Karte k) {
         JFrame frame1 = new JFrame();
-        Dimension size = new Dimension(WIDTH, HEIGHT);
 
-        this.setPreferredSize(size);
         frame1.setTitle(title);
         frame1.add(this);
         frame1.pack();
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
+        frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.setPreferredSize(frame1.getPreferredSize());
 
         kartetest = k;
         csizeX = (int) WIDTH / kartetest.getSizeX();
@@ -52,7 +52,6 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
     }
 
     public void render() {
-
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
@@ -64,12 +63,12 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
             s.linksdrehen();
         if (right == true)
             s.rechtsdrehen();
-        // Karte malen
+        // 3D Bild
         CastTest.paintMap(g, kartetest, s);
-       // paintMap();
 
-        // Spieler malen
-       // paintPlayer();
+        // 2D Bild
+        // paintPlayer();
+        // paintMap();
 
         g.dispose();
         bs.show();
@@ -106,38 +105,33 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
-            // vorwärts
             fwd = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
-            // rückwärts
             back = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
-            // links
             left = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
-            // rechts
             right = true;
         }
-
+        /*if (e.getKeyCode() == KeyEvent.VK_F) {
+        frame1.setVisible(false);
+        new Settings(this, s.getSpeed());
+        }*/
     }
 
     public void keyReleased(KeyEvent e) {
-        // vorwärts
         if (e.getKeyCode() == KeyEvent.VK_W) {
             fwd = false;
         }
-        // rückwärts
         if (e.getKeyCode() == KeyEvent.VK_S) {
             back = false;
         }
-        // links
         if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
         }
-        // rechts
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
@@ -159,4 +153,11 @@ public class Singleplayergame extends Canvas implements KeyListener, Game {
         s = spieler;
     }
 
+    public void setSpeed(double spielers){
+        s.setSpeed(spielers);
+    }
+
+    public void returne(){
+        frame1.setVisible(true);
+    }
 }

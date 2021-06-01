@@ -5,13 +5,13 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Settings extends JFrame implements ActionListener {
-    private Framee fra;
+    private Returner fra;
     private JTextField textspeed;
     private JLabel labelspeed;
     private JButton exit;
     private JButton save;
 
-    public Settings(Framee f, double speed) {
+    public Settings(Returner f, double speed) {
         fra = f;
 
         save = new JButton("Save Settings");
