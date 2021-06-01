@@ -14,10 +14,19 @@ public class TextureManager
         textures = new BufferedImage[10];
         darkTextures = new BufferedImage[10];
         skyTextures = new BufferedImage[10];
-
-        loadTexture(0,"textures/sheetMetal.png");
         loadSkyTexture(0,"textures/sky.png");
+        
+        loadTexture(0,"textures/sheetMetal.png");
         createDarkTexture(0);
+        
+        loadTexture(1,"textures/brickWall.png");
+        createDarkTexture(0);
+        
+        loadTexture(2,"textures/brickWallPainting.png");
+        createDarkTexture(2);
+        
+        loadTexture(3,"textures/woodPlankWall.png");
+        createDarkTexture(3);
     }
 
     public BufferedImage getTexture(int texID){
