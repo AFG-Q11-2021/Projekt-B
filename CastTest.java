@@ -108,9 +108,14 @@ public class CastTest {
 
                 Color c = new Color(texManager.getDarkTexture(0).getRGB(tx,ty));
 
-                int rgb = texManager.getDarkTexture(0).getRGB(tx,ty);
+                //int rgb = texManager.getDarkTexture(0).getRGB(tx,ty);
 
-                floorImage.setRGB(ix, iy - (screenHeight/4), rgb);
+                int rgb = c.getRed();
+                rgb = (rgb<<8) + c.getGreen();
+                rgb = (rgb<<8) + c.getBlue();
+                
+                floorImage.setRGB(ix,iy-screenHeight/(2*floorRes),rgb);
+
                 // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
                 //tx,ty,tx+1,ty+1,null);
 
