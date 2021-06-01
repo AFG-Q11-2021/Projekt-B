@@ -17,11 +17,13 @@ public class Controller {
     public static void main(String[] args) {
         running = true;
 
-        kartetest = new Karte();
+        kartetest = KartenVerwalter.getMapFromStorage(0);
+        
+        /* new Karte();
         kartetest.setKartenArray(2, 2, 1);
         kartetest.setKartenArray(3, 2, 1);
         kartetest.setKartenArray(4, 2, 1);
-        kartetest.setKartenArray(4, 3, 1);
+        kartetest.setKartenArray(4, 3, 1);*/
         setTextureManager(new TextureManager());
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest);

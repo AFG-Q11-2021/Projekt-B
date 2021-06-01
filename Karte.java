@@ -7,8 +7,8 @@ public class Karte {
     private int y1;
 
     public Karte() {
-        x1 = 64;
-        y1 = 64;
+        x1 = 32;
+        y1 = 32;
         kartenArray = new int[x1][y1];// setzt die Kartengröße
     }
 
