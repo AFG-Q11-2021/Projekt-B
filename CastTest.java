@@ -27,7 +27,6 @@ public class CastTest {
         double planeX = 0.66;
         double planeY = 0;
 
-        
         double oldPlaneX = planeX;
         planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
         planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
@@ -36,7 +35,7 @@ public class CastTest {
 
         int screenWidth = game.getWidth();
         int screenHeight = game.getHeight();
-        
+
         TextureManager texManager = Controller.getTextureManager();
         //drawSky
         float fov = 52.85f;
@@ -56,12 +55,12 @@ public class CastTest {
 
         }
 
-         g.setColor(new Color(90, 90, 90));
-         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
+        g.setColor(new Color(90, 90, 90));
+        g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
 
         //Floor Casting?
         BufferedImage floorImage = new BufferedImage(screenWidth/floorRes,screenHeight/(2*floorRes),BufferedImage.TYPE_INT_RGB);
-        for(int iy = screenHeight/(2*floorRes); iy < screenHeight/(floorRes);iy++){
+        for(int iy = screenHeight/(2*floorRes); iy < screenHeight/(floorRes); iy++){
             // rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
             int y = iy*floorRes;
             double rayDirX0 = dirX - planeX;
@@ -83,11 +82,11 @@ public class CastTest {
             double floorX = xPos + rowDistance * rayDirX0;
             double floorY = yPos + rowDistance * rayDirY0;
 
-            for(int ix = 0; ix < screenWidth/floorRes; ++ix)
+            for(int ix = 0; ix < screenWidth/floorRes; ix++)
             {
                 int x = ix*floorRes;
                 // the cell coord is simply got from the integer parts of floorX and floorY
-                
+
                 int cellX = (int)(floorX);
                 int cellY = (int)(floorY);
 
@@ -103,26 +102,21 @@ public class CastTest {
                 // floor
                 //color = texture[floorTexture][texRes * ty + tx];
                 //color = (color >> 1) & 8355711; // make a bit darker
-               // buffer[y][x] = color;
-               
+
                 
-                
-                
-               
-               
-                
+
                 
                 floorImage.setRGB((screenWidth/floorRes)-ix-1,iy-screenHeight/(2*floorRes),texManager.getDarkTexture(0).getRGB(tx,ty));
+
                 // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
                 //tx,ty,tx+1,ty+1,null);
-                
 
                 //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
                 //color = texture[ceilingTexture][texRes * ty + tx];
                 // color = (color >> 1) & 8355711; // make a bit darker
                 // buffer[screenHeight - y - 1][x] = color;
             }
-            
+
         }
         g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth/floorRes,screenHeight/(2*floorRes),null);
 

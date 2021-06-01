@@ -8,7 +8,7 @@ public class Controller {
     private static Spieler spieler;
     private static Framee frame;
     private static Karte kartetest;
-    private  static TextureManager textureManager;
+    private static TextureManager textureManager;
 
     public Controller() {
 

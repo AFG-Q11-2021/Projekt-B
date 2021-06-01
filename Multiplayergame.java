@@ -6,7 +6,7 @@ import java.sql.*;
 
 //Author: Julius(primär), Laurens
 @SuppressWarnings("serial")
-public class Multiplayergame extends Canvas implements KeyListener, Game {
+public class Multiplayergame extends Canvas implements KeyListener, Game, Returner {
 
     private JFrame frame1;
     private String title = "Game";
@@ -191,46 +191,34 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
     }
 
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            // vorwärts
-            // fwd = true;
-            System.out.println("muhuhuh");
-        }
     }
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
-            // vorwärts
             fwd = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
-            // rückwärts
             back = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
-            // links
             left = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
-            // rechts
             right = true;
         }
+        
     }
 
     public void keyReleased(KeyEvent e) {
-        // vorwärts
         if (e.getKeyCode() == KeyEvent.VK_W) {
             fwd = false;
         }
-        // rückwärts
         if (e.getKeyCode() == KeyEvent.VK_S) {
             back = false;
         }
-        // links
         if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
         }
-        // rechts
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
@@ -250,6 +238,14 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     public void setSpieler(Spieler spiler) {
         s = spiler;
+    }
+    
+    public void returne(){
+        frame1.setVisible(true);
+    }
+    
+    public void setSpeed(double spielers){
+        s.setSpeed(spielers);
     }
 
     private void setupframe() {

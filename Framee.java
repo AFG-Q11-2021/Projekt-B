@@ -9,7 +9,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Framee extends JFrame implements ActionListener {
+public class Framee extends JFrame implements ActionListener, Returner {
     private JButton schliessen;
     private JButton auswahl;
     private JButton settings;
@@ -53,16 +53,16 @@ public class Framee extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         {
             if (e.getSource() == schliessen) {
+                this.setVisible(false);
                 fenster();
-                this.setVisible(false);
             } else if (e.getSource() == auswahl) {
-                auswahl();
                 this.setVisible(false);
+                auswahl();
             } else if (e.getSource() == ende) {
                 System.exit(0);
             } else if (e.getSource() == settings) {
-                setting();
                 this.setVisible(false);
+                setting();
             }
         }
     }

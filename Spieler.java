@@ -105,4 +105,12 @@ public class Spieler {
     public void setLeben(int leben) {
         this.leben = leben;
     }
+    
+    public double getSpeed(){
+        return speed;
+    }
+    
+    public void setSpeed(double s){
+        speed = s;
+    }
 }
