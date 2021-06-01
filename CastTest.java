@@ -10,7 +10,7 @@ import java.awt.image.*;
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
         int stepSize = 4;
-        int floorRes = 2;
+        int floorRes = 4;
         int texRes = 32;
 
         double xPos = s.getX();
@@ -48,8 +48,8 @@ public class CastTest {
             double rayAngle = (rot + (camX*0.583));
 
             int texX = (int) ((rayAngle/6.283) * 1000);
-            if(texX < 0) texX += 1000;
-            if(texX > 1000) texX -= 1000;
+            if(texX < 0) texX += 990;
+            if(texX > 1000) texX -= 990;
 
             g.drawImage(texManager.getSkyTexture(0),x-stepSize-1,0,x+stepSize ,game.getHeight(),
                 texX,100,texX+1,250,null);
@@ -70,7 +70,7 @@ public class CastTest {
             double rayDirY1 = dirY + planeY;
 
             int p = y - screenHeight/2;
-            double posZ = 0.5 *game.getHeight();
+            double posZ = 0.5 *screenHeight;
 
             double rowDistance = posZ/p;
 
@@ -105,16 +105,14 @@ public class CastTest {
                 //color = (color >> 1) & 8355711; // make a bit darker
                // buffer[y][x] = color;
                
-                int drawX = screenWidth-x;
                 
-                Color c = new Color(texManager.getDarkTexture(0).getRGB(tx,ty));
+                
+                
                
-                int rgb = c.getRed();
-                rgb = (rgb<<8) + c.getGreen();
-                rgb = (rgb<<8) + c.getBlue();
+               
                 
                 
-                floorImage.setRGB(ix,iy-screenHeight/(2*floorRes),rgb);
+                floorImage.setRGB((screenWidth/floorRes)-ix-1,iy-screenHeight/(2*floorRes),texManager.getDarkTexture(0).getRGB(tx,ty));
                 // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize ,y+stepSize,
                 //tx,ty,tx+1,ty+1,null);
                 
@@ -126,7 +124,7 @@ public class CastTest {
             }
             
         }
-        g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth,screenHeight/2,null);
+        g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth/floorRes,screenHeight/(2*floorRes),null);
 
         //WallCasting
         for (int fx = 0; fx < screenWidth/stepSize; fx++) {
