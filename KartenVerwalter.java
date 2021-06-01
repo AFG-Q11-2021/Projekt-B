@@ -25,8 +25,6 @@ public class KartenVerwalter {
         return gesucht;
     }
     
-    
-
     public static void karteLaden(Karte karte, String dateiName) {
         try {
             FileReader fr = new FileReader(dateiName);

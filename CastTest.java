@@ -102,9 +102,6 @@ public class CastTest {
                 // floor
                 //color = texture[floorTexture][texRes * ty + tx];
                 //color = (color >> 1) & 8355711; // make a bit darker
-
-                
-
                 
                 floorImage.setRGB((screenWidth/floorRes)-ix-1,iy-screenHeight/(2*floorRes),texManager.getDarkTexture(0).getRGB(tx,ty));
 
