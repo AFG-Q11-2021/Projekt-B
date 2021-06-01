@@ -10,8 +10,8 @@ public class Spieler {
 
     public Spieler(String usernameNeu, double s) {
         setUsername(usernameNeu);
-        x = 5;// Startpunkt des Spielers//
-        y = 5;// Startpunkt des Spielers//
+        x = 4;// Startpunkt des Spielers//
+        y = 3;// Startpunkt des Spielers//
         setLeben(20);
         // rotation= 90.0;
         speed =s;

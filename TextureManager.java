@@ -20,7 +20,7 @@ public class TextureManager
         createDarkTexture(0);
         
         loadTexture(1,"textures/brickWall.png");
-        createDarkTexture(0);
+        createDarkTexture(1);
         
         loadTexture(2,"textures/brickWallPainting.png");
         createDarkTexture(2);
