@@ -31,14 +31,13 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
 
     public Singleplayergame(Karte k) {
         JFrame frame1 = new JFrame();
-
+        frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame1.setTitle(title);
         frame1.add(this);
         frame1.pack();
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
-        frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setPreferredSize(frame1.getPreferredSize());
 
         kartetest = k;
