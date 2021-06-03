@@ -40,6 +40,10 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         bs = this.getBufferStrategy();
     }
 
+    public void update(){
+        
+    }
+    
     public void render() {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));

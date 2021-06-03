@@ -28,6 +28,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private boolean back = false;
     private boolean left = false;
     private boolean right = false;
+    private boolean shoot = false;
+    private boolean rotRight = false;
+    private boolean rotLeft = false;
 
     public Singleplayergame(Karte k) {
         JFrame frame1 = new JFrame();
@@ -50,18 +53,69 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         this.addKeyListener(this);
     }
 
+    public void update(){
+        movePlayer();
+    }
+
+    private void movePlayer(){
+        double rotation = s.getRotation();
+        double speed = s.getSpeed();
+        double x = s.getX();
+        double y = s.getY();
+
+        if (fwd == true){
+            double radrot = Math.toRadians(rotation);
+            double xadd =  speed * (Math.sin(radrot));
+            double yadd =  speed * (Math.cos(radrot));
+
+            
+            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
+            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
+
+        } else 
+
+        if (back == true){
+            double radrot = Math.toRadians(rotation+180);
+            double xadd =  speed * (Math.sin(radrot));
+            double yadd =  speed * (Math.cos(radrot));
+
+            
+            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
+            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
+
+        }
+
+        if (left == true){
+            double radrot = Math.toRadians(rotation+90);
+            double xadd =  speed * (Math.sin(radrot));
+            double yadd =  speed * (Math.cos(radrot));
+
+            
+            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
+            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
+        } else
+
+        if (right == true){
+            double radrot = Math.toRadians(rotation-90);
+            double xadd =  speed * (Math.sin(radrot));
+            double yadd =  speed * (Math.cos(radrot));
+
+            
+            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
+            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
+        }
+
+        if (rotRight == true)
+            s.rechtsdrehen();
+        if (rotLeft == true)
+            s.linksdrehen();
+    }
+
     public void render() {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        if (fwd == true)
-            s.geradeGehen();
-        if (back == true)
-            s.rueckwaertsGehen();
-        if (left == true)
-            s.linksdrehen();
-        if (right == true)
-            s.rechtsdrehen();
+
         // 3D Bild
         CastTest.paintMap(g, kartetest, s);
 
@@ -115,6 +169,12 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rotRight = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            rotLeft = true;
+        }
         /*if (e.getKeyCode() == KeyEvent.VK_F) {
         frame1.setVisible(false);
         new Settings(this, s.getSpeed());
@@ -133,6 +193,12 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rotRight = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            rotLeft = false;
         }
     }
 

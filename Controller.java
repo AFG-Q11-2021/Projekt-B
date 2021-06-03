@@ -46,6 +46,9 @@ public class Controller {
     }
 
     public static void Update() {
+        if (game != null) {
+            game.update();
+        }
     }
 
     public static void Render() {
