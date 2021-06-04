@@ -40,9 +40,12 @@ public class Controller {
         game.getGraphics().dispose();
     }
 
-    //public static void Update() {
-    //}
-
+    public static void Update() {
+        if (game != null) {
+            game.update();
+        }
+    }
+    
     private static void Render() {
         if (game != null) {
             game.render();

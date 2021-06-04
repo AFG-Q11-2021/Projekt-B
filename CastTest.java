@@ -4,13 +4,13 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 /*Autor: Laurens Birkenbach
- * Zuletzt geändert: 23.05.2021
+ * Zuletzt geändert: 03.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 4;
-        int floorRes = 4;
+        int stepSize = 1;
+        int floorRes = 1;
         int texRes = 32;
 
         double xPos = s.getX();
