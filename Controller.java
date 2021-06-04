@@ -19,11 +19,6 @@ public class Controller {
 
         kartetest = KartenVerwalter.getMapFromStorage(0);
         
-        /* new Karte();
-        kartetest.setKartenArray(2, 2, 1);
-        kartetest.setKartenArray(3, 2, 1);
-        kartetest.setKartenArray(4, 2, 1);
-        kartetest.setKartenArray(4, 3, 1);*/
         setTextureManager(new TextureManager());
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest);
@@ -37,7 +32,7 @@ public class Controller {
         while (running) {
             currentTime = System.nanoTime();
             if (currentTime - lastupdate > 1000000000 / FPS) {
-                Update();
+                //Update();
                 Render();
                 lastupdate = currentTime;
             }
@@ -45,10 +40,10 @@ public class Controller {
         game.getGraphics().dispose();
     }
 
-    public static void Update() {
-    }
+    //public static void Update() {
+    //}
 
-    public static void Render() {
+    private static void Render() {
         if (game != null) {
             game.render();
         }

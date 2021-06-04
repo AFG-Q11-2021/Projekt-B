@@ -41,8 +41,8 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         this.setPreferredSize(frame1.getPreferredSize());
 
         kartetest = k;
-        csizeX = (int) WIDTH / kartetest.getSizeX();
-        csizeY = (int) HEIGHT / kartetest.getSizeY();
+        csizeX = (int) WIDTH / kartetest.getSizeX() / 2;
+        csizeY = (int) HEIGHT / kartetest.getSizeY() / 2;
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -66,8 +66,8 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         CastTest.paintMap(g, kartetest, s);
 
         // 2D Bild
-        // paintPlayer();
-        // paintMap();
+        paintMap();
+        paintPlayer();
 
         g.dispose();
         bs.show();
@@ -115,10 +115,13 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
-        /*if (e.getKeyCode() == KeyEvent.VK_F) {
-        frame1.setVisible(false);
-        new Settings(this, s.getSpeed());
-        }*/
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            frame1.setVisible(false);
+            new Settings(this, s.getSpeed());
+        }
+        if (e.getKeyCode() == KeyEvent.VK_E) {
+            System.exit(0);
+        }
     }
 
     public void keyReleased(KeyEvent e) {
