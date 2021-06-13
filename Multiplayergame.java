@@ -25,6 +25,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
     private boolean back = false;
     private boolean left = false;
     private boolean right = false;
+    private boolean rotRight = false;
+    private boolean rotLeft = false;
 
     public Multiplayergame(Karte k) {
         frame1 = new JFrame();
@@ -67,14 +69,13 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         Connection verbindung = null;
         String sql1 = "SELECT count(*) FROM multiplayer";
         String sql2 = "SELECT name, xposition, yposition rotation FROM multiplayer WHERE name !='" + sp.getUsername()
-                + "'";
+            + "'";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
             ResultSet rs = st.executeQuery(sql1);
             rs.next();
             int g = rs.getInt(1);
-            rs.close();
             if (g != 0) {
                 ResultSet ergebnis = st.executeQuery(sql2);
                 while (ergebnis.next()) {
@@ -108,7 +109,6 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
     }
 
     private void paintPlayer(Spieler susi) {
-        //draw Charakter
         double rotRad = Math.toRadians(s.getRotation());
         int xc = (int) (susi.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
@@ -117,7 +117,6 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
-        //draw name 
         String tempi = susi.getUsername();
         char[] tulo = new char[tempi.length()];
         tempi.getChars(0, tempi.length(), tulo, 0);
@@ -179,7 +178,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
             datenbankupdaten(sql);
         }
         if (left == true) {
-            s.linksdrehen();
+            s.linksGehen();
             double x9 = s.getX();
             double y9 = s.getY();
             double r9 = s.getRotation();
@@ -188,13 +187,19 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
             datenbankupdaten(sql);
         }
         if (right == true) {
-            s.rechtsdrehen();
+            s.rechtsGehen();
             double x9 = s.getX();
             double y9 = s.getY();
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
             datenbankupdaten(sql);
+        }
+        if (rotRight = true) {
+            s.rechtsdrehen();
+        }
+        if (rotLeft = true) {
+            s.linksdrehen();
         }
     }
 
@@ -214,7 +219,15 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
-
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rotRight = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            rotLeft = true;
+        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -229,6 +242,12 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rotRight = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            rotLeft = false;
         }
     }
 
@@ -255,7 +274,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
     public void setSpeed(double spielers) {
         s.setSpeed(spielers);
     }
-    
+
     public void setSpeedr(double speedr) {
         s.setSpeedr(speedr);
     }
@@ -268,5 +287,4 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
     }
-
 }
