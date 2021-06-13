@@ -42,7 +42,6 @@ public class CastTest {
         for (int dx = 0; dx < game.getWidth() / stepSize; dx++) {
             int x = dx * stepSize;
             double camX = (2 * x / ((double) game.getWidth())) - 1;
-
             double rayAngle = (rot + (camX * 0.583));
 
             int texX = (int) ((rayAngle / 6.283) * 1000);
@@ -52,7 +51,7 @@ public class CastTest {
                 texX -= 990;
 
             g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, game.getHeight(), texX, 100,
-                    texX + 1, 250, null);
+                texX + 1, 250, null);
 
         }
 
@@ -107,7 +106,7 @@ public class CastTest {
                 // color = (color >> 1) & 8355711; // make a bit darker
 
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                        texManager.getDarkTexture(0).getRGB(tx, ty));
+                    texManager.getDarkTexture(0).getRGB(tx, ty));
 
                 // g.drawImage(Controller.getTextureManager().getDarkTexture(0),drawX,y,drawX+stepSize
                 // ,y+stepSize,
@@ -121,7 +120,7 @@ public class CastTest {
 
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
-                screenHeight / (2 * floorRes), null);
+            screenHeight / (2 * floorRes), null);
 
         // WallCasting
         for (int fx = 0; fx < screenWidth / stepSize; fx++) {
@@ -212,18 +211,14 @@ public class CastTest {
 
             texX = texRes - texX - 1;
             int xdraw = screenWidth - x;
-            BufferedImage imgRaw = texManager.getTexture(texID);
 
             if (side == 1) {
-                g.drawImage(imgRaw, xdraw - stepSize - 1, topPixel, xdraw + stepSize, topPixel + columnHeight, texX, 0,
-                        texX + 1, texRes, null);
+                g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                    topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
             } else {
                 g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                    topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
             }
-
-            // g.fillRect(xdraw, topPixel, 1, columnHeight);
         }
     }
-
 }
