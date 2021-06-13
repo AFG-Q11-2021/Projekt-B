@@ -127,14 +127,14 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
     private void datenbankupdaten(String sql) {
         Connection verbindung = null;
         verbindung = aufbau(verbindung);
-        try {
-            Statement st = verbindung.createStatement();
-            st.executeUpdate(sql);
-            st.close();
+        /*try {
+        Statement st = verbindung.createStatement();
+        st.executeUpdate(sql);
+        st.close();
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
-            System.exit(0);
-        }
+        System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
+        System.exit(0);
+        }*/
         abbau(verbindung);
     }
 
@@ -142,7 +142,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         try {
             ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
             return ver;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
             System.exit(0);
             return null;
