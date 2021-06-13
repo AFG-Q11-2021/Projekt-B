@@ -28,11 +28,10 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     public Multiplayergame(Karte k) {
         frame1 = new JFrame();
-        setupframe();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
         this.addKeyListener(this);
-
+        setupframe();
         kartetest = k;
         csizeX = (int) WIDTH / kartetest.getSizeX();
         csizeY = (int) HEIGHT / kartetest.getSizeY();
@@ -122,12 +121,12 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
         Connection verbindung = null;
         verbindung = aufbau(verbindung);
         /*try {
-            Statement st = verbindung.createStatement();
-            st.executeUpdate(sql);
-            st.close();
+        Statement st = verbindung.createStatement();
+        st.executeUpdate(sql);
+        st.close();
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
-            System.exit(0);
+        System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
+        System.exit(0);
         }*/
         abbau(verbindung);
     }
@@ -160,9 +159,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-
             datenbankupdaten(sql);
-
         }
         if (back == true) {
             s.rueckwaertsGehen();
@@ -171,9 +168,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-
             datenbankupdaten(sql);
-
         }
         if (left == true) {
             s.linksdrehen();
@@ -182,9 +177,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-
             datenbankupdaten(sql);
-
         }
         if (right == true) {
             s.rechtsdrehen();
@@ -193,9 +186,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
             double r9 = s.getRotation();
             String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-
             datenbankupdaten(sql);
-
         }
     }
 
