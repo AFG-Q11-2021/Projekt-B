@@ -4,15 +4,13 @@ import javax.imageio.*;
 import java.io.*;
 //Author: Laurens
 public class TextureManager {
-    private BufferedImage[] textures;
-    private BufferedImage[] darkTextures;
-
-    private BufferedImage[] skyTextures;
+    private BufferedImage[] textures, darkTextures, skyTextures;
 
     public TextureManager() {
         textures = new BufferedImage[10];
         darkTextures = new BufferedImage[10];
         skyTextures = new BufferedImage[10];
+        
         loadSkyTexture(0, "textures/sky.png");
 
         loadTexture(0, "textures/sheetMetal.png");

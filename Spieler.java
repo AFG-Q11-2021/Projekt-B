@@ -1,8 +1,7 @@
 // Autoren: Martin ; Lasse; Laurens; Julius//
 
 public class Spieler {
-    private double x, rotation, y; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem)
-    private double speedm, speedr;
+    private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
     private int leben;
     private Karte karte;

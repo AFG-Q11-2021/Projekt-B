@@ -44,7 +44,7 @@ public class Settings extends JFrame implements ActionListener {
         add(labelrotation);
 
         // resolution setting
-        textresolution = new JTextField(Integer.toString(1));
+        textresolution = new JTextField(Integer.toString(con.getCast().getResolution()));
         textresolution.setBounds(500, 470, 530, 50);
         add(textresolution);
         labelresolution = new JLabel("Resolution of 3D-Render (lower=better)");

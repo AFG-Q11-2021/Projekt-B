@@ -1,4 +1,3 @@
-
 //Author: Samuel T. , Julius R.
 import java.io.*;
 
@@ -42,7 +41,5 @@ public class KartenVerwalter {
         } catch (Exception e) {
             // Klingelin
         }
-
     }
-
 }

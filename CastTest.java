@@ -234,4 +234,8 @@ public class CastTest {
         stepSize = r;
         floorRes = r;
     }
+    
+    public int getResolution(){
+        return stepSize;
+    }
 }
