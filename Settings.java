@@ -6,10 +6,8 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Settings extends JFrame implements ActionListener {
     private Returner fra;
-    private JTextField textspeed;
-    private JLabel labelspeed;
-    private JTextField textrotation;
-    private JLabel labelrotation;
+    private JTextField textspeed, textrotation;
+    private JLabel labelspeed, labelrotation;
     private JButton exit;
     private JButton save;
 
