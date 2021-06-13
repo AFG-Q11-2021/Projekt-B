@@ -7,9 +7,17 @@ import java.awt.image.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest {
-    public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 1;
-        int floorRes = 1;
+    private Controller con;
+    private int stepSize, floorRes;
+    
+    public CastTest(Controller c){
+        con = c;
+        stepSize = 1;
+        floorRes = 1;
+    }
+    
+    
+    public  void paintMap(Graphics g, Karte k, Spieler s) {
         int texRes = 32;
 
         double xPos = s.getX();
@@ -30,12 +38,12 @@ public class CastTest {
         planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
         planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
-        Game game = Controller.getGame();
+        Game game = con.getGame();
 
         int screenWidth = game.getWidth();
         int screenHeight = game.getHeight();
 
-        TextureManager texManager = Controller.getTextureManager();
+        TextureManager texManager = con.getTextureManager();
         // drawSky
         float fov = 52.85f;
         int sourceWidth = (int) ((fov / 360) * 1000);
@@ -220,5 +228,10 @@ public class CastTest {
                     topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
             }
         }
+    }
+    
+    public void setResolution(int r){
+        stepSize = r;
+        floorRes = r;
     }
 }
