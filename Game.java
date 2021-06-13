@@ -8,6 +8,8 @@ public interface Game {
 
     abstract void render();
 
+    abstract void update();
+
     abstract void setSpieler(Spieler spiler);
 
     abstract Graphics getGraphics();

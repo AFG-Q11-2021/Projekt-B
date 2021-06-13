@@ -19,9 +19,10 @@ public class Multiplayer extends JFrame implements ActionListener {
     private JLabel label;
     private static JTextField name;
     private JButton starten;
-    public static Karte kartetest;
+    public Karte kartetest;
+    private double spielerspeed;
 
-    public Multiplayer(String title, Karte k) {
+    public Multiplayer(String title, Karte k, double s) {
         super(title);
         setTitle("Multiplayer");
         setSize(1000, 1000);
@@ -45,6 +46,7 @@ public class Multiplayer extends JFrame implements ActionListener {
         setVisible(true);
 
         kartetest = k;
+        spielerspeed = s;
 
     }
 
@@ -55,9 +57,9 @@ public class Multiplayer extends JFrame implements ActionListener {
         }
     }
 
-    public static void starten1() {
+    public void starten1() {
         Multiplayergame gamee = new Multiplayergame(kartetest);
-        Spieler spieleri = new Spieler(name.getText());
+        Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
         + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
         + spieleri.getRotation() + ")");
@@ -66,7 +68,7 @@ public class Multiplayer extends JFrame implements ActionListener {
         Controller.setGame(gamee);
     }
 
-    private static void datenbankinsert(String sql) {
+    private void datenbankinsert(String sql) {
         Connection verbindung = null;
         try {
             verbindung = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");

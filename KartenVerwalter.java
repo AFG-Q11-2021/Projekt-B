@@ -3,29 +3,29 @@
 import java.io.*;
 
 public class KartenVerwalter {
-    private Karte activeMap;
+    private static Karte activeMap;
 
     public KartenVerwalter() {
 
     }
 
-    public void setActiveMap(int bI) {
-        activeMap = this.getMapFromStorage(bI);
+    public static void setActiveMap(int bI) {
+        activeMap = getMapFromStorage(bI);
     }
 
     public Karte getMap() {
         return activeMap;
     }
 
-    private Karte getMapFromStorage(int buildIndex) {
+    public static Karte getMapFromStorage(int buildIndex) {
         Karte gesucht = new Karte();
-        String g = buildIndex + ".txt";
+        String g = "maps/Map" + buildIndex + ".txt";
         // soll eine karte aus den Speicher Auslesen
-        this.karteLaden(gesucht, g);
+        karteLaden(gesucht, g);
         return gesucht;
     }
 
-    private void karteLaden(Karte karte, String dateiName) {
+    public static void karteLaden(Karte karte, String dateiName) {
         try {
             FileReader fr = new FileReader(dateiName);
             BufferedReader br = new BufferedReader(fr);

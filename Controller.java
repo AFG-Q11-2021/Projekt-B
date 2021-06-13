@@ -8,7 +8,7 @@ public class Controller {
     private static Spieler spieler;
     private static Framee frame;
     private static Karte kartetest;
-    private  static TextureManager textureManager;
+    private static TextureManager textureManager;
 
     public Controller() {
 
@@ -17,11 +17,8 @@ public class Controller {
     public static void main(String[] args) {
         running = true;
 
-        kartetest = new Karte();
-        kartetest.setKartenArray(2, 2, 1);
-        kartetest.setKartenArray(3, 2, 1);
-        kartetest.setKartenArray(4, 2, 1);
-        kartetest.setKartenArray(4, 3, 1);
+        kartetest = KartenVerwalter.getMapFromStorage(0);
+
         setTextureManager(new TextureManager());
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest);
@@ -35,7 +32,7 @@ public class Controller {
         while (running) {
             currentTime = System.nanoTime();
             if (currentTime - lastupdate > 1000000000 / FPS) {
-                Update();
+                // Update();
                 Render();
                 lastupdate = currentTime;
             }
@@ -44,9 +41,12 @@ public class Controller {
     }
 
     public static void Update() {
+        if (game != null) {
+            game.update();
+        }
     }
 
-    public static void Render() {
+    private static void Render() {
         if (game != null) {
             game.render();
         }
@@ -64,7 +64,7 @@ public class Controller {
         return spieler;
     }
 
-    public static void setSpieler(Spieler spiler){
+    public static void setSpieler(Spieler spiler) {
         spieler = spiler;
     }
 
@@ -75,7 +75,7 @@ public class Controller {
     public static void setTextureManager(TextureManager textureManagr) {
         textureManager = textureManagr;
     }
-    
+
     public Framee getFramee() {
         return frame;
     }

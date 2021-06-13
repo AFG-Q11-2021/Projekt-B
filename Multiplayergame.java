@@ -6,7 +6,7 @@ import java.sql.*;
 
 //Author: Julius(primär), Laurens
 @SuppressWarnings("serial")
-public class Multiplayergame extends Canvas implements KeyListener, Game {
+public class Multiplayergame extends Canvas implements KeyListener, Game, Returner {
 
     private JFrame frame1;
     private String title = "Game";
@@ -40,6 +40,10 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
         bs = this.getBufferStrategy();
     }
 
+    public void update() {
+
+    }
+
     public void render() {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
@@ -62,13 +66,15 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
         Spieler h;
         Connection verbindung = null;
         String sql1 = "SELECT count(*) FROM multiplayer";
-        String sql2 = "SELECT name, xposition, yposition rotation FROM multiplayer WHERE name !='"+ sp.getUsername() +"'";
+        String sql2 = "SELECT name, xposition, yposition rotation FROM multiplayer WHERE name !='" + sp.getUsername()
+                + "'";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
             ResultSet rs = st.executeQuery(sql1);
             rs.next();
             int g = rs.getInt(1);
+            rs.close();
             if (g != 0) {
                 ResultSet ergebnis = st.executeQuery(sql2);
                 while (ergebnis.next()) {
@@ -102,6 +108,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
     }
 
     private void paintPlayer(Spieler susi) {
+        //draw Charakter
         double rotRad = Math.toRadians(s.getRotation());
         int xc = (int) (susi.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
@@ -110,6 +117,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
+        //draw name 
         String tempi = susi.getUsername();
         char[] tulo = new char[tempi.length()];
         tempi.getChars(0, tempi.length(), tulo, 0);
@@ -191,46 +199,34 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
     }
 
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            // vorwärts
-            // fwd = true;
-            System.out.println("muhuhuh");
-        }
     }
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
-            // vorwärts
             fwd = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
-            // rückwärts
             back = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
-            // links
             left = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
-            // rechts
             right = true;
         }
+
     }
 
     public void keyReleased(KeyEvent e) {
-        // vorwärts
         if (e.getKeyCode() == KeyEvent.VK_W) {
             fwd = false;
         }
-        // rückwärts
         if (e.getKeyCode() == KeyEvent.VK_S) {
             back = false;
         }
-        // links
         if (e.getKeyCode() == KeyEvent.VK_A) {
             left = false;
         }
-        // rechts
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
         }
@@ -250,6 +246,18 @@ public class Multiplayergame extends Canvas implements KeyListener, Game {
 
     public void setSpieler(Spieler spiler) {
         s = spiler;
+    }
+
+    public void returne() {
+        frame1.setVisible(true);
+    }
+
+    public void setSpeed(double spielers) {
+        s.setSpeed(spielers);
+    }
+    
+    public void setSpeedr(double speedr) {
+        s.setSpeedr(speedr);
     }
 
     private void setupframe() {
