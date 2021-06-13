@@ -61,8 +61,8 @@ public class Multiplayer extends JFrame implements ActionListener {
         Multiplayergame gamee = new Multiplayergame(kartetest);
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
-                + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
-                + spieleri.getRotation() + ")");
+        + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
+        + spieleri.getRotation() + ")");
         gamee.setSpieler(spieleri);
         Controller.setSpieler(spieleri);
         Controller.setGame(gamee);
@@ -71,7 +71,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     private void datenbankinsert(String sql) {
         Connection verbindung = null;
         try {
-            verbindung = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11", "abitur");
+            verbindung = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
         } catch (SQLException e) {
             System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
             System.exit(0);
