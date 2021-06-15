@@ -41,13 +41,13 @@ public class CastTest {
             dirX = 0;
             dirY = 1;
             double oldDirX = dirX;
-            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
+            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);//Spielerrotation einrechnen
             dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
             
             planeX = 0.66;
             planeY = 0;
             double oldPlaneX = planeX;
-            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
+            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);//Spielerrotation einrechnen
             planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
             // drawSky
