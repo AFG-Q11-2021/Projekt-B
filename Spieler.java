@@ -1,20 +1,20 @@
 // Autoren: Martin ; Lasse; Laurens; Julius//
 
 public class Spieler {
-    private double x; // Postion x (Koordinatensystem)//
-    private double y; // Postion y (Koordinatensystem)//
-    private double speed;
+    private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
     private int leben;
-    private double rotation;
+    private Karte karte;
 
-    public Spieler(String usernameNeu, double s) {
+    public Spieler(String usernameNeu, double s, double r, Karte k) {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
         setLeben(20);
         // rotation= 90.0;
-        speed =s;
+        speedm = s;
+        speedr = r;
+        setKarte(k);
     }
 
     public Spieler(String usernameNeu) {
@@ -23,54 +23,58 @@ public class Spieler {
         y = 5;// Startpunkt des Spielers//
         setLeben(20);
         // rotation= 90.0;
-        speed =0.05;
+        speedm = 0.05;
     }
 
     public void linksGehen() {
-        double radrot = Math.toRadians(rotation+90);
-        double xnew = x + speed * (Math.sin(radrot));
-        double ynew = y + speed * (Math.cos(radrot));
-
-        x = xnew;
-        y = ynew;
+        double radrot = Math.toRadians(rotation + 90);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
     }
 
     public void rechtsGehen() {
-        double radrot = Math.toRadians(rotation-90);
-        double xnew = x + speed * (Math.sin(radrot));
-        double ynew = y + speed * (Math.cos(radrot));
-
-        x = xnew;
-        y = ynew;
+        double radrot = Math.toRadians(rotation - 90);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
     }
 
     public void geradeGehen() {
         double radrot = Math.toRadians(rotation);
-        double xnew = x + speed * (Math.sin(radrot));
-        double ynew = y + speed * (Math.cos(radrot));
-
-        x = xnew;
-        y = ynew;
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
     }
 
     public void rueckwaertsGehen() {
-        double radrot = Math.toRadians(rotation);
-        double xnew = x - speed * (Math.sin(radrot));
-        double ynew = y - speed * (Math.cos(radrot));
-
-        x = xnew;
-        y = ynew;
+        double radrot = Math.toRadians(rotation + 180);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
     }
 
     public void linksdrehen() {
-        rotation += 2;
+        rotation += speedr;
         if (rotation < 0) {
             rotation += 360;
         }
     }
 
     public void rechtsdrehen() {
-        rotation -= 2;
+        rotation -= speedr;
         if (rotation > 360) {
             rotation -= 360;
         }
@@ -97,7 +101,7 @@ public class Spieler {
     }
 
     public void setRotation(double rt) {
-        this.rotation =rt;
+        this.rotation = rt;
     }
 
     public String getUsername() {
@@ -116,11 +120,27 @@ public class Spieler {
         this.leben = leben;
     }
 
-    public double getSpeed(){
-        return speed;
+    public double getSpeed() {
+        return speedm;
     }
 
-    public void setSpeed(double s){
-        speed = s;
+    public void setSpeed(double s) {
+        speedm = s;
+    }
+
+    public double getSpeedr() {
+        return speedr;
+    }
+
+    public void setSpeedr(double speedr) {
+        this.speedr = speedr;
+    }
+
+    public Karte getKarte() {
+        return karte;
+    }
+
+    public void setKarte(Karte karte) {
+        this.karte = karte;
     }
 }

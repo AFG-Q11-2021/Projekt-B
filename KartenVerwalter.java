@@ -1,16 +1,15 @@
-
 //Author: Samuel T. , Julius R.
 import java.io.*;
 
 public class KartenVerwalter {
-    private Karte activeMap;
+    private static Karte activeMap;
 
     public KartenVerwalter() {
 
     }
 
-    public void setActiveMap(int bI) {
-        activeMap = this.getMapFromStorage(bI);
+    public static void setActiveMap(int bI) {
+        activeMap = getMapFromStorage(bI);
     }
 
     public Karte getMap() {
@@ -24,7 +23,7 @@ public class KartenVerwalter {
         karteLaden(gesucht, g);
         return gesucht;
     }
-    
+
     public static void karteLaden(Karte karte, String dateiName) {
         try {
             FileReader fr = new FileReader(dateiName);
@@ -42,7 +41,5 @@ public class KartenVerwalter {
         } catch (Exception e) {
             // Klingelin
         }
-
     }
-
 }

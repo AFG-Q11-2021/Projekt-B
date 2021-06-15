@@ -31,18 +31,17 @@ public class MapEditor {
         }
     }
 
-    public static void karteSpeichern(Karte karte, String dateiName) { // Bitte nur positive int Werte als Dateiname
-                                                                        // verwenden! LG Julius
-        File file = new File(dateiName);
-
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            // Writer für Text
-
-        } catch (Exception e) {
-            // Klingeling
-        }
-
-    }
+    /*
+     * public static void karteSpeichern(Karte karte, String dateiName) { // Bitte
+     * nur positive int Werte als Dateiname // verwenden! LG Julius File file = new
+     * File(dateiName);
+     * 
+     * try { BufferedWriter writer = new BufferedWriter(new FileWriter(file)); //
+     * Writer für Text
+     * 
+     * } catch (Exception e) { // Klingeling }
+     * 
+     * }
+     */
 
 }

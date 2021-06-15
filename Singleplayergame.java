@@ -10,7 +10,7 @@ import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class Singleplayergame extends Canvas implements KeyListener, Game, Returner {
-    public JFrame frame1;
+    private JFrame frame1;
 
     private String title = "Game";
     private final int WIDTH = 1000;
@@ -21,8 +21,8 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX;
-    private int csizeY;
+    private int csizeX, csizeY;
+    private Controller con;
 
     private boolean fwd = false;
     private boolean back = false;
@@ -32,8 +32,8 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private boolean rotRight = false;
     private boolean rotLeft = false;
 
-    public Singleplayergame(Karte k) {
-        JFrame frame1 = new JFrame();
+    public Singleplayergame(Karte k, Controller c) {
+        frame1 = new JFrame();
         frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame1.setTitle(title);
         frame1.add(this);
@@ -44,8 +44,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         this.setPreferredSize(frame1.getPreferredSize());
 
         kartetest = k;
-        csizeX = (int) WIDTH / kartetest.getSizeX();
-        csizeY = (int) HEIGHT / kartetest.getSizeY();
+        csizeX = (int) WIDTH / kartetest.getSizeX() / 2;
+        csizeY = (int) HEIGHT / kartetest.getSizeY() / 2;
+        con = c;
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -53,75 +54,42 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         this.addKeyListener(this);
     }
 
-    public void update(){
+    public void update() {
         movePlayer();
     }
 
-    private void movePlayer(){
-        double rotation = s.getRotation();
-        double speed = s.getSpeed();
-        double x = s.getX();
-        double y = s.getY();
-
-        if (fwd == true){
-            double radrot = Math.toRadians(rotation);
-            double xadd =  speed * (Math.sin(radrot));
-            double yadd =  speed * (Math.cos(radrot));
-
-            
-            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
-            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
-
-        } else 
-
-        if (back == true){
-            double radrot = Math.toRadians(rotation+180);
-            double xadd =  speed * (Math.sin(radrot));
-            double yadd =  speed * (Math.cos(radrot));
-
-            
-            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
-            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
-
+    private void movePlayer() {
+        if (fwd == true) {
+            s.geradeGehen();
         }
-
-        if (left == true){
-            double radrot = Math.toRadians(rotation+90);
-            double xadd =  speed * (Math.sin(radrot));
-            double yadd =  speed * (Math.cos(radrot));
-
-            
-            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
-            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
-        } else
-
-        if (right == true){
-            double radrot = Math.toRadians(rotation-90);
-            double xadd =  speed * (Math.sin(radrot));
-            double yadd =  speed * (Math.cos(radrot));
-
-            
-            if(kartetest.getCoordinate((int)(xadd*10 + x),(int)y) == 0) {s.setX(x + xadd);}
-            if(kartetest.getCoordinate((int)x,(int)(yadd*10+y)) == 0) {s.setY(y + yadd);}
+        if (back == true) {
+            s.rueckwaertsGehen();
         }
-
-        if (rotRight == true)
+        if (left == true) {
+            s.linksGehen();
+        }
+        if (right == true) {
+            s.rechtsGehen();
+        }
+        if (rotRight == true) {
             s.rechtsdrehen();
-        if (rotLeft == true)
+        }
+        if (rotLeft == true) {
             s.linksdrehen();
+        }
     }
 
     public void render() {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
-
+        movePlayer();
         // 3D Bild
-        CastTest.paintMap(g, kartetest, s);
+        //con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
-        // paintPlayer();
-        // paintMap();
+        paintMap();
+        paintPlayer();
 
         g.dispose();
         bs.show();
@@ -169,16 +137,18 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            settings();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             rotRight = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             rotLeft = true;
         }
-        /*if (e.getKeyCode() == KeyEvent.VK_F) {
-        frame1.setVisible(false);
-        new Settings(this, s.getSpeed());
-        }*/
     }
 
     public void keyReleased(KeyEvent e) {
@@ -202,6 +172,11 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         }
     }
 
+    private void settings() {
+        frame1.setVisible(false);
+        new Settings(this, s.getSpeed(), s.getSpeedr(), con);
+    }
+
     public int getWidth() {
         return WIDTH;
     }
@@ -218,11 +193,15 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         s = spieler;
     }
 
-    public void setSpeed(double spielers){
+    public void setSpeed(double spielers) {
         s.setSpeed(spielers);
     }
 
-    public void returne(){
+    public void setSpeedr(double speedr) {
+        s.setSpeedr(speedr);
+    }
+
+    public void returne() {
         frame1.setVisible(true);
     }
 }
