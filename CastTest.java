@@ -11,13 +11,11 @@ public class CastTest {
     private TextureManager texManager;
     private int stepSize, floorRes, texRes, screenWidth, screenHeight;
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot;
+    private boolean run = false;
 
     public CastTest(Controller c) {
         con = c;
-        game = con.getGame();
         texManager = con.getTextureManager();
-        screenWidth = game.getWidth();
-        screenHeight = game.getHeight();
         stepSize = 1;
         floorRes = 1;
         texRes = 32;
@@ -27,127 +25,137 @@ public class CastTest {
         planeY = 0;
     }
 
+    public void update(){
+        game = con.getGame();
+        screenWidth = game.getWidth();
+        screenHeight = game.getHeight();
+        run=true;
+    }
+
     public void paintMap(Graphics g, Karte k, Spieler s) {
-        xPos = s.getX();
-        yPos = s.getY();
-        rot = Math.toRadians(-s.getRotation());
+        if(run){
+            xPos = s.getX();
+            yPos = s.getY();
+            rot = Math.toRadians(-s.getRotation());
 
-        double oldDirX = dirX;
-        dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
-        dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
+            double oldDirX = dirX;
+            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
+            dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
 
-        double oldPlaneX = planeX;
-        planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
-        planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
+            double oldPlaneX = planeX;
+            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
+            planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
-        // drawSky
-        drawSky(g);
-        
-        // Floor Casting?
-        floorCasting(g);
-            
-        // draw Entities (Enemies, Props, Pickups)
-        double[] depthBuffer = new double[screenWidth / stepSize];
-        
-        // WallCasting
-        for (int fx = 0; fx < screenWidth / stepSize; fx++) {
-            int x = fx * stepSize;
-            double camX = (2 * x / ((double) game.getWidth())) - 1;
-            double rayDirX = dirX + planeX * camX;
-            double rayDirY = dirY + planeY * camX;
+            // drawSky
+            drawSky(g);
 
-            int mapX = (int) xPos;
-            int mapY = (int) yPos;
+            // Floor Casting?
+            floorCasting(g);
 
-            double sideDistX;
-            double sideDistY;
+            // draw Entities (Enemies, Props, Pickups)
+            double[] depthBuffer = new double[screenWidth / stepSize];
 
-            double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
-            double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
+            // WallCasting
+            for (int fx = 0; fx < screenWidth / stepSize; fx++) {
+                int x = fx * stepSize;
+                double camX = (2 * x / ((double) game.getWidth())) - 1;
+                double rayDirX = dirX + planeX * camX;
+                double rayDirY = dirY + planeY * camX;
 
-            double perpWallDist;
+                int mapX = (int) xPos;
+                int mapY = (int) yPos;
 
-            int stepX;
-            int stepY;
+                double sideDistX;
+                double sideDistY;
 
-            int hit = 0;
-            int side = 0;
+                double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
 
-            if (rayDirX < 0) {
-                stepX = -1;
-                sideDistX = (xPos - mapX) * deltaDistX;
-            } else {
-                stepX = 1;
-                sideDistX = (mapX + 1.0 - xPos) * deltaDistX;
-            }
-            if (rayDirY < 0) {
-                stepY = -1;
-                sideDistY = (yPos - mapY) * deltaDistY;
-            } else {
-                stepY = 1;
-                sideDistY = (mapY + 1.0 - yPos) * deltaDistY;
-            }
+                double perpWallDist;
 
-            // cast
-            while (hit == 0) {
-                if (sideDistX < sideDistY) {
-                    sideDistX += deltaDistX;
-                    mapX += stepX;
-                    side = 0;
+                int stepX;
+                int stepY;
+
+                int hit = 0;
+                int side = 0;
+
+                if (rayDirX < 0) {
+                    stepX = -1;
+                    sideDistX = (xPos - mapX) * deltaDistX;
                 } else {
-                    sideDistY += deltaDistY;
-                    mapY += stepY;
-                    side = 1;
+                    stepX = 1;
+                    sideDistX = (mapX + 1.0 - xPos) * deltaDistX;
                 }
-                if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
-                    break;
+                if (rayDirY < 0) {
+                    stepY = -1;
+                    sideDistY = (yPos - mapY) * deltaDistY;
+                } else {
+                    stepY = 1;
+                    sideDistY = (mapY + 1.0 - yPos) * deltaDistY;
                 }
-                if (k.getCoordinate(mapX, mapY) > 0) {
-                    hit = 1;
+
+                // cast
+                while (hit == 0) {
+                    if (sideDistX < sideDistY) {
+                        sideDistX += deltaDistX;
+                        mapX += stepX;
+                        side = 0;
+                    } else {
+                        sideDistY += deltaDistY;
+                        mapY += stepY;
+                        side = 1;
+                    }
+                    if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
+                        break;
+                    }
+                    if (k.getCoordinate(mapX, mapY) > 0) {
+                        hit = 1;
+                    }
                 }
-            }
 
-            if (side == 0)
-                perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
-            else
-                perpWallDist = (mapY - yPos + (1 - stepY) / 2) / rayDirY;
+                if (side == 0)
+                    perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
+                else
+                    perpWallDist = (mapY - yPos + (1 - stepY) / 2) / rayDirY;
 
-            int columnHeight = (int) (screenHeight / perpWallDist);
-            int topPixel = (screenHeight - columnHeight) / 2;
+                int columnHeight = (int) (screenHeight / perpWallDist);
+                int topPixel = (screenHeight - columnHeight) / 2;
 
-            int texID = k.getCoordinate(mapX, mapY) - 1;
+                int texID = k.getCoordinate(mapX, mapY) - 1;
 
-            // calculate value of wallX
-            double wallX; // where exactly the wall was hit
-            if (side == 0)
-                wallX = yPos + perpWallDist * rayDirY;
-            else
-                wallX = xPos + perpWallDist * rayDirX;
-            wallX -= Math.floor((wallX));
+                // calculate value of wallX
+                double wallX; // where exactly the wall was hit
+                if (side == 0)
+                    wallX = yPos + perpWallDist * rayDirY;
+                else
+                    wallX = xPos + perpWallDist * rayDirX;
+                wallX -= Math.floor((wallX));
 
-            // x coordinate on the texture
-            int texX = (int) (wallX * texRes);
-            if (side == 0 && rayDirX > 0)
+                // x coordinate on the texture
+                int texX = (int) (wallX * texRes);
+                if (side == 0 && rayDirX > 0)
+                    texX = texRes - texX - 1;
+                if (side == 1 && rayDirY < 0)
+                    texX = texRes - texX - 1;
+
                 texX = texRes - texX - 1;
-            if (side == 1 && rayDirY < 0)
-                texX = texRes - texX - 1;
+                int xdraw = screenWidth - x;
 
-            texX = texRes - texX - 1;
-            int xdraw = screenWidth - x;
+                if (side == 1) {
+                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                } else {
+                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                }
 
-            if (side == 1) {
-                g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                    topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
-            } else {
-                g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                    topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                depthBuffer[fx] = perpWallDist;
             }
-
-            depthBuffer[fx] = perpWallDist;
         }
     }
-    
+
     private void  drawSky(Graphics g){
+ 
         float fov = 52.85f;
         int sourceWidth = (int) ((fov / 360) * 1000);
         for (int dx = 0; dx < game.getWidth() / stepSize; dx++) {
@@ -165,7 +173,7 @@ public class CastTest {
         g.setColor(new Color(90, 90, 90));
         g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
     }
-    
+
     private void floorCasting(Graphics g){
         BufferedImage floorImage = new BufferedImage(screenWidth / floorRes, screenHeight / (2 * floorRes),
                 BufferedImage.TYPE_INT_RGB);
