@@ -13,10 +13,11 @@ public class Controller {
 
     public Controller() {
         running = true;
-
-        kartetest = KartenVerwalter.getMapFromStorage(0);
-        
         setTextureManager(new TextureManager());
+        kartetest = KartenVerwalter.getMapFromStorage(0);
+
+        cast = new CastTest(this);
+
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest, this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +57,7 @@ public class Controller {
     public void setGame(Game tmepi) {
         cast = new CastTest(this);
         game = tmepi;
+        cast.update();
     }
 
     public Game getGame() {
@@ -81,7 +83,7 @@ public class Controller {
     public Framee getFramee() {
         return this.frame;
     }
-    
+
     public CastTest getCast(){
         return this.cast;
     }
