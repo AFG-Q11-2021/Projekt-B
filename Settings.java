@@ -70,7 +70,8 @@ public class Settings extends JFrame implements ActionListener {
             sr = sr / 100;
             fra.setSpeedr(sr);
             int r = Integer.valueOf(textresolution.getText());
-            con.getCast().setResolution(r);
+            con.getCast().setwallRes(r);
+            con.getCast().setfloorRes(r);
         }
     }
 }
