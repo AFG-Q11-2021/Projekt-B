@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.image.*;
 
 /*Autor: Laurens Birkenbach
- * Zuletzt geändert: 03.06.2021
+ * Zuletzt geändert: 15.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest {
