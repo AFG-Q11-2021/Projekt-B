@@ -3,8 +3,7 @@
 //Nicht dies hier benutzen, das ist bloß ein Datentyp. Für Geländedaten bitte den aktiven Verwalter(kommt später irgendwann) anfragen, der handled dann Speichertasks und andere
 public class Karte {
     private int[][] kartenArray;
-    private int x1;
-    private int y1;
+    private int x1, y1;
 
     public Karte() {
         x1 = 32;

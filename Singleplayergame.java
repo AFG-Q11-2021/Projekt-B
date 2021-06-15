@@ -21,8 +21,8 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX;
-    private int csizeY;
+    private int csizeX, csizeY;
+    private Controller con;
 
     private boolean fwd = false;
     private boolean back = false;
@@ -32,7 +32,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private boolean rotRight = false;
     private boolean rotLeft = false;
 
-    public Singleplayergame(Karte k) {
+    public Singleplayergame(Karte k, Controller c) {
         frame1 = new JFrame();
         frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame1.setTitle(title);
@@ -46,6 +46,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         kartetest = k;
         csizeX = (int) WIDTH / kartetest.getSizeX() / 2;
         csizeY = (int) HEIGHT / kartetest.getSizeY() / 2;
+        con = c;
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -84,7 +85,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         g.fillRect(0, 0, WIDTH, HEIGHT);
         movePlayer();
         // 3D Bild
-        CastTest.paintMap(g, kartetest, s);
+        //con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
         paintMap();
@@ -173,7 +174,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
 
     private void settings() {
         frame1.setVisible(false);
-        new Settings(this, s.getSpeed(), s.getSpeedr());
+        new Settings(this, s.getSpeed(), s.getSpeedr(), con);
     }
 
     public int getWidth() {

@@ -21,8 +21,9 @@ public class Multiplayer extends JFrame implements ActionListener {
     private JButton starten;
     public Karte kartetest;
     private double spielerspeed;
+    private Controller con;
 
-    public Multiplayer(String title, Karte k, double s) {
+    public Multiplayer(String title, Karte k, double s, Controller c) {
         super(title);
         setTitle("Multiplayer");
         setSize(1000, 1000);
@@ -47,6 +48,7 @@ public class Multiplayer extends JFrame implements ActionListener {
 
         kartetest = k;
         spielerspeed = s;
+        con = c;
 
     }
 
@@ -64,8 +66,8 @@ public class Multiplayer extends JFrame implements ActionListener {
         + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
         + spieleri.getRotation() + ")");
         gamee.setSpieler(spieleri);
-        Controller.setSpieler(spieleri);
-        Controller.setGame(gamee);
+        con.setSpieler(spieleri);
+        con.setGame(gamee);
     }
 
     private void datenbankinsert(String sql) {

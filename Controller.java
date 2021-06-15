@@ -4,24 +4,21 @@ public class Controller {
     // instance variables - replace the example below with your own
     private static int FPS = 60;
     private static boolean running = false;
-    private static Game game;
-    private static Spieler spieler;
-    private static Framee frame;
-    private static Karte kartetest;
-    private static TextureManager textureManager;
+    private Game game;
+    private Spieler spieler;
+    private Framee frame;
+    private Karte kartetest;
+    private TextureManager textureManager;
+    private CastTest cast;
 
     public Controller() {
-
-    }
-
-    public static void main(String[] args) {
         running = true;
 
         kartetest = KartenVerwalter.getMapFromStorage(0);
-
+        cast = new CastTest(this);
         setTextureManager(new TextureManager());
         // Startmenü öffnen
-        frame = new Framee("Startmenü", kartetest);
+        frame = new Framee("Startmenü", kartetest, this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1290, 1100);
         frame.setLayout(null);
@@ -40,44 +37,52 @@ public class Controller {
         game.getGraphics().dispose();
     }
 
-    public static void Update() {
+    public static void main(String[] args) {
+        new Controller();
+    }
+
+    public  void Update() {
         if (game != null) {
             game.update();
         }
     }
 
-    private static void Render() {
+    private void Render() {
         if (game != null) {
             game.render();
         }
     }
 
-    public static void setGame(Game tmepi) {
+    public void setGame(Game tmepi) {
         game = tmepi;
     }
 
-    public static Game getGame() {
-        return game;
+    public Game getGame() {
+        return this.game;
     }
 
-    public static Spieler getSpieler() {
-        return spieler;
+    public Spieler getSpieler() {
+        return this.spieler;
     }
 
-    public static void setSpieler(Spieler spiler) {
+    public void setSpieler(Spieler spiler) {
         spieler = spiler;
     }
 
-    public static TextureManager getTextureManager() {
-        return textureManager;
+    public TextureManager getTextureManager() {
+        return this.textureManager;
     }
 
-    public static void setTextureManager(TextureManager textureManagr) {
+    public void setTextureManager(TextureManager textureManagr) {
         textureManager = textureManagr;
     }
 
     public Framee getFramee() {
-        return frame;
+        return this.frame;
+    }
+    
+    public CastTest getCast(){
+        return this.cast;
     }
 
 }

@@ -7,9 +7,19 @@ import java.awt.image.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest {
-    public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 1;
-        int floorRes = 1;
+
+    private Controller con;
+    private int stepSize, floorRes;
+    
+    public CastTest(Controller c){
+        con = c;
+        stepSize = 1;
+        floorRes = 1;
+    }
+    
+    
+    public  void paintMap(Graphics g, Karte k, Spieler s) {
+
         int texRes = 32;
 
         double xPos = s.getX();
@@ -30,12 +40,12 @@ public class CastTest {
         planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
         planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
-        Game game = Controller.getGame();
+        Game game = con.getGame();
 
         int screenWidth = game.getWidth();
         int screenHeight = game.getHeight();
 
-        TextureManager texManager = Controller.getTextureManager();
+        TextureManager texManager = con.getTextureManager();
         // drawSky
         float fov = 52.85f;
         int sourceWidth = (int) ((fov / 360) * 1000);
@@ -119,11 +129,18 @@ public class CastTest {
             }
 
         }
-        g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
-            screenHeight / (2 * floorRes), null);
 
-        // WallCasting
-        for (int fx = 0; fx < screenWidth / stepSize; fx++) {
+        g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth/floorRes,screenHeight/(2*floorRes),null);
+        
+        //draw Entities (Enemies, Props, Pickups)
+        double[] depthBuffer = new double[screenWidth / stepSize];
+        
+        
+        
+        
+        //WallCasting
+        for (int fx = 0; fx < screenWidth/stepSize; fx++) {
+
             int x = fx * stepSize;
             double camX = (2 * x / ((double) game.getWidth())) - 1;
             double rayDirX = dirX + planeX * camX;
@@ -219,6 +236,20 @@ public class CastTest {
                 g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
                     topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
             }
+
+            
+            depthBuffer[fx] = perpWallDist;
+            // g.fillRect(xdraw, topPixel, 1, columnHeight);
+
         }
+    }
+    
+    public void setResolution(int r){
+        stepSize = r;
+        floorRes = r;
+    }
+    
+    public int getResolution(){
+        return stepSize;
     }
 }

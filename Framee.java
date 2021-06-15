@@ -10,16 +10,13 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Framee extends JFrame implements ActionListener, Returner {
-    private JButton schliessen;
-    private JButton auswahl;
-    private JButton settings;
-    private JButton ende;
+    private JButton schliessen, auswahl, settings, ende;
     private Bild build;
     private static Karte kartetest;
-    private double spielerspeed;
-    private double speedr;
+    private double spielerspeed, speedr;
+    private Controller con;
 
-    public Framee(String title, Karte k) {
+    public Framee(String title, Karte k, Controller c) {
         super(title);
 
         schliessen = new JButton("Single Player");
@@ -49,6 +46,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
         kartetest = k;
         spielerspeed = 0.05;
         speedr = 2;
+        con = c;
 
     }
 
@@ -70,20 +68,20 @@ public class Framee extends JFrame implements ActionListener, Returner {
     }
 
     private void fenster() {
-        Singleplayergame gamee = new Singleplayergame(kartetest);
+        Singleplayergame gamee = new Singleplayergame(kartetest, con);
         Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest);
-        Controller.setSpieler(sppileri);
+        con.setSpieler(sppileri);
         gamee.setSpieler(sppileri);
-        Controller.setGame(gamee);
+        con.setGame(gamee);
     }
 
     private void auswahl() {
         @SuppressWarnings("unused")
-        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed);
+        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed, con);
     }
 
     private void setting() {
-        new Settings(this, spielerspeed, speedr);
+        new Settings(this, spielerspeed, speedr, con);
     }
 
     public void returne() {

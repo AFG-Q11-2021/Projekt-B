@@ -110,9 +110,9 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
 
     private void paintPlayer(Spieler susi) {
         double rotRad = Math.toRadians(s.getRotation());
-        int xc = (int) (susi.getX() * csizeX);
+        int xc = (int) (s.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
-        int yc = (int) (susi.getY() * csizeY);
+        int yc = (int) (s.getY() * csizeY);
         int yl = (int) (Math.cos(rotRad) * 20);
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
