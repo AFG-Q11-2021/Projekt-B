@@ -58,7 +58,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
 
         // Spieler malen
         paintPlayer(s);
-        //paintpotentialPlayers(s);
+        paintpotentialPlayers(s);
 
         g.dispose();
         bs.show();
