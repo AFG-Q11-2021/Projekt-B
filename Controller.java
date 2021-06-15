@@ -15,7 +15,6 @@ public class Controller {
         running = true;
         setTextureManager(new TextureManager());
         kartetest = KartenVerwalter.getMapFromStorage(0);
-
         cast = new CastTest(this);
 
         // Startmenü öffnen

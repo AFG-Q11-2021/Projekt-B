@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.*;
 
-/*Autor: Laurens Birkenbach
+/*Autor: Laurens Birkenbach, Julius
  * Zuletzt geändert: 15.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
@@ -38,10 +38,14 @@ public class CastTest {
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());
 
+            dirX = 0;
+            dirY = 1;
             double oldDirX = dirX;
             dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);
             dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
-
+            
+            planeX = 0.66;
+            planeY = 0;
             double oldPlaneX = planeX;
             planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);
             planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
@@ -155,7 +159,6 @@ public class CastTest {
     }
 
     private void  drawSky(Graphics g){
- 
         float fov = 52.85f;
         int sourceWidth = (int) ((fov / 360) * 1000);
         for (int dx = 0; dx < game.getWidth() / stepSize; dx++) {
