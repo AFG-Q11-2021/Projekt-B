@@ -1,77 +1,146 @@
-// Autoren: Martin ; Lasse//
+// Autoren: Martin ; Lasse; Laurens; Julius//
 
-import java.awt.Graphics;
-import java.awt.Color;
-
-public class Spieler
-{
-    private double x; // Postion x (Koordinatensystem)//
-    private double y; // Postion y (Koordinatensystem)//
+public class Spieler {
+    private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
     private int leben;
-    private double rotation;
-    
-    public Spieler(String usernameNeu, Graphics stift)
-    {
-        username= usernameNeu;
-        int px = 1;//Startpunkt des Spielers//
-        int py = 1;//Startpunkt des Spielers//
-        int leben = 5;
-        double rotation=90.0;
+    private Karte karte;
+
+    public Spieler(String usernameNeu, double s, double r, Karte k) {
+        setUsername(usernameNeu);
+        x = 4;// Startpunkt des Spielers//
+        y = 3;// Startpunkt des Spielers//
+        setLeben(20);
+        // rotation= 90.0;
+        speedm = s;
+        speedr = r;
+        setKarte(k);
     }
 
-    public void linksGehen()
-    {
-        if(x>0)
-        {
-            x=x+(1*Math.cos(rotation-90));
-            y=y+(1*Math.sin(rotation-90));
+    public Spieler(String usernameNeu) {
+        setUsername(usernameNeu);
+        x = 5;// Startpunkt des Spielers//
+        y = 5;// Startpunkt des Spielers//
+        setLeben(20);
+        // rotation= 90.0;
+        speedm = 0.05;
+    }
+
+    public void linksGehen() {
+        double radrot = Math.toRadians(rotation + 90);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
+    }
+
+    public void rechtsGehen() {
+        double radrot = Math.toRadians(rotation - 90);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
+    }
+
+    public void geradeGehen() {
+        double radrot = Math.toRadians(rotation);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
+    }
+
+    public void rueckwaertsGehen() {
+        double radrot = Math.toRadians(rotation + 180);
+        double xadd = speedm * (Math.sin(radrot));
+        double yadd = speedm * (Math.cos(radrot));
+        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+            setX(x + xadd);
+        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+            setY(y + yadd);
+    }
+
+    public void linksdrehen() {
+        rotation += speedr;
+        if (rotation < 0) {
+            rotation += 360;
         }
     }
 
-    public void rechtsGehen()
-    {
-        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
-        {
-            x=x+(1*Math.cos(rotation+90));
-            y=y+(1*Math.sin(rotation+90));
+    public void rechtsdrehen() {
+        rotation -= speedr;
+        if (rotation > 360) {
+            rotation -= 360;
         }
     }
 
+    public double getX() {
+        return this.x;
+    }
 
-    public Karte getPosition()
+    public void setX(double xt) {
+        this.x = xt;
+    }
 
-    {//Aktualisiert die Position des Spielers//
+    public double getY() {
+        return this.y;
+    }
 
+    public void setY(double yt) {
+        this.y = yt;
+    }
 
+    public double getRotation() {
+        return rotation;
     }
-    
-    public void geradeausGehen()
-    {
-        if(y>0)
-        {
-           x=x+(1*Math.cos(rotation));
-           y=y+(1*Math.sin(rotation));
-        } 
+
+    public void setRotation(double rt) {
+        this.rotation = rt;
     }
-    
-    public void rueckwertsGehen()
-    {
-        if(y<Karte.getSizeX()) //Karte ist eine Klasse, muss noch in ein Objekt umgewandelt werden//
-        {
-           x=x-(1*Math.cos(rotation));
-           y=y-(1*Math.sin(rotation));
-        }
+
+    public String getUsername() {
+        return username;
     }
-    
-    public void linksdrehen()
-    {
-        rotation--;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
-    
-    public void rechtsdrehen()
-    {
-        rotation++;
+
+    public int getLeben() {
+        return leben;
     }
+
+    public void setLeben(int leben) {
+        this.leben = leben;
     }
- 
+
+    public double getSpeed() {
+        return speedm;
+    }
+
+    public void setSpeed(double s) {
+        speedm = s;
+    }
+
+    public double getSpeedr() {
+        return speedr;
+    }
+
+    public void setSpeedr(double speedr) {
+        this.speedr = speedr;
+    }
+
+    public Karte getKarte() {
+        return karte;
+    }
+
+    public void setKarte(Karte karte) {
+        this.karte = karte;
+    }
+}
