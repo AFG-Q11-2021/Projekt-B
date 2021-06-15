@@ -85,11 +85,13 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         g.fillRect(0, 0, WIDTH, HEIGHT);
         movePlayer();
         // 3D Bild
-        //con.getCast().paintMap(g, kartetest, s);
+
+        con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
-        paintMap();
-        paintPlayer();
+        // paintMap();
+        // paintPlayer();
+
 
         g.dispose();
         bs.show();

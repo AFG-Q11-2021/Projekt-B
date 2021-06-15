@@ -68,7 +68,9 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         Spieler h;
         Connection verbindung = null;
         String sql1 = "SELECT count(*) FROM multiplayer";
-        String sql2 = "SELECT name, xposition, yposition rotation FROM multiplayer WHERE name !='" + sp.getUsername()
+
+        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer WHERE name !='" + sp.getUsername()
+
             + "'";
         verbindung = aufbau(verbindung);
         try {
@@ -127,14 +129,14 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
     private void datenbankupdaten(String sql) {
         Connection verbindung = null;
         verbindung = aufbau(verbindung);
-        /*try {
+        try {
         Statement st = verbindung.createStatement();
         st.executeUpdate(sql);
         st.close();
         } catch (SQLException e) {
         System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
         System.exit(0);
-        }*/
+        }
         abbau(verbindung);
     }
 
@@ -220,6 +222,7 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
             right = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            
             System.exit(0);
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
