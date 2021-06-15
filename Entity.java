@@ -3,14 +3,19 @@ import java.awt.*;
 
 public class Entity
 {
-    private float x,y;
-    private float rotation;  
+    private double x,y;
     private int texID;
     
-    public float getX(){
+    public Entity(double x, double y, int texID){
+        this.x = x;
+        this.y = y;
+        this.texID = texID;
+    }
+    
+    public double getX(){
         return x;
     }
-    public float getY(){
+    public double getY(){
         return y;
     }
     public int getTexID(){

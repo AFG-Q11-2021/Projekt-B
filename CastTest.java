@@ -9,8 +9,8 @@ import java.awt.image.*;
  */
 public class CastTest {
     public static void paintMap(Graphics g, Karte k, Spieler s) {
-        int stepSize = 1;
-        int floorRes = 1;
+        int stepSize = 4;
+        int floorRes = 4;
         int texRes = 32;
 
         double xPos = s.getX();
@@ -116,7 +116,13 @@ public class CastTest {
 
         }
         g.drawImage(floorImage,0,screenHeight/2,screenWidth,screenHeight,0,0,screenWidth/floorRes,screenHeight/(2*floorRes),null);
-
+        
+        //draw Entities (Enemies, Props, Pickups)
+        double[] depthBuffer = new double[screenWidth / stepSize];
+        
+        
+        
+        
         //WallCasting
         for (int fx = 0; fx < screenWidth/stepSize; fx++) {
             int x = fx * stepSize;
@@ -210,7 +216,8 @@ public class CastTest {
                 g.drawImage(texManager.getDarkTexture(texID),xdraw-stepSize-1,topPixel,xdraw+stepSize ,topPixel + columnHeight,
                     texX,0,texX+1,texRes,null);
             }
-
+            
+            depthBuffer[fx] = perpWallDist;
             // g.fillRect(xdraw, topPixel, 1, columnHeight);
         }
     }
