@@ -15,7 +15,7 @@ public class Controller {
         running = true;
 
         kartetest = KartenVerwalter.getMapFromStorage(0);
-        cast = new CastTest(this);
+        
         setTextureManager(new TextureManager());
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest, this);
@@ -54,6 +54,7 @@ public class Controller {
     }
 
     public void setGame(Game tmepi) {
+        cast = new CastTest(this);
         game = tmepi;
     }
 
