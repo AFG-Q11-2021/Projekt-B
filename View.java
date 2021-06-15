@@ -4,8 +4,8 @@ import java.awt.event.*;
 /**
  * Write a description of class View here.
  *
- * @author Niklas Rösner, Laurens Birkenbach (30.04.2021)
- * @version 0.1
+ * @author Niklas Rösner, Laurens Birkenbach (07.05.2021)
+ * @version 0.2
  */
 
 // wird später rüberkopiert
