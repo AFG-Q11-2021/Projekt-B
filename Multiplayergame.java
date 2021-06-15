@@ -68,7 +68,9 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         Spieler h;
         Connection verbindung = null;
         String sql1 = "SELECT count(*) FROM multiplayer";
-        String sql2 = "SELECT name, xposition, yposition rotation FROM multiplayer WHERE name !='" + sp.getUsername()
+
+        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer WHERE name !='" + sp.getUsername()
+
             + "'";
         verbindung = aufbau(verbindung);
         try {
