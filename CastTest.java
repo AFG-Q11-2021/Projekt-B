@@ -27,8 +27,8 @@ public class CastTest {
 
     public void updategame(){
         game = con.getGame();
-        screenWidth = game.getWidth();
-        screenHeight = game.getHeight();
+        screenWidth = (int) game.gibWidth();
+        screenHeight = (int) game.gibHeight();
         run=true;
     }
 
@@ -62,7 +62,7 @@ public class CastTest {
             // WallCasting
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 int x = fx * stepSize;
-                double camX = (2 * x / ((double) game.getWidth())) - 1;
+                double camX = (2 * x / game.gibWidth()) - 1;
                 double rayDirX = dirX + planeX * camX;
                 double rayDirY = dirY + planeY * camX;
 
@@ -161,20 +161,20 @@ public class CastTest {
     private void  drawSky(Graphics g){
         float fov = 52.85f;
         int sourceWidth = (int) ((fov / 360) * 1000);
-        for (int dx = 0; dx < game.getWidth() / stepSize; dx++) {
+        for (int dx = 0; dx < game.gibWidth() / stepSize; dx++) {
             int x = dx * stepSize;
-            double camX = (2 * x / ((double) game.getWidth())) - 1;
+            double camX = (2 * x / ((double) game.gibWidth())) - 1;
             double rayAngle = (rot + (camX * 0.583));
             int texX = (int) ((rayAngle / 6.283) * 1000);
             if (texX < 0)
                 texX += 990;
             if (texX > 1000)
                 texX -= 990;
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, game.getHeight(), texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, (int) game.gibHeight(), texX, 100,
                 texX + 1, 250, null);
         }
         g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, game.getHeight() / 2, game.getWidth(), game.getHeight() / 2);
+        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){

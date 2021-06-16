@@ -13,8 +13,6 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private JFrame frame1;
 
     private String title = "Game";
-    private final int WIDTH = 1000;
-    private final int HEIGHT = 1000;
 
     private Spieler s;
 
@@ -34,18 +32,18 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
 
     public Singleplayergame(Karte k, Controller c) {
         frame1 = new JFrame();
-        frame1.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        frame1.setPreferredSize(getMaximumSize());
         frame1.setTitle(title);
         frame1.add(this);
-        frame1.pack();
+
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
         this.setPreferredSize(frame1.getPreferredSize());
 
         kartetest = k;
-        csizeX = (int) WIDTH / kartetest.getSizeX() / 2;
-        csizeY = (int) HEIGHT / kartetest.getSizeY() / 2;
+        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
+        csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
         con = c;
 
         this.createBufferStrategy(3);
@@ -91,7 +89,6 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         // 2D Bild
         // paintMap();
         // paintPlayer();
-
 
         g.dispose();
         bs.show();
@@ -179,12 +176,12 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         new Settings(this, s.getSpeed(), s.getSpeedr(), con);
     }
 
-    public int getWidth() {
-        return WIDTH;
+    public double gibWidth() {
+        return frame1.getPreferredSize().getWidth();
     }
 
-    public int getHeight() {
-        return HEIGHT;
+    public double gibHeight() {
+        return frame1.getPreferredSize().getHeight();
     }
 
     public Graphics getGraphics() {

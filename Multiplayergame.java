@@ -35,8 +35,8 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         this.addKeyListener(this);
         setupframe();
         kartetest = k;
-        csizeX = (int) WIDTH / kartetest.getSizeX();
-        csizeY = (int) HEIGHT / kartetest.getSizeY();
+        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
+        csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -254,12 +254,12 @@ public class Multiplayergame extends Canvas implements KeyListener, Game, Return
         }
     }
 
-    public int getWidth() {
-        return WIDTH;
+    public double gibWidth() {
+        return frame1.getPreferredSize().getWidth();
     }
 
-    public int getHeight() {
-        return HEIGHT;
+    public double gibHeight() {
+        return frame1.getPreferredSize().getHeight();
     }
 
     public Graphics getGraphics() {

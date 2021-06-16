@@ -2,9 +2,9 @@ import java.awt.*;
 //Author Julius
 
 public interface Game {
-    abstract int getWidth();
+    abstract double gibWidth();
 
-    abstract int getHeight();
+    abstract double gibHeight();
 
     abstract void render();
 
