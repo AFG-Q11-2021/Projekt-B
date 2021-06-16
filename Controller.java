@@ -56,7 +56,7 @@ public class Controller {
     public void setGame(Game tmepi) {
         cast = new CastTest(this);
         game = tmepi;
-        cast.update();
+        cast.updategame();
     }
 
     public Game getGame() {

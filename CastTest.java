@@ -25,7 +25,7 @@ public class CastTest {
         planeY = 0;
     }
 
-    public void update(){
+    public void updategame(){
         game = con.getGame();
         screenWidth = game.getWidth();
         screenHeight = game.getHeight();
