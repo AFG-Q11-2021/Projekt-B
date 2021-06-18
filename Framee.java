@@ -68,9 +68,9 @@ public class Framee extends JFrame implements ActionListener, Returner {
     }
 
     private void fenster() {
-        Singleplayergame gamee = new Singleplayergame(kartetest, con);
         Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest);
         con.setSpieler(sppileri);
+        Singleplayergame gamee = new Singleplayergame(kartetest, con);
         gamee.setSpieler(sppileri);
         con.setGame(gamee);
     }
