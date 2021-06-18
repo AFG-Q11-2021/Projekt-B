@@ -2,6 +2,10 @@
 
 public class Player
 {
+    // IMPORTATNTE
+    //*******
+    // Implementas de la ammunitone
+    //*******
     public Spieler actPlay;
     public StatHandle handler;
     public int maxH, curH;
