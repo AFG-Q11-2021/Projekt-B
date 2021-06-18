@@ -96,7 +96,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
         this.spielerspeed = spielers;
     }
     
-    public void setSpeedr(double speedr) {
-        this.spielerspeed = speedr;
+    public void setSpeedr(double speedrr) {
+        this.speedr = speedrr;
     }
 }
