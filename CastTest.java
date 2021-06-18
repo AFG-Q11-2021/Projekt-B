@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.*;
+import java.util.*;
 
 /*Autor: Laurens Birkenbach, Julius
  * Zuletzt geändert: 15.06.2021
@@ -9,16 +10,20 @@ public class CastTest {
     private Controller con;
     private Game game;
     private TextureManager texManager;
-    private int stepSize, floorRes, texRes, screenWidth, screenHeight;
+    private int stepSize, floorRes, texRes, screenWidth, screenHeight, spriteResX, spriteResY;
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot;
     private boolean run = false;
+    private ArrayList<Sprite> sprites;
 
     public CastTest(Controller c) {
+        sprites = new ArrayList<Sprite>();
         con = c;
         texManager = con.getTextureManager();
-        stepSize = 1;
-        floorRes = 1;
+        stepSize = 4;
+        floorRes = 4;
         texRes = 32;
+        spriteResX = 32;
+        spriteResY = 32;
         dirX = 0;
         dirY = 1;
         planeX = 0.66;
@@ -155,6 +160,32 @@ public class CastTest {
 
                 depthBuffer[fx] = perpWallDist;
             }
+        }
+        
+    
+    }
+    
+    private void drawSprites(Graphics g){
+        for(Sprite s:sprites){
+            double spriteX = s.x - xPos;
+            double spriteY = s.y - yPos;
+            
+            double inverse = 1 / (planeX*dirY - dirX*planeY);
+            
+            double tranX = inverse * (dirY*spriteX - dirX *spriteY);
+            double tranY = inverse * (-planeY*spriteX + planeX*spriteY);
+            
+            int spritePixelX = (int) ((screenWidth/2) + (1 + tranX/tranY));
+            int drawHeight = Math.abs((int) (screenHeight/tranY));
+            
+            int startDrawY = (screenHeight -drawHeight)/2;
+            int endDrawY = (drawHeight + screenHeight)/2;
+            
+            int drawWidth = Math.abs((int)(screenWidth/tranY));
+            int startDrawX = -drawWidth/2 + spritePixelX;
+            int endDrawX = drawWidth/2 + spritePixelX;
+        
+        
         }
     }
 

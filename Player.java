@@ -2,19 +2,23 @@
 
 public class Player
 {
+    // IMPORTATNTE
+    //*******
+    // Implementas de la ammunitone
+    //*******
     public Spieler actPlay;
     public StatHandle handler;
     public int maxH, curH;
     public int maxA, curA;
     public boolean aliveChecker;
-    public Player(Spieler playTemp, StatHandle statTemp)
+    public Player(Spieler playTemp, StatHandle statTemp, int max)
     {
         handler = statTemp;
         actPlay = playTemp;
-        maxH = 100;
-        curH = 100;
-        maxA = 100;
-        curA = 100;
+        maxH = max;
+        curH = max;
+        maxA = max;
+        curA = max;
         
         aliveChecker = true;
         handler.updatePlayerLiveState(aliveChecker);
@@ -28,6 +32,11 @@ public class Player
     public void setCurrentHealth(int amount)
     {
         curH = amount;
+    }
+    
+    public void setCurrentArmor(int amount)
+    {
+        curA = amount;
     }
     public void checkAlive()
     {
@@ -44,5 +53,16 @@ public class Player
     {
         curH = curH-amount; //rewrite to account for armor
         this.checkAlive();
+    }
+    
+    public void pickUP(boolean type, int amount)
+    {
+        if(type == true) //healthPickup
+        {
+            this.setCurrentHealth(curH + amount);   
+        } else if (type == false)
+        {
+            this.setCurrentArmor(amount);
+        }
     }
 }

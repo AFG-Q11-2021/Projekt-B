@@ -1,12 +1,18 @@
 //author Sam Titt
+/* TO DO LIST
+ * ENEMY FINDER
+ * STATS
+ * PLAYER DEACTIVATION
+ */
 
 public class StatHandle
 {
     public Player activePlayerObject;
     public boolean playerAlive;
-    public StatHandle(Spieler s)
+    public EnemyTree tree;
+    public StatHandle(Spieler s, int maxLIVE)
     {
-        activePlayerObject = new Player(s, this);
+        activePlayerObject = new Player(s, this, maxLIVE);
     }
     
     public void updatePlayerLiveState(boolean temp)
@@ -18,4 +24,11 @@ public class StatHandle
     {
         activePlayerObject.damageDealtToPlayer(amount);
     }
+    
+    public void dealDamageToEnemy(int amount, int iD)
+    {
+        tree.returnEnemy(iD).dealDamage(amount);
+    }
+    
+    //LOGIC FOR ENEMY FINDING
 }
