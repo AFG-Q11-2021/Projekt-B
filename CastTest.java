@@ -46,13 +46,13 @@ public class CastTest {
             dirX = 0;
             dirY = 1;
             double oldDirX = dirX;
-            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);//Spielerrotation einrechnen
+            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
             dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
-            
+
             planeX = 0.66;
             planeY = 0;
             double oldPlaneX = planeX;
-            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);//Spielerrotation einrechnen
+            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
             planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
 
             // drawSky
@@ -67,8 +67,8 @@ public class CastTest {
             // WallCasting
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 int x = fx * stepSize;
-                double camX = (2 * x / game.gibWidth()) - 1;
-                double rayDirX = dirX + planeX * camX;
+                double camX = (2 * x / game.gibWidth()) - 1;//Faktor zur berechnung des Punktes auf der plane
+                double rayDirX = dirX + planeX * camX;//Punkt auf der projezierten Ebene
                 double rayDirY = dirY + planeY * camX;
 
                 int mapX = (int) xPos;
@@ -140,7 +140,7 @@ public class CastTest {
                     wallX = xPos + perpWallDist * rayDirX;
                 wallX -= Math.floor((wallX));
 
-                // x coordinate on the texture
+                // x coordinate on the texture/Spalte in der Textur 
                 int texX = (int) (wallX * texRes);
                 if (side == 0 && rayDirX > 0)
                     texX = texRes - texX - 1;
@@ -161,106 +161,77 @@ public class CastTest {
                 depthBuffer[fx] = perpWallDist;
             }
         }
-        
-    
+
     }
-    
     private void drawSprites(Graphics g){
         for(Sprite s:sprites){
             double spriteX = s.x - xPos;
             double spriteY = s.y - yPos;
-            
+
             double inverse = 1 / (planeX*dirY - dirX*planeY);
-            
+
             double tranX = inverse * (dirY*spriteX - dirX *spriteY);
             double tranY = inverse * (-planeY*spriteX + planeX*spriteY);
-            
+
             int spritePixelX = (int) ((screenWidth/2) + (1 + tranX/tranY));
             int drawHeight = Math.abs((int) (screenHeight/tranY));
-            
+
             int startDrawY = (screenHeight -drawHeight)/2;
             int endDrawY = (drawHeight + screenHeight)/2;
-            
+
             int drawWidth = Math.abs((int)(screenWidth/tranY));
             int startDrawX = -drawWidth/2 + spritePixelX;
             int endDrawX = drawWidth/2 + spritePixelX;
-        
-        
+
         }
     }
 
     private void  drawSky(Graphics g){
-        float fov = 52.85f;
-        int sourceWidth = (int) ((fov / 360) * 1000);
         for (int dx = 0; dx < game.gibWidth() / stepSize; dx++) {
             int x = dx * stepSize;
             double camX = (2 * x / ((double) game.gibWidth())) - 1;
             double rayAngle = (rot + (camX * 0.583));
             int texX = (int) ((rayAngle / 6.283) * 1000);
-            if (texX < 0)
-                texX += 990;
-            if (texX > 1000)
-                texX -= 990;
+            while(texX < 0){
+                texX += 1000;
+            }
+            while(texX >= 1000){
+                texX -= 1000;
+            }
             g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, (int) game.gibHeight(), texX, 100,
                 texX + 1, 250, null);
         }
-        g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
+        //g.setColor(new Color(90, 90, 90));
+        //g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
         BufferedImage floorImage = new BufferedImage(screenWidth / floorRes, screenHeight / (2 * floorRes),
                 BufferedImage.TYPE_INT_RGB);
+        double posZ = 0.5 * screenHeight;//Camera position
+        double rayDirX0 = dirX - planeX;
+        double rayDirY0 = dirY - planeY;
+        double rayDirX1 = dirX + planeX;
+        double rayDirY1 = dirY + planeY;
+        double floorStepXpart = (rayDirX1 - rayDirX0) / (screenWidth / floorRes);
+        double floorStepYpart = (rayDirY1 - rayDirY0) / (screenWidth / floorRes);
         for (int iy = screenHeight / (2 * floorRes); iy < screenHeight / (floorRes); iy++) {
-            // rayDir for leftmost ray (x = 0) and rightmost ray (x = w)
             int y = iy * floorRes;
-            double rayDirX0 = dirX - planeX;
-            double rayDirY0 = dirY - planeY;
-            double rayDirX1 = dirX + planeX;
-            double rayDirY1 = dirY + planeY;
-
             int p = y - screenHeight / 2;
-            double posZ = 0.5 * screenHeight;
-            double rowDistance = posZ / p;
-
-            // calculate the real world step vector we have to add for each x (parallel to
-            // camera plane)
-            // adding step by step avoids multiplications with a weight in the inner loop
-            double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / (screenWidth / floorRes);
-            double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / (screenWidth / floorRes);
-
-            // real world coordinates of the leftmost column. This will be updated as we
-            // step to the right.
-            double floorX = xPos + rowDistance * rayDirX0;
-            double floorY = yPos + rowDistance * rayDirY0;
-
+            double rowDistance = posZ / p;//Abstand des Bodens zur Camera
+            double floorStepX = rowDistance * floorStepXpart;
+            double floorStepY = rowDistance * floorStepYpart;
+            double floorX = xPos + (rowDistance * rayDirX0);
+            double floorY = yPos + (rowDistance * rayDirY0);
             for (int ix = 0; ix < screenWidth / floorRes; ix++) {
-                // int x = ix*floorRes;
-                // the cell coord is simply got from the integer parts of floorX and floorY
-
                 int cellX = (int) (floorX);
                 int cellY = (int) (floorY);
-
-                // get the texture coordinate from the fractional part
                 int tx = (int) (texRes * (floorX - cellX)) & (texRes - 1);
                 int ty = (int) (texRes * (floorY - cellY)) & (texRes - 1);
-
                 floorX += floorStepX;
                 floorY += floorStepY;
-
-                // choose texture and draw the pixel
-
-                // floor
-                // color = texture[floorTexture][texRes * ty + tx];
-                // color = (color >> 1) & 8355711; // make a bit darker
-
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
                     texManager.getDarkTexture(0).getRGB(tx, ty));
-
-                // ceiling (symmetrical, at screenHeight - y - 1 instead of y)
-                // color = texture[ceilingTexture][texRes * ty + tx];
-                // color = (color >> 1) & 8355711; // make a bit darker
-                // buffer[screenHeight - y - 1][x] = color;
             }
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
