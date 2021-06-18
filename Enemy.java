@@ -25,6 +25,10 @@ public abstract class Enemy
     
     abstract public void eventListener(); //has to be activated every frame or so to check for live actions
     
-    
+    //please implement logic to find the Enemy, consider to ask the RayCaster for help
+    // ALTERNATIVE PLANS :
+    // ENEMY ARRAY
+    // TREE
+    // EVENT SYSTEM
     
 }
