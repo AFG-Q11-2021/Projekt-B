@@ -7,15 +7,13 @@
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.image.*;
+import java.sql.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Multiplayer extends JFrame implements ActionListener {
-    private JPanel panel;
+    private Bild build;
     private JLabel label;
     private static JTextField name;
     private JButton starten;
@@ -29,23 +27,32 @@ public class Multiplayer extends JFrame implements ActionListener {
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        panel = new JPanel();
         label = new JLabel("Spielername");
         name = new JTextField("", 20);
         starten = new JButton("Spiel starten");
+        starten.setBounds(450, 600, 350, 40);
+
+        name = new JTextField("", 20);
+        name.setBounds(400, 530, 450, 40);
+        add(name);
+        label = new JLabel("Spielername:");
+        label.setBounds(313, 525, 350, 50);
+        add(label);
 
         name.setForeground(Color.BLACK);
         name.setBackground(Color.WHITE);
-
+        label.setBackground(Color.WHITE);
         starten.addActionListener(this);
 
-        panel.add(label);
-        panel.add(name);
-        panel.add(starten);
+        build= new Bild();
+        build.setBounds(0, 0, 1290, 1100);
 
-        add(panel);
+        add(label);
+        add(name);
+        add(starten);
+        add(build);
+
         setVisible(true);
-
         kartetest = k;
         spielerspeed = s;
         con = c;
@@ -63,8 +70,8 @@ public class Multiplayer extends JFrame implements ActionListener {
         Multiplayergame gamee = new Multiplayergame(kartetest);
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
-        + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
-        + spieleri.getRotation() + ")");
+            + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
+            + spieleri.getRotation() + ")");
         gamee.setSpieler(spieleri);
         con.setSpieler(spieleri);
         con.setGame(gamee);

@@ -21,7 +21,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
     private BufferStrategy bs;
     private int csizeX, csizeY;
     private Controller con;
-
+    private double speedm;
     private boolean fwd = false;
     private boolean back = false;
     private boolean left = false;
@@ -45,7 +45,7 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
         con = c;
-
+        speedm = con.getSpieler().getSpeed();
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
 
@@ -148,6 +148,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             rotLeft = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
+            con.getSpieler().setSpeed(speedm*2);
+        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -168,6 +171,9 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             rotLeft = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
+         con.getSpieler().setSpeed(speedm);
         }
     }
 
