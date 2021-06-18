@@ -9,79 +9,48 @@ import java.awt.image.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class Singleplayergame extends Canvas implements KeyListener, Game, Returner {
+public class Singleplayergame extends Canvas implements Game, Returner {
     private JFrame frame1;
-
-    private String title = "Game";
-
+    private KeyHandler key;
     private Spieler s;
-
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
     private int csizeX, csizeY;
     private Controller con;
     private double speedm;
-    private boolean fwd = false;
-    private boolean back = false;
-    private boolean left = false;
-    private boolean right = false;
     private boolean shoot = false;
-    private boolean rotRight = false;
-    private boolean rotLeft = false;
 
     public Singleplayergame(Karte k, Controller c) {
+        kartetest = k;
+        con = c;
+        key = new KeyHandler(con, this);
         frame1 = new JFrame();
         frame1.setPreferredSize(new Dimension(1000,1000));
-        frame1.setTitle(title);
+        frame1.setTitle("Game");
         frame1.add(this);
         frame1.pack();
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
         this.setPreferredSize(frame1.getPreferredSize());
-
-        kartetest = k;
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
-        con = c;
         speedm = con.getSpieler().getSpeed();
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
-
-        this.addKeyListener(this);
+        this.addKeyListener(key);
     }
 
     public void update() {
-        movePlayer();
-    }
-
-    private void movePlayer() {
-        if (fwd == true) {
-            s.geradeGehen();
-        }
-        if (back == true) {
-            s.rueckwaertsGehen();
-        }
-        if (left == true) {
-            s.linksGehen();
-        }
-        if (right == true) {
-            s.rechtsGehen();
-        }
-        if (rotRight == true) {
-            s.rechtsdrehen();
-        }
-        if (rotLeft == true) {
-            s.linksdrehen();
-        }
+        key.movesPlayer();
     }
 
     public void render() {
         g = bs.getDrawGraphics();
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        movePlayer();
+        key.movesPlayer();
         // 3D Bild
 
         con.getCast().paintMap(g, kartetest, s);
@@ -119,69 +88,6 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
         g.drawLine(xc, yc, xc + xl, yc + yl);
     }
 
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            fwd = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            back = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_A) {
-            left = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D) {
-            right = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_F) {
-            settings();
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rotRight = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            rotLeft = true;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
-            con.getSpieler().setSpeed(speedm*2);
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            fwd = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            back = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_A) {
-            left = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D) {
-            right = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rotRight = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            rotLeft = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
-         con.getSpieler().setSpeed(speedm);
-        }
-    }
-
-    private void settings() {
-        frame1.setVisible(false);
-        new Settings(this, s.getSpeed(), s.getSpeedr(), con);
-    }
-
     public double gibWidth() {
         return frame1.getPreferredSize().getWidth();
     }
@@ -204,6 +110,10 @@ public class Singleplayergame extends Canvas implements KeyListener, Game, Retur
 
     public void setSpeedr(double speedr) {
         s.setSpeedr(speedr);
+    }
+    
+    public JFrame getFrame(){
+        return frame1;
     }
 
     public void returne() {

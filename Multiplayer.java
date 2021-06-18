@@ -67,7 +67,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     }
 
     public void starten1() {
-        Multiplayergame gamee = new Multiplayergame(kartetest);
+        Multiplayergame gamee = new Multiplayergame(kartetest, con);
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
