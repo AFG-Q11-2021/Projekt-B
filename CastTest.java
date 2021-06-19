@@ -200,7 +200,7 @@ public class CastTest {
         double rayDirY1 = dirY + planeY;
         double floorStepXpart = (rayDirX1 - rayDirX0) / (screenWidth / floorRes);
         double floorStepYpart = (rayDirY1 - rayDirY0) / (screenWidth / floorRes);
-        int y, p, tx, ty, cellX, cellY;
+        int y, p, tx, ty;
         double rowDistance, floorStepX, floorStepY, floorX, floorY;
         for (int iy = screenHeight / (2 * floorRes); iy < screenHeight / (floorRes); iy++) {
             y = iy * floorRes;
@@ -211,10 +211,8 @@ public class CastTest {
             floorX = xPos + (rowDistance * rayDirX0);
             floorY = yPos + (rowDistance * rayDirY0);
             for (int ix = 0; ix < screenWidth / floorRes; ix++) {
-                cellX = (int) (floorX);
-                cellY = (int) (floorY);
-                tx = (int) (texRes * (floorX - cellX)) & (texRes - 1);
-                ty = (int) (texRes * (floorY - cellY)) & (texRes - 1);
+                tx = (int) (texRes * (floorX % 1)) & (texRes - 1);
+                ty = (int) (texRes * (floorY % 1)) & (texRes - 1);
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
