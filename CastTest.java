@@ -11,7 +11,7 @@ public class CastTest {
     private Game game;
     private TextureManager texManager;
     private int stepSize, floorRes, texRes, screenWidth, screenHeight, spriteResX, spriteResY;
-    private double yPos, xPos, dirX, dirY, planeX, planeY, rot;
+    private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
 
@@ -24,10 +24,7 @@ public class CastTest {
         texRes = 32;
         spriteResX = 32;
         spriteResY = 32;
-        dirX = 0;
-        dirY = 1;
-        planeX = 0.66;
-        planeY = 0;
+        oldPlaneX = 0.66;
     }
 
     public void updategame(){
@@ -43,17 +40,12 @@ public class CastTest {
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());
 
-            dirX = 0;
             dirY = 1;
-            double oldDirX = dirX;
-            dirX = dirX * Math.cos(rot) - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
-            dirY = oldDirX * Math.sin(rot) + dirY * Math.cos(rot);
+            dirX = 0 - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
+            dirY = dirY * Math.cos(rot);
 
-            planeX = 0.66;
-            planeY = 0;
-            double oldPlaneX = planeX;
-            planeX = planeX * Math.cos(rot) - planeY * Math.sin(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
-            planeY = oldPlaneX * Math.sin(rot) + planeY * Math.cos(rot);
+            planeX = oldPlaneX * Math.cos(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
+            planeY = oldPlaneX * Math.sin(rot);
 
             // drawSky
             drawSky(g);
@@ -63,30 +55,22 @@ public class CastTest {
 
             // draw Entities (Enemies, Props, Pickups)
             double[] depthBuffer = new double[screenWidth / stepSize];
-
-            // WallCasting
+            int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
+            double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
-                int x = fx * stepSize;
-                double camX = (2 * x / game.gibWidth()) - 1;//Faktor zur berechnung des Punktes auf der plane
-                double rayDirX = dirX + planeX * camX;//Punkt auf der projezierten Ebene
+                x = fx * stepSize;
+                double camX = (2 * x / game.gibWidth()) - 1;
+                double rayDirX = dirX + planeX * camX;
                 double rayDirY = dirY + planeY * camX;
-
-                int mapX = (int) xPos;
-                int mapY = (int) yPos;
-
-                double sideDistX;
-                double sideDistY;
+                
+                mapX = (int) xPos;
+                mapY = (int) yPos;
 
                 double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
                 double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
-
-                double perpWallDist;
-
-                int stepX;
-                int stepY;
-
-                int hit = 0;
-                int side = 0;
+                
+                hit = 0;
+                side = 0;
 
                 if (rayDirX < 0) {
                     stepX = -1;
@@ -130,26 +114,25 @@ public class CastTest {
                 int columnHeight = (int) (screenHeight / perpWallDist);
                 int topPixel = (screenHeight - columnHeight) / 2;
 
-                int texID = k.getCoordinate(mapX, mapY) - 1;
+                texID = k.getCoordinate(mapX, mapY) - 1;
 
                 // calculate value of wallX
-                double wallX; // where exactly the wall was hit
+                // where exactly the wall was hit
                 if (side == 0)
                     wallX = yPos + perpWallDist * rayDirY;
                 else
                     wallX = xPos + perpWallDist * rayDirX;
-                wallX -= Math.floor((wallX));
+                wallX -= Math.floor(wallX);
 
-                // x coordinate on the texture/Spalte in der Textur 
-                int texX = (int) (wallX * texRes);
+                // x coordinate on the texture
+                texX = (int) (wallX * texRes);
                 if (side == 0 && rayDirX > 0)
                     texX = texRes - texX - 1;
                 if (side == 1 && rayDirY < 0)
                     texX = texRes - texX - 1;
 
                 texX = texRes - texX - 1;
-                int xdraw = screenWidth - x;
-
+                xdraw = screenWidth - x;
                 if (side == 1) {
                     g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
@@ -159,10 +142,10 @@ public class CastTest {
                 }
 
                 depthBuffer[fx] = perpWallDist;
-            }
+            }            
         }
-
     }
+
     private void drawSprites(Graphics g){
         for(Sprite s:sprites){
             double spriteX = s.x - xPos;
@@ -187,11 +170,13 @@ public class CastTest {
     }
 
     private void  drawSky(Graphics g){
+        int x, texX;
+        double camX, rayAngle;
         for (int dx = 0; dx < game.gibWidth() / stepSize; dx++) {
-            int x = dx * stepSize;
-            double camX = (2 * x / ((double) game.gibWidth())) - 1;
-            double rayAngle = (rot + (camX * 0.583));
-            int texX = (int) ((rayAngle / 6.283) * 1000);
+            x = dx * stepSize;
+            camX = (2 * x / game.gibWidth()) - 1;
+            rayAngle = (rot + (camX * 0.583));
+            texX = (int) ((rayAngle / 6.283) * 1000);
             while(texX < 0){
                 texX += 1000;
             }
@@ -215,19 +200,21 @@ public class CastTest {
         double rayDirY1 = dirY + planeY;
         double floorStepXpart = (rayDirX1 - rayDirX0) / (screenWidth / floorRes);
         double floorStepYpart = (rayDirY1 - rayDirY0) / (screenWidth / floorRes);
+        int y, p, tx, ty, cellX, cellY;
+        double rowDistance, floorStepX, floorStepY, floorX, floorY;
         for (int iy = screenHeight / (2 * floorRes); iy < screenHeight / (floorRes); iy++) {
-            int y = iy * floorRes;
-            int p = y - screenHeight / 2;
-            double rowDistance = posZ / p;//Abstand des Bodens zur Camera
-            double floorStepX = rowDistance * floorStepXpart;
-            double floorStepY = rowDistance * floorStepYpart;
-            double floorX = xPos + (rowDistance * rayDirX0);
-            double floorY = yPos + (rowDistance * rayDirY0);
+            y = iy * floorRes;
+            p = y - screenHeight / 2;
+            rowDistance = posZ / p;//Abstand des Bodens zur Camera
+            floorStepX = rowDistance * floorStepXpart;
+            floorStepY = rowDistance * floorStepYpart;
+            floorX = xPos + (rowDistance * rayDirX0);
+            floorY = yPos + (rowDistance * rayDirY0);
             for (int ix = 0; ix < screenWidth / floorRes; ix++) {
-                int cellX = (int) (floorX);
-                int cellY = (int) (floorY);
-                int tx = (int) (texRes * (floorX - cellX)) & (texRes - 1);
-                int ty = (int) (texRes * (floorY - cellY)) & (texRes - 1);
+                cellX = (int) (floorX);
+                cellY = (int) (floorY);
+                tx = (int) (texRes * (floorX - cellX)) & (texRes - 1);
+                ty = (int) (texRes * (floorY - cellY)) & (texRes - 1);
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
