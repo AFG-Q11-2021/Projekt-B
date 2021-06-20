@@ -52,7 +52,6 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
         // 3D Bild
-
         con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
@@ -61,7 +60,6 @@ public class Singleplayergame extends Canvas implements Game, Returner {
 
         g.dispose();
         bs.show();
-
     }
 
     public void paintMap() {
@@ -111,7 +109,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     public void setSpeedr(double speedr) {
         s.setSpeedr(speedr);
     }
-    
+
     public JFrame getFrame(){
         return frame1;
     }
