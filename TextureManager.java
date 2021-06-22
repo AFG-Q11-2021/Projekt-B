@@ -10,7 +10,7 @@ public class TextureManager {
         textures = new BufferedImage[10];
         darkTextures = new BufferedImage[10];
         skyTextures = new BufferedImage[10];
-        
+
         loadSkyTexture(0, "textures/sky.png");
 
         loadTexture(0, "textures/sheetMetal.png");
@@ -24,9 +24,22 @@ public class TextureManager {
 
         loadTexture(3, "textures/woodPlankWall.png");
         createDarkTexture(3);
-        
+
         loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(4);
+
+        loadTexture(5, "textures/brickWallSchwanzSecret.png");
+        createDarkTexture(5);
+
+        loadTexture(6, "textures/brickWallBloodVariation1.png");
+        createDarkTexture(6);
+
+        loadTexture(7, "textures/brickWallBloodVariation2.png");
+        createDarkTexture(7);
+
+        loadTexture(8, "textures/brickWalltotenkopf.png");
+        createDarkTexture(8);
+
     }
 
     public BufferedImage getTexture(int texID) {
