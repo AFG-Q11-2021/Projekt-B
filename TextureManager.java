@@ -27,6 +27,9 @@ public class TextureManager {
         
         loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(4);
+        
+        loadTexture(5, "textures/brickWallSchwanzSecret.png");
+        createDarkTexture(5);
     }
 
     public BufferedImage getTexture(int texID) {

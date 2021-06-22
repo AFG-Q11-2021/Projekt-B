@@ -1,4 +1,3 @@
-
 /**
  * Multiplayer Class
  *
@@ -36,7 +35,7 @@ public class Multiplayer extends JFrame implements ActionListener {
         name.setBounds(400, 530, 450, 40);
         add(name);
         label = new JLabel("Spielername:");
-        label.setBounds(313, 525, 350, 50);
+        label.setBounds(580, 480, 380, 60);
         add(label);
 
         name.setForeground(Color.BLACK);
