@@ -6,7 +6,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
-import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class Singleplayergame extends Canvas implements Game, Returner {
@@ -18,8 +17,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private BufferStrategy bs;
     private int csizeX, csizeY;
     private Controller con;
-    private double speedm;
-    private boolean shoot = false;
+    //private boolean shoot = false;
 
     public Singleplayergame(Karte k, Controller c) {
         kartetest = k;
@@ -36,7 +34,6 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         this.setPreferredSize(frame1.getPreferredSize());
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
-        speedm = con.getSpieler().getSpeed();
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
         this.addKeyListener(key);

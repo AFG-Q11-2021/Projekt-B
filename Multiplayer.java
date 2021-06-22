@@ -7,7 +7,6 @@
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.sql.*;
 import javax.swing.*;
 
