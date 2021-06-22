@@ -28,9 +28,25 @@ public class TextureManager {
         loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(4);
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         loadTexture(5, "textures/brickWallSchwanzSecret.png");
         createDarkTexture(5);
+=======
+
+        loadTexture(5, "textures/brickWallSchwanzSecret.png");
+        createDarkTexture(5);
+
+        loadTexture(6, "textures/brickWallBloodVariation1.png");
+        createDarkTexture(6);
+
+        loadTexture(7, "textures/brickWallBloodVariation2.png");
+        createDarkTexture(7);
+
+        loadTexture(8, "textures/brickWalltotenkopf.png");
+        createDarkTexture(8);
+
+>>>>>>> 39b582e024dbe5a678dafd700214cf0e55956daa
 =======
 
         loadTexture(5, "textures/brickWallSchwanzSecret.png");
