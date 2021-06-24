@@ -246,6 +246,10 @@ public class CastTest {
     public void setfloorRes(int r) {
         floorRes = r;
     }
+    
+    public void setRun(boolean r){
+        run = r;
+    }
 
     public int getResolution() {
         return stepSize;

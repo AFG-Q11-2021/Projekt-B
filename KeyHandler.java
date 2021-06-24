@@ -90,6 +90,7 @@ public class KeyHandler implements KeyListener
     
     private void settings() {
         game.getFrame().setVisible(false);
+        con.getCast().setRun(false);
         new Settings(game, s.getSpeed(), s.getSpeedr(), con);
     }
 
