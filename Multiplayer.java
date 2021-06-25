@@ -30,9 +30,9 @@ public class Multiplayer extends JFrame implements ActionListener {
         starten = new JButton("Spiel starten");
         starten.setBounds(450, 600, 350, 40);
         test = new JButton("test");
-        test.setBounds(200, 300, 300, 50);
+        test.setBounds(200, 300, 100, 50);
         test1 = new JButton("delete");
-        test1.setBounds(300, 300, 300, 50);
+        test1.setBounds(400, 300, 300, 50);
         name = new JTextField("", 20);
         name.setBounds(400, 530, 450, 40);
         label = new JLabel("Spielername");
@@ -62,7 +62,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == starten) {
             starten1();
-            this.setVisible(false);
+            //this.setVisible(false);
         }
         if ( e.getSource() == test){
             testen();
@@ -78,18 +78,19 @@ public class Multiplayer extends JFrame implements ActionListener {
 
     private void testen(){
         spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
-        datenbankinsert("DELETE * FROM multiplayer WHERE name = '"+spieleri.getUsername()+"'");
+        datenbankinsert("DELETE * FROM multiplayer");
     }
 
     public void starten1() {
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
-        datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
+        String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES ('"
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
-            + spieleri.getRotation() + ")");
-        Multiplayergame gamee = new Multiplayergame(kartetest, con);
+            + spieleri.getRotation() + ")";
+        datenbankinsert(sql);
+        /*Multiplayergame gamee = new Multiplayergame(kartetest, con);
         gamee.setSpieler(spieleri);
         con.setSpieler(spieleri);
-        con.setGame(gamee);
+        con.setGame(gamee);*/
     }
 
     private void datenbankinsert(String sql) {
