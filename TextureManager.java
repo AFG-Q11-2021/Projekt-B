@@ -42,6 +42,10 @@ public class TextureManager {
         
         loadTexture(9, "textures/woodPlankWallblood.png");
         createDarkTexture(9);
+        
+        loadTexture(10, "textures/brickWallred.png");
+        createDarkTexture(10);
+
 
     }
 
