@@ -1,4 +1,4 @@
-import java.awt.*;
+ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 
@@ -11,6 +11,7 @@ public class CastTest {
     private Game game;
     private TextureManager texManager;
     private int stepSize, floorRes, texRes, screenWidth, screenHeight, spriteResX, spriteResY;
+    private double[] depthBuffer = new double[screenWidth ];
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
@@ -32,6 +33,9 @@ public class CastTest {
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
         run=true;
+        Sprite test = new Sprite(15,15,false,texManager.getTexture(3));
+        depthBuffer = new double[screenWidth/stepSize ];
+        
     }
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
@@ -52,9 +56,10 @@ public class CastTest {
 
             // Floor Casting?
             floorCasting(g);
+            drawSprites(g);
 
             // draw Entities (Enemies, Props, Pickups)
-            double[] depthBuffer = new double[screenWidth / stepSize];
+            
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
             double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
@@ -148,6 +153,7 @@ public class CastTest {
 
     private void drawSprites(Graphics g){
         for(Sprite s:sprites){
+            
             double spriteX = s.x - xPos;
             double spriteY = s.y - yPos;
 
@@ -165,7 +171,16 @@ public class CastTest {
             int drawWidth = Math.abs((int)(screenWidth/tranY));
             int startDrawX = -drawWidth/2 + spritePixelX;
             int endDrawX = drawWidth/2 + spritePixelX;
-
+            
+            for(int ix = 0; ix < spriteResX/stepSize;ix++){
+                int x = ix*stepSize;
+                
+                if(depthBuffer[ix] < Math.sqrt(spriteX*spriteX + spriteY*spriteY) && tranY > 0){
+                     g.drawImage(s.getDirectTexture(), startDrawX + x, startDrawY, startDrawX + x + stepSize,
+                        endDrawY, x, 0, x + 1, spriteResY, null);
+                
+                }
+            }
         }
     }
 
