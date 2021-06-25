@@ -14,6 +14,7 @@ public class KeyHandler implements KeyListener
     private boolean back = false;
     private boolean left = false;
     private boolean right = false;
+    private boolean exit;
     public KeyHandler(Controller c, Returner g)
     {
         con = c;
@@ -40,6 +41,9 @@ public class KeyHandler implements KeyListener
         }
         if (rotLeft == true) {
             s.linksdrehen();
+        }
+        if (exit == true){
+            System.exit(0);
         }
     }
     
@@ -80,12 +84,16 @@ public class KeyHandler implements KeyListener
                 + " WHERE name = '" + s.getUsername() + "'";
             m.datenbankupdaten(sql);
         }
-        if (rotRight = true) {
+        if (rotRight == true) {
             s.rechtsdrehen();
         }
-        if (rotLeft = true) {
+        if (rotLeft == true) {
             s.linksdrehen();
-        }    
+        }
+        if (exit == true){
+            m.datenbankupdaten("DELETE * FROM multiplayer WHERE name = '"+s.getUsername()+"'");
+            System.exit(0);
+        }
     }
     
     private void settings() {

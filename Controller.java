@@ -11,14 +11,14 @@ public class Controller {
     private TextureManager textureManager;
     private CastTest cast;
     private StatHandle stat;
-    
+    private KartenVerwalter katver;
 
     public Controller() {
         running = true;
         setTextureManager(new TextureManager());
-        kartetest = KartenVerwalter.getMapFromStorage(0);
+        katver = new KartenVerwalter();
+        kartetest = katver.getMapFromStorage(0);
         cast = new CastTest(this);
-        
 
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest, this);
