@@ -132,4 +132,26 @@ public class Spieler {
     public void setKarte(Karte karte) {
         this.karte = karte;
     }
+    
+    //ab hier von Samuel
+    
+    public Player spielerStat;
+    public Enemy[] enemyArray = new Enemy[9999];
+    public int i;
+    public void insertEnemy(Enemy temp)
+    {
+        if (i< enemyArray.length)
+        {
+            enemyArray[i] = temp;
+        }
+    }
+    
+    public void setPlayer(Player temp)
+    {
+        spielerStat = temp;
+    }
+    
+    
+    
+    
 }
