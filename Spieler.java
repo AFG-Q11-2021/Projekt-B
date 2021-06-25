@@ -10,7 +10,7 @@ public class Spieler {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
-        setLeben(20);
+        setLeben(20); //NOTIZ VON SAMUEL : BITTE ENTFERNEN, DER STATHANDLE MACHT DAS
         // rotation= 90.0;
         speedm = s;
         speedr = r;
