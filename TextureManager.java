@@ -7,8 +7,8 @@ public class TextureManager {
     private BufferedImage[] textures, darkTextures, skyTextures;
 
     public TextureManager() {
-        textures = new BufferedImage[10];
-        darkTextures = new BufferedImage[10];
+        textures = new BufferedImage[100];
+        darkTextures = new BufferedImage[100];
         skyTextures = new BufferedImage[10];
 
         loadSkyTexture(0, "textures/sky.png");
