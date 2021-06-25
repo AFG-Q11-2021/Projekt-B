@@ -232,7 +232,7 @@ public class CastTest {
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                    texManager.getDarkTexture(0).getRGB(tx, ty));
+                    texManager.getDarkTexture(11).getRGB(tx, ty));
             }
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
