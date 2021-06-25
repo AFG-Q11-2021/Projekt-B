@@ -11,6 +11,7 @@ public class CastTest {
     private Game game;
     private TextureManager texManager;
     private int stepSize, floorRes, texRes, screenWidth, screenHeight, spriteResX, spriteResY;
+    private double[] depthBuffer = new double[screenWidth];
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
@@ -32,6 +33,9 @@ public class CastTest {
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
         run=true;
+        Sprite test = new Sprite(15,15,false,texManager.getTexture(3));
+        depthBuffer = new double[screenWidth/stepSize ];
+        
     }
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
@@ -51,10 +55,11 @@ public class CastTest {
             drawSky(g);
 
             // Floor Casting?
-            floorCasting(g);
+            //floorCasting(g);
+            drawSprites(g);
 
             // draw Entities (Enemies, Props, Pickups)
-            double[] depthBuffer = new double[screenWidth / stepSize];
+            
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
             double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
@@ -147,25 +152,36 @@ public class CastTest {
     }
 
     private void drawSprites(Graphics g){
+        double spriteX, spriteY, inverse, tranX, tranY;
+        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX, x;
         for(Sprite s:sprites){
-            double spriteX = s.x - xPos;
-            double spriteY = s.y - yPos;
+            spriteX = s.x - xPos;
+            spriteY = s.y - yPos;
 
-            double inverse = 1 / (planeX*dirY - dirX*planeY);
+            inverse = 1 / (planeX*dirY - dirX*planeY);
 
-            double tranX = inverse * (dirY*spriteX - dirX *spriteY);
-            double tranY = inverse * (-planeY*spriteX + planeX*spriteY);
+            tranX = inverse * (dirY*spriteX - dirX *spriteY);
+            tranY = inverse * (-planeY*spriteX + planeX*spriteY);
 
-            int spritePixelX = (int) ((screenWidth/2) + (1 + tranX/tranY));
-            int drawHeight = Math.abs((int) (screenHeight/tranY));
+            spritePixelX = (int) ((screenWidth/2) + (1 + tranX/tranY));
+            drawHeight = Math.abs((int) (screenHeight/tranY));
 
-            int startDrawY = (screenHeight -drawHeight)/2;
-            int endDrawY = (drawHeight + screenHeight)/2;
+            startDrawY = (screenHeight -drawHeight)/2;
+            endDrawY = (drawHeight + screenHeight)/2;
 
-            int drawWidth = Math.abs((int)(screenWidth/tranY));
-            int startDrawX = -drawWidth/2 + spritePixelX;
-            int endDrawX = drawWidth/2 + spritePixelX;
-
+            drawWidth = Math.abs((int)(screenWidth/tranY));
+            startDrawX = -drawWidth/2 + spritePixelX;
+            endDrawX = drawWidth/2 + spritePixelX;
+            
+            for(int ix = 0; ix < spriteResX/stepSize;ix++){
+                x = ix*stepSize;
+                
+                if(depthBuffer[ix] < Math.sqrt(spriteX*spriteX + spriteY*spriteY) && tranY > 0){
+                     g.drawImage(s.getDirectTexture(), startDrawX + x, startDrawY, startDrawX + x + stepSize,
+                        endDrawY, x, 0, x + 1, spriteResY, null);
+                
+                }
+            }
         }
     }
 
@@ -186,8 +202,8 @@ public class CastTest {
             g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, (int) game.gibHeight(), texX, 100,
                 texX + 1, 250, null);
         }
-        //g.setColor(new Color(90, 90, 90));
-        //g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
+        g.setColor(new Color(90, 90, 90));
+        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
@@ -229,6 +245,10 @@ public class CastTest {
 
     public void setfloorRes(int r) {
         floorRes = r;
+    }
+    
+    public void setRun(boolean r){
+        run = r;
     }
 
     public int getResolution() {

@@ -7,7 +7,6 @@
  */
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.sql.*;
 import javax.swing.*;
 
@@ -16,10 +15,11 @@ public class Multiplayer extends JFrame implements ActionListener {
     private Bild build;
     private JLabel label;
     private static JTextField name;
-    private JButton starten;
-    public Karte kartetest;
+    private JButton starten, test, test1;
+    private Karte kartetest;
     private double spielerspeed;
     private Controller con;
+    private Spieler spieleri;
 
     public Multiplayer(String title, Karte k, double s, Controller c) {
         super(title);
@@ -27,17 +27,16 @@ public class Multiplayer extends JFrame implements ActionListener {
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        label = new JLabel("Spielername");
-        name = new JTextField("", 20);
         starten = new JButton("Spiel starten");
         starten.setBounds(450, 600, 350, 40);
-
+        test = new JButton("test");
+        test.setBounds(200, 300, 300, 50);
+        test1 = new JButton("delete");
+        test1.setBounds(300, 300, 300, 50);
         name = new JTextField("", 20);
         name.setBounds(400, 530, 450, 40);
-        add(name);
-        label = new JLabel("Spielername:");
+        label = new JLabel("Spielername");
         label.setBounds(313, 525, 350, 50);
-        add(label);
 
         name.setForeground(Color.BLACK);
         name.setBackground(Color.WHITE);
@@ -46,7 +45,8 @@ public class Multiplayer extends JFrame implements ActionListener {
 
         build= new Bild();
         build.setBounds(0, 0, 1290, 1100);
-
+        add(test);
+        add(test1);
         add(label);
         add(name);
         add(starten);
@@ -64,14 +64,29 @@ public class Multiplayer extends JFrame implements ActionListener {
             starten1();
             this.setVisible(false);
         }
+        if ( e.getSource() == test){
+            testen();
+        }
+        if (e.getSource() == test1){
+            dele();
+        }
+    }
+
+    private void dele(){
+
+    }
+
+    private void testen(){
+        spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
+        datenbankinsert("DELETE * FROM multiplayer WHERE name = '"+spieleri.getUsername()+"'");
     }
 
     public void starten1() {
-        Multiplayergame gamee = new Multiplayergame(kartetest, con);
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES (name  = '"
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
             + spieleri.getRotation() + ")");
+        Multiplayergame gamee = new Multiplayergame(kartetest, con);
         gamee.setSpieler(spieleri);
         con.setSpieler(spieleri);
         con.setGame(gamee);

@@ -3,15 +3,13 @@
 public class Spieler {
     private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
-    private int leben;
     private Karte karte;
 
     public Spieler(String usernameNeu, double s, double r, Karte k) {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
-        setLeben(20); //NOTIZ VON SAMUEL : BITTE ENTFERNEN, DER STATHANDLE MACHT DAS
-        // rotation= 90.0;
+       rotation= 0.0;
         speedm = s;
         speedr = r;
         setKarte(k);
@@ -21,8 +19,7 @@ public class Spieler {
         setUsername(usernameNeu);
         x = 5;// Startpunkt des Spielers//
         y = 5;// Startpunkt des Spielers//
-        setLeben(20);
-        // rotation= 90.0;
+        rotation= 0.0;
         speedm = 0.05;
     }
 
@@ -110,14 +107,6 @@ public class Spieler {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public int getLeben() {
-        return leben;
-    }
-
-    public void setLeben(int leben) {
-        this.leben = leben;
     }
 
     public double getSpeed() {
