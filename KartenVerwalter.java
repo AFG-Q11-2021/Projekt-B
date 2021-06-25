@@ -39,7 +39,7 @@ public class KartenVerwalter {
             }
             br.close();
         } catch (Exception e) {
-            // Klingelin
+            System.out.println("Exception " + e + " has occured");
         }
     }
 }
