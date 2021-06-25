@@ -46,7 +46,11 @@ public class TextureManager {
         loadTexture(10, "textures/teppichBoden.png");
         createDarkTexture(10);
 
+        loadTexture(11, "textures/brickWallred.png");
+        createDarkTexture(11);
+
     }
+
     public BufferedImage getTexture(int texID) {
         return textures[texID];
     }

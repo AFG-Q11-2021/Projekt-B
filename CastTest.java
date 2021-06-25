@@ -1,4 +1,4 @@
-import java.awt.*;
+ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 
@@ -168,14 +168,12 @@ public class CastTest {
 
             startDrawY = (screenHeight -drawHeight)/2;
             endDrawY = (drawHeight + screenHeight)/2;
-
             drawWidth = Math.abs((int)(screenWidth/tranY));
             startDrawX = -drawWidth/2 + spritePixelX;
             endDrawX = drawWidth/2 + spritePixelX;
             
             for(int ix = 0; ix < spriteResX/stepSize;ix++){
                 x = ix*stepSize;
-                
                 if(depthBuffer[ix] < Math.sqrt(spriteX*spriteX + spriteY*spriteY) && tranY > 0){
                      g.drawImage(s.getDirectTexture(), startDrawX + x, startDrawY, startDrawX + x + stepSize,
                         endDrawY, x, 0, x + 1, spriteResY, null);

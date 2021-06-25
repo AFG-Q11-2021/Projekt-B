@@ -4,7 +4,7 @@
  * STATS
  * PLAYER DEACTIVATION
  */
-
+// TECHNICAL LIMITATIONS MAKE THIS IMPOSSIBLE: STOP WRITING AN ENGINE
 public class StatHandle
 {
     public Player activePlayerObject;
