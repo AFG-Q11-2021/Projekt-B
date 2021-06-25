@@ -78,7 +78,7 @@ public class Multiplayer extends JFrame implements ActionListener {
 
     private void testen(){
         spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
-        datenbankinsert("DELETE * FROM multiplayer");
+        datenbankinsert("DELETE FROM multiplayer");
     }
 
     public void starten1() {
@@ -87,10 +87,9 @@ public class Multiplayer extends JFrame implements ActionListener {
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
             + spieleri.getRotation() + ")";
         datenbankinsert(sql);
-        /*Multiplayergame gamee = new Multiplayergame(kartetest, con);
-        gamee.setSpieler(spieleri);
+        Multiplayergame game = new Multiplayergame(kartetest, con);
         con.setSpieler(spieleri);
-        con.setGame(gamee);*/
+        con.setGame(game);
     }
 
     private void datenbankinsert(String sql) {

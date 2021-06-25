@@ -4,7 +4,7 @@ import java.sql.*;
 public class Datenbankreiniger
 {
     public void leeren(){
-        datenbankinsert("DELETE * FROM multiplayer");
+        datenbankinsert("DELETE FROM multiplayer");
     }
     
     private void auslesne(){
