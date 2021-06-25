@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
-import java.awt.event.*;
 import java.sql.*;
 
 //Author: Julius(primär), Laurens
@@ -20,13 +19,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private BufferStrategy bs;
     private int csizeX;
     private int csizeY;
-
-    private boolean fwd = false;
-    private boolean back = false;
-    private boolean left = false;
-    private boolean right = false;
-    private boolean rotRight = false;
-    private boolean rotLeft = false;
 
     public Multiplayergame(Karte k, Controller c) {
         frame1 = new JFrame();

@@ -27,49 +27,25 @@ public class TextureManager {
 
         loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(4);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+        loadTexture(5, "textures/brickWallSchwanzSecret.png");
+        createDarkTexture(5);
+
+        loadTexture(6, "textures/brickWallBloodVariation1.png");
+        createDarkTexture(6);
+
+        loadTexture(7, "textures/brickWallBloodVariation2.png");
+        createDarkTexture(7);
+
+        loadTexture(8, "textures/brickWalltotenkopf.png");
+        createDarkTexture(8);
         
-        loadTexture(5, "textures/brickWallSchwanzSecret.png");
-        createDarkTexture(5);
-=======
-
-        loadTexture(5, "textures/brickWallSchwanzSecret.png");
-        createDarkTexture(5);
-
-        loadTexture(6, "textures/brickWallBloodVariation1.png");
-        createDarkTexture(6);
-
-        loadTexture(7, "textures/brickWallBloodVariation2.png");
-        createDarkTexture(7);
-
-        loadTexture(8, "textures/brickWalltotenkopf.png");
-        createDarkTexture(8);
-
-        loadTexture(5, "textures/brickWallSchwanzSecret.png");
-        createDarkTexture(5);
-
-        loadTexture(6, "textures/brickWallBloodVariation1.png");
-        createDarkTexture(6);
-
-        loadTexture(7, "textures/brickWallBloodVariation2.png");
-        createDarkTexture(7);
-
-        loadTexture(8, "textures/brickWalltotenkopf.png");
-        createDarkTexture(8);
-
-        loadTexture(5, "textures/brickWallSchwanzSecret.png");
-        createDarkTexture(5);
-
-        loadTexture(6, "textures/brickWallBloodVariation1.png");
-        createDarkTexture(6);
-
-        loadTexture(7, "textures/brickWallBloodVariation2.png");
-        createDarkTexture(7);
-
-        loadTexture(8, "textures/brickWalltotenkopf.png");
-        createDarkTexture(8);
+        loadTexture(9, "textures/woodPlankWallblood.png");
+        createDarkTexture(9);
+        
+        loadTexture(10, "textures/teppichBoden.png");
+        createDarkTexture(10);
+        
 
 
     }

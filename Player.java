@@ -11,6 +11,8 @@ public class Player
     public int maxH, curH;
     public int maxA, curA;
     public boolean aliveChecker;
+    
+    public int ammoType1, ammoType2, ammoType3;
     public Player(Spieler playTemp, StatHandle statTemp, int max)
     {
         handler = statTemp;
@@ -65,4 +67,13 @@ public class Player
             this.setCurrentArmor(amount);
         }
     }
+    
+    public void shoot(int damage, int rngOAW)
+    {
+        double yCO = actPlay.getX();
+        double xCO = actPlay.getY();
+        double rotat = actPlay.getRotation();
+        
+    }
+    
 }
