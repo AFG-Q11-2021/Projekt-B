@@ -44,8 +44,8 @@ public class Framee extends JFrame implements ActionListener, Returner {
         add(build);
 
         kartetest = k;
-        spielerspeed = 0.05;
-        speedr = 2;
+        spielerspeed = 0.1;
+        speedr = 4;
         con = c;
 
     }
