@@ -49,6 +49,10 @@ public class TextureManager {
         loadTexture(11, "textures/brickWallred.png");
         createDarkTexture(11);
 
+        loadTexture(12, "textures/brickWallredandbluefusion.png");
+        createDarkTexture(12);
+
+
     }
 
     public BufferedImage getTexture(int texID) {
