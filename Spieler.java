@@ -9,7 +9,7 @@ public class Spieler {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
-        rotation= 0.0;
+       rotation= 0.0;
         speedm = s;
         speedr = r;
         setKarte(k);
@@ -132,4 +132,26 @@ public class Spieler {
     public void setKarte(Karte karte) {
         this.karte = karte;
     }
+    
+    //ab hier von Samuel
+    
+    public Player spielerStat;
+    public Enemy[] enemyArray = new Enemy[9999];
+    public int i;
+    public void insertEnemy(Enemy temp)
+    {
+        if (i< enemyArray.length)
+        {
+            enemyArray[i] = temp;
+        }
+    }
+    
+    public void setPlayer(Player temp)
+    {
+        spielerStat = temp;
+    }
+    
+    
+    
+    
 }

@@ -4,15 +4,25 @@
  * STATS
  * PLAYER DEACTIVATION
  */
-
+// TECHNICAL LIMITATIONS MAKE THIS IMPOSSIBLE: STOP WRITING AN ENGINE
 public class StatHandle
 {
     public Player activePlayerObject;
     public boolean playerAlive;
-    public EnemyTree tree;
+    private int difficulty;
     public StatHandle(Spieler s, int maxLIVE)
     {
         activePlayerObject = new Player(s, this, maxLIVE);
+    }
+    
+    public void setDiff(int i)
+    {
+        difficulty = i;
+    }
+    
+    public int getDif()
+    {
+        return difficulty;
     }
     
     public void updatePlayerLiveState(boolean temp)
@@ -23,11 +33,6 @@ public class StatHandle
     public void dealDamagetoPlayer(int amount)
     {
         activePlayerObject.damageDealtToPlayer(amount);
-    }
-    
-    public void dealDamageToEnemy(int amount, int iD)
-    {
-        tree.returnEnemy(iD).dealDamage(amount);
     }
     
     //LOGIC FOR ENEMY FINDING

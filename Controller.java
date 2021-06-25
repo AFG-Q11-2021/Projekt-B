@@ -10,12 +10,15 @@ public class Controller {
     private Karte kartetest;
     private TextureManager textureManager;
     private CastTest cast;
+    private StatHandle stat;
+    
 
     public Controller() {
         running = true;
         setTextureManager(new TextureManager());
         kartetest = KartenVerwalter.getMapFromStorage(0);
         cast = new CastTest(this);
+        
 
         // Startmenü öffnen
         frame = new Framee("Startmenü", kartetest, this);
@@ -36,7 +39,17 @@ public class Controller {
         }
         game.getGraphics().dispose();
     }
-
+    
+    public void setStatHandle(StatHandle stemp)
+    {
+        stat = stemp;
+    }
+    
+    public StatHandle returnStat()
+    {
+        return stat;
+    }
+    
     public static void main(String[] args) {
         new Controller();
     }

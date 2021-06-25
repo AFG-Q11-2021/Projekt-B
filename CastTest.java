@@ -1,4 +1,4 @@
-import java.awt.*;
+ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 
@@ -57,8 +57,7 @@ public class CastTest {
 
             // Floor Casting?
             floorCasting(g);
-            
-            
+
 
             // draw Entities (Enemies, Props, Pickups)
             
@@ -175,10 +174,10 @@ public class CastTest {
 
             startDrawY = (screenHeight -drawHeight)/2;
             endDrawY = (drawHeight + screenHeight)/2;
-
             drawWidth = Math.abs((int)(screenWidth/tranY));
             startDrawX = -drawWidth/2 + spritePixelX;
             endDrawX = drawWidth/2 + spritePixelX;
+
             int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
                 int texx = (int) (((ix-startDrawX*1.0)/dWidth*1.0)*spriteResX);
@@ -186,6 +185,7 @@ public class CastTest {
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
                      g.drawImage(s.getDirectTexture(),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, texx, 0, texx + 1, spriteResY, null);
+
                 
                 }
             }
@@ -239,7 +239,7 @@ public class CastTest {
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                    texManager.getDarkTexture(0).getRGB(tx, ty));
+                    texManager.getDarkTexture(10).getRGB(tx, ty));
             }
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
