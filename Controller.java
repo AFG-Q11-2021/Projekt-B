@@ -39,17 +39,7 @@ public class Controller {
         }
         game.getGraphics().dispose();
     }
-    
-    public void setStatHandle(StatHandle stemp)
-    {
-        stat = stemp;
-    }
-    
-    public StatHandle returnStat()
-    {
-        return stat;
-    }
-    
+
     public static void main(String[] args) {
         new Controller();
     }
@@ -98,6 +88,14 @@ public class Controller {
 
     public CastTest getCast(){
         return this.cast;
+    }
+
+    public void setStatHandle(StatHandle stemp){
+        stat = stemp;
+    }
+
+    public StatHandle getStatHandle(){
+        return stat;
     }
 
 }

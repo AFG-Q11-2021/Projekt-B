@@ -1,7 +1,5 @@
-
 /**
  * Framee Class
- *
  * @author Christopher Scherübl, Timon Weiss, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.2
  */
@@ -18,7 +16,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
     
     public Framee(String title, Karte k, Controller c) {
         super(title);
-
+        
         schliessen = new JButton("Single Player");
         schliessen.setBounds(280, 590, 750, 50);
         schliessen.addActionListener(this);

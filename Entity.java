@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class Entity
 {
-
     private double x,y;
     private int texID;
     
@@ -16,10 +15,11 @@ public class Entity
     public double getX(){
         return x;
     }
+    
     public double getY(){
-
         return y;
     }
+    
     public int getTexID(){
         return texID;
     }
