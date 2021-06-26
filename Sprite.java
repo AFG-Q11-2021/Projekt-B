@@ -16,7 +16,7 @@ public class Sprite
     public Sprite(double x, double y,boolean directional, BufferedImage... textures){
         this.x = x;
         this.y = y;
-        this.directional = false;
+        this.directional = directional;
         this.textures = textures;
     }
 
@@ -25,7 +25,19 @@ public class Sprite
         this.y = y;
     }
 
-    public BufferedImage getDirectTexture(){
-        return textures[0];
+    public BufferedImage getDirectTexture(double camX,double camY){
+        if(!directional){
+             // System.out.println("not directional");
+             return textures[0];
+           
+        }
+        double dx = camX-x;
+        double dy = camY-y;
+        double angle = Math.atan2(dx,dy);
+        int texIndex = (int) ((8*angle)/6.28);
+        System.out.println(texIndex);
+        return textures[Math.abs(texIndex)];
     }
+    
+
 }

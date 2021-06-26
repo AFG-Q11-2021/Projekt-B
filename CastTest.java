@@ -33,10 +33,10 @@ public class CastTest {
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
         run=true;
-        Sprite test = new Sprite(15,15,false,texManager.getTexture(12));
+        Sprite test = new Sprite(15,15,false,texManager.getSpriteTexture(0));
         sprites.add(test);
-        Sprite test1 = new Sprite(16,15,false,texManager.getTexture(12));
-        sprites.add(test1);
+        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(1),texManager.getSpriteTexture(2),texManager.getSpriteTexture(3),texManager.getSpriteTexture(4),texManager.getSpriteTexture(1),texManager.getSpriteTexture(2),texManager.getSpriteTexture(3),texManager.getSpriteTexture(4));
+        sprites.add(directional);
         depthBuffer = new double[screenWidth ];
         
     }
@@ -199,8 +199,8 @@ public class CastTest {
                 int texx = (int) (((ix-startDrawX*1.0)/dWidth*1.0)*spriteResX);
                 
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
-                     g.drawImage(s.getDirectTexture(),screenWidth-ix, startDrawY, screenWidth-ix +1,
-                        endDrawY, texx, 0, texx + 1, spriteResY, null);
+                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
+                        endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
 
                 
                 }

@@ -4,12 +4,13 @@ import javax.imageio.*;
 import java.io.*;
 //Author: Laurens
 public class TextureManager {
-    private BufferedImage[] textures, darkTextures, skyTextures;
+    private BufferedImage[] textures, darkTextures, skyTextures, spriteTextures;
 
     public TextureManager() {
         textures = new BufferedImage[100];
         darkTextures = new BufferedImage[100];
         skyTextures = new BufferedImage[10];
+        spriteTextures = new BufferedImage[20];
 
         loadSkyTexture(0, "textures/sky.png");
 
@@ -28,7 +29,7 @@ public class TextureManager {
         loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(4);
 
-        loadTexture(5, "textures/brickWallSchwanzSecret.png");
+        loadTexture(5, "textures/brickWall.png");
         createDarkTexture(5);
 
         loadTexture(6, "textures/brickWallBloodVariation1.png");
@@ -49,9 +50,18 @@ public class TextureManager {
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         createDarkTexture(11);
         
-         loadTexture(12, "textures/explosiveBarrel.png");
-        createDarkTexture(12);
-
+        
+        //Sprite Textures
+        
+        loadSpriteTexture(0, "textures/explosiveBarrel.png");
+        loadSpriteTexture(1, "textures/Debug01.png");
+        loadSpriteTexture(2, "textures/Debug02.png");
+        loadSpriteTexture(3, "textures/Debug03.png");
+        loadSpriteTexture(4, "textures/Debug04.png");
+        
+        
+        
+        
 
     }
 
@@ -62,6 +72,9 @@ public class TextureManager {
     public BufferedImage getSkyTexture(int texID) {
         return skyTextures[texID];
     }
+     public BufferedImage getSpriteTexture(int texID) {
+        return spriteTextures[texID];
+    }
 
     public BufferedImage getDarkTexture(int texID) {
         return darkTextures[texID];
@@ -70,6 +83,14 @@ public class TextureManager {
     private void loadTexture(int index, String path) {
         try {
             textures[index] = ImageIO.read(new File(path));
+        } catch (java.io.IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+    
+      private void loadSpriteTexture(int index, String path) {
+        try {
+            spriteTextures[index] = ImageIO.read(new File(path));
         } catch (java.io.IOException ioe) {
             ioe.printStackTrace();
         }
