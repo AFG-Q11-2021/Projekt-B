@@ -54,10 +54,14 @@ public class TextureManager {
         //Sprite Textures
         
         loadSpriteTexture(0, "textures/explosiveBarrel.png");
-        loadSpriteTexture(1, "textures/Debug01.png");
-        loadSpriteTexture(2, "textures/Debug02.png");
-        loadSpriteTexture(3, "textures/Debug03.png");
-        loadSpriteTexture(4, "textures/Debug04.png");
+        loadSpriteTexture(1, "textures/testHuman01.png");
+        loadSpriteTexture(2, "textures/testHuman02.png");
+        loadSpriteTexture(3, "textures/testHuman03.png");
+        loadSpriteTexture(4, "textures/testHuman04.png");
+        loadSpriteTexture(5, "textures/testHuman05.png");
+        loadSpriteTexture(6, "textures/testHuman06.png");
+        loadSpriteTexture(7, "textures/testHuman07.png");
+        loadSpriteTexture(8, "textures/testHuman08.png");
         
         
         

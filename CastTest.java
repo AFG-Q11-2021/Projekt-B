@@ -23,8 +23,8 @@ public class CastTest {
         stepSize = 4;
         floorRes = 4;
         texRes = 32;
-        spriteResX = 32;
-        spriteResY = 32;
+        spriteResX = 64;
+        spriteResY = 64;
         oldPlaneX = 0.66;
     }
 
@@ -35,7 +35,7 @@ public class CastTest {
         run=true;
         Sprite test = new Sprite(15,15,false,texManager.getSpriteTexture(0));
         sprites.add(test);
-        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(1),texManager.getSpriteTexture(2),texManager.getSpriteTexture(3),texManager.getSpriteTexture(4),texManager.getSpriteTexture(1),texManager.getSpriteTexture(2),texManager.getSpriteTexture(3),texManager.getSpriteTexture(4));
+        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
         sprites.add(directional);
         depthBuffer = new double[screenWidth ];
         
