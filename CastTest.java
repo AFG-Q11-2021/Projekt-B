@@ -35,6 +35,8 @@ public class CastTest {
         run=true;
         Sprite test = new Sprite(15,15,false,texManager.getTexture(3));
         sprites.add(test);
+        Sprite test1 = new Sprite(16,15,false,texManager.getTexture(4));
+        sprites.add(test1);
         depthBuffer = new double[screenWidth ];
         
     }
@@ -151,8 +153,22 @@ public class CastTest {
                 }
                
             }   
+            sortSprites();
             drawSprites(g);
         }
+    }
+    
+    private void sortSprites(){
+        Collections.sort(sprites, new Comparator<Sprite>() {
+            @Override
+            public int compare(Sprite s1, Sprite s2){
+                double dsts1 = (xPos - s1.x)*(xPos - s1.x) + (yPos - s1.y)*(yPos - s1.y);
+                double dsts2 = (xPos - s2.x)*(xPos - s2.x) + (yPos - s2.y)*(yPos - s2.y);
+                
+                return new Double(dsts2).compareTo(dsts1);
+            }
+        
+        });
     }
 
     private void drawSprites(Graphics g){
