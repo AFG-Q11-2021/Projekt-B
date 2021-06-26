@@ -48,6 +48,9 @@ public class TextureManager {
 
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         createDarkTexture(11);
+        
+         loadTexture(12, "textures/explosiveBarrel.png");
+        createDarkTexture(12);
 
 
     }
@@ -85,7 +88,7 @@ public class TextureManager {
         BufferedImage bi = new BufferedImage(texRes, texRes, BufferedImage.TYPE_INT_ARGB);
         Graphics j = bi.getGraphics();
         j.drawImage(textures[texID], 0, 0, null);
-        float dark = 0.6f;
+        float dark = 0.4f;
         float[] scales = { dark, dark, dark, 1f };
         float[] offsets = new float[4];
         RescaleOp rop = new RescaleOp(scales, offsets, null);

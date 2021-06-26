@@ -33,9 +33,9 @@ public class CastTest {
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
         run=true;
-        Sprite test = new Sprite(15,15,false,texManager.getTexture(3));
+        Sprite test = new Sprite(15,15,false,texManager.getTexture(12));
         sprites.add(test);
-        Sprite test1 = new Sprite(16,15,false,texManager.getTexture(4));
+        Sprite test1 = new Sprite(16,15,false,texManager.getTexture(12));
         sprites.add(test1);
         depthBuffer = new double[screenWidth ];
         
@@ -255,7 +255,7 @@ public class CastTest {
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                    texManager.getDarkTexture(10).getRGB(tx, ty));
+                    texManager.getTexture(10).getRGB(tx, ty));
             }
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
