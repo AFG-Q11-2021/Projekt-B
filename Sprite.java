@@ -35,7 +35,7 @@ public class Sprite
         double dy = camY-y;
         double angle = Math.atan2(dx,dy);
         int texIndex = (int) ((8*angle)/6.28);
-        System.out.println(texIndex);
+       // System.out.println(texIndex);
         return textures[Math.abs(texIndex)];
     }
     
