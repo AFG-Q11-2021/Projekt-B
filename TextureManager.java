@@ -84,7 +84,7 @@ public class TextureManager {
     }
 
     private void createDarkTexture(int texID) {
-        int texRes = textures[texID].getWidth(null);
+        int texRes = textures[texID].getWidth();
         BufferedImage bi = new BufferedImage(texRes, texRes, BufferedImage.TYPE_INT_ARGB);
         Graphics j = bi.getGraphics();
         j.drawImage(textures[texID], 0, 0, null);
