@@ -76,6 +76,7 @@ public class TextureManager {
     public BufferedImage getSkyTexture(int texID) {
         return skyTextures[texID];
     }
+    
      public BufferedImage getSpriteTexture(int texID) {
         return spriteTextures[texID];
     }
