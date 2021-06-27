@@ -6,7 +6,9 @@ import java.util.*;
  * Zuletzt geändert: 15.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
-public class CastTest {
+public class CastTest  {
+    private Thread thread;
+    
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -15,6 +17,9 @@ public class CastTest {
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
+    
+   
+    private Spieler testS;
 
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
@@ -27,6 +32,10 @@ public class CastTest {
         spriteResY = 64;
         oldPlaneX = 0.66;
     }
+    
+  
+    
+  
 
     public void updategame(){
         game = con.getGame();
