@@ -23,8 +23,8 @@ public class CastTest {
         stepSize = 4;
         floorRes = 4;
         texRes = 32;
-        spriteResX = 32;
-        spriteResY = 32;
+        spriteResX = 64;
+        spriteResY = 64;
         oldPlaneX = 0.66;
     }
 
@@ -33,8 +33,10 @@ public class CastTest {
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
         run=true;
-        Sprite test = new Sprite(15,15,false,texManager.getTexture(3));
+        Sprite test = new Sprite(15,15,false,texManager.getSpriteTexture(0));
         sprites.add(test);
+        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+        sprites.add(directional);
         depthBuffer = new double[screenWidth ];
         
     }
@@ -151,8 +153,22 @@ public class CastTest {
                 }
                
             }   
+            sortSprites();
             drawSprites(g);
         }
+    }
+    
+    private void sortSprites(){
+        Collections.sort(sprites, new Comparator<Sprite>() {
+            @Override
+            public int compare(Sprite s1, Sprite s2){
+                double dsts1 = (xPos - s1.x)*(xPos - s1.x) + (yPos - s1.y)*(yPos - s1.y);
+                double dsts2 = (xPos - s2.x)*(xPos - s2.x) + (yPos - s2.y)*(yPos - s2.y);
+                
+                return new Double(dsts2).compareTo(dsts1);
+            }
+        
+        });
     }
 
     private void drawSprites(Graphics g){
@@ -183,8 +199,8 @@ public class CastTest {
                 int texx = (int) (((ix-startDrawX*1.0)/dWidth*1.0)*spriteResX);
                 
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
-                     g.drawImage(s.getDirectTexture(),screenWidth-ix, startDrawY, screenWidth-ix +1,
-                        endDrawY, texx, 0, texx + 1, spriteResY, null);
+                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
+                        endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
 
                 
                 }
@@ -239,7 +255,7 @@ public class CastTest {
                 floorX += floorStepX;
                 floorY += floorStepY;
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                    texManager.getDarkTexture(10).getRGB(tx, ty));
+                    texManager.getTexture(10).getRGB(tx, ty));
             }
         }
         g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
