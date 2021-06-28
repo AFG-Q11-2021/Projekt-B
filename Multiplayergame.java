@@ -31,7 +31,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         con = c;
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
-        
+
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
     }
@@ -51,37 +51,29 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         paintMap();
 
         // Spieler malen
-        paintPlayer(s);
-        paintpotentialPlayers(s);
+        paintPlayers(s);
 
         g.dispose();
         bs.show();
     }
 
-    private void paintpotentialPlayers(Spieler sp) {
+    private void paintPlayers(Spieler sp) {
         Spieler h;
         Connection verbindung = null;
-        String sql1 = "SELECT count(*) FROM multiplayer";
         String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer WHERE name !='" + sp.getUsername()
             + "'";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
-            ResultSet rs = st.executeQuery(sql1);
-            rs.next();
-            int g = rs.getInt(1);
-            System.out.println(g);
-            if (g != 0) {
-                ResultSet ergebnis = st.executeQuery(sql2);
-                while (ergebnis.next()) {
-                    h = new Spieler(ergebnis.getString(1));
-                    h.setX(ergebnis.getDouble(2));
-                    h.setY(ergebnis.getDouble(3));
-                    h.setRotation(ergebnis.getDouble(4));
-                    paintPlayer(h);
-                }
-                ergebnis.close();
+            ResultSet ergebnis = st.executeQuery(sql2);
+            while (ergebnis.next()) {
+                h = new Spieler(ergebnis.getString(1));
+                h.setX(ergebnis.getDouble(2));
+                h.setY(ergebnis.getDouble(3));
+                h.setRotation(ergebnis.getDouble(4));
+                paintPlayer(h);
             }
+            ergebnis.close();
             st.close();
             abbau(verbindung);
         } catch (SQLException e) {
@@ -180,7 +172,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     public void setSpeedr(double speedr) {
         s.setSpeedr(speedr);
     }
-    
+
     public JFrame getFrame(){
         return frame1;
     }
