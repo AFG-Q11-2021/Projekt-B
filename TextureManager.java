@@ -44,7 +44,7 @@ public class TextureManager {
         loadTexture(9, "textures/woodPlankWallblood.png");
         createDarkTexture(9);
 
-        loadTexture(10, "textures/teppichBoden.png");
+        loadTexture(10, "textures/teppichBoden2.png");
         createDarkTexture(10);
 
         loadTexture(11, "textures/brickWallredandbluefusion.png");
