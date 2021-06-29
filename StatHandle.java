@@ -37,9 +37,9 @@ public class StatHandle
     
     public void creatNewEnemy()
     {
-        Enemy enemyIns = new GegnerTyp1StatPrefab();
+        //Enemy enemyIns = new GegnerTyp1StatPrefab();
         
-        activePlayerObject.returnThisSpieler().insertEnemy(enemyIns);
+       // activePlayerObject.returnThisSpieler().insertEnemy(enemyIns);
     }
     
     //LOGIC FOR ENEMY FINDING
