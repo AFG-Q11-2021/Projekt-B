@@ -72,5 +72,10 @@ public class Player
         double rotat = actPlay.getRotation();
 
     }
+    
+    public Spieler returnThisSpieler()
+    {
+        return this.actPlay;
+    }
 
 }
