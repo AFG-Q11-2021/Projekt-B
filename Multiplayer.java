@@ -45,6 +45,7 @@ public class Multiplayer extends JFrame implements ActionListener {
 
         build= new Bild();
         build.setBounds(0, 0, 1290, 1100);
+
         add(test);
         add(test1);
         add(label);
@@ -62,7 +63,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == starten) {
             starten1();
-            //this.setVisible(false);
+            this.setVisible(false);
         }
         if ( e.getSource() == test){
             testen();
@@ -73,7 +74,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     }
 
     private void dele(){
-
+        datenbankinsert("DELETE FROM multiplayer");
     }
 
     private void testen(){
@@ -87,8 +88,8 @@ public class Multiplayer extends JFrame implements ActionListener {
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
             + spieleri.getRotation() + ")";
         datenbankinsert(sql);
-        Multiplayergame game = new Multiplayergame(kartetest, con);
         con.setSpieler(spieleri);
+        Multiplayergame game = new Multiplayergame(kartetest, con);
         con.setGame(game);
     }
 
