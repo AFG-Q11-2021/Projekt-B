@@ -21,6 +21,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private int csizeY;
 
     public Multiplayergame(Karte k, Controller c) {
+        con = c;
         frame1 = new JFrame();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
@@ -28,7 +29,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         this.addKeyListener(key);
         setupframe();
         kartetest = k;
-        con = c;
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
 
@@ -60,8 +60,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private void paintPlayers(Spieler sp) {
         Spieler h;
         Connection verbindung = null;
-        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer WHERE name !='" + sp.getUsername()
-            + "'";
+        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
@@ -95,7 +94,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         }
     }
 
-    private void paintPlayer(Spieler susi) {
+    private void paintPlayer(Spieler s) {
         double rotRad = Math.toRadians(s.getRotation());
         int xc = (int) (s.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
@@ -104,7 +103,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
-        String tempi = susi.getUsername();
+        String tempi = s.getUsername();
         char[] tulo = new char[tempi.length()];
         tempi.getChars(0, tempi.length(), tulo, 0);
         g.setColor(Color.GREEN);
