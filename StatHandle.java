@@ -35,5 +35,12 @@ public class StatHandle
         activePlayerObject.damageDealtToPlayer(amount);
     }
     
+    public void creatNewEnemy()
+    {
+        Enemy enemyIns = new GegnerTyp1StatPrefab();
+        
+        activePlayerObject.returnThisSpieler().insertEnemy(enemyIns);
+    }
+    
     //LOGIC FOR ENEMY FINDING
 }
