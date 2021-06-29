@@ -99,7 +99,6 @@ public class CastTest implements Runnable  {
             System.exit(0);
         }
     }
-  
 
     public void updategame(){
         game = con.getGame();
