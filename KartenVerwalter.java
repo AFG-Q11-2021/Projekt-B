@@ -25,7 +25,6 @@ public class KartenVerwalter {
     }
 
     public void karteLaden(Karte karte, String dateiName) {
-        //throws nullpointer
         try {
             FileReader fr = new FileReader(dateiName);
             BufferedReader br = new BufferedReader(fr);

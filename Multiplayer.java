@@ -18,7 +18,6 @@ public class Multiplayer extends JFrame implements ActionListener {
     private Karte kartetest;
     private double spielerspeed;
     private Controller con;
-    private Spieler spieleri;
 
     public Multiplayer(String title, Karte k, double s, Controller c) {
         super(title);
@@ -78,7 +77,7 @@ public class Multiplayer extends JFrame implements ActionListener {
     }
 
     private void testen(){
-        spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
+        //Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("DELETE FROM multiplayer");
     }
 

@@ -1,4 +1,4 @@
- import java.awt.*;
+import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 import java.sql.*;
@@ -245,7 +245,7 @@ public class CastTest implements Runnable  {
 
     private void drawSprites(Graphics g){
         double spriteX, spriteY, inverse, tranX, tranY;
-        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX, x;
+        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX;
          
         for(Sprite s:sprites){
         
@@ -268,13 +268,11 @@ public class CastTest implements Runnable  {
 
             int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
-                int texx = (int) (((ix-startDrawX*1.0)/dWidth*1.0)*spriteResX);
+                int texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
                 
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
                      g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
-
-                
                 }
             }
         }

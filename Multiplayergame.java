@@ -2,7 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 import java.sql.*;
-import java.util.*;
 
 //Author: Julius(primär), Laurens
 @SuppressWarnings("serial")
