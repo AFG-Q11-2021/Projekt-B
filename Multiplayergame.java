@@ -2,11 +2,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 import java.sql.*;
+import java.util.*;
 
 //Author: Julius(primär), Laurens
 @SuppressWarnings("serial")
 public class Multiplayergame extends Canvas implements Game, Returner {
-
+   
     private JFrame frame1;
     private String title = "Game";
     private final int WIDTH = 1000;
@@ -21,6 +22,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private int csizeY;
 
     public Multiplayergame(Karte k, Controller c) {
+
         con = c;
         frame1 = new JFrame();
         Dimension size = new Dimension(WIDTH, HEIGHT);

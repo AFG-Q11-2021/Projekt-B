@@ -1,6 +1,7 @@
  import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
+import java.sql.*;
 
 /*Autor: Laurens Birkenbach, Julius
  * Zuletzt geändert: 15.06.2021
@@ -55,6 +56,49 @@ public class CastTest implements Runnable  {
        
     }
     
+      private void paintPlayers(Spieler sp) {
+        Spieler h;
+        Connection verbindung = null;
+        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
+        verbindung = aufbau(verbindung);
+        try {
+            Statement st = verbindung.createStatement();
+            ResultSet ergebnis = st.executeQuery(sql2);
+            while (ergebnis.next()) {
+                h = new Spieler(ergebnis.getString(1));
+                h.setX(ergebnis.getDouble(2));
+                h.setY(ergebnis.getDouble(3));
+                h.setRotation(ergebnis.getDouble(4));
+               // sprites.add(new Sprite())
+            }
+            ergebnis.close();
+            st.close();
+            abbau(verbindung);
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Auslesen der Datenbank: " + e);
+            System.exit(0);
+        }
+    }
+    
+    private Connection aufbau(Connection ver) {
+        try {
+            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+            return ver;
+        } catch (Exception e) {
+            System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
+            System.exit(0);
+            return null;
+        }
+    }
+
+    private void abbau(Connection ver) {
+        try {
+            ver.close();
+        } catch (SQLException e) {
+            System.err.println("Fehler beim schließen der Verbindung:" + e);
+            System.exit(0);
+        }
+    }
   
 
     public void updategame(){
