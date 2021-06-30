@@ -334,17 +334,18 @@ public class CastTest implements Runnable  {
         BufferedImage floorImage = new BufferedImage(screenWidth / floorRes, screenHeight / (2 * floorRes),BufferedImage.TYPE_INT_RGB);
        // int[] rgbRaster = ((DataBufferInt) floorImage.getRaster().getDataBuffer()).getData();
 
-        BufferedImage floorTexture = texManager.getTexture(3);
+        int SWFL = screenWidth/floorRes;
+        int SHFL = screenHeight/(2*floorRes);
         double posZ = 0.5 * screenHeight;//Camera position
         double rayDirX0 = dirX - planeX;
         double rayDirY0 = dirY - planeY;
         double rayDirX1 = dirX + planeX;
         double rayDirY1 = dirY + planeY;
-        double floorStepXpart = (rayDirX1 - rayDirX0) / (screenWidth / floorRes);
-        double floorStepYpart = (rayDirY1 - rayDirY0) / (screenWidth / floorRes);
+        double floorStepXpart = (rayDirX1 - rayDirX0) / (SWFL);
+        double floorStepYpart = (rayDirY1 - rayDirY0) / (SWFL);
         int y, p, tx, ty;
         double rowDistance, floorStepX, floorStepY, floorX, floorY;
-        for (int iy = screenHeight / (2 * floorRes); iy < screenHeight / (floorRes); iy++) {
+        for (int iy = SHFL; iy < screenHeight / (floorRes); iy++) {
             y = iy * floorRes;
             p = y - screenHeight / 2;
             rowDistance = posZ / p;//Abstand des Bodens zur Camera
@@ -352,7 +353,7 @@ public class CastTest implements Runnable  {
             floorStepY = rowDistance * floorStepYpart;
             floorX = xPos + (rowDistance * rayDirX0);
             floorY = yPos + (rowDistance * rayDirY0);
-            for (int ix = 0; ix < screenWidth / floorRes; ix++) {
+            for (int ix = 0; ix < SWFL; ix++) {
                 tx = (int) (texRes * (floorX % 1)) & (texRes - 1);
                 ty = (int) (texRes * (floorY % 1)) & (texRes - 1);
                 floorX += floorStepX;
@@ -362,8 +363,7 @@ public class CastTest implements Runnable  {
            //     int yTex = iy - screenHeight / (2 * floorRes);
              //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
              int texRGB =   this.floorTexture[tx + ty*texRes];
-                floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                   texRGB);
+                floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
                //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
             }
