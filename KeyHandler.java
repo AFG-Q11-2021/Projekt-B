@@ -122,7 +122,7 @@ public class KeyHandler implements KeyListener
             settings();
         }
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
+            exit = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             rotRight = true;
@@ -147,6 +147,9 @@ public class KeyHandler implements KeyListener
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             right = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            exit = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             rotRight = false;

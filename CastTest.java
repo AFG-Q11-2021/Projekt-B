@@ -8,8 +8,7 @@ import java.sql.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest implements Runnable  {
-    
-    Thread t;
+
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -18,14 +17,13 @@ public class CastTest implements Runnable  {
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
-    
-   
+
     private Spieler testS;
-    
     //Temp:
     Graphics _g;
     Karte _k;
     Spieler _s;
+    Thread t;
 
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
@@ -38,25 +36,25 @@ public class CastTest implements Runnable  {
         spriteResY = 64;
         oldPlaneX = 0.66;
     }
-    
+
     public void run(){
         paintMap(_g,_k,_s);
-        
+
     }
-    
+
     public void start(Graphics g, Karte k, Spieler s){
         _g = g;
         _k = k;
         _s = s;
-        
+
         if(t==null){
             t = new Thread(this, "TestThread01");
-             t.start();
+            t.start();
         }
-       
+
     }
-    
-      private void paintPlayers(Spieler sp) {
+
+    private void paintPlayers(Spieler sp) {
         Spieler h;
         Connection verbindung = null;
         String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
@@ -69,7 +67,7 @@ public class CastTest implements Runnable  {
                 h.setX(ergebnis.getDouble(2));
                 h.setY(ergebnis.getDouble(3));
                 h.setRotation(ergebnis.getDouble(4));
-               // sprites.add(new Sprite())
+                // sprites.add(new Sprite())
             }
             ergebnis.close();
             st.close();
@@ -79,38 +77,18 @@ public class CastTest implements Runnable  {
             System.exit(0);
         }
     }
-    
-    private Connection aufbau(Connection ver) {
-        try {
-            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
-            return ver;
-        } catch (Exception e) {
-            System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
-            System.exit(0);
-            return null;
-        }
-    }
-
-    private void abbau(Connection ver) {
-        try {
-            ver.close();
-        } catch (SQLException e) {
-            System.err.println("Fehler beim schließen der Verbindung:" + e);
-            System.exit(0);
-        }
-    }
 
     public void updategame(){
         game = con.getGame();
         screenWidth = (int) game.gibWidth();
         screenHeight = (int) game.gibHeight();
-        run=true;
+        run = true;
         Sprite test = new Sprite(15,15,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
         sprites.add(test);
         Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
         sprites.add(directional);
-        depthBuffer = new double[screenWidth ];
-        
+        depthBuffer = new double[screenWidth];
+
     }
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
@@ -132,23 +110,23 @@ public class CastTest implements Runnable  {
             // Floor Casting?
             floorCasting(g);
 
-
             // draw Entities (Enemies, Props, Pickups)
-            
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
-            double wallX, perpWallDist, sideDistX, sideDistY;
+            double wallX, perpWallDist, sideDistX, sideDistY, camX, rayDirX, rayDirY, deltaDistX, deltaDistY;
+            mapX = (int) xPos;
+            mapY = (int) yPos;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
-                double camX = (2 * x / game.gibWidth()) - 1;
-                double rayDirX = dirX + planeX * camX;
-                double rayDirY = dirY + planeY * camX;
-                
+                camX = (2 * x / game.gibWidth()) - 1;
+                rayDirX = dirX + planeX * camX;
+                rayDirY = dirY + planeY * camX;
+
                 mapX = (int) xPos;
                 mapY = (int) yPos;
 
-                double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
-                double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
-                
+                deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
+
                 hit = 0;
                 side = 0;
 
@@ -168,7 +146,7 @@ public class CastTest implements Runnable  {
                 }
 
                 // cast
-                while (hit == 0) {
+                do{
                     if (sideDistX < sideDistY) {
                         sideDistX += deltaDistX;
                         mapX += stepX;
@@ -184,7 +162,7 @@ public class CastTest implements Runnable  {
                     if (k.getCoordinate(mapX, mapY) > 0) {
                         hit = 1;
                     }
-                }
+                } while ( hit == 0 );
 
                 if (side == 0)
                     perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
@@ -221,34 +199,33 @@ public class CastTest implements Runnable  {
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 }
                 for(int i = 0; i < stepSize;i++){
-                     depthBuffer[x + i] = perpWallDist;
+                    depthBuffer[x + i] = perpWallDist;
                 }
-               
             }   
             sortSprites();
             drawSprites(g);
         }
     }
-    
+
     private void sortSprites(){
         Collections.sort(sprites, new Comparator<Sprite>() {
-            @Override
-            public int compare(Sprite s1, Sprite s2){
-                double dsts1 = (xPos - s1.x)*(xPos - s1.x) + (yPos - s1.y)*(yPos - s1.y);
-                double dsts2 = (xPos - s2.x)*(xPos - s2.x) + (yPos - s2.y)*(yPos - s2.y);
-                
-                return new Double(dsts2).compareTo(dsts1);
+                @Override
+                public int compare(Sprite s1, Sprite s2){
+                    double dsts1 = (xPos - s1.x)*(xPos - s1.x) + (yPos - s1.y)*(yPos - s1.y);
+                    double dsts2 = (xPos - s2.x)*(xPos - s2.x) + (yPos - s2.y)*(yPos - s2.y);
+
+                    return new Double(dsts2).compareTo(dsts1);
+                }
             }
-        
-        });
+        );
     }
 
     private void drawSprites(Graphics g){
         double spriteX, spriteY, inverse, tranX, tranY;
         int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX;
-         
+
         for(Sprite s:sprites){
-        
+
             spriteX = s.x - xPos;
             spriteY = s.y - yPos;
 
@@ -269,9 +246,9 @@ public class CastTest implements Runnable  {
             int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
                 int texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
-                
+
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
-                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
+                    g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
                 }
             }
@@ -339,12 +316,32 @@ public class CastTest implements Runnable  {
     public void setfloorRes(int r) {
         floorRes = r;
     }
-    
+
     public void setRun(boolean r){
         run = r;
     }
 
     public int getResolution() {
         return stepSize;
+    }
+
+    private Connection aufbau(Connection ver) {
+        try {
+            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+            return ver;
+        } catch (Exception e) {
+            System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
+            System.exit(0);
+            return null;
+        }
+    }
+
+    private void abbau(Connection ver) {
+        try {
+            ver.close();
+        } catch (SQLException e) {
+            System.err.println("Fehler beim schließen der Verbindung:" + e);
+            System.exit(0);
+        }
     }
 }
