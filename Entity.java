@@ -1,6 +1,3 @@
-import java.util.*;
-import java.awt.*;
-
 public class Entity
 {
     private double x,y;
@@ -24,3 +21,4 @@ public class Entity
         return texID;
     }
 }
+

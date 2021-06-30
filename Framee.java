@@ -8,24 +8,25 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class Framee extends JFrame implements ActionListener, Returner {
-    private JButton schliessen, auswahl, settings, ende;
+    private JButton single, multi, settings, ende;
     private Bild build;
     private static Karte kartetest;
     private double spielerspeed, speedr;
     private Controller con;
-    
+
     public Framee(String title, Karte k, Controller c) {
         super(title);
-        
-        schliessen = new JButton("Single Player");
-        schliessen.setBounds(280, 590, 750, 50);
-        schliessen.addActionListener(this);
-        add(schliessen);
+        kartetest = k;
+        con = c;
+        single = new JButton("Single Player");
+        single.setBounds(280, 590, 750, 50);
+        single.addActionListener(this);
+        add(single);
 
-        auswahl = new JButton("Multiplayer");
-        auswahl.setBounds(280, 650, 750, 50);
-        auswahl.addActionListener(this);
-        add(auswahl);
+        multi = new JButton("Multiplayer");
+        multi.setBounds(280, 650, 750, 50);
+        multi.addActionListener(this);
+        add(multi);
 
         settings = new JButton("Settings");
         settings.setBounds(280, 710, 750, 50);
@@ -41,21 +42,18 @@ public class Framee extends JFrame implements ActionListener, Returner {
         build.setBounds(0, 0, 1290, 1100);
         add(build);
 
-        kartetest = k;
         spielerspeed = 0.1;
         speedr = 4;
-        con = c;
-
     }
 
     public void actionPerformed(ActionEvent e) {
         {
-            if (e.getSource() == schliessen) {
+            if (e.getSource() == single) {
                 this.setVisible(false);
-                fenster();
-            } else if (e.getSource() == auswahl) {
+                singel();
+            } else if (e.getSource() == multi) {
                 this.setVisible(false);
-                auswahl();
+                mluti();
             } else if (e.getSource() == ende) {
                 System.exit(0);
             } else if (e.getSource() == settings) {
@@ -65,7 +63,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
         }
     }
 
-    private void fenster() {
+    private void singel() {
         Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest);
         con.setStatHandle(new StatHandle(sppileri, 100));
         con.setSpieler(sppileri);
@@ -74,7 +72,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
         con.setGame(gamee);
     }
 
-    private void auswahl() {
+    private void mluti() {
         @SuppressWarnings("unused")
         Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed, con);
     }
@@ -94,11 +92,11 @@ public class Framee extends JFrame implements ActionListener, Returner {
     public void setSpeed(double spielers) {
         this.spielerspeed = spielers;
     }
-    
+
     public JFrame getFrame(){
         return this;
     }
-    
+
     public void setSpeedr(double speedrr) {
         this.speedr = speedrr;
     }

@@ -10,11 +10,11 @@ import java.sql.*;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Multiplayer extends JFrame implements ActionListener {
+public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     private Bild build;
     private JLabel label;
     private static JTextField name;
-    private JButton starten, test, test1;
+    private JButton starten, test1;
     private Karte kartetest;
     private double spielerspeed;
     private Controller con;
@@ -24,13 +24,14 @@ public class Multiplayer extends JFrame implements ActionListener {
         setTitle("Multiplayer");
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        kartetest = k;
+        spielerspeed = s;
+        con = c;
 
         starten = new JButton("Spiel starten");
         starten.setBounds(450, 600, 350, 40);
-        test = new JButton("test");
-        test.setBounds(200, 300, 100, 50);
         test1 = new JButton("delete");
-        test1.setBounds(400, 300, 300, 50);
+        test1.setBounds(400, 300, 100, 50);
         name = new JTextField("", 20);
         name.setBounds(400, 530, 450, 40);
 
@@ -45,7 +46,6 @@ public class Multiplayer extends JFrame implements ActionListener {
         build= new Bild();
         build.setBounds(0, 0, 1290, 1100);
 
-        add(test);
         add(test1);
         add(label);
         add(name);
@@ -53,10 +53,19 @@ public class Multiplayer extends JFrame implements ActionListener {
         add(build);
 
         setVisible(true);
-        kartetest = k;
-        spielerspeed = s;
-        con = c;
-
+    }
+    
+    public void keyReleased(KeyEvent e){
+    }
+    
+    public void keyPressed(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            starten1();
+            this.setVisible(false);
+        }
+    }
+    
+    public void keyTyped(KeyEvent e){
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -64,20 +73,12 @@ public class Multiplayer extends JFrame implements ActionListener {
             starten1();
             this.setVisible(false);
         }
-        if ( e.getSource() == test){
-            testen();
-        }
         if (e.getSource() == test1){
             dele();
         }
     }
 
     private void dele(){
-        datenbankinsert("DELETE FROM multiplayer");
-    }
-
-    private void testen(){
-        //Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
         datenbankinsert("DELETE FROM multiplayer");
     }
 
