@@ -2,7 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 import java.sql.*;
-import java.util.*;
 
 //Author: Julius(primär), Laurens
 @SuppressWarnings("serial")
@@ -22,15 +21,14 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private int csizeY;
 
     public Multiplayergame(Karte k, Controller c) {
-
+        kartetest = k;
         con = c;
         frame1 = new JFrame();
         Dimension size = new Dimension(WIDTH, HEIGHT);
-        this.setPreferredSize(size);
         key = new KeyHandler(con, this);
+        this.setPreferredSize(size);
         this.addKeyListener(key);
         setupframe();
-        kartetest = k;
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
 

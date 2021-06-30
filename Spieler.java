@@ -1,4 +1,4 @@
-// Autoren: Martin ; Lasse; Laurens; Julius//
+// Autoren: Martin ; Lasse; Laurens; Julius; Samuel//
 
 public class Spieler {
     private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit

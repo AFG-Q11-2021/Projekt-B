@@ -16,7 +16,7 @@ public class KartenVerwalter {
         return activeMap;
     }
 
-    public Karte getMapFromStorage(int buildIndex) {
+    private Karte getMapFromStorage(int buildIndex) {
         Karte gesucht = new Karte();
         String g = "maps/Map" + buildIndex + ".txt";
         // soll eine karte aus den Speicher Auslesen
@@ -25,7 +25,6 @@ public class KartenVerwalter {
     }
 
     public void karteLaden(Karte karte, String dateiName) {
-        //throws nullpointer
         try {
             FileReader fr = new FileReader(dateiName);
             BufferedReader br = new BufferedReader(fr);
@@ -41,7 +40,6 @@ public class KartenVerwalter {
             br.close();
             fr.close();
         } catch (Exception e) {
-            
             e.printStackTrace();
             //System.out.println("Exception " + e + " has occured(Kartenverwalter)");
         }

@@ -17,7 +17,8 @@ public class Controller {
         running = true;
         setTextureManager(new TextureManager());
         katver = new KartenVerwalter();
-        kartetest = katver.getMapFromStorage(0);
+        katver.setActiveMap(0);
+        kartetest = katver.getMap();
         cast = new CastTest(this);
 
         // Startmenü öffnen
