@@ -49,10 +49,12 @@ public class CastTest implements Runnable  {
         _k = k;
         _s = s;
         
-        if(t==null){
+       // if(t==null){
             t = new Thread(this, "TestThread01");
              t.start();
-        }
+            
+      //  }
+        
        
     }
     
@@ -116,6 +118,7 @@ public class CastTest implements Runnable  {
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
         if(run){
+            System.out.println("Painted");
             xPos = s.getX();
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());

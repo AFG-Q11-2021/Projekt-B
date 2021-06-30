@@ -34,6 +34,7 @@ public class Controller {
             if (currentTime - lastupdate > 1000000000 / FPS) {
                 // Update();
                 Render();
+                System.out.println("FPS: " + 1000000000.0/(currentTime - lastupdate));
                 lastupdate = currentTime;
             }
         }
