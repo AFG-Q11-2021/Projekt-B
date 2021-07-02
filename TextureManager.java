@@ -26,7 +26,7 @@ public class TextureManager {
         loadTexture(3, "textures/woodPlankWall.png");
         createDarkTexture(3);
 
-        loadTexture(4, "textures/brickWallPainting Hr.Wolf.png");
+        loadTexture(4, "textures/brickWallred.png");
         createDarkTexture(4);
 
         loadTexture(5, "textures/brickWall.png");
@@ -49,6 +49,9 @@ public class TextureManager {
 
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         createDarkTexture(11);
+        
+        loadTexture(12, "textures/brickWallPainting Hr.Wolf.png");
+        createDarkTexture(12);
         
         
         //Sprite Textures
