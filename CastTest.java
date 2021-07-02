@@ -9,9 +9,7 @@ import java.sql.*;
  */
 public class CastTest implements Runnable  {
 
-
     Thread t;
-
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -23,18 +21,13 @@ public class CastTest implements Runnable  {
 
     private int[] floorTexture;
 
-   
-
     private Spieler testS;
-
     //Temp:
     Graphics _g;
     Karte _k;
     Spieler _s;
 
-
     public CastTest(Controller c) {
-
         sprites = new ArrayList<Sprite>();
         con = c;
         texManager = con.getTextureManager();
@@ -57,21 +50,19 @@ public class CastTest implements Runnable  {
         _k = k;
         _s = s;
 
-
         // if(t==null){
         t = new Thread(this, "TestThread01");
         t.start();
         try
         {
             t.join();
-      }
+        }
 
         catch (InterruptedException ie)
         {
             ie.printStackTrace();
         }
         //  }
-
 
     }
 
@@ -99,7 +90,6 @@ public class CastTest implements Runnable  {
         }
     }
 
-
     private Connection aufbau(Connection ver) {
         try {
             ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
@@ -120,20 +110,18 @@ public class CastTest implements Runnable  {
         }
     }
 
-
     public void updategame(){
-        game = con.getGame();
-        screenWidth = (int) game.gibWidth();
-        screenHeight = (int) game.gibHeight();
-        run = true;
-        Sprite test = new Sprite(15,15,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
-        sprites.add(test);
-        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
-        sprites.add(directional);
+            game = con.getGame();
+            screenWidth = (int) game.gibWidth();
+            screenHeight = (int) game.gibHeight();
+            run = true;
+            Sprite test = new Sprite(15,15,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
+            sprites.add(test);
+            Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+            sprites.add(directional);
 
-        depthBuffer = new double[screenWidth ];
-        loadFloorTexture();
-
+            depthBuffer = new double[screenWidth ];
+            loadFloorTexture();
 
     }
 
@@ -165,18 +153,15 @@ public class CastTest implements Runnable  {
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
 
-                 camX = (2 * x / game.gibWidth()) - 1;
-                 rayDirX = dirX + planeX * camX;
-                 rayDirY = dirY + planeY * camX;
-
+                camX = (2 * x / game.gibWidth()) - 1;
+                rayDirX = dirX + planeX * camX;
+                rayDirY = dirY + planeY * camX;
 
                 mapX = (int) xPos;
                 mapY = (int) yPos;
 
-
-                 deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
-                 deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
-
+                deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
 
                 hit = 0;
                 side = 0;
@@ -269,9 +254,7 @@ public class CastTest implements Runnable  {
                     return new Double(dsts2).compareTo(dsts1);
                 }
 
-
             });
-
     }
 
     private void drawSprites(Graphics g){
@@ -332,7 +315,7 @@ public class CastTest implements Runnable  {
 
     private void floorCasting(Graphics g){
         BufferedImage floorImage = new BufferedImage(screenWidth / floorRes, screenHeight / (2 * floorRes),BufferedImage.TYPE_INT_RGB);
-       // int[] rgbRaster = ((DataBufferInt) floorImage.getRaster().getDataBuffer()).getData();
+        // int[] rgbRaster = ((DataBufferInt) floorImage.getRaster().getDataBuffer()).getData();
 
         BufferedImage floorTexture = texManager.getTexture(3);
         double posZ = 0.5 * screenHeight;//Camera position
@@ -357,14 +340,14 @@ public class CastTest implements Runnable  {
                 ty = (int) (texRes * (floorY % 1)) & (texRes - 1);
                 floorX += floorStepX;
                 floorY += floorStepY;
-                
-            //    int xTex = (screenWidth / floorRes) - ix - 1;
-           //     int yTex = iy - screenHeight / (2 * floorRes);
-             //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
-             int texRGB =   this.floorTexture[tx + ty*texRes];
+
+                //    int xTex = (screenWidth / floorRes) - ix - 1;
+                //     int yTex = iy - screenHeight / (2 * floorRes);
+                //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
+                int texRGB =   this.floorTexture[tx + ty*texRes];
                 floorImage.setRGB((screenWidth / floorRes) - ix - 1, iy - screenHeight / (2 * floorRes),
-                   texRGB);
-               //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
+                    texRGB);
+                //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
             }
         }
@@ -378,7 +361,7 @@ public class CastTest implements Runnable  {
                 floorTexture[x + (y*texRes)] = texManager.getTexture(3).getRGB(x,y);
             }
         }
-    
+
     }
 
     public void setwallRes(int r) {
@@ -397,5 +380,4 @@ public class CastTest implements Runnable  {
         return stepSize;
     }
 
- 
 }
