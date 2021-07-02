@@ -7,10 +7,7 @@ import java.sql.*;
  * Zuletzt geändert: 30.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
-
 public class CastTest {
-
-
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -23,8 +20,6 @@ public class CastTest {
     private int[] floorTexture;
 
     private Spieler testS;
-
-
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
         con = c;
@@ -37,7 +32,6 @@ public class CastTest {
         oldPlaneX = 0.66;
         floorTexture = new int[texRes*texRes];
     }
-
 
     private void paintPlayers(Spieler sp) {
         Spieler h;
@@ -274,10 +268,7 @@ public class CastTest {
             while(texX >= 1000){
                 texX -= 1000;
             }
-
             g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, screenHeight, texX, 100,
-
-  
                 texX + 1, 250, null);
         }
         //g.setColor(new Color(90, 90, 90));
@@ -349,5 +340,4 @@ public class CastTest {
     public int getResolution() {
         return stepSize;
     }
-
 }
