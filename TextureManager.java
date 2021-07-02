@@ -49,13 +49,14 @@ public class TextureManager {
 
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         createDarkTexture(11);
-        
+
         loadTexture(12, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(12);
-        
-        
+
+        loadTexture(13, "textures/brickWallWithGun.png");
+        createDarkTexture(13);
+
         //Sprite Textures
-        
         loadSpriteTexture(0, "textures/explosiveBarrel.png");
         loadSpriteTexture(1, "textures/testHuman01.png");
         loadSpriteTexture(2, "textures/testHuman02.png");
@@ -65,7 +66,7 @@ public class TextureManager {
         loadSpriteTexture(6, "textures/testHuman06.png");
         loadSpriteTexture(7, "textures/testHuman07.png");
         loadSpriteTexture(8, "textures/testHuman08.png");
-        
+
         loadSpriteTexture(9 , "textures/barrel01.png");
         loadSpriteTexture(10, "textures/barrel02.png");
         loadSpriteTexture(11, "textures/barrel03.png");
@@ -74,9 +75,7 @@ public class TextureManager {
         loadSpriteTexture(14, "textures/barrel06.png");
         loadSpriteTexture(15, "textures/barrel07.png");
         loadSpriteTexture(16, "textures/barrel08.png");
-        
-        
-        
+
         
 
     }
@@ -88,8 +87,8 @@ public class TextureManager {
     public BufferedImage getSkyTexture(int texID) {
         return skyTextures[texID];
     }
-    
-     public BufferedImage getSpriteTexture(int texID) {
+
+    public BufferedImage getSpriteTexture(int texID) {
         return spriteTextures[texID];
     }
 
@@ -104,8 +103,8 @@ public class TextureManager {
             ioe.printStackTrace();
         }
     }
-    
-      private void loadSpriteTexture(int index, String path) {
+
+    private void loadSpriteTexture(int index, String path) {
         try {
             spriteTextures[index] = ImageIO.read(new File(path));
         } catch (java.io.IOException ioe) {

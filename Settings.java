@@ -72,7 +72,9 @@ public class Settings extends JFrame implements ActionListener {
             int r = Integer.valueOf(textresolution.getText());
             con.getCast().setwallRes(r);
             con.getCast().setfloorRes(r);
-            con.getCast().updategame();
+            if(con.getGame()!=null){
+                con.getCast().updategame();
+            }
         }
     }
 }

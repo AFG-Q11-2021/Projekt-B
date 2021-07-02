@@ -52,7 +52,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
         // Spieler malen
         paintPlayers(s);
-
+        paintfps();
         g.dispose();
         bs.show();
     }
@@ -92,6 +92,14 @@ public class Multiplayergame extends Canvas implements Game, Returner {
                 }
             }
         }
+    }
+    
+    private void paintfps(){
+        String tempi = Double.toString(Math.floor(con.getFPS()));
+        char[] tulo = new char[tempi.length()];
+        tempi.getChars(0, tempi.length(), tulo, 0);
+        g.setColor(Color.GREEN);
+        g.drawChars(tulo, 0, tempi.length(), 900, 100);
     }
 
     private void paintPlayer(Spieler s) {
