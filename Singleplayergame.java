@@ -15,7 +15,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX, csizeY;
+    private int csizeX, csizeY, width, height;
     private Controller con;
     //private boolean shoot = false;
 
@@ -32,7 +32,9 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
         this.setPreferredSize(frame1.getPreferredSize());
-        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
+        width = (int) frame1.getPreferredSize().getWidth();
+        height = (int) frame1.getPreferredSize().getHeight();
+        csizeX = width / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -92,12 +94,12 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.drawLine(xc, yc, xc + xl, yc + yl);
     }
 
-    public double gibWidth() {
-        return frame1.getPreferredSize().getWidth();
+    public int gibWidth() {
+        return width;
     }
 
-    public double gibHeight() {
-        return frame1.getPreferredSize().getHeight();
+    public int gibHeight() {
+        return height;
     }
 
     public Graphics getGraphics() {
