@@ -357,7 +357,7 @@ public class CastTest implements Runnable  {
     private void loadFloorTexture(){
         for(int x = 0; x < texRes;x++){
             for(int y = 0; y < texRes; y++){
-                floorTexture[x + (y*texRes)] = texManager.getTexture(3).getRGB(x,y);
+                floorTexture[x + (y*texRes)] = texManager.getTexture(10).getRGB(x,y);
             }
         }
 
