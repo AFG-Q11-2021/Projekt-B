@@ -142,14 +142,13 @@ public class CastTest implements Runnable  {
             // drawSky
             drawSky(g);
 
-            // Floor Casting?
+            // Floor Casting
             floorCasting(g);
 
             // draw Entities (Enemies, Props, Pickups)
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
             double wallX, perpWallDist, sideDistX, sideDistY, camX, rayDirX, rayDirY, deltaDistX, deltaDistY;
-            mapX = (int) xPos;
-            mapY = (int) yPos;
+
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
 
@@ -305,11 +304,11 @@ public class CastTest implements Runnable  {
             while(texX >= 1000){
                 texX -= 1000;
             }
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, screenHeight, texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, game.gibHeight(), texX, 100,
                 texX + 1, 250, null);
         }
         g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, (screenHeight) / 2, screenWidth, (screenHeight) / 2);
+        g.fillRect(0, (game.gibHeight()) / 2, game.gibWidth(), (game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
