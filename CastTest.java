@@ -8,7 +8,6 @@ import java.sql.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest   {
-
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -270,7 +269,7 @@ public class CastTest   {
             while(texX >= 1000){
                 texX -= 1000;
             }
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x +stepSize,  screenHeight, texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, screenHeight, texX, 100,
                 texX + 1, 250, null);
         }
         //g.setColor(new Color(90, 90, 90));
