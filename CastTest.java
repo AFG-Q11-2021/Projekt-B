@@ -8,6 +8,7 @@ import java.sql.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest   {
+
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -20,8 +21,6 @@ public class CastTest   {
     private int[] floorTexture;
 
     private Spieler testS;
- 
-
 
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
