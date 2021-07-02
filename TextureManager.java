@@ -50,12 +50,15 @@ public class TextureManager {
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         createDarkTexture(11);
 
+
         loadTexture(12, "textures/brickWallPainting Hr.Wolf.png");
         createDarkTexture(12);
 
         loadTexture(13, "textures/brickWallWithGun.png");
         createDarkTexture(13);
 
+
+    
         //Sprite Textures
         loadSpriteTexture(0, "textures/explosiveBarrel.png");
         loadSpriteTexture(1, "textures/testHuman01.png");
