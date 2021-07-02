@@ -127,7 +127,6 @@ public class CastTest implements Runnable  {
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
         if(run){
-            //   System.out.println("Painted");
             xPos = s.getX();
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());
@@ -142,25 +141,23 @@ public class CastTest implements Runnable  {
             // drawSky
             drawSky(g);
 
-            // Floor Casting
+            // Floor Casting?
             floorCasting(g);
 
             // draw Entities (Enemies, Props, Pickups)
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
-            double wallX, perpWallDist, sideDistX, sideDistY, camX, rayDirX, rayDirY, deltaDistX, deltaDistY;
-
+            double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
-
-                camX = (2 * x / screenWidth) - 1;
-                rayDirX = dirX + planeX * camX;
-                rayDirY = dirY + planeY * camX;
+                double camX = (2 * x / game.gibWidth()) - 1;
+                double rayDirX = dirX + planeX * camX;
+                double rayDirY = dirY + planeY * camX;
 
                 mapX = (int) xPos;
                 mapY = (int) yPos;
 
-                deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
-                deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
+                double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
 
                 hit = 0;
                 side = 0;
@@ -258,13 +255,14 @@ public class CastTest implements Runnable  {
 
     private void drawSprites(Graphics g){
         double spriteX, spriteY, inverse, tranX, tranY;
-        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, draWidthh, startDrawX, endDrawX, dWidth, texx;
-
-        inverse = 1 / (planeX*dirY - dirX*planeY);
+        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX;
 
         for(Sprite s:sprites){
+
             spriteX = s.x - xPos;
             spriteY = s.y - yPos;
+
+            inverse = 1 / (planeX*dirY - dirX*planeY);
 
             tranX = inverse * (dirY*spriteX - dirX *spriteY);
             tranY = inverse * (-planeY*spriteX + planeX*spriteY);
@@ -275,13 +273,12 @@ public class CastTest implements Runnable  {
             startDrawY = (screenHeight -drawHeight)/2;
             endDrawY = (drawHeight + screenHeight)/2;
             drawWidth = Math.abs((int)(screenWidth/tranY));
-            draWidthh = drawWidth / 2;
-            startDrawX = -draWidthh + spritePixelX;
-            endDrawX = draWidthh + spritePixelX;
+            startDrawX = -drawWidth/2 + spritePixelX;
+            endDrawX = drawWidth/2 + spritePixelX;
 
-            dWidth = endDrawX - startDrawX;
+            int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
-                texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
+                int texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
@@ -293,9 +290,9 @@ public class CastTest implements Runnable  {
     private void  drawSky(Graphics g){
         int x, texX;
         double camX, rayAngle;
-        for (int dx = 0; dx < screenWidth / stepSize; dx++) {
+        for (int dx = 0; dx < game.gibWidth() / stepSize; dx++) {
             x = dx * stepSize;
-            camX = (2 * x / screenWidth) - 1;
+            camX = (2 * x / game.gibWidth()) - 1;
             rayAngle = (rot + (camX * 0.583));
             texX = (int) ((rayAngle / 6.283) * 1000);
             while(texX < 0){
@@ -304,11 +301,11 @@ public class CastTest implements Runnable  {
             while(texX >= 1000){
                 texX -= 1000;
             }
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, game.gibHeight(), texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, (int) game.gibHeight(), texX, 100,
                 texX + 1, 250, null);
         }
         g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, (game.gibHeight()) / 2, game.gibWidth(), (game.gibHeight()) / 2);
+        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
@@ -339,14 +336,13 @@ public class CastTest implements Runnable  {
                 ty = (int) (texRes * (floorY % 1)) & (texRes - 1);
                 floorX += floorStepX;
                 floorY += floorStepY;
-  
-            //    int xTex = (screenWidth / floorRes) - ix - 1;
-           //     int yTex = iy - screenHeight / (2 * floorRes);
-             //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
-             int texRGB =   this.floorTexture[tx + ty*texRes];
-                floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
-               //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
+                //    int xTex = (screenWidth / floorRes) - ix - 1;
+                //     int yTex = iy - screenHeight / (2 * floorRes);
+                //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
+                int texRGB =   this.floorTexture[tx + ty*texRes];
+                floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
+                //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
             }
         }
@@ -360,7 +356,6 @@ public class CastTest implements Runnable  {
                 floorTexture[x + (y*texRes)] = texManager.getTexture(10).getRGB(x,y);
             }
         }
-
     }
 
     public void setwallRes(int r) {

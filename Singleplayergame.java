@@ -47,8 +47,8 @@ public class Singleplayergame extends Canvas implements Game, Returner {
 
     public void render() {
         g = bs.getDrawGraphics();
-        g.setColor(new Color(37, 150, 190));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        //g.setColor(new Color(37, 150, 190));
+        //g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
         
         // 3D Bild
