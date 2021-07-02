@@ -17,8 +17,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX;
-    private int csizeY;
+    private int csizeX, csizeY;
 
     public Multiplayergame(Karte k, Controller c) {
         kartetest = k;
@@ -152,12 +151,12 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         }
     }
 
-    public double gibWidth() {
-        return frame1.getPreferredSize().getWidth();
+    public int gibWidth() {
+        return WIDTH;
     }
 
-    public double gibHeight() {
-        return frame1.getPreferredSize().getHeight();
+    public int gibHeight() {
+        return HEIGHT;
     }
 
     public Graphics getGraphics() {
