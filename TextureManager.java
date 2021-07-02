@@ -64,6 +64,7 @@ public class TextureManager {
 
         //Sprite Textures
         loadSpriteTexture(0, "textures/explosiveBarrel.png");
+        
         loadSpriteTexture(1, "textures/testHuman01.png");
         loadSpriteTexture(2, "textures/testHuman02.png");
         loadSpriteTexture(3, "textures/testHuman03.png");

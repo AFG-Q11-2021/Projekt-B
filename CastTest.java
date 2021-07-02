@@ -7,9 +7,8 @@ import java.sql.*;
  * Zuletzt geändert: 30.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
-public class CastTest implements Runnable  {
+public class CastTest   {
 
-    Thread t;
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -22,17 +21,14 @@ public class CastTest implements Runnable  {
     private int[] floorTexture;
 
     private Spieler testS;
-    //Temp:
-    Graphics _g;
-    Karte _k;
-    Spieler _s;
+ 
 
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
         con = c;
         texManager = con.getTextureManager();
-        stepSize = 5;
-        floorRes = 5;
+        stepSize = 4;
+        floorRes = 4;
         texRes = 32;
         spriteResX = 64;
         spriteResY = 64;
@@ -40,31 +36,6 @@ public class CastTest implements Runnable  {
         floorTexture = new int[texRes*texRes];
     }
 
-    public void run(){
-        paintMap(_g,_k,_s);
-
-    }
-
-    public void start(Graphics g, Karte k, Spieler s){
-        _g = g;
-        _k = k;
-        _s = s;
-
-        // if(t==null){
-        t = new Thread(this, "TestThread01");
-        t.start();
-        try
-        {
-            t.join();
-        }
-
-        catch (InterruptedException ie)
-        {
-            ie.printStackTrace();
-        }
-        //  }
-
-    }
 
     private void paintPlayers(Spieler sp) {
         Spieler h;
@@ -127,13 +98,12 @@ public class CastTest implements Runnable  {
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
         if(run){
-            //   System.out.println("Painted");
             xPos = s.getX();
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());
 
             dirY = 1;
-            dirX = 0 - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
+            dirX =  - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
             dirY = dirY * Math.cos(rot);
 
             planeX = oldPlaneX * Math.cos(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
@@ -142,25 +112,23 @@ public class CastTest implements Runnable  {
             // drawSky
             drawSky(g);
 
-            // Floor Casting
+            // Floor Casting?
             floorCasting(g);
 
             // draw Entities (Enemies, Props, Pickups)
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
-            double wallX, perpWallDist, sideDistX, sideDistY, camX, rayDirX, rayDirY, deltaDistX, deltaDistY;
-
+            double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
-
-                camX = (2 * x / screenWidth) - 1;
-                rayDirX = dirX + planeX * camX;
-                rayDirY = dirY + planeY * camX;
+                double camX = (2.0 * x / screenWidth) - 1;
+                double rayDirX = dirX + planeX * camX;
+                double rayDirY = dirY + planeY * camX;
 
                 mapX = (int) xPos;
                 mapY = (int) yPos;
 
-                deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
-                deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
+                double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
 
                 hit = 0;
                 side = 0;
@@ -181,7 +149,7 @@ public class CastTest implements Runnable  {
                 }
 
                 // cast
-                do{
+                while ( hit == 0 ){
                     if (sideDistX < sideDistY) {
                         sideDistX += deltaDistX;
                         mapX += stepX;
@@ -197,7 +165,7 @@ public class CastTest implements Runnable  {
                     if (k.getCoordinate(mapX, mapY) > 0) {
                         hit = 1;
                     }
-                } while ( hit == 0 );
+                } 
 
                 if (side == 0)
                     perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
@@ -227,10 +195,10 @@ public class CastTest implements Runnable  {
                 texX = texRes - texX - 1;
                 xdraw = screenWidth - x;
                 if (side == 1) {
-                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize ,
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 } else {
-                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw +stepSize,
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 }
                 for(int i = 0; i < stepSize;i++){
@@ -258,13 +226,14 @@ public class CastTest implements Runnable  {
 
     private void drawSprites(Graphics g){
         double spriteX, spriteY, inverse, tranX, tranY;
-        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, draWidthh, startDrawX, endDrawX, dWidth, texx;
-
-        inverse = 1 / (planeX*dirY - dirX*planeY);
+        int spritePixelX, drawHeight, startDrawY, endDrawY, drawWidth, startDrawX, endDrawX;
 
         for(Sprite s:sprites){
+
             spriteX = s.x - xPos;
             spriteY = s.y - yPos;
+
+            inverse = 1 / (planeX*dirY - dirX*planeY);
 
             tranX = inverse * (dirY*spriteX - dirX *spriteY);
             tranY = inverse * (-planeY*spriteX + planeX*spriteY);
@@ -275,13 +244,12 @@ public class CastTest implements Runnable  {
             startDrawY = (screenHeight -drawHeight)/2;
             endDrawY = (drawHeight + screenHeight)/2;
             drawWidth = Math.abs((int)(screenWidth/tranY));
-            draWidthh = drawWidth / 2;
-            startDrawX = -draWidthh + spritePixelX;
-            endDrawX = draWidthh + spritePixelX;
+            startDrawX = -drawWidth/2 + spritePixelX;
+            endDrawX = drawWidth/2 + spritePixelX;
 
-            dWidth = endDrawX - startDrawX;
+            int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
-                texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
+                int texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
@@ -295,7 +263,7 @@ public class CastTest implements Runnable  {
         double camX, rayAngle;
         for (int dx = 0; dx < screenWidth / stepSize; dx++) {
             x = dx * stepSize;
-            camX = (2 * x / screenWidth) - 1;
+            camX = (2.0 * x / screenWidth) - 1;
             rayAngle = (rot + (camX * 0.583));
             texX = (int) ((rayAngle / 6.283) * 1000);
             while(texX < 0){
@@ -304,11 +272,11 @@ public class CastTest implements Runnable  {
             while(texX >= 1000){
                 texX -= 1000;
             }
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, game.gibHeight(), texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x +stepSize,  screenHeight, texX, 100,
                 texX + 1, 250, null);
         }
         g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, (game.gibHeight()) / 2, game.gibWidth(), (game.gibHeight()) / 2);
+        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
@@ -339,14 +307,13 @@ public class CastTest implements Runnable  {
                 ty = (int) (texRes * (floorY % 1)) & (texRes - 1);
                 floorX += floorStepX;
                 floorY += floorStepY;
-  
-            //    int xTex = (screenWidth / floorRes) - ix - 1;
-           //     int yTex = iy - screenHeight / (2 * floorRes);
-             //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
-             int texRGB =   this.floorTexture[tx + ty*texRes];
-                floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
-               //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
+                //    int xTex = (screenWidth / floorRes) - ix - 1;
+                //     int yTex = iy - screenHeight / (2 * floorRes);
+                //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
+                int texRGB =   this.floorTexture[tx + ty*texRes];
+                floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
+                //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
             }
         }
@@ -360,7 +327,6 @@ public class CastTest implements Runnable  {
                 floorTexture[x + (y*texRes)] = texManager.getTexture(10).getRGB(x,y);
             }
         }
-
     }
 
     public void setwallRes(int r) {
