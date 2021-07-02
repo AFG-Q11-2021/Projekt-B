@@ -8,6 +8,7 @@ import java.sql.*;
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
 public class CastTest  {
+
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -25,8 +26,8 @@ public class CastTest  {
         sprites = new ArrayList<Sprite>();
         con = c;
         texManager = con.getTextureManager();
-        stepSize = 5;
-        floorRes = 5;
+        stepSize = 4;
+        floorRes = 4;
         texRes = 32;
         spriteResX = 64;
         spriteResY = 64;
@@ -100,7 +101,7 @@ public class CastTest  {
             rot = Math.toRadians(-s.getRotation());
 
             dirY = 1;
-            dirX = 0 - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
+            dirX =  - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
             dirY = dirY * Math.cos(rot);
 
             planeX = oldPlaneX * Math.cos(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
@@ -117,7 +118,7 @@ public class CastTest  {
             double wallX, perpWallDist, sideDistX, sideDistY;
             for (int fx = 0; fx < screenWidth / stepSize; fx++) {
                 x = fx * stepSize;
-                double camX = (2 * x / game.gibWidth()) - 1;
+                double camX = (2.0 * x / screenWidth) - 1;
                 double rayDirX = dirX + planeX * camX;
                 double rayDirY = dirY + planeY * camX;
 
@@ -146,7 +147,7 @@ public class CastTest  {
                 }
 
                 // cast
-                do{
+                while ( hit == 0 ){
                     if (sideDistX < sideDistY) {
                         sideDistX += deltaDistX;
                         mapX += stepX;
@@ -162,7 +163,7 @@ public class CastTest  {
                     if (k.getCoordinate(mapX, mapY) > 0) {
                         hit = 1;
                     }
-                } while ( hit == 0 );
+                } 
 
                 if (side == 0)
                     perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
@@ -192,10 +193,10 @@ public class CastTest  {
                 texX = texRes - texX - 1;
                 xdraw = screenWidth - x;
                 if (side == 1) {
-                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize ,
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 } else {
-                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
+                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw +stepSize,
                         topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 }
                 for(int i = 0; i < stepSize;i++){
@@ -260,7 +261,7 @@ public class CastTest  {
         double camX, rayAngle;
         for (int dx = 0; dx < screenWidth / stepSize; dx++) {
             x = dx * stepSize;
-            camX = (2 * x / game.gibWidth()) - 1;
+            camX = (2.0 * x / screenWidth) - 1;
             rayAngle = (rot + (camX * 0.583));
             texX = (int) ((rayAngle / 6.283) * 1000);
             while(texX < 0){

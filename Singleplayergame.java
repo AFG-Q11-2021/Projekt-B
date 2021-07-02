@@ -36,9 +36,11 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         height = (int) frame1.getPreferredSize().getHeight();
         csizeX = width / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
-        this.createBufferStrategy(3);
+        this.createBufferStrategy(2);
         bs = this.getBufferStrategy();
         this.addKeyListener(key);
+        
+       // con.getCast().updategame();
     }
 
     public void update() {
