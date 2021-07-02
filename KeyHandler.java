@@ -22,7 +22,7 @@ public class KeyHandler implements KeyListener
         s = con.getSpieler();
         speedm = s.getSpeed();
     }
-    
+
     public void movesPlayer() {
         if (fwd == true) {
             s.geradeGehen();
@@ -46,43 +46,19 @@ public class KeyHandler implements KeyListener
             System.exit(0);
         }
     }
-    
+
     public void movemPlayer(Multiplayergame m){
         if (fwd == true) {
             s.geradeGehen();
-            double x9 = s.getX();
-            double y9 = s.getY();
-            double r9 = s.getRotation();
-            String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                + " WHERE name = '" + s.getUsername() + "'";
-            m.datenbankupdaten(sql);
         }
         if (back == true) {
             s.rueckwaertsGehen();
-            double x9 = s.getX();
-            double y9 = s.getY();
-            double r9 = s.getRotation();
-            String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                + " WHERE name = '" + s.getUsername() + "'";
-            m.datenbankupdaten(sql);
         }
         if (left == true) {
             s.linksGehen();
-            double x9 = s.getX();
-            double y9 = s.getY();
-            double r9 = s.getRotation();
-            String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                + " WHERE name = '" + s.getUsername() + "'";
-            m.datenbankupdaten(sql);
         }
         if (right == true) {
             s.rechtsGehen();
-            double x9 = s.getX();
-            double y9 = s.getY();
-            double r9 = s.getRotation();
-            String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                + " WHERE name = '" + s.getUsername() + "'";
-            m.datenbankupdaten(sql);
         }
         if (rotRight == true) {
             s.rechtsdrehen();
@@ -90,12 +66,19 @@ public class KeyHandler implements KeyListener
         if (rotLeft == true) {
             s.linksdrehen();
         }
+        double x9 = s.getX();
+        double y9 = s.getY();
+        double r9 = s.getRotation();
+        String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
+            + " WHERE name = '" + s.getUsername() + "'";
+        m.datenbankupdaten(sql);
+
         if (exit == true){
-            m.datenbankupdaten("DELETE * FROM multiplayer WHERE name = '"+s.getUsername()+"'");
+            m.datenbankupdaten("DELETE FROM multiplayer WHERE name = '"+s.getUsername()+"'");
             System.exit(0);
         }
     }
-    
+
     private void settings() {
         game.getFrame().setVisible(false);
         con.getCast().setRun(false);
