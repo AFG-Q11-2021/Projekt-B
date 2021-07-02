@@ -48,15 +48,24 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
+        
         // 3D Bild
         con.getCast().start(g, kartetest, s);
 
         // 2D Bild
         // paintMap();
         // paintPlayer();
-
+        paintfps();
         g.dispose();
         bs.show();
+    }
+    
+    private void paintfps(){
+        String tempi = Double.toString(Math.floor(con.getFPS()));
+        char[] tulo = new char[tempi.length()];
+        tempi.getChars(0, tempi.length(), tulo, 0);
+        g.setColor(Color.GREEN);
+        g.drawChars(tulo, 0, tempi.length(), 900, 100);
     }
 
     public void paintMap() {
