@@ -74,7 +74,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
 
     private void mluti() {
         @SuppressWarnings("unused")
-        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed, con);
+        Multiplayer multiplayer = new Multiplayer("Multiplayer", kartetest, spielerspeed, speedr, con);
     }
 
     private void setting() {

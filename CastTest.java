@@ -7,9 +7,7 @@ import java.sql.*;
  * Zuletzt geändert: 30.06.2021
  * Inhalt: Raycasting-Logik, wird von Singleplayergame / Multiplayergame aufgerufen
  */
-public class CastTest implements Runnable  {
-
-    Thread t;
+public class CastTest  {
     private Controller con;
     private Game game;
     private TextureManager texManager;
@@ -22,10 +20,6 @@ public class CastTest implements Runnable  {
     private int[] floorTexture;
 
     private Spieler testS;
-    //Temp:
-    Graphics _g;
-    Karte _k;
-    Spieler _s;
 
     public CastTest(Controller c) {
         sprites = new ArrayList<Sprite>();
@@ -38,32 +32,6 @@ public class CastTest implements Runnable  {
         spriteResY = 64;
         oldPlaneX = 0.66;
         floorTexture = new int[texRes*texRes];
-    }
-
-    public void run(){
-        paintMap(_g,_k,_s);
-
-    }
-
-    public void start(Graphics g, Karte k, Spieler s){
-        _g = g;
-        _k = k;
-        _s = s;
-
-        // if(t==null){
-        t = new Thread(this, "TestThread01");
-        t.start();
-        try
-        {
-            t.join();
-        }
-
-        catch (InterruptedException ie)
-        {
-            ie.printStackTrace();
-        }
-        //  }
-
     }
 
     private void paintPlayers(Spieler sp) {
@@ -112,8 +80,8 @@ public class CastTest implements Runnable  {
 
     public void updategame(){
         game = con.getGame();
-        screenWidth = (int) game.gibWidth();
-        screenHeight = (int) game.gibHeight();
+        screenWidth = game.gibWidth();
+        screenHeight = game.gibHeight();
         run = true;
         Sprite test = new Sprite(15,15,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
         sprites.add(test);
@@ -290,7 +258,7 @@ public class CastTest implements Runnable  {
     private void  drawSky(Graphics g){
         int x, texX;
         double camX, rayAngle;
-        for (int dx = 0; dx < game.gibWidth() / stepSize; dx++) {
+        for (int dx = 0; dx < screenWidth / stepSize; dx++) {
             x = dx * stepSize;
             camX = (2 * x / game.gibWidth()) - 1;
             rayAngle = (rot + (camX * 0.583));
@@ -301,17 +269,17 @@ public class CastTest implements Runnable  {
             while(texX >= 1000){
                 texX -= 1000;
             }
-            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, (int) game.gibHeight(), texX, 100,
+            g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, screenHeight, texX, 100,
                 texX + 1, 250, null);
         }
-        g.setColor(new Color(90, 90, 90));
-        g.fillRect(0, ((int) game.gibHeight()) / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
+        //g.setColor(new Color(90, 90, 90));
+        //g.fillRect(0, screenHeight / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
     private void floorCasting(Graphics g){
-        BufferedImage floorImage = new BufferedImage(screenWidth / floorRes, screenHeight / (2 * floorRes),BufferedImage.TYPE_INT_RGB);
+        BufferedImage floorImage = new BufferedImage(screenWidth/floorRes, screenHeight/(2*floorRes),BufferedImage.TYPE_INT_RGB);
         // int[] rgbRaster = ((DataBufferInt) floorImage.getRaster().getDataBuffer()).getData();
-
+        
         int SWFL = screenWidth/floorRes;
         int SHFL = screenHeight/(2*floorRes);
         double posZ = 0.5 * screenHeight;//Camera position
@@ -346,8 +314,8 @@ public class CastTest implements Runnable  {
 
             }
         }
-        g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, screenWidth / floorRes,
-            screenHeight / (2 * floorRes), null);
+        g.drawImage(floorImage, 0, screenHeight / 2, screenWidth, screenHeight, 0, 0, SWFL,
+            SHFL, null);
     }
 
     private void loadFloorTexture(){
