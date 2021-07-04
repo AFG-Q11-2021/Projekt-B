@@ -4,7 +4,7 @@ import javax.swing.*;
 //Author: Julius Rommel
 
 @SuppressWarnings("serial")
-public class Settings extends JFrame implements ActionListener {
+public class Settings extends JFrame implements ActionListener, KeyListener {
     private Returner fra;
     private JTextField textspeed, textrotation, textresolution;
     private JLabel labelspeed, labelrotation, labelresolution;
@@ -58,23 +58,46 @@ public class Settings extends JFrame implements ActionListener {
 
     }
 
+    private void save() {
+        double sm = Integer.valueOf(textspeed.getText());
+        sm = sm / 100;
+        fra.setSpeed(sm);
+        double sr = Integer.valueOf(textrotation.getText());
+        sr = sr / 100;
+        fra.setSpeedr(sr);
+        int r = Integer.valueOf(textresolution.getText());
+        con.getCast().setwallRes(r);
+        con.getCast().setfloorRes(r);
+        if(con.getGame()!=null){
+            con.getCast().updategame();
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exit) {
             fra.returne();
             setVisible(false);
         } else if (e.getSource() == save) {
-            double sm = Integer.valueOf(textspeed.getText());
-            sm = sm / 100;
-            fra.setSpeed(sm);
-            double sr = Integer.valueOf(textrotation.getText());
-            sr = sr / 100;
-            fra.setSpeedr(sr);
-            int r = Integer.valueOf(textresolution.getText());
-            con.getCast().setwallRes(r);
-            con.getCast().setfloorRes(r);
-            if(con.getGame()!=null){
-                con.getCast().updategame();
-            }
+            save();
         }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+            save();
+        }
+        if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+            fra.returne();
+            setVisible(false);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
 }
