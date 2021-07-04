@@ -103,5 +103,4 @@ public class Controller {
     public double getFPS(){
         return fps;
     }
-
 }
