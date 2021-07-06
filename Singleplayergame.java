@@ -34,7 +34,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         this.setPreferredSize(frame1.getPreferredSize());
         csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
-        this.createBufferStrategy(3);
+        this.createBufferStrategy(2);
         bs = this.getBufferStrategy();
         this.addKeyListener(key);
     }
@@ -49,7 +49,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
         // 3D Bild
-        con.getCast().start(g, kartetest, s);
+        con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
         // paintMap();
