@@ -15,7 +15,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private Karte kartetest;// für den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX, csizeY;
+    private int csizeX, csizeY, width, height;
     private Controller con;
     //private boolean shoot = false;
 
@@ -32,11 +32,15 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         frame1.setLocationRelativeTo(null);
         frame1.setVisible(true);
         this.setPreferredSize(frame1.getPreferredSize());
-        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
+        width = (int) frame1.getPreferredSize().getWidth();
+        height = (int) frame1.getPreferredSize().getHeight();
+        csizeX = width / kartetest.getSizeX() / 2;
         csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
         this.createBufferStrategy(2);
         bs = this.getBufferStrategy();
         this.addKeyListener(key);
+        
+       // con.getCast().updategame();
     }
 
     public void update() {
@@ -45,18 +49,27 @@ public class Singleplayergame extends Canvas implements Game, Returner {
 
     public void render() {
         g = bs.getDrawGraphics();
-        g.setColor(new Color(37, 150, 190));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        //g.setColor(new Color(37, 150, 190));
+        //g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
+        
         // 3D Bild
         con.getCast().paintMap(g, kartetest, s);
 
         // 2D Bild
         // paintMap();
         // paintPlayer();
-
+        paintfps();
         g.dispose();
         bs.show();
+    }
+    
+    private void paintfps(){
+        String tempi = Double.toString(Math.floor(con.getFPS()));
+        char[] tulo = new char[tempi.length()];
+        tempi.getChars(0, tempi.length(), tulo, 0);
+        g.setColor(Color.GREEN);
+        g.drawChars(tulo, 0, tempi.length(), 900, 100);
     }
 
     public void paintMap() {
@@ -83,12 +96,12 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.drawLine(xc, yc, xc + xl, yc + yl);
     }
 
-    public double gibWidth() {
-        return frame1.getPreferredSize().getWidth();
+    public int gibWidth() {
+        return width;
     }
 
-    public double gibHeight() {
-        return frame1.getPreferredSize().getHeight();
+    public int gibHeight() {
+        return height;
     }
 
     public Graphics getGraphics() {

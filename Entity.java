@@ -21,4 +21,3 @@ public class Entity
         return texID;
     }
 }
-

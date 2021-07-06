@@ -16,16 +16,17 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     private static JTextField name;
     private JButton starten, test1;
     private Karte kartetest;
-    private double spielerspeed;
+    private double spielerspeed, speedr;
     private Controller con;
 
-    public Multiplayer(String title, Karte k, double s, Controller c) {
+    public Multiplayer(String title, Karte k, double s, double r, Controller c) {
         super(title);
         setTitle("Multiplayer");
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         kartetest = k;
         spielerspeed = s;
+        speedr = r;
         con = c;
 
         starten = new JButton("Spiel starten");
@@ -83,7 +84,7 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     }
 
     public void starten1() {
-        Spieler spieleri = new Spieler(name.getText(), spielerspeed, 2, kartetest);
+        Spieler spieleri = new Spieler(name.getText(), spielerspeed, speedr, kartetest);
         String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES ('"
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
             + spieleri.getRotation() + ")";

@@ -4,6 +4,7 @@ public class Controller {
     // instance variables - replace the example below with your own
     private static int FPS = 60;
     private static boolean running = false;
+    private double fps;
     private Game game;
     private Spieler spieler;
     private Framee frame;
@@ -35,7 +36,7 @@ public class Controller {
             if (currentTime - lastupdate > 1000000000 / FPS) {
                 // Update();
                 Render();
-                System.out.println("FPS: " + 1000000000.0/(currentTime - lastupdate));
+                fps = 1000000000.0/(currentTime - lastupdate);
                 lastupdate = currentTime;
             }
         }
@@ -59,7 +60,6 @@ public class Controller {
     }
 
     public void setGame(Game tmepi) {
-        cast = new CastTest(this);
         game = tmepi;
         cast.updategame();
     }
@@ -99,5 +99,8 @@ public class Controller {
     public StatHandle getStatHandle(){
         return stat;
     }
-
+    
+    public double getFPS(){
+        return fps;
+    }
 }
