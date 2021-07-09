@@ -79,6 +79,10 @@ public class CastTest   {
             System.exit(0);
         }
     }
+    
+    public void drawGUI(Graphics g, Spieler s){
+        g.drawImage(texManager.getGuiTexture(0),100,100,null);
+    }
 
     public void updategame(){
         game = con.getGame();
