@@ -6,7 +6,7 @@ public class Sprite
 {
     public double x, y;
     private int playerID;
-    private BufferedImage[] textures;
+    public BufferedImage[] textures;
     private boolean directional;
     private int numSprites;
 
