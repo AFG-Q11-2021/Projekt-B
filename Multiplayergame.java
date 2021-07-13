@@ -46,7 +46,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         key.movemPlayer(this);
 
         // Karte malen
-        //CastTest.paintMap(g, kartetest, s);
+        //CastTest.paintMapMulti(g, kartetest, s);
         paintMap();
 
         // Spieler malen
