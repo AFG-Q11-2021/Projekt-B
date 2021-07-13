@@ -54,6 +54,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         
         // 3D Bild
         con.getCast().paintMap(g, kartetest, s);
+        con.getCast().drawGUI(g,s);
 
         // 2D Bild
         // paintMap();

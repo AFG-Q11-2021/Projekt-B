@@ -16,7 +16,9 @@ public class CastTest   {
     private double yPos, xPos, dirX, dirY, planeX, planeY, rot, oldPlaneX;
     private boolean run = false;
     private ArrayList<Sprite> sprites;
+    private int hitID = -1;
 
+    private int[] floorTextureDark;
     private int[] floorTexture;
 
     private Spieler testS;
@@ -31,8 +33,8 @@ public class CastTest   {
         spriteResY = 64;
         oldPlaneX = 0.66;
         floorTexture = new int[texRes*texRes];
+        floorTextureDark = new int[texRes*texRes];
     }
-
 
     private void paintPlayers(Spieler sp) {
         Spieler h;
@@ -77,15 +79,19 @@ public class CastTest   {
             System.exit(0);
         }
     }
+    
+    public void drawGUI(Graphics g, Spieler s){
+        g.drawImage(texManager.getGuiTexture(0),100,100,null);
+    }
 
     public void updategame(){
         game = con.getGame();
         screenWidth = game.gibWidth();
         screenHeight = game.gibHeight();
         run = true;
-        Sprite test = new Sprite(15,15,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
+        Sprite test = new Sprite(15,15,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
         sprites.add(test);
-        Sprite directional = new Sprite(14,11,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+        Sprite directional = new Sprite(14,11,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
         sprites.add(directional);
 
         depthBuffer = new double[screenWidth ];
@@ -110,7 +116,7 @@ public class CastTest   {
             drawSky(g);
 
             // Floor Casting?
-            floorCasting(g);
+            floorCasting(g,k);
 
             // draw Entities (Enemies, Props, Pickups)
             int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
@@ -251,8 +257,16 @@ public class CastTest   {
                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
                 }
+                if(Math.abs(ix-(screenWidth/2)) < 3){
+                    this.hitID = s.getID();
+                }
             }
+
         }
+    }
+    
+    private int getHitID(){
+        return this.hitID;
     }
 
     private void  drawSky(Graphics g){
@@ -276,10 +290,10 @@ public class CastTest   {
         //g.fillRect(0, screenHeight / 2, (int) game.gibWidth(), ((int) game.gibHeight()) / 2);
     }
 
-    private void floorCasting(Graphics g){
+    private void floorCasting(Graphics g,Karte k){
         BufferedImage floorImage = new BufferedImage(screenWidth/floorRes, screenHeight/(2*floorRes),BufferedImage.TYPE_INT_RGB);
         // int[] rgbRaster = ((DataBufferInt) floorImage.getRaster().getDataBuffer()).getData();
-        
+
         int SWFL = screenWidth/floorRes;
         int SHFL = screenHeight/(2*floorRes);
         double posZ = 0.5 * screenHeight;//Camera position
@@ -308,7 +322,19 @@ public class CastTest   {
                 //    int xTex = (screenWidth / floorRes) - ix - 1;
                 //     int yTex = iy - screenHeight / (2 * floorRes);
                 //   int index = (xTex * (screenHeight/(2*floorRes))) + yTex;
-                int texRGB =   this.floorTexture[tx + ty*texRes];
+                int shadowX = (int) Math.round((float)(floorX + 0.3));
+                int shadowY = (int) (floorY);
+                int texRGB;
+
+                if (shadowX >= k.getSizeX() - 1 || shadowY < 0 || shadowX >= k.getSizeY() - 1 || shadowY < 0) {
+                    texRGB =   this.floorTextureDark[tx + ty*texRes];
+                } else if(k.getCoordinate(shadowX,shadowY)>0){
+                    texRGB =   this.floorTextureDark[tx + ty*texRes];
+
+                } else {
+                    texRGB =   this.floorTexture[tx + ty*texRes];
+                }
+
                 floorImage.setRGB((SWFL) - ix - 1, iy - SHFL,texRGB);
                 //  rgbRaster[index] = floorTexture.getRGB(tx,ty);
 
@@ -322,6 +348,7 @@ public class CastTest   {
         for(int x = 0; x < texRes;x++){
             for(int y = 0; y < texRes; y++){
                 floorTexture[x + (y*texRes)] = texManager.getTexture(10).getRGB(x,y);
+                floorTextureDark[x + (y*texRes)] = texManager.getDarkTexture(10).getRGB(x,y);
             }
         }
     }

@@ -5,12 +5,13 @@ import java.awt.image.*;
 public class Sprite
 {
     public double x, y;
-
+    private int playerID;
     private BufferedImage[] textures;
     private boolean directional;
     private int numSprites;
 
-    public Sprite(double x, double y,boolean directional, BufferedImage... textures){
+    public Sprite(double x, double y,int playerID,boolean directional, BufferedImage... textures){
+        this.playerID = playerID;
         this.x = x;
         this.y = y;
         this.directional = directional;
@@ -40,6 +41,10 @@ public class Sprite
         return textures[texIndex];
 
         
+    }
+    
+    public int getID(){
+        return this.playerID;
     }
 
 }

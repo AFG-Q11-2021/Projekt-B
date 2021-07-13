@@ -4,13 +4,14 @@ import javax.imageio.*;
 import java.io.*;
 //Author: Laurens
 public class TextureManager {
-    private BufferedImage[] textures, darkTextures, skyTextures, spriteTextures;
+    private BufferedImage[] textures, darkTextures, skyTextures, spriteTextures, guiTextures;
 
     public TextureManager() {
         textures = new BufferedImage[100];
         darkTextures = new BufferedImage[100];
         skyTextures = new BufferedImage[10];
         spriteTextures = new BufferedImage[20];
+        guiTextures = new BufferedImage[10];
 
         loadSkyTexture(0, "textures/sky.png");
 
@@ -83,11 +84,17 @@ public class TextureManager {
         loadSpriteTexture(15, "textures/barrel07.png");
         loadSpriteTexture(16, "textures/barrel08.png");
 
+        //GUI Textures
+        loadGuiTexture(0, "textures/Lebensanzeige.png");
 
     }
 
     public BufferedImage getTexture(int texID) {
         return textures[texID];
+    }
+    
+    public BufferedImage getGuiTexture(int texID){
+        return guiTextures[texID];
     }
 
     public BufferedImage getSkyTexture(int texID) {
@@ -114,6 +121,14 @@ public class TextureManager {
         try {
             spriteTextures[index] = ImageIO.read(new File(path));
         } catch (java.io.IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+    
+    private void loadGuiTexture(int index, String path){
+        try{
+            guiTextures[index] = ImageIO.read(new File(path));
+        } catch(java.io.IOException ioe){
             ioe.printStackTrace();
         }
     }

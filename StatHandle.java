@@ -10,9 +10,10 @@ public class StatHandle
     public Player activePlayerObject;
     public boolean playerAlive;
     private int difficulty;
-    public StatHandle(Spieler s, int maxLIVE)
+    public StatHandle(Spieler s, int difftemp)
     {
-        activePlayerObject = new Player(s, this, maxLIVE);
+        this.setDiff(difftemp);
+        activePlayerObject = new Player(s, this, 100*difficulty);
     }
     
     public void setDiff(int i)

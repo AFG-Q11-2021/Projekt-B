@@ -1,8 +1,7 @@
 //Author Sam Titt
 
-public abstract class Enemy
+public class Enemy
 {
-    private int ID;
     public Spieler actPlayer;
     private int maxHealth = 100;//contained to 100 each
     public int currentHealth;
@@ -12,11 +11,6 @@ public abstract class Enemy
     public float currentX, currentY;
     
     //abstract public int getThisID();
-    
-    
-    
-    
-    
     
     
     
@@ -45,6 +39,8 @@ public abstract class Enemy
         {
           this.changeLiveStatus(false);   
         }
+        
+        //new ID finding
     }
     
     public int giveDamage()
