@@ -21,7 +21,6 @@ public class GegnerBaum
             eneArray[IDint] = x;
         }else
         {
-            
             System.out.println("Failed to instantiate new enemy");
         }
         

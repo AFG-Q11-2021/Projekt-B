@@ -10,10 +10,10 @@ public class StatHandle
     public Player activePlayerObject;
     public boolean playerAlive;
     private int difficulty;
-    public StatHandle(Spieler s, int difftemp)
+    public StatHandle(int difftemp, Controller con)
     {
         this.setDiff(difftemp);
-        activePlayerObject = new Player(s, this, 100*difficulty);
+        activePlayerObject = new Player(con.getSpieler(), this, 100*difficulty , con.getCast());
     }
     
     public void setDiff(int i)
@@ -34,6 +34,10 @@ public class StatHandle
     public void dealDamagetoPlayer(int amount)
     {
         activePlayerObject.damageDealtToPlayer(amount);
+    }
+    public void playerSchießen()
+    {
+        this.activePlayerObject.schießen();
     }
     
     public void creatNewEnemy()

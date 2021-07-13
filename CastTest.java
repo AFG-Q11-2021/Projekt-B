@@ -261,7 +261,7 @@ public class CastTest   {
         }
     }
     
-    private int getHitID(){
+    public int getHitID(){
         return this.hitID;
     }
 
