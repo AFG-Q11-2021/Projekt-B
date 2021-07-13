@@ -1,4 +1,3 @@
-
 /**
  * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
