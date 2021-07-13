@@ -13,7 +13,7 @@ public class Bild extends JPanel {
 
     public Bild() {
         setFocusable(true);
-        ImageIcon b = new ImageIcon("bild/vorläufiges HB.png");
+        ImageIcon b = new ImageIcon("bild/Hintergrundbild.png");
         bild = b.getImage();
     }
 

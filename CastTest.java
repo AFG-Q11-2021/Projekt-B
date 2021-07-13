@@ -49,7 +49,10 @@ public class CastTest   {
                 h.setX(ergebnis.getDouble(2));
                 h.setY(ergebnis.getDouble(3));
                 h.setRotation(ergebnis.getDouble(4));
-                // sprites.add(new Sprite())
+                sprites.add(new Sprite(ergebnis.getDouble(2), ergebnis.getDouble(3), ergebnis.getString(1), ergebnis.getDouble(4),
+                    0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),
+                    texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),
+                    texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1)));
             }
             ergebnis.close();
             st.close();
@@ -79,15 +82,19 @@ public class CastTest   {
             System.exit(0);
         }
     }
+    
+    public void drawGUI(Graphics g, Spieler s){
+        g.drawImage(texManager.getGuiTexture(0),100,100,null);
+    }
 
     public void updategame(){
         game = con.getGame();
         screenWidth = game.gibWidth();
         screenHeight = game.gibHeight();
         run = true;
-        Sprite test = new Sprite(15,15,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
+        Sprite test = new Sprite(15,15,"",0,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
         sprites.add(test);
-        Sprite directional = new Sprite(14,11,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+        Sprite directional = new Sprite(14,11,"",0,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
         sprites.add(directional);
 
         depthBuffer = new double[screenWidth ];
@@ -205,6 +212,122 @@ public class CastTest   {
                 }
 
             }   
+            sortSprites();
+            drawSprites(g);
+        }
+    }
+    
+    public void paintMapMulti(Graphics g, Karte k, Spieler s) {
+        if(run){
+            xPos = s.getX();
+            yPos = s.getY();
+            rot = Math.toRadians(-s.getRotation());
+
+            dirY = 1;
+            dirX =  - dirY * Math.sin(rot);//Spielerrotation einrechnen(Blickrichtung)
+            dirY = dirY * Math.cos(rot);
+
+            planeX = oldPlaneX * Math.cos(rot);//Spielerrotation einrechnen(Lot auf Blickrichtung
+            planeY = oldPlaneX * Math.sin(rot);
+
+            // drawSky
+            drawSky(g);
+
+            // Floor Casting?
+            floorCasting(g,k);
+
+            // draw Entities (Enemies, Props, Pickups)
+            int x, mapX, mapY, stepX, stepY, xdraw, texX, hit, side, texID;
+            double wallX, perpWallDist, sideDistX, sideDistY;
+            for (int fx = 0; fx < screenWidth / stepSize; fx++) {
+                x = fx * stepSize;
+                double camX = (2.0 * x / screenWidth) - 1;
+                double rayDirX = dirX + planeX * camX;
+                double rayDirY = dirY + planeY * camX;
+
+                mapX = (int) xPos;
+                mapY = (int) yPos;
+
+                double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : Math.abs(1 / rayDirX));
+                double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : Math.abs(1 / rayDirY));
+
+                hit = 0;
+                side = 0;
+
+                if (rayDirX < 0) {
+                    stepX = -1;
+                    sideDistX = (xPos - mapX) * deltaDistX;
+                } else {
+                    stepX = 1;
+                    sideDistX = (mapX + 1.0 - xPos) * deltaDistX;
+                }
+                if (rayDirY < 0) {
+                    stepY = -1;
+                    sideDistY = (yPos - mapY) * deltaDistY;
+                } else {
+                    stepY = 1;
+                    sideDistY = (mapY + 1.0 - yPos) * deltaDistY;
+                }
+
+                // cast
+                while ( hit == 0 ){
+                    if (sideDistX < sideDistY) {
+                        sideDistX += deltaDistX;
+                        mapX += stepX;
+                        side = 0;
+                    } else {
+                        sideDistY += deltaDistY;
+                        mapY += stepY;
+                        side = 1;
+                    }
+                    if (mapX >= k.getSizeX() - 1 || mapX < 0 || mapY >= k.getSizeY() - 1 || mapY < 0) {
+                        break;
+                    }
+                    if (k.getCoordinate(mapX, mapY) > 0) {
+                        hit = 1;
+                    }
+                } 
+
+                if (side == 0)
+                    perpWallDist = (mapX - xPos + (1 - stepX) / 2) / rayDirX;
+                else
+                    perpWallDist = (mapY - yPos + (1 - stepY) / 2) / rayDirY;
+
+                int columnHeight = (int) (screenHeight / perpWallDist);
+                int topPixel = (screenHeight - columnHeight) / 2;
+
+                texID = k.getCoordinate(mapX, mapY) - 1;
+
+                // calculate value of wallX
+                // where exactly the wall was hit
+                if (side == 0)
+                    wallX = yPos + perpWallDist * rayDirY;
+                else
+                    wallX = xPos + perpWallDist * rayDirX;
+                wallX -= Math.floor(wallX);
+
+                // x coordinate on the texture
+                texX = (int) (wallX * texRes);
+                if (side == 0 && rayDirX > 0)
+                    texX = texRes - texX - 1;
+                if (side == 1 && rayDirY < 0)
+                    texX = texRes - texX - 1;
+
+                texX = texRes - texX - 1;
+                xdraw = screenWidth - x;
+                if (side == 1) {
+                    g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize ,
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                } else {
+                    g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw +stepSize,
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                }
+                for(int i = 0; i < stepSize;i++){
+                    depthBuffer[x + i] = perpWallDist;
+                }
+
+            }   
+            paintPlayers(s);
             sortSprites();
             drawSprites(g);
         }

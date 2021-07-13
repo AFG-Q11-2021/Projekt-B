@@ -1,4 +1,3 @@
-
 /**
  * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
@@ -55,6 +54,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         
         // 3D Bild
         con.getCast().paintMap(g, kartetest, s);
+        con.getCast().drawGUI(g,s);
 
         // 2D Bild
         // paintMap();
