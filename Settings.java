@@ -1,7 +1,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 
-//Author: Julius Rommel
+//Author Julius Rommel
 
 @SuppressWarnings("serial")
 public class Settings extends JFrame implements ActionListener, KeyListener {

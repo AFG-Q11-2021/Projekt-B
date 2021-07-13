@@ -1,3 +1,7 @@
+/**
+ * @author Laurens Birkenbach, Christopher Scherübl, Julius Rommel, Niklas Rösner, Samuel Titt (13.07.2021 n.Chr);
+ * @version 0.2
+ */
 import javax.swing.*;
 
 public class Controller {

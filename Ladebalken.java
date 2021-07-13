@@ -14,13 +14,14 @@ public class Ladebalken
         JFrame laden1 = new JFrame();
         laden1.setSize(1000,1000);
         laden1.setTitle("Laden");
+        JPanel laden = new JPanel();
         JProgressBar ladebalken = new JProgressBar(0,100);
-        ladebalken.setBounds(10,10,100,50);
         ladebalken.setValue(0);
         ladebalken.setStringPainted(true);
-        ladebalken.setBackground(Color.GREEN);
+        ladebalken.setBackground(Color.WHITE);
         ladebalken.setForeground(Color.BLACK);
-        laden1.add(ladebalken);
+        laden.add(ladebalken);
+        laden1.add(laden);
         laden1.setVisible(true);
         for(int i=0; i<=ladebalken.getMaximum(); i++)
         {
