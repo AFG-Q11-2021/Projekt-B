@@ -1,12 +1,12 @@
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 //Author: Julius
-public class KeyHandler implements KeyListener
+public class KeyHandler implements KeyListener, MouseListener
 {
     private Controller con;
     private Returner game;
     private Spieler s;
+    private StatHandle stat;
     private double speedm;
     private boolean rotRight = false;
     private boolean rotLeft = false;
@@ -21,6 +21,23 @@ public class KeyHandler implements KeyListener
         game = g;
         s = con.getSpieler();
         speedm = s.getSpeed();
+        stat = con.getStatHandle();
+    }
+    
+    public void mouseExited(MouseEvent e){
+    }
+    
+    public void mouseEntered(MouseEvent e){
+    }
+    
+    public void mouseClicked(MouseEvent e){
+        stat.playerSchießen();
+    }
+    
+    public void mouseReleased(MouseEvent e){
+    }
+    
+    public void mousePressed(MouseEvent e){
     }
 
     public void movesPlayer() {

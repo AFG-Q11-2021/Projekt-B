@@ -1,5 +1,5 @@
 //Author Sam Titt
-
+import java.util.Random;
 public class Player
 {
     // IMPORTATNTE
@@ -10,19 +10,32 @@ public class Player
     public StatHandle handler;
     public int maxH, curH, maxA, curA;
     public boolean aliveChecker;
-
+    public CastTest caster;
     public int ammoType1, ammoType2, ammoType3;
-    public Player(Spieler playTemp, StatHandle statTemp, int max)
+    public GegnerBaum baum;
+    public Random randomGen;
+    public Player(Spieler playTemp, StatHandle statTemp, int max, CastTest castert)
     {
+        baum = new GegnerBaum(handler);
+        caster = castert;
         handler = statTemp;
         actPlay = playTemp;
         maxH = max;
         curH = max;
         maxA = max;
         curA = max;
+        randomGen = new Random();
 
         aliveChecker = true;
         handler.updatePlayerLiveState(aliveChecker);
+    }
+    
+    public void schießen()
+    {
+        
+        int a = 5;
+        int i = caster.getHitID();
+        baum.eneArray[i].statScript.dealDamage(a);
     }
 
     public void setPlayer(Spieler temp)
