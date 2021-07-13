@@ -368,18 +368,24 @@ public class CastTest   {
             drawWidth = Math.abs((int)(screenWidth/tranY));
             startDrawX = -drawWidth/2 + spritePixelX;
             endDrawX = drawWidth/2 + spritePixelX;
-
+            boolean painted = false;
             int dWidth = endDrawX - startDrawX;
             for(int ix = startDrawX; ix < endDrawX;ix++){
                 int texx = (int) (((ix-startDrawX)*1.0/dWidth*1.0)*spriteResX);
                 if(tranY > 0 && ix > 0 && ix< screenWidth && tranY < depthBuffer[ix]){
                     g.drawImage(s.getDirectTexture(xPos,yPos),screenWidth-ix, startDrawY, screenWidth-ix +1,
                         endDrawY, spriteResX - texx, 0,  spriteResX - texx - 1, spriteResY, null);
+                        painted = true;
                 }
                 if(Math.abs(ix-(screenWidth/2)) < 3){
                     this.hitID = s.getID();
                 }
             }
+            if(painted){
+                g.drawString(s.getName(),startDrawX,startDrawY);
+            }
+            
+            
 
         }
     }

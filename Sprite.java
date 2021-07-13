@@ -9,7 +9,7 @@ public class Sprite
     public BufferedImage[] textures;
     private boolean directional;
     private int numSprites;
-
+    
     public Sprite(double x, double y, String name, double rotation, int playerID ,boolean directional, BufferedImage... textures){
         this.playerID = playerID;
         this.x = x;
