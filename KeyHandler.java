@@ -31,7 +31,7 @@ public class KeyHandler implements KeyListener, MouseListener
     }
     
     public void mouseClicked(MouseEvent e){
-        //stat.
+        stat.playerSchießen();
     }
     
     public void mouseReleased(MouseEvent e){
