@@ -11,6 +11,7 @@ public class Sprite
     private int numSprites;
     private String name;
 
+
     public Sprite(double x, double y, String name, double rotation, int playerID ,boolean directional, BufferedImage... textures){
         this.playerID = playerID;
         this.x = x;
