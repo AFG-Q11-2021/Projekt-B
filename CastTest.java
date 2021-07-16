@@ -37,6 +37,7 @@ public class CastTest   {
     }
 
     private void paintPlayers(Spieler sp) {
+        
         Spieler h;
         Connection verbindung = null;
         String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
