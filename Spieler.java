@@ -9,14 +9,19 @@ public class Spieler {
     private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
     private Karte karte;
+
     private Weapon[] weapons;
     private Weapon usedWeapon;
+
+    private int leben;
+
 
     public Spieler(String usernameNeu, double s, double r, Karte k,Controller c) {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
         rotation= 0.0;
+        leben = 100;
         speedm = s;
         speedr = r;
         setKarte(k);
@@ -139,6 +144,14 @@ public class Spieler {
 
     public void setKarte(Karte karte) {
         this.karte = karte;
+    }
+    
+    public int getLeben(){
+        return leben;
+    }
+    
+    public void setLeben(int l){
+        leben = l;
     }
 
     //ab hier von Samuel

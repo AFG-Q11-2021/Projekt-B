@@ -29,13 +29,14 @@ public class Player
         aliveChecker = true;
         handler.updatePlayerLiveState(aliveChecker);
     }
-    
+
     public void schießen()
     {
-        
         int a = 5;
         int i = caster.getHitID();
-        baum.eneArray[i].statScript.dealDamage(a);
+        if(i>-1){
+            baum.eneArray[i].statScript.dealDamage(a);
+        }
     }
 
     public void setPlayer(Spieler temp)
@@ -85,7 +86,7 @@ public class Player
         double rotat = actPlay.getRotation();
 
     }
-    
+
     public Spieler returnThisSpieler()
     {
         return this.actPlay;
