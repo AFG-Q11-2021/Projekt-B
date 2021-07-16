@@ -346,9 +346,14 @@ public class CastTest   {
 
             spriteX = s.x - xPos;
             spriteY = s.y - yPos;
-
+            
+             double dsts1 = (xPos - s.x)*(xPos - s.x) + (yPos - s.y)*(yPos - s.y);
+            if(dsts1 < 1){
+                continue;
+            }
             inverse = 1 / (planeX*dirY - dirX*planeY);
 
+            
             tranX = inverse * (dirY*spriteX - dirX *spriteY);
             tranY = inverse * (-planeY*spriteX + planeX*spriteY);
 
