@@ -47,7 +47,9 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         key.movemPlayer(this);
 
         // Karte malen
-     //   con.getCast().paintMapMulti(g, kartetest, s);
+
+        con.getCast().paintMapMulti(g, kartetest, s);
+
         paintMap();
 
         // Spieler malen
@@ -60,7 +62,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private void paintPlayers(Spieler sp) {
         Spieler h;
         Connection verbindung = null;
-        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
+        String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();

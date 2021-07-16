@@ -39,29 +39,40 @@ public class CastTest   {
     private void paintPlayers(Spieler sp) {
        
         Spieler h;
+        sprites.clear();
         Connection verbindung = null;
-        String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
+        String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer WHERE name !='" + sp.getUsername() + "'";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
             ResultSet ergebnis = st.executeQuery(sql2);
+            int i = 1;
             while (ergebnis.next()) {
+                System.out.println(i);
+                i++;
                 h = new Spieler(ergebnis.getString(1));
                 h.setX(ergebnis.getDouble(2));
                 h.setY(ergebnis.getDouble(3));
                 h.setRotation(ergebnis.getDouble(4));
-                sprites.add(new Sprite(ergebnis.getDouble(2), ergebnis.getDouble(3), ergebnis.getString(1), ergebnis.getDouble(4),
-                    0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),
+                Sprite af = new Sprite(ergebnis.getDouble(2),ergebnis.getDouble(3),ergebnis.getString(1),ergebnis.getDouble(4),
+                    ergebnis.getInt(5),true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),
                     texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),
-                    texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1)));
+                    texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+                sprites.add(af);
             }
             ergebnis.close();
+            System.out.println("nach ergebnis close");
             st.close();
+            System.out.println("nach statement close");
             abbau(verbindung);
+
+            System.out.println("nach verbindung close");
+
         } catch (Exception e) {
             System.err.println("Fehler beim Auslesen der Datenbank: " + e);
             System.exit(0);
         }
+        System.out.println("nach catch");
     }
 
     public void drawGUI(Graphics g, Spieler s){

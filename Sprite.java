@@ -22,6 +22,17 @@ public class Sprite
         this.textures = textures;
         numSprites = textures.length;
     }
+    
+    public Sprite(Spieler s, int playerID ,boolean directional, BufferedImage... textures){
+        this.playerID = playerID;
+        this.x = s.getX();
+        this.y = s.getY();
+        this.name = s.getUsername();
+        this.rotation = s.getRotation();
+        this.directional = directional;
+        this.textures = textures;
+        numSprites = textures.length;
+    }
 
     public String getName(){
         return name;
@@ -61,6 +72,7 @@ public class Sprite
         return textures[texIndex];
 
     }
+    
     public int getID(){
         return this.playerID;
     }
