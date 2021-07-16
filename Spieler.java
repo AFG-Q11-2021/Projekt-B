@@ -40,9 +40,9 @@ public class Spieler {
         double radrot = Math.toRadians(rotation + 90);
         double xadd = speedm * (Math.sin(radrot));
         double yadd = speedm * (Math.cos(radrot));
-        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+        if (karte.getCoordinate((int) (xadd + x), (int) y) == 0)
             setX(x + xadd);
-        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+        if (karte.getCoordinate((int) x, (int) (yadd + y)) == 0)
             setY(y + yadd);
     }
 
@@ -50,9 +50,9 @@ public class Spieler {
         double radrot = Math.toRadians(rotation - 90);
         double xadd = speedm * (Math.sin(radrot));
         double yadd = speedm * (Math.cos(radrot));
-        if (karte.getCoordinate((int) (x + xadd * 10), (int) y) == 0)
+        if (karte.getCoordinate((int) (x + xadd), (int) y) == 0)
             setX(x + xadd);
-        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+        if (karte.getCoordinate((int) x, (int) (yadd + y)) == 0)
             setY(y + yadd);
     }
 
@@ -60,9 +60,9 @@ public class Spieler {
         double radrot = Math.toRadians(rotation);
         double xadd = speedm * (Math.sin(radrot));
         double yadd = speedm * (Math.cos(radrot));
-        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+        if (karte.getCoordinate((int) (xadd + x), (int) y) == 0)
             setX(x + xadd);
-        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+        if (karte.getCoordinate((int) x, (int) (yadd + y)) == 0)
             setY(y + yadd);
     }
 
@@ -70,9 +70,9 @@ public class Spieler {
         double radrot = Math.toRadians(rotation + 180);
         double xadd = speedm * (Math.sin(radrot));
         double yadd = speedm * (Math.cos(radrot));
-        if (karte.getCoordinate((int) (xadd * 10 + x), (int) y) == 0)
+        if (karte.getCoordinate((int) (xadd + x), (int) y) == 0)
             setX(x + xadd);
-        if (karte.getCoordinate((int) x, (int) (yadd * 10 + y)) == 0)
+        if (karte.getCoordinate((int) x, (int) (yadd + y)) == 0)
             setY(y + yadd);
     }
 
