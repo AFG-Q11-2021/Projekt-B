@@ -22,6 +22,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     public Multiplayergame(Karte k, Controller c) {
         kartetest = k;
         con = c;
+        s = con.getSpieler();
         frame1 = new JFrame();
         Dimension size = new Dimension(WIDTH, HEIGHT);
         key = new KeyHandler(con, this);
@@ -46,7 +47,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         key.movemPlayer(this);
 
         // Karte malen
-        //CastTest.paintMapMulti(g, kartetest, s);
+        //con.getCast().paintMapMulti(g, kartetest, s);
         paintMap();
 
         // Spieler malen

@@ -79,12 +79,12 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     }
 
     public void starten1() {
-
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, speedr, kartetest,con);
+        
         String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation, leben, state) VALUES ('"
-
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
             + spieleri.getRotation() + ", " + spieleri.getLeben() + ", " + 0 + ")";
+            
         datenbankinsert(sql);
         con.setSpieler(spieleri);
         Multiplayergame game = new Multiplayergame(kartetest, con);
