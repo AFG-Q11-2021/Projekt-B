@@ -37,7 +37,7 @@ public class CastTest   {
     }
 
     private void paintPlayers(Spieler sp) {
-        
+       
         Spieler h;
         Connection verbindung = null;
         String sql2 = "SELECT name, xposition, yposition, rotation FROM multiplayer";
@@ -58,7 +58,7 @@ public class CastTest   {
             ergebnis.close();
             st.close();
             abbau(verbindung);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Fehler beim Auslesen der Datenbank: " + e);
             System.exit(0);
         }
