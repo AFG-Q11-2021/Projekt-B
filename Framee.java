@@ -64,7 +64,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
     }
 
     private void singel() {
-        Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest);
+        Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest,con);
         con.setStatHandle(new StatHandle(100, con));
         con.setSpieler(sppileri);
         Singleplayergame gamee = new Singleplayergame(kartetest, con);

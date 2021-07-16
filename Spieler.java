@@ -1,11 +1,18 @@
 // Autoren: Martin ; Lasse; Laurens; Julius; Samuel//
 
+import java.awt.*;
+import java.awt.image.*;
+import java.util.*;
+import java.sql.*;
+
 public class Spieler {
     private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y (Koordinatensystem), Bewegungsgeschwindigkeit, Drehgeschwindigkeit
     private String username;
     private Karte karte;
+    private Weapon[] weapons;
+    private Weapon usedWeapon;
 
-    public Spieler(String usernameNeu, double s, double r, Karte k) {
+    public Spieler(String usernameNeu, double s, double r, Karte k,Controller c) {
         setUsername(usernameNeu);
         x = 4;// Startpunkt des Spielers//
         y = 3;// Startpunkt des Spielers//
@@ -13,6 +20,7 @@ public class Spieler {
         speedm = s;
         speedr = r;
         setKarte(k);
+        usedWeapon = new Weapon(10,100,0.1,c.getTextureManager().getTexture(3),c.getTextureManager().getTexture(3));
     }
 
     public Spieler(String usernameNeu) {
