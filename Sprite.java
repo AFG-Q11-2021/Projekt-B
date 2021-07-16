@@ -63,7 +63,7 @@ public class Sprite
         }
         double dx = camX-x;
         double dy = camY-y;
-        double angle =   Math.atan2(dx,dy) + 3.14159+rotation;
+        double angle =   Math.atan2(dx,dy) + 3.14159;
         int texIndex =  Math.round((float)((numSprites*angle)/6.283)) ;
         //System.out.println(texIndex);
         if(texIndex == numSprites){

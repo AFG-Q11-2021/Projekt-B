@@ -223,7 +223,7 @@ public class CastTest   {
             planeY = oldPlaneX * Math.sin(rot);
 
             // drawSky
-            drawSky(g);
+           // drawSky(g);
 
             // Floor Casting?
             floorCasting(g,k);
