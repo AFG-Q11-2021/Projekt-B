@@ -24,10 +24,11 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         setTitle("Multiplayer");
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        con = c;
         kartetest = k;
         spielerspeed = s;
         speedr = r;
-        con = c;
+        
 
         starten = new JButton("Spiel starten");
         starten.setBounds(450, 600, 350, 40);
@@ -55,18 +56,12 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
 
         setVisible(true);
     }
-    
-    public void keyReleased(KeyEvent e){
-    }
-    
+
     public void keyPressed(KeyEvent e){
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             starten1();
             this.setVisible(false);
         }
-    }
-    
-    public void keyTyped(KeyEvent e){
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -85,9 +80,9 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
 
     public void starten1() {
         Spieler spieleri = new Spieler(name.getText(), spielerspeed, speedr, kartetest);
-        String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation) VALUES ('"
+        String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation, leben, state) VALUES ('"
             + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
-            + spieleri.getRotation() + ")";
+            + spieleri.getRotation() + ", " + spieleri.getLeben() + ", " + 0 + ")";
         datenbankinsert(sql);
         con.setSpieler(spieleri);
         Multiplayergame game = new Multiplayergame(kartetest, con);
@@ -116,5 +111,11 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
             System.err.println("Fehler beim schließen der Verbindung:" + e);
             System.exit(0);
         }
+    }
+
+    public void keyTyped(KeyEvent e){
+    }
+
+    public void keyReleased(KeyEvent e){
     }
 }
