@@ -46,10 +46,7 @@ public class CastTest   {
         try {
             Statement st = verbindung.createStatement();
             ResultSet ergebnis = st.executeQuery(sql2);
-            int i = 1;
             while (ergebnis.next()) {
-                System.out.println(i);
-                i++;
                 h = new Spieler(ergebnis.getString(1));
                 h.setX(ergebnis.getDouble(2));
                 h.setY(ergebnis.getDouble(3));
@@ -61,18 +58,12 @@ public class CastTest   {
                 sprites.add(af);
             }
             ergebnis.close();
-            System.out.println("nach ergebnis close");
             st.close();
-            System.out.println("nach statement close");
             abbau(verbindung);
-
-            System.out.println("nach verbindung close");
-
         } catch (Exception e) {
             System.err.println("Fehler beim Auslesen der Datenbank: " + e);
             System.exit(0);
         }
-        System.out.println("nach catch");
     }
 
     public void drawGUI(Graphics g, Spieler s){
