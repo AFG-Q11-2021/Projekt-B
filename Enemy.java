@@ -11,7 +11,7 @@ public class Enemy
     public float currentX, currentY;
     
     //abstract public int getThisID();
-    public void Enemy()
+    public Enemy()
     {
         
     }
@@ -44,7 +44,7 @@ public class Enemy
           this.changeLiveStatus(false);   
         }
         int e = currentHealth + currentArmor;
-        System.out.println("Enemy Damage set to"+ i );
+        System.out.println("Enemy Damage set to"+ e );
         //new ID finding
     }
     
