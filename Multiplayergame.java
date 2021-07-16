@@ -50,7 +50,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
 		con.getCast().paintMapMulti(g, kartetest, s);
 
-		//twod(s);
+		twod(s);
 
 		paintfps();
 		g.dispose();
