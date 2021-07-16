@@ -50,10 +50,10 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
         con.getCast().paintMapMulti(g, kartetest, s);
 
-        paintMap();
+       // paintMap();
 
         // Spieler malen
-        paintPlayers(s);
+        //paintPlayers(s);
         paintfps();
         g.dispose();
         bs.show();
