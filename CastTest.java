@@ -37,7 +37,6 @@ public class CastTest   {
     }
 
     private void paintPlayers(Spieler sp) {
-       
         Spieler h;
         sprites.clear();
         Connection verbindung = null;
@@ -393,7 +392,7 @@ public class CastTest   {
             texX = (int) ((rayAngle / 6.283) * 1000);
             while(texX < 0){
                 texX += 1000;
-            }
+            }// doch im prinzip modulo
             while(texX >= 1000){
                 texX -= 1000;
             }

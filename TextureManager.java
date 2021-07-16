@@ -15,52 +15,38 @@ public class TextureManager {
 
         loadSkyTexture(0, "textures/sky.png");
 
-        loadTexture(0, "textures/sheetMetal.png");
-        createDarkTexture(0);
-
-        loadTexture(1, "textures/brickWall.png");
-        createDarkTexture(1);
-
-        loadTexture(2, "textures/brickWallPainting.png");
-        createDarkTexture(2);
-
-        loadTexture(3, "textures/woodPlankWall.png");
-        createDarkTexture(3);
-
-        loadTexture(4, "textures/brickWallred.png");
-        createDarkTexture(4);
-
-        loadTexture(5, "textures/brickWall.png");
-        createDarkTexture(5);
-
-        loadTexture(6, "textures/brickWallBloodVariation1.png");
-        createDarkTexture(6);
-
-        loadTexture(7, "textures/brickWallBloodVariation2.png");
-        createDarkTexture(7);
-
-        loadTexture(8, "textures/brickWalltotenkopf.png");
-        createDarkTexture(8);
-
-        loadTexture(9, "textures/woodPlankWallblood.png");
-        createDarkTexture(9);
-
+        loadTexture(0,  "textures/sheetMetal.png");
+        loadTexture(1,  "textures/brickWall.png");
+        loadTexture(2,  "textures/brickWallPainting.png");
+        loadTexture(3,  "textures/woodPlankWall.png");
+        loadTexture(4,  "textures/brickWallred.png");
+        loadTexture(5,  "textures/brickWall.png");
+        loadTexture(6,  "textures/brickWallBloodVariation1.png");
+        loadTexture(7,  "textures/brickWallBloodVariation2.png");
+        loadTexture(8,  "textures/brickWalltotenkopf.png");
+        loadTexture(9,  "textures/woodPlankWallblood.png");
         loadTexture(10, "textures/woodPlankBoden.png");
-        createDarkTexture(10);
-
         loadTexture(11, "textures/brickWallredandbluefusion.png");
-        createDarkTexture(11);
-
         loadTexture(12, "textures/brickWallPainting Hr.Wolf.png");
-        createDarkTexture(12);
-
         loadTexture(13, "textures/brickWallWithGun.png");
-        createDarkTexture(13);
-
         loadTexture(14, "textures/brickWallWithRocket.png");
-        createDarkTexture(14);
-
         loadTexture(15, "textures/brickWallPrison.png");
+        
+        createDarkTexture(0);
+        createDarkTexture(1);
+        createDarkTexture(2);
+        createDarkTexture(3);
+        createDarkTexture(4);
+        createDarkTexture(5);
+        createDarkTexture(6);
+        createDarkTexture(7);
+        createDarkTexture(8);
+        createDarkTexture(9);
+        createDarkTexture(10);
+        createDarkTexture(11);
+        createDarkTexture(12);
+        createDarkTexture(13);
+        createDarkTexture(14);
         createDarkTexture(15);
 
         //Sprite Textures
@@ -69,14 +55,14 @@ public class TextureManager {
         loadSpriteTexture(1, "textures/testHuman01.png");
         loadSpriteTexture(2, "textures/testHuman02.png");
         loadSpriteTexture(3, "textures/testHuman03.png");
-        loadSpriteTexture(4, "textures/testHuman04.png");
+        loadSpriteTexture(4, "textures/testHuman04.png");//mensch
         loadSpriteTexture(5, "textures/testHuman05.png");
         loadSpriteTexture(6, "textures/testHuman06.png");
         loadSpriteTexture(7, "textures/testHuman07.png");
         loadSpriteTexture(8, "textures/testHuman08.png");
 
         loadSpriteTexture(9 , "textures/barrel01.png");
-        loadSpriteTexture(10, "textures/barrel02.png");
+        loadSpriteTexture(10, "textures/barrel02.png");//fass
         loadSpriteTexture(11, "textures/barrel03.png");
         loadSpriteTexture(12, "textures/barrel04.png");
         loadSpriteTexture(13, "textures/barrel05.png");
