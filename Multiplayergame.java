@@ -57,7 +57,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		bs.show();
 	}
 
-	private void twod (Spieler sp) {
+	private void twod(Spieler sp) {
 		g.setColor(Color.BLACK);
 		for (int x = 0; x < kartetest.getSizeX(); x++) {
 			for (int y = 0; y < kartetest.getSizeY(); y++) {
@@ -89,6 +89,13 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
 			System.exit(0);
 		}
+	}
+
+	public void dealDamage() {
+		Sprite s = con.getCast().getLastsprite();
+		int damage = (int)Math.random()*5;
+		String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
+		datenbankupdaten(sql);
 	}
 
 	private void paintfps() {

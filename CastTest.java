@@ -17,6 +17,7 @@ public class CastTest   {
     private boolean run = false;
     private ArrayList<Sprite> sprites;
     private int hitID = -1;
+    private Sprite lastsprite;
 
     private int[] floorTextureDark;
     private int[] floorTexture;
@@ -66,21 +67,6 @@ public class CastTest   {
 
     public void drawGUI(Graphics g, Spieler s){
         g.drawImage(texManager.getGuiTexture(0),100,100,null);
-    }
-
-    public void updategame(){
-        game = con.getGame();
-        screenWidth = game.gibWidth();
-        screenHeight = game.gibHeight();
-        run = true;
-        Sprite test = new Sprite(15,15,"Barrel",0,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
-        sprites.add(test);
-        Sprite directional = new Sprite(14,11,"Player",0,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
-        sprites.add(directional);
-
-        depthBuffer = new double[screenWidth ];
-        loadFloorTexture();
-
     }
 
     public void paintMap(Graphics g, Karte k, Spieler s) {
@@ -371,17 +357,16 @@ public class CastTest   {
                 g.setColor(Color.GREEN);
                 g.drawString(s.getName(),screenWidth-((startDrawX+endDrawX)/2),startDrawY+40);
             }
+            if(startDrawX<(screenWidth/2) && (screenWidth/2)<endDrawX && startDrawY<(screenWidth/2) && (screenWidth/2)<endDrawY) {
+            	lastsprite = s;
+            }
             
             
 
         }
     }
-    
-    public int getHitID(){
-        return this.hitID;
-    }
 
-    private void  drawSky(Graphics g){
+    private void drawSky(Graphics g){
         int x, texX;
         double camX, rayAngle;
         for (int dx = 0; dx < screenWidth / stepSize; dx++) {
@@ -464,6 +449,20 @@ public class CastTest   {
             }
         }
     }
+    
+    public void updategame(){
+        game = con.getGame();
+        screenWidth = game.gibWidth();
+        screenHeight = game.gibHeight();
+        run = true;
+        Sprite test = new Sprite(15,15,"Barrel",0,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
+        sprites.add(test);
+        Sprite directional = new Sprite(14,11,"Player",0,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+        sprites.add(directional);
+
+        depthBuffer = new double[screenWidth ];
+        loadFloorTexture();
+    }
 
     public void setwallRes(int r) {
         stepSize = r;
@@ -479,6 +478,10 @@ public class CastTest   {
 
     public int getResolution() {
         return stepSize;
+    }
+
+    public int getHitID(){
+        return this.hitID;
     }
     
     private void abbau(Connection ver) {
@@ -500,4 +503,14 @@ public class CastTest   {
             return null;
         }
     }
+
+	
+	public Sprite getLastsprite() {
+		return lastsprite;
+	}
+
+	
+	public void setLastsprite(Sprite lastsprite) {
+		this.lastsprite = lastsprite;
+	}
 }

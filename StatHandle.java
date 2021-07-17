@@ -35,9 +35,9 @@ public class StatHandle
     {
         activePlayerObject.damageDealtToPlayer(amount);
     }
-    public void playerSchießen()
+    public void playerSchiesen()
     {
-        this.activePlayerObject.schießen();
+        this.activePlayerObject.schiesen();
     }
     
     public void creatNewEnemy()

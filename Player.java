@@ -30,13 +30,13 @@ public class Player
         handler.updatePlayerLiveState(aliveChecker);
     }
 
-    public void schießen()
-    {
+    public void schiesen()
+    {/*
         int a = 5;
         int i = caster.getHitID();
         if(i>-1){
             baum.eneArray[i].statScript.dealDamage(a);
-        }
+        }*/
     }
 
     public void setPlayer(Spieler temp)
@@ -81,9 +81,9 @@ public class Player
 
 	public void shoot(int damage, int rngOAW)
     {
-        double yCO = actPlay.getX();
-        double xCO = actPlay.getY();
-        double rotat = actPlay.getRotation();
+        //double yCO = actPlay.getX();
+        //double xCO = actPlay.getY();
+        //double rotat = actPlay.getRotation();
 
     }
 

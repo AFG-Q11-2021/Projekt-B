@@ -26,7 +26,7 @@ public class Controller {
         kartetest = katver.getMap();
         cast = new CastTest(this);
 
-        // Startmenü öffnen
+        // Startmenu oeffnen
         frame = new Framee("Startmenü", kartetest, this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1290, 1100);

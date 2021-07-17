@@ -128,4 +128,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     public void returne() {
         frame1.setVisible(true);
     }
+
+	public void dealDamage() {
+	}
 }
