@@ -186,7 +186,8 @@ public class CastTest   {
     
     public void paintMapMulti(Graphics g, Karte k, Spieler s) {
         if(run){
-            xPos = s.getX();
+            lastsprite = null;
+        	xPos = s.getX();
             yPos = s.getY();
             rot = Math.toRadians(-s.getRotation());
 
@@ -455,9 +456,9 @@ public class CastTest   {
         screenWidth = game.gibWidth();
         screenHeight = game.gibHeight();
         run = true;
-        Sprite test = new Sprite(15,15,"Barrel",0,0,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
+        Sprite test = new Sprite(15,15,"Barrel",0,-1,true,texManager.getSpriteTexture(16),texManager.getSpriteTexture(15),texManager.getSpriteTexture(14),texManager.getSpriteTexture(13),texManager.getSpriteTexture(12),texManager.getSpriteTexture(11),texManager.getSpriteTexture(10),texManager.getSpriteTexture(9));
         sprites.add(test);
-        Sprite directional = new Sprite(14,11,"Player",0,0,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
+        Sprite directional = new Sprite(14,11,"Player",0,-1,true,texManager.getSpriteTexture(8),texManager.getSpriteTexture(7),texManager.getSpriteTexture(6),texManager.getSpriteTexture(5),texManager.getSpriteTexture(4),texManager.getSpriteTexture(3),texManager.getSpriteTexture(2),texManager.getSpriteTexture(1));
         sprites.add(directional);
 
         depthBuffer = new double[screenWidth ];

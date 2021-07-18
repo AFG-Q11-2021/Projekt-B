@@ -93,9 +93,11 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
 	public void dealDamage() {
 		Sprite s = con.getCast().getLastsprite();
-		int damage = (int)Math.random()*5;
-		String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
-		datenbankupdaten(sql);
+		if (s.getID() > 0) {
+			int damage = (int) Math.random() * 5;
+			String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
+			datenbankupdaten(sql);
+		}
 	}
 
 	private void paintfps() {
