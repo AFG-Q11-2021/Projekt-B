@@ -15,7 +15,7 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private JFrame frame1;
     private KeyHandler key;
     private Spieler s;
-    private Karte kartetest;// für den Darsteller umschreiben
+    private Karte kartetest;// fuer den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
     private int csizeX, csizeY, width, height;
