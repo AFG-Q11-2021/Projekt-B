@@ -28,6 +28,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		key = new KeyHandler(con, this);
 		this.setPreferredSize(size);
 		this.addKeyListener(key);
+		this.addMouseListener(key);
 		setupframe();
 		csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
 		csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
