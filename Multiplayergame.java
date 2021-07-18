@@ -14,7 +14,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 	private KeyHandler key;
 	private Spieler s;
 	private Controller con;
-	private Karte kartetest;// für den Darsteller umschreiben
+	private Karte kartetest;// fuer den Darsteller umschreiben
 	private Graphics g;
 	private BufferStrategy bs;
 	private int csizeX, csizeY;
@@ -94,10 +94,13 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
 	public void dealDamage() {
 		Sprite s = con.getCast().getLastsprite();
-		if (s.getID() > 0) {
-			int damage = (int) Math.random() * 5;
-			String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
-			datenbankupdaten(sql);
+		if (s != null) {
+			if (s.getID() > 0) {
+				int damage = (int) Math.random() * 5;
+				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
+				datenbankupdaten(sql);
+				System.out.println("Schaden gegeben");
+			}
 		}
 	}
 
