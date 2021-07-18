@@ -1,4 +1,9 @@
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 //Author: Julius
 public class KeyHandler extends MouseAdapter implements KeyListener {
@@ -24,7 +29,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		//stat.playerSchiesen();
+		stat.playerSchiesen();
 		game.dealDamage();
 	}
 
@@ -52,7 +57,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 		}
 	}
 
-	public void movemPlayer(Multiplayergame m) {
+	public void movemPlayer() {
 		if (fwd == true) {
 			s.geradeGehen();
 		}
@@ -76,10 +81,26 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 		double r9 = s.getRotation();
 		String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
 				+ " WHERE name = '" + s.getUsername() + "'";
-		m.datenbankupdaten(sql);
+		String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
+		datenbankupdaten(sql);
+		Connection verbindung = null;
+		verbindung = aufbau(verbindung);
+		try {
+			Statement st = verbindung.createStatement();
+			ResultSet ergebnis = st.executeQuery(sql2);
+			while (ergebnis.next()) {
+				s.setLeben(ergebnis.getInt(1));
+			}
+			ergebnis.close();
+			st.close();
+			abbau(verbindung);
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
+			System.exit(0);
+		}
 
 		if (exit == true) {
-			m.datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
+			datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
 			System.exit(0);
 		}
 	}
@@ -148,5 +169,39 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+	}
+	
+	public void datenbankupdaten(String sql) {
+		Connection verbindung = null;
+		verbindung = aufbau(verbindung);
+		try {
+			Statement st = verbindung.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Einfuegen des Datensatzes: " + e);
+			System.exit(0);
+		}
+		abbau(verbindung);
+	}
+	
+	private Connection aufbau(Connection ver) {
+		try {
+			ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+			return ver;
+		} catch (Exception e) {
+			System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
+			System.exit(0);
+			return null;
+		}
+	}
+
+	private void abbau(Connection ver) {
+		try {
+			ver.close();
+		} catch (SQLException e) {
+			System.err.println("Fehler beim schliesen der Verbindung:" + e);
+			System.exit(0);
+		}
 	}
 }

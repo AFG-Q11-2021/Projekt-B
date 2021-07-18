@@ -45,7 +45,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		g = bs.getDrawGraphics();
 		g.setColor(new Color(37, 150, 190));
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		key.movemPlayer(this);
+		key.movemPlayer();
 
 		// Karte malen
 
@@ -54,6 +54,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		twod(s);
 
 		paintfps();
+		paintlives();
 		g.dispose();
 		bs.show();
 	}
@@ -104,6 +105,14 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		}
 	}
 
+	private void paintlives() {
+		String tempi = Integer.toString(s.getLeben());
+		char[] tulo = new char[tempi.length()];
+		tempi.getChars(0, tempi.length(), tulo, 0);
+		g.setColor(Color.GREEN);
+		g.drawChars(tulo, 0, tempi.length(), 900, 150);
+	}
+
 	private void paintfps() {
 		String tempi = Double.toString(Math.floor(con.getFPS()));
 		char[] tulo = new char[tempi.length()];
@@ -128,7 +137,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
 	}
 
-	public void datenbankupdaten(String sql) {
+	private void datenbankupdaten(String sql) {
 		Connection verbindung = null;
 		verbindung = aufbau(verbindung);
 		try {
@@ -136,7 +145,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 			st.executeUpdate(sql);
 			st.close();
 		} catch (SQLException e) {
-			System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
+			System.err.println("Fehler beim Einfuegen des Datensatzes: " + e);
 			System.exit(0);
 		}
 		abbau(verbindung);
@@ -157,7 +166,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		try {
 			ver.close();
 		} catch (SQLException e) {
-			System.err.println("Fehler beim schließen der Verbindung:" + e);
+			System.err.println("Fehler beim schliesen der Verbindung:" + e);
 			System.exit(0);
 		}
 	}

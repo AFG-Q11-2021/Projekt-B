@@ -5,6 +5,10 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @SuppressWarnings("serial")
 public class Singleplayergame extends Canvas implements Game, Returner {
@@ -55,39 +59,36 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         
         // 3D Bild
         con.getCast().paintMap(g, kartetest, s);
-        con.getCast().drawGUI(g,s);
+        con.getCast().drawGUI(g, s);
 
         // 2D Bild
-        // paintMap();
-        // paintPlayer();
+        // twod();
         paintfps();
+        paintlives();
         g.dispose();
         bs.show();
     }
     
-    private void paintfps(){
-        String tempi = Double.toString(Math.floor(con.getFPS()));
-        char[] tulo = new char[tempi.length()];
-        tempi.getChars(0, tempi.length(), tulo, 0);
-        g.setColor(Color.GREEN);
-        g.drawChars(tulo, 0, tempi.length(), 900, 100);
-    }
-
-    public void paintMap() {
-        g.setColor(Color.BLACK);
-        for (int x = 0; x < kartetest.getSizeX(); x++) {
-            for (int y = 0; y < kartetest.getSizeY(); y++) {
-                if (kartetest.getCoordinate(x, y) != 0) {
-                    g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                } else {
-                    g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                }
-            }
-        }
-    }
-
-    public void paintPlayer() {
-        double rotRad = Math.toRadians(s.getRotation());
+    private void paintlives() {
+		String tempi = Integer.toString(s.getLeben());
+		char[] tulo = new char[tempi.length()];
+		tempi.getChars(0, tempi.length(), tulo, 0);
+		g.setColor(Color.GREEN);
+		g.drawChars(tulo, 0, tempi.length(), 900, 150);
+	}
+    
+    private void twod(Spieler sp) {
+		g.setColor(Color.BLACK);
+		for (int x = 0; x < kartetest.getSizeX(); x++) {
+			for (int y = 0; y < kartetest.getSizeY(); y++) {
+				if (kartetest.getCoordinate(x, y) != 0) {
+					g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
+				} else {
+					g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
+				}
+			}
+		}
+		double rotRad = Math.toRadians(s.getRotation());
         int xc = (int) (s.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
         int yc = (int) (s.getY() * csizeY);
@@ -95,6 +96,14 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
+	}
+    
+    private void paintfps(){
+        String tempi = Double.toString(Math.floor(con.getFPS()));
+        char[] tulo = new char[tempi.length()];
+        tempi.getChars(0, tempi.length(), tulo, 0);
+        g.setColor(Color.GREEN);
+        g.drawChars(tulo, 0, tempi.length(), 900, 100);
     }
 
     public int gibWidth() {
