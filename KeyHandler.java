@@ -24,7 +24,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		stat.playerSchiesen();
+		//stat.playerSchiesen();
 		game.dealDamage();
 	}
 
