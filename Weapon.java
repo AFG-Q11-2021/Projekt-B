@@ -10,16 +10,15 @@ import java.awt.image.*;
 public class Weapon {
 	private BufferedImage standardTexture;
 	private BufferedImage shootingTexture;
-	private int damagePerBullet;
-	private int magazineSize;
-	private double timeToReload;
-	private double shootDelay;
+	private int damagePerBullet, magazineSize;
+	private double timeToReload, shootDelay;
 
 	public Weapon(int _damagePerBullet, int _magazineSize, double _timeToReload, BufferedImage standardTexture,
 			BufferedImage shootingTexture) {
 		setDamagePerBullet(_damagePerBullet);
 		setMagazineSize(_magazineSize);
 		setTimeToReload(_timeToReload);
+		//shootDelay
 		this.setStandardTexture(standardTexture);
 		this.setShootingTexture(shootingTexture);
 	}

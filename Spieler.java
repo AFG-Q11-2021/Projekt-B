@@ -6,10 +6,8 @@ public class Spieler {
 													// Drehgeschwindigkeit
 	private String username;
 	private Karte karte;
-
 	private Weapon[] weapons;
 	private Weapon usedWeapon;
-
 	private int leben;
 
 	public Spieler(String usernameNeu, double s, double r, Karte k, Controller c) {

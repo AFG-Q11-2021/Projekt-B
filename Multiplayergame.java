@@ -93,18 +93,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		}
 	}
 
-	public void dealDamage() {
-		Sprite s = con.getCast().getLastsprite();
-		if (s != null) {
-			if (s.getID() > 0) {
-				int damage = (int) Math.random() * 5;
-				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE ID = '" + s.getID() + "'";
-				datenbankupdaten(sql);
-				System.out.println("Schaden gegeben");
-			}
-		}
-	}
-
 	private void paintlives() {
 		String tempi = Integer.toString(s.getLeben());
 		char[] tulo = new char[tempi.length()];
@@ -135,6 +123,19 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		tempi.getChars(0, tempi.length(), tulo, 0);
 		g.setColor(Color.GREEN);
 		g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
+	}
+
+	public void dealDamage() {
+		Sprite su = con.getCast().getLastsprite();
+		if (su != null) {
+			if (su.getID() > 0) {
+				// int damage = (int) Math.random() * 5;
+				int damage = s.getUsedWeapon().getDamagePerBullet();
+				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
+				datenbankupdaten(sql);
+				System.out.println("Schaden gegeben");
+			}
+		}
 	}
 
 	private void datenbankupdaten(String sql) {
