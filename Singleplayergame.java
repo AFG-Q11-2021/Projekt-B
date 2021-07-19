@@ -1,14 +1,10 @@
 /**
- * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
+ * @author Christopher Scheruebl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 @SuppressWarnings("serial")
 public class Singleplayergame extends Canvas implements Game, Returner {

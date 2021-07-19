@@ -14,7 +14,7 @@ public class Controller {
     private Framee frame;
     private Karte kartetest;
     private TextureManager textureManager;
-    private CastTest cast;
+    private Caster cast;
     private StatHandle stat;
     private KartenVerwalter katver;
 
@@ -24,7 +24,7 @@ public class Controller {
         katver = new KartenVerwalter();
         katver.setActiveMap(0);
         kartetest = katver.getMap();
-        cast = new CastTest(this);
+        cast = new Caster(this);
 
         // Startmenu oeffnen
         frame = new Framee("Startmenü", kartetest, this);
@@ -92,7 +92,7 @@ public class Controller {
         return this.frame;
     }
 
-    public CastTest getCast(){
+    public Caster getCast(){
         return this.cast;
     }
 

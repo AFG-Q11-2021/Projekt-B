@@ -170,7 +170,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 
 	public void keyTyped(KeyEvent e) {
 	}
-	
+
 	public void datenbankupdaten(String sql) {
 		Connection verbindung = null;
 		verbindung = aufbau(verbindung);
@@ -184,7 +184,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
 		}
 		abbau(verbindung);
 	}
-	
+
 	private Connection aufbau(Connection ver) {
 		try {
 			ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");

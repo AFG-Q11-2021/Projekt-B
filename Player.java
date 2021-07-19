@@ -10,11 +10,11 @@ public class Player
     public StatHandle handler;
     public int maxH, curH, maxA, curA;
     public boolean aliveChecker;
-    public CastTest caster;
+    public Caster caster;
     public int ammoType1, ammoType2, ammoType3;
     public GegnerBaum baum;
     public Random randomGen;
-    public Player(Spieler playTemp, StatHandle statTemp, int max, CastTest castert)
+    public Player(Spieler playTemp, StatHandle statTemp, int max, Caster castert)
     {
         baum = new GegnerBaum(handler);
         caster = castert;

@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.image.*;
 import java.sql.*;
 
-//Author: Julius(primär), Laurens
+//Author: Julius(primar), Laurens
 @SuppressWarnings("serial")
 public class Multiplayergame extends Canvas implements Game, Returner {
 
