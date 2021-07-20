@@ -55,7 +55,6 @@ public class Settings extends JFrame implements ActionListener, KeyListener {
         setSize(1290, 1100);
         setLayout(null);
         setVisible(true);
-
     }
 
     private void save() {
