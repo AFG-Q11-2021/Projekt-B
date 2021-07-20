@@ -50,6 +50,24 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         // Karte malen
 
         con.getCast().paintMapMulti(g, kartetest, s);
+        String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
+        Connection verbindung = null;
+        verbindung = aufbau(verbindung);
+        try {
+            Statement st = verbindung.createStatement();
+            ResultSet ergebnis = st.executeQuery(sql2);
+            while (ergebnis.next()) {
+
+                s.setLeben(ergebnis.getInt(1));
+
+            }
+            ergebnis.close();
+            st.close();
+            abbau(verbindung);
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Auslesen der Datenbank: " + e);
+            System.exit(0);
+        }
 
         twod(s);
         paintfps();

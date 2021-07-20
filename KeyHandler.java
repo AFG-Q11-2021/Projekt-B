@@ -83,26 +83,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
         double r9 = s.getRotation();
         String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
                 + " WHERE name = '" + s.getUsername() + "'";
-        String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
         datenbankupdaten(sql);
-        Connection verbindung = null;
-        verbindung = aufbau(verbindung);
-        try {
-            Statement st = verbindung.createStatement();
-            ResultSet ergebnis = st.executeQuery(sql2);
-            while (ergebnis.next()) {
-
-                con.getSpieler().setLeben(ergebnis.getInt(1));
-
-            }
-            ergebnis.close();
-            st.close();
-            abbau(verbindung);
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Auslesen der Datenbank: " + e);
-            System.exit(0);
-        }
-
         if (exit == true) {
             datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
             System.exit(0);
