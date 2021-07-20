@@ -129,8 +129,8 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         Sprite su = con.getCast().getLastsprite();
         if (su != null) {
             if (su.getID() > 0) {
-                // int damage = (int) Math.random() * 5;
-                int damage = s.getUsedWeapon().getDamagePerBullet();
+                int damage = (int) Math.random() * 5;
+                //int damage = s.getUsedWeapon().getDamagePerBullet();
                 String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
                 datenbankupdaten(sql);
                 System.out.println("Schaden gegeben");
