@@ -101,6 +101,6 @@ public class Framee extends JFrame implements ActionListener, Returner {
         this.speedr = speedrr;
     }
 
-	public void dealDamage() {		
-	}
+    public void dealDamage() {        
+    }
 }
