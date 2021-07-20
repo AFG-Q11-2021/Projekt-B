@@ -15,7 +15,7 @@ public class Controller {
     private Karte kartetest;
     private TextureManager textureManager;
     private Caster cast;
-    private StatHandle stat;
+
     private KartenVerwalter katver;
 
     public Controller() {
@@ -96,13 +96,7 @@ public class Controller {
         return this.cast;
     }
 
-    public void setStatHandle(StatHandle stemp){
-        stat = stemp;
-    }
-
-    public StatHandle getStatHandle(){
-        return stat;
-    }
+    
     
     public double getFPS(){
         return fps;

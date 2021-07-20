@@ -10,7 +10,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
     private Controller con;
     private Returner game;
     private Spieler s;
-    private StatHandle stat;
+
     private double speedm;
     private boolean rotRight = false;
     private boolean rotLeft = false;
@@ -25,7 +25,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
         game = g;
         s = con.getSpieler();
         speedm = s.getSpeed();
-        stat = con.getStatHandle();
+
     }
 
     public void mouseClicked(MouseEvent e) {

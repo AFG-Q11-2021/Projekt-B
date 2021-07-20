@@ -2,8 +2,8 @@
 
 public class Spieler {
     private double x, rotation, y, speedm, speedr; // Postion x (Koordinatensystem), Drehung, Postion y
-                                                    // (Koordinatensystem), Bewegungsgeschwindigkeit,
-                                                    // Drehgeschwindigkeit
+    // (Koordinatensystem), Bewegungsgeschwindigkeit,
+    // Drehgeschwindigkeit
     private String username;
     private Karte karte;
     private Weapon[] weapons;
@@ -20,7 +20,7 @@ public class Spieler {
         speedr = r;
         setKarte(k);
         setUsedWeapon(
-                new Weapon(10, 100, 0.1, c.getTextureManager().getTexture(3), c.getTextureManager().getTexture(3)));
+            new Weapon(10, 100, 0.1, c.getTextureManager().getTexture(3), c.getTextureManager().getTexture(3)));
     }
 
     public Spieler(String usernameNeu) {
@@ -149,17 +149,6 @@ public class Spieler {
         leben = l;
     }
 
-    // ab hier von Samuel
-
-    private Player spielerStat;
-    private Enemy[] enemyArray = new Enemy[9999];
-    private int i;
-
-    public void insertEnemy(Enemy temp) {
-        if (i < enemyArray.length) {
-            enemyArray[i] = temp;
-        }
-    }
 
     public Weapon[] getWeapons() {
         return weapons;
@@ -177,11 +166,4 @@ public class Spieler {
         this.usedWeapon = usedWeapon;
     }
 
-    public Player getSpielerStat() {
-        return spielerStat;
-    }
-
-    public void setSpielerStat(Player spielerStat) {
-        this.spielerStat = spielerStat;
-    }
 }
