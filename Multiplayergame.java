@@ -75,15 +75,12 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		}
 
 
-
 		twod(s);
 		paintfps();
 		paintlives();
 		g.dispose();
 		bs.show();
 	}
-
-
 
 	private void twod(Spieler sp) {
 		g.setColor(Color.BLACK);
@@ -117,7 +114,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
 			System.exit(0);
 		}
-
 	}
 
 	private void paintlives() {
@@ -126,7 +122,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		tempi.getChars(0, tempi.length(), tulo, 0);
 		g.setColor(Color.GREEN);
 		g.drawChars(tulo, 0, tempi.length(), 900, 150);
-
 	}
 	
 	private void paintfps() {
@@ -154,7 +149,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
 
 	}
-
 
 	public void dealDamage() {
 		Sprite su = con.getCast().getLastsprite();

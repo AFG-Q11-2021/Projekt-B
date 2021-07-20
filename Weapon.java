@@ -14,6 +14,7 @@ public class Weapon {
 
     public Weapon(int _damagePerBullet, int _magazineSize, double _timeToReload, BufferedImage standardTexture,
     BufferedImage shootingTexture) {
+
         setDamagePerBullet(_damagePerBullet);
         setMagazineSize(_magazineSize);
         setTimeToReload(_timeToReload);
