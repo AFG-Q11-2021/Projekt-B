@@ -46,7 +46,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movemPlayer();
-
+        s = con.getSpieler();
         // Karte malen
 
         con.getCast().paintMapMulti(g, kartetest, s);

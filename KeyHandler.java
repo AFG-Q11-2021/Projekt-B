@@ -89,7 +89,7 @@ public class KeyHandler extends MouseAdapter implements KeyListener {
             Statement st = verbindung.createStatement();
             ResultSet ergebnis = st.executeQuery(sql2);
             while (ergebnis.next()) {
-                s.setLeben(ergebnis.getInt(1));
+                con.getSpieler().setLeben(ergebnis.getInt(1));
             }
             ergebnis.close();
             st.close();
