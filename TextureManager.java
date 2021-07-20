@@ -36,6 +36,7 @@ public class TextureManager {
         loadTexture(15, "textures/brickWallPrison.png");
         loadTexture(16, "textures/woodPlankWallBanner.png");
         loadTexture(17, "textures/woodPlankWallBanner2.png");
+        loadTexture(18, "textures/Blumentopffertig/png");
 
         //Dark Textures
         createDarkTexture(0);
