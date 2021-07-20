@@ -1,12 +1,15 @@
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 //Author: Julius
-public class KeyHandler implements KeyListener, MouseListener
-{
+public class KeyHandler extends MouseAdapter implements KeyListener {
     private Controller con;
     private Returner game;
     private Spieler s;
-    private StatHandle stat;
+
     private double speedm;
     private boolean rotRight = false;
     private boolean rotLeft = false;
@@ -15,29 +18,20 @@ public class KeyHandler implements KeyListener, MouseListener
     private boolean left = false;
     private boolean right = false;
     private boolean exit;
-    public KeyHandler(Controller c, Returner g)
-    {
+
+    public KeyHandler(Controller c, Returner g) {
         con = c;
         game = g;
         s = con.getSpieler();
         speedm = s.getSpeed();
-        stat = con.getStatHandle();
+
     }
-    
-    public void mouseExited(MouseEvent e){
-    }
-    
-    public void mouseEntered(MouseEvent e){
-    }
-    
-    public void mouseClicked(MouseEvent e){
-        stat.playerSchießen();
-    }
-    
-    public void mouseReleased(MouseEvent e){
-    }
-    
-    public void mousePressed(MouseEvent e){
+
+    public void mouseClicked(MouseEvent e) {
+
+        //stat.playerSchiesen();
+
+        game.dealDamage();
     }
 
     public void movesPlayer() {
@@ -59,12 +53,12 @@ public class KeyHandler implements KeyListener, MouseListener
         if (rotLeft == true) {
             s.linksdrehen();
         }
-        if (exit == true){
+        if (exit == true) {
             System.exit(0);
         }
     }
 
-    public void movemPlayer(Multiplayergame m){
+    public void movemPlayer() {
         if (fwd == true) {
             s.geradeGehen();
         }
@@ -87,11 +81,10 @@ public class KeyHandler implements KeyListener, MouseListener
         double y9 = s.getY();
         double r9 = s.getRotation();
         String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-            + " WHERE name = '" + s.getUsername() + "'";
-        m.datenbankupdaten(sql);
-
-        if (exit == true){
-            m.datenbankupdaten("DELETE FROM multiplayer WHERE name = '"+s.getUsername()+"'");
+                + " WHERE name = '" + s.getUsername() + "'";
+        datenbankupdaten(sql);
+        if (exit == true) {
+            datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
             System.exit(0);
         }
     }
@@ -100,9 +93,6 @@ public class KeyHandler implements KeyListener, MouseListener
         game.getFrame().setVisible(false);
         con.getCast().setRun(false);
         new Settings(game, s.getSpeed(), s.getSpeedr(), con);
-    }
-
-    public void keyTyped(KeyEvent e) {
     }
 
     public void keyPressed(KeyEvent e) {
@@ -130,8 +120,8 @@ public class KeyHandler implements KeyListener, MouseListener
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             rotLeft = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
-            s.setSpeed(speedm*2);
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            s.setSpeed(speedm * 2);
         }
     }
 
@@ -157,9 +147,45 @@ public class KeyHandler implements KeyListener, MouseListener
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             rotLeft = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             s.setSpeed(speedm);
         }
     }
 
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void datenbankupdaten(String sql) {
+        Connection verbindung = null;
+        verbindung = aufbau(verbindung);
+        try {
+            Statement st = verbindung.createStatement();
+            st.executeUpdate(sql);
+            st.close();
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Einfuegen des Datensatzes: " + e);
+            System.exit(0);
+        }
+        abbau(verbindung);
+    }
+
+    private Connection aufbau(Connection ver) {
+        try {
+            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+            return ver;
+        } catch (Exception e) {
+            System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
+            System.exit(0);
+            return null;
+        }
+    }
+
+    private void abbau(Connection ver) {
+        try {
+            ver.close();
+        } catch (SQLException e) {
+            System.err.println("Fehler beim schliesen der Verbindung:" + e);
+            System.exit(0);
+        }
+    }
 }

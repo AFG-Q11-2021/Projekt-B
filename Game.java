@@ -13,5 +13,5 @@ public interface Game {
     abstract void setSpieler(Spieler spiler);
 
     abstract Graphics getGraphics();
-    
+
 }

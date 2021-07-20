@@ -7,6 +7,8 @@ public interface Returner {
     abstract void setSpeed(double spielers);
 
     abstract void setSpeedr(double r);
-    
+
     abstract JFrame getFrame();
+
+    abstract void dealDamage();
 }

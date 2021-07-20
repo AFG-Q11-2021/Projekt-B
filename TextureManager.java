@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 import java.io.*;
+
 //Author: Laurens
 public class TextureManager {
     private BufferedImage[] textures, darkTextures, skyTextures, spriteTextures, guiTextures;
@@ -12,26 +13,34 @@ public class TextureManager {
         skyTextures = new BufferedImage[10];
         spriteTextures = new BufferedImage[20];
         guiTextures = new BufferedImage[10];
-
+        
+        //Sky Textures
         loadSkyTexture(0, "textures/sky.png");
 
-        loadTexture(0,  "textures/sheetMetal.png");
-        loadTexture(1,  "textures/brickWall.png");
-        loadTexture(2,  "textures/brickWallPainting.png");
-        loadTexture(3,  "textures/woodPlankWall.png");
-        loadTexture(4,  "textures/brickWallred.png");
-        loadTexture(5,  "textures/brickWall.png");
-        loadTexture(6,  "textures/brickWallBloodVariation1.png");
-        loadTexture(7,  "textures/brickWallBloodVariation2.png");
-        loadTexture(8,  "textures/brickWalltotenkopf.png");
-        loadTexture(9,  "textures/woodPlankWallblood.png");
+        //Textures
+        loadTexture(0, "textures/sheetMetal.png");
+        loadTexture(1, "textures/brickWall.png");
+        loadTexture(2, "textures/brickWallPainting.png");
+        loadTexture(3, "textures/woodPlankWall.png");
+        loadTexture(4, "textures/brickWallred.png");
+        loadTexture(5, "textures/brickWall.png");
+        loadTexture(6, "textures/brickWallBloodVariation1.png");
+        loadTexture(7, "textures/brickWallBloodVariation2.png");
+        loadTexture(8, "textures/brickWalltotenkopf.png");
+        loadTexture(9, "textures/woodPlankWallblood.png");
         loadTexture(10, "textures/woodPlankBoden.png");
         loadTexture(11, "textures/brickWallredandbluefusion.png");
         loadTexture(12, "textures/brickWallPainting Hr.Wolf.png");
         loadTexture(13, "textures/brickWallWithGun.png");
         loadTexture(14, "textures/brickWallWithRocket.png");
         loadTexture(15, "textures/brickWallPrison.png");
-        
+
+        loadTexture(16, "textures/woodPlankWallBanner.png");
+        loadTexture(17, "textures/woodPlankWallBanner2.png");
+        loadTexture(18, "textures/Blumentopffertig/png");
+
+
+        //Dark Textures
         createDarkTexture(0);
         createDarkTexture(1);
         createDarkTexture(2);
@@ -49,20 +58,24 @@ public class TextureManager {
         createDarkTexture(14);
         createDarkTexture(15);
 
-        //Sprite Textures
+        createDarkTexture(16);
+        createDarkTexture(17);
+
+
+        // Sprite Textures
         loadSpriteTexture(0, "textures/explosiveBarrel.png");
-        
+
         loadSpriteTexture(1, "textures/testHuman01.png");
         loadSpriteTexture(2, "textures/testHuman02.png");
         loadSpriteTexture(3, "textures/testHuman03.png");
-        loadSpriteTexture(4, "textures/testHuman04.png");//mensch
+        loadSpriteTexture(4, "textures/testHuman04.png");// mensch
         loadSpriteTexture(5, "textures/testHuman05.png");
         loadSpriteTexture(6, "textures/testHuman06.png");
         loadSpriteTexture(7, "textures/testHuman07.png");
         loadSpriteTexture(8, "textures/testHuman08.png");
 
         loadSpriteTexture(9 , "textures/barrel01.png");
-        loadSpriteTexture(10, "textures/barrel02.png");//fass
+        loadSpriteTexture(10, "textures/barrel02.png");// fass
         loadSpriteTexture(11, "textures/barrel03.png");
         loadSpriteTexture(12, "textures/barrel04.png");
         loadSpriteTexture(13, "textures/barrel05.png");
@@ -70,7 +83,7 @@ public class TextureManager {
         loadSpriteTexture(15, "textures/barrel07.png");
         loadSpriteTexture(16, "textures/barrel08.png");
 
-        //GUI Textures
+        // GUI Textures
         loadGuiTexture(0, "textures/Lebensanzeige.png");
 
     }
@@ -78,8 +91,8 @@ public class TextureManager {
     public BufferedImage getTexture(int texID) {
         return textures[texID];
     }
-    
-    public BufferedImage getGuiTexture(int texID){
+
+    public BufferedImage getGuiTexture(int texID) {
         return guiTextures[texID];
     }
 
@@ -98,7 +111,7 @@ public class TextureManager {
     private void loadTexture(int index, String path) {
         try {
             textures[index] = ImageIO.read(new File(path));
-        } catch (java.io.IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -106,15 +119,15 @@ public class TextureManager {
     private void loadSpriteTexture(int index, String path) {
         try {
             spriteTextures[index] = ImageIO.read(new File(path));
-        } catch (java.io.IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
-    
-    private void loadGuiTexture(int index, String path){
-        try{
+
+    private void loadGuiTexture(int index, String path) {
+        try {
             guiTextures[index] = ImageIO.read(new File(path));
-        } catch(java.io.IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -122,7 +135,7 @@ public class TextureManager {
     private void loadSkyTexture(int index, String path) {
         try {
             skyTextures[index] = ImageIO.read(new File(path));
-        } catch (java.io.IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }

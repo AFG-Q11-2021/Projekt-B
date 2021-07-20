@@ -1,3 +1,4 @@
+
 /**
  * Multiplayer Class
  *
@@ -14,7 +15,7 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     private Bild build;
     private JLabel label;
     private static JTextField name;
-    private JButton starten, test1;
+    private JButton starten;
     private Karte kartetest;
     private double spielerspeed, speedr;
     private Controller con;
@@ -28,12 +29,9 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         kartetest = k;
         spielerspeed = s;
         speedr = r;
-        
 
         starten = new JButton("Spiel starten");
         starten.setBounds(450, 600, 350, 40);
-        test1 = new JButton("delete");
-        test1.setBounds(400, 300, 100, 50);
         name = new JTextField("", 20);
         name.setBounds(400, 530, 450, 40);
 
@@ -45,10 +43,9 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         label.setBackground(Color.WHITE);
         starten.addActionListener(this);
 
-        build= new Bild();
+        build = new Bild();
         build.setBounds(0, 0, 1290, 1100);
 
-        add(test1);
         add(label);
         add(name);
         add(starten);
@@ -57,7 +54,7 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         setVisible(true);
     }
 
-    public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             starten1();
             this.setVisible(false);
@@ -69,22 +66,16 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
             starten1();
             this.setVisible(false);
         }
-        if (e.getSource() == test1){
-            dele();
-        }
-    }
 
-    private void dele(){
-        datenbankinsert("DELETE FROM multiplayer");
     }
 
     public void starten1() {
-        Spieler spieleri = new Spieler(name.getText(), spielerspeed, speedr, kartetest,con);
-        
+        Spieler spieleri = new Spieler(name.getText(), spielerspeed, speedr, kartetest, con);
+
         String sql = "INSERT INTO multiplayer (name, xposition, yposition, rotation, leben, state) VALUES ('"
-            + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
-            + spieleri.getRotation() + ", " + spieleri.getLeben() + ", " + 0 + ")";
-            
+                + spieleri.getUsername() + "', " + spieleri.getX() + ", " + spieleri.getY() + ", "
+                + spieleri.getRotation() + ", " + spieleri.getLeben() + ", " + 0 + ")";
+
         datenbankinsert(sql);
         con.setSpieler(spieleri);
         Multiplayergame game = new Multiplayergame(kartetest, con);
@@ -94,7 +85,8 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
     private void datenbankinsert(String sql) {
         Connection verbindung = null;
         try {
-            verbindung = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+            verbindung = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein",
+                    "abitur");
         } catch (SQLException e) {
             System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
             System.exit(0);
@@ -115,9 +107,9 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         }
     }
 
-    public void keyTyped(KeyEvent e){
+    public void keyTyped(KeyEvent e) {
     }
 
-    public void keyReleased(KeyEvent e){
+    public void keyReleased(KeyEvent e) {
     }
 }

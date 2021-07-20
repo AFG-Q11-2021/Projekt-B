@@ -1,5 +1,6 @@
+
 /**
- * @author Christopher Scherübl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
+ * @author Christopher Scheruebl, Laurens Birkenbach, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.1
  */
 import java.awt.*;
@@ -11,19 +12,19 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private JFrame frame1;
     private KeyHandler key;
     private Spieler s;
-    private Karte kartetest;// für den Darsteller umschreiben
+    private Karte kartetest;// fuer den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
     private int csizeX, csizeY, width, height;
     private Controller con;
-    //private boolean shoot = false;
+    // private boolean shoot = false;
 
     public Singleplayergame(Karte k, Controller c) {
         kartetest = k;
         con = c;
         key = new KeyHandler(con, this);
         frame1 = new JFrame();
-        frame1.setPreferredSize(new Dimension(1000,1000));
+        frame1.setPreferredSize(new Dimension(1000, 1000));
         frame1.setTitle("Game");
         frame1.add(this);
         frame1.pack();
@@ -39,8 +40,8 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         bs = this.getBufferStrategy();
         this.addKeyListener(key);
         this.addMouseListener(key);
-        
-       // con.getCast().updategame();
+
+        // con.getCast().updategame();
     }
 
     public void update() {
@@ -49,31 +50,22 @@ public class Singleplayergame extends Canvas implements Game, Returner {
 
     public void render() {
         g = bs.getDrawGraphics();
-        //g.setColor(new Color(37, 150, 190));
-        //g.fillRect(0, 0, WIDTH, HEIGHT);
+        // g.setColor(new Color(37, 150, 190));
+        // g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movesPlayer();
-        
+
         // 3D Bild
         con.getCast().paintMap(g, kartetest, s);
-        con.getCast().drawGUI(g,s);
+        con.getCast().drawGUI(g, s);
 
         // 2D Bild
-        // paintMap();
-        // paintPlayer();
+        // twod();
         paintfps();
         g.dispose();
         bs.show();
     }
-    
-    private void paintfps(){
-        String tempi = Double.toString(Math.floor(con.getFPS()));
-        char[] tulo = new char[tempi.length()];
-        tempi.getChars(0, tempi.length(), tulo, 0);
-        g.setColor(Color.GREEN);
-        g.drawChars(tulo, 0, tempi.length(), 900, 100);
-    }
 
-    public void paintMap() {
+    private void twod(Spieler sp) {
         g.setColor(Color.BLACK);
         for (int x = 0; x < kartetest.getSizeX(); x++) {
             for (int y = 0; y < kartetest.getSizeY(); y++) {
@@ -84,9 +76,6 @@ public class Singleplayergame extends Canvas implements Game, Returner {
                 }
             }
         }
-    }
-
-    public void paintPlayer() {
         double rotRad = Math.toRadians(s.getRotation());
         int xc = (int) (s.getX() * csizeX);
         int xl = (int) (Math.sin(rotRad) * 20);
@@ -95,6 +84,14 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         g.setColor(Color.RED);
         g.fillOval(xc - 5, yc - 5, 10, 10);
         g.drawLine(xc, yc, xc + xl, yc + yl);
+    }
+
+    private void paintfps() {
+        String tempi = Double.toString(Math.floor(con.getFPS()));
+        char[] tulo = new char[tempi.length()];
+        tempi.getChars(0, tempi.length(), tulo, 0);
+        g.setColor(Color.GREEN);
+        g.drawChars(tulo, 0, tempi.length(), 900, 100);
     }
 
     public int gibWidth() {
@@ -121,11 +118,14 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         s.setSpeedr(speedr);
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame1;
     }
 
     public void returne() {
         frame1.setVisible(true);
+    }
+
+    public void dealDamage() {
     }
 }

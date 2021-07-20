@@ -3,34 +3,39 @@ import javax.swing.*;
 import java.awt.image.*;
 import java.sql.*;
 
-//Author: Julius(primär), Laurens
+//Author: Julius(primar), Laurens
 @SuppressWarnings("serial")
 public class Multiplayergame extends Canvas implements Game, Returner {
 
-    private JFrame frame1;
-    private String title = "Game";
-    private final int WIDTH = 1000;
-    private final int HEIGHT = 1000;
-    private KeyHandler key;
-    private Spieler s;
-    private Controller con;
-    private Karte kartetest;// für den Darsteller umschreiben
-    private Graphics g;
-    private BufferStrategy bs;
-    private int csizeX, csizeY;
 
-    public Multiplayergame(Karte k, Controller c) {
-        kartetest = k;
-        con = c;
-        s = con.getSpieler();
-        frame1 = new JFrame();
-        Dimension size = new Dimension(WIDTH, HEIGHT);
-        key = new KeyHandler(con, this);
-        this.setPreferredSize(size);
-        this.addKeyListener(key);
-        setupframe();
-        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
-        csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
+	private JFrame frame1;
+	private String title = "Game";
+	private final int WIDTH = 1000;
+	private final int HEIGHT = 1000;
+	private KeyHandler key;
+	private Spieler s;
+	private Controller con;
+	private Karte kartetest;// fuer den Darsteller umschreiben
+	private Graphics g;
+	private BufferStrategy bs;
+	private int csizeX, csizeY;
+
+
+
+	public Multiplayergame(Karte k, Controller c) {
+		kartetest = k;
+		con = c;
+		s = con.getSpieler();
+		frame1 = new JFrame();
+		Dimension size = new Dimension(WIDTH, HEIGHT);
+		key = new KeyHandler(con, this);
+		this.setPreferredSize(size);
+		this.addKeyListener(key);
+		this.addMouseListener(key);
+		setupframe();
+		csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
+		csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
+
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
@@ -40,146 +45,207 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
     }
 
-    public void render() {
-        g = bs.getDrawGraphics();
-        g.setColor(new Color(37, 150, 190));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        key.movemPlayer(this);
 
-        // Karte malen
+	public void render() {
+		g = bs.getDrawGraphics();
+		g.setColor(new Color(37, 150, 190));
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		key.movemPlayer();
+		s = con.getSpieler();
+		// Karte malen
 
-        con.getCast().paintMapMulti(g, kartetest, s);
+		con.getCast().paintMapMulti(g, kartetest, s);
+		String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
+		Connection verbindung = null;
+		verbindung = aufbau(verbindung);
+		try {
+			Statement st = verbindung.createStatement();
+			ResultSet ergebnis = st.executeQuery(sql2);
+			while (ergebnis.next()) {
 
-        twod(s);
+				s.setLeben(ergebnis.getInt(1));
 
-        paintfps();
-        g.dispose();
-        bs.show();
-    }
+			}
+			ergebnis.close();
+			st.close();
+			abbau(verbindung);
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
+			System.exit(0);
+		}
 
-    private void twod (Spieler sp) {
-        g.setColor(Color.BLACK);
-        for (int x = 0; x < kartetest.getSizeX(); x++) {
-            for (int y = 0; y < kartetest.getSizeY(); y++) {
-                if (kartetest.getCoordinate(x, y) != 0) {
-                    g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                } else {
-                    g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                }
-            }
-        }
-        Spieler h;
-        Connection verbindung = null;
-        String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer";
-        verbindung = aufbau(verbindung);
-        try {
-            Statement st = verbindung.createStatement();
-            ResultSet ergebnis = st.executeQuery(sql2);
-            while (ergebnis.next()) {
-                h = new Spieler(ergebnis.getString(1));
-                h.setX(ergebnis.getDouble(2));
-                h.setY(ergebnis.getDouble(3));
-                h.setRotation(ergebnis.getDouble(4));
-                paintPlayer(h);
-            }
-            ergebnis.close();
-            st.close();
-            abbau(verbindung);
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Auslesen der Datenbank: " + e);
-            System.exit(0);
-        }
-    }
 
-    private void paintfps() {
-        String tempi = Double.toString(Math.floor(con.getFPS()));
-        char[] tulo = new char[tempi.length()];
-        tempi.getChars(0, tempi.length(), tulo, 0);
-        g.setColor(Color.GREEN);
-        g.drawChars(tulo, 0, tempi.length(), 900, 100);
-    }
 
-    private void paintPlayer(Spieler s) {
-        double rotRad = Math.toRadians(s.getRotation());
-        int xc = (int) (s.getX() * csizeX);
-        int xl = (int) (Math.sin(rotRad) * 20);
-        int yc = (int) (s.getY() * csizeY);
-        int yl = (int) (Math.cos(rotRad) * 20);
-        g.setColor(Color.RED);
-        g.fillOval(xc - 5, yc - 5, 10, 10);
-        g.drawLine(xc, yc, xc + xl, yc + yl);
-        String tempi = s.getUsername();
-        char[] tulo = new char[tempi.length()];
-        tempi.getChars(0, tempi.length(), tulo, 0);
-        g.setColor(Color.GREEN);
-        g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
-    }
+		twod(s);
+		paintfps();
+		paintlives();
+		g.dispose();
+		bs.show();
+	}
 
-    public void datenbankupdaten(String sql) {
-        Connection verbindung = null;
-        verbindung = aufbau(verbindung);
-        try {
-            Statement st = verbindung.createStatement();
-            st.executeUpdate(sql);
-            st.close();
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen des Datensatzes: " + e);
-            System.exit(0);
-        }
-        abbau(verbindung);
-    }
 
-    private Connection aufbau(Connection ver) {
-        try {
-            ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
-            return ver;
-        } catch (Exception e) {
-            System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
-            System.exit(0);
-            return null;
-        }
-    }
 
-    private void abbau(Connection ver) {
-        try {
-            ver.close();
-        } catch (SQLException e) {
-            System.err.println("Fehler beim schließen der Verbindung:" + e);
-            System.exit(0);
-        }
-    }
+	private void twod(Spieler sp) {
+		g.setColor(Color.BLACK);
+		for (int x = 0; x < kartetest.getSizeX(); x++) {
+			for (int y = 0; y < kartetest.getSizeY(); y++) {
+				if (kartetest.getCoordinate(x, y) != 0) {
+					g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
+				} else {
+					g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
+				}
+			}
+		}
+		Spieler h;
+		Connection verbindung = null;
+		String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer";
+		verbindung = aufbau(verbindung);
+		try {
+			Statement st = verbindung.createStatement();
+			ResultSet ergebnis = st.executeQuery(sql2);
+			while (ergebnis.next()) {
+				h = new Spieler(ergebnis.getString(1));
+				h.setX(ergebnis.getDouble(2));
+				h.setY(ergebnis.getDouble(3));
+				h.setRotation(ergebnis.getDouble(4));
+				paintPlayer(h);
+			}
+			ergebnis.close();
+			st.close();
+			abbau(verbindung);
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
+			System.exit(0);
+		}
 
-    public int gibWidth() {
-        return WIDTH;
-    }
+	}
 
-    public int gibHeight() {
-        return HEIGHT;
-    }
+	private void paintlives() {
+		String tempi = Integer.toString(s.getLeben());
+		char[] tulo = new char[tempi.length()];
+		tempi.getChars(0, tempi.length(), tulo, 0);
+		g.setColor(Color.GREEN);
+		g.drawChars(tulo, 0, tempi.length(), 900, 150);
 
-    public Graphics getGraphics() {
-        return this.g;
-    }
+	}
+	
+	private void paintfps() {
+		String tempi = Double.toString(Math.floor(con.getFPS()));
+		char[] tulo = new char[tempi.length()];
+		tempi.getChars(0, tempi.length(), tulo, 0);
+		g.setColor(Color.GREEN);
+		g.drawChars(tulo, 0, tempi.length(), 900, 100);
 
-    public void setSpieler(Spieler spiler) {
-        s = spiler;
-    }
+	}
 
-    public void returne() {
-        frame1.setVisible(true);
-    }
+	private void paintPlayer(Spieler s) {
+		double rotRad = Math.toRadians(s.getRotation());
+		int xc = (int) (s.getX() * csizeX);
+		int xl = (int) (Math.sin(rotRad) * 20);
+		int yc = (int) (s.getY() * csizeY);
+		int yl = (int) (Math.cos(rotRad) * 20);
+		g.setColor(Color.RED);
+		g.fillOval(xc - 5, yc - 5, 10, 10);
+		g.drawLine(xc, yc, xc + xl, yc + yl);
+		String tempi = s.getUsername();
+		char[] tulo = new char[tempi.length()];
+		tempi.getChars(0, tempi.length(), tulo, 0);
+		g.setColor(Color.GREEN);
+		g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
 
-    public void setSpeed(double spielers) {
-        s.setSpeed(spielers);
-    }
+	}
 
-    public void setSpeedr(double speedr) {
-        s.setSpeedr(speedr);
-    }
 
-    public JFrame getFrame() {
-        return frame1;
-    }
+	public void dealDamage() {
+		Sprite su = con.getCast().getLastsprite();
+		if (su != null) {
+			if (su.getID() > 0) {
+				int damage = (int) Math.random() * 5;
+				// int damage = s.getUsedWeapon().getDamagePerBullet();
+				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
+				datenbankupdaten(sql);
+				System.out.println("Schaden gegeben");
+			
+			}
+		}
+
+	}
+
+	private void datenbankupdaten(String sql) {
+		Connection verbindung = null;
+		verbindung = aufbau(verbindung);
+		try {
+			Statement st = verbindung.createStatement();
+			st.executeUpdate(sql);
+			st.close();
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Einfuegen des Datensatzes: " + e);
+			System.exit(0);
+		}
+		abbau(verbindung);
+	}
+
+	private Connection aufbau(Connection ver) {
+		try {
+			ver = DriverManager.getConnection("jdbc:mysql://srvxampp/q11wolfenstein", "q11wolfenstein", "abitur");
+			return ver;
+		} catch (Exception e) {
+			System.err.println("Datenbankfehler(Verbindungsaufbau): " + e);
+			System.exit(0);
+			return null;
+		}
+
+	}
+
+	private void abbau(Connection ver) {
+		try {
+			ver.close();
+		} catch (SQLException e) {
+			System.err.println("Fehler beim schliesen der Verbindung:" + e);
+			System.exit(0);
+		}
+	}
+
+	public int gibWidth() {
+		return WIDTH;
+
+	}
+
+	public int gibHeight() {
+		return HEIGHT;
+
+	}
+
+	public Graphics getGraphics() {
+		return this.g;
+
+	}
+
+	public void setSpieler(Spieler spiler) {
+		s = spiler;
+
+	}
+
+	public void returne() {
+		frame1.setVisible(true);
+
+	}
+
+	public void setSpeed(double spielers) {
+		s.setSpeed(spielers);
+
+	}
+
+	public void setSpeedr(double speedr) {
+		s.setSpeedr(speedr);
+
+	}
+
+	public JFrame getFrame() {
+		return frame1;
+
+	}
+
 
     private void setupframe() {
         frame1.setTitle(title);
