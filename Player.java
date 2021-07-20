@@ -79,7 +79,7 @@ public class Player
         }
     }
 
-	public void shoot(int damage, int rngOAW)
+    public void shoot(int damage, int rngOAW)
     {
         double yCO = actPlay.getX();
         double xCO = actPlay.getY();
