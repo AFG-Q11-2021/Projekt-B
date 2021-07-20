@@ -7,7 +7,6 @@ import java.sql.*;
 @SuppressWarnings("serial")
 public class Multiplayergame extends Canvas implements Game, Returner {
 
-
 	private JFrame frame1;
 	private String title = "Game";
 	private final int WIDTH = 1000;
@@ -19,8 +18,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 	private Graphics g;
 	private BufferStrategy bs;
 	private int csizeX, csizeY;
-
-
 
 	public Multiplayergame(Karte k, Controller c) {
 		kartetest = k;
@@ -36,15 +33,13 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
 		csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
 
+		this.createBufferStrategy(3);
+		bs = this.getBufferStrategy();
+	}
 
-        this.createBufferStrategy(3);
-        bs = this.getBufferStrategy();
-    }
+	public void update() {
 
-    public void update() {
-
-    }
-
+	}
 
 	public void render() {
 		g = bs.getDrawGraphics();
@@ -73,7 +68,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 			System.err.println("Fehler beim Auslesen der Datenbank: " + e);
 			System.exit(0);
 		}
-
 
 		twod(s);
 		paintfps();
@@ -123,7 +117,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		g.setColor(Color.GREEN);
 		g.drawChars(tulo, 0, tempi.length(), 900, 150);
 	}
-	
+
 	private void paintfps() {
 		String tempi = Double.toString(Math.floor(con.getFPS()));
 		char[] tulo = new char[tempi.length()];
@@ -159,7 +153,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
 				datenbankupdaten(sql);
 				System.out.println("Schaden gegeben");
-			
+
 			}
 		}
 
@@ -240,13 +234,12 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
 	}
 
-
-    private void setupframe() {
-        frame1.setTitle(title);
-        frame1.add(this);
-        frame1.pack();
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame1.setLocationRelativeTo(null);
-        frame1.setVisible(true);
-    }
+	private void setupframe() {
+		frame1.setTitle(title);
+		frame1.add(this);
+		frame1.pack();
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame1.setLocationRelativeTo(null);
+		frame1.setVisible(true);
+	}
 }
