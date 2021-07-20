@@ -34,6 +34,8 @@ public class TextureManager {
 		loadTexture(13, "textures/brickWallWithGun.png");
 		loadTexture(14, "textures/brickWallWithRocket.png");
 		loadTexture(15, "textures/brickWallPrison.png");
+		loadTexture(16, "textures/woodPlankWallBanner.png");
+		loadTexture(17, "textures/woodPlankWallBanner2.png");
 
 		//Dark Textures
 		createDarkTexture(0);
@@ -52,6 +54,8 @@ public class TextureManager {
 		createDarkTexture(13);
 		createDarkTexture(14);
 		createDarkTexture(15);
+		createDarkTexture(16);
+		createDarkTexture(17);
 
 		// Sprite Textures
 		loadSpriteTexture(0, "textures/explosiveBarrel.png");
