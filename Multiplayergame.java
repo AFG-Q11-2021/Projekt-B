@@ -148,12 +148,11 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 		Sprite su = con.getCast().getLastsprite();
 		if (su != null) {
 			if (su.getID() > 0) {
-				int damage = (int) Math.random() * 5;
+				//int damage = (int) Math.random() * 5;
 				// int damage = s.getUsedWeapon().getDamagePerBullet();
-				String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
+				String sql = "UPDATE multiplayer SET leben = leben-" + 5 + " WHERE name = '" + su.getName() + "'";
 				datenbankupdaten(sql);
-				System.out.println("Schaden gegeben");
-
+				System.out.println("Schaden gegeben:" + su.getName());
 			}
 		}
 
@@ -196,42 +195,34 @@ public class Multiplayergame extends Canvas implements Game, Returner {
 
 	public int gibWidth() {
 		return WIDTH;
-
 	}
 
 	public int gibHeight() {
 		return HEIGHT;
-
 	}
 
 	public Graphics getGraphics() {
 		return this.g;
-
 	}
 
 	public void setSpieler(Spieler spiler) {
 		s = spiler;
-
 	}
 
 	public void returne() {
 		frame1.setVisible(true);
-
 	}
 
 	public void setSpeed(double spielers) {
 		s.setSpeed(spielers);
-
 	}
 
 	public void setSpeedr(double speedr) {
 		s.setSpeedr(speedr);
-
 	}
 
 	public JFrame getFrame() {
 		return frame1;
-
 	}
 
 	private void setupframe() {
