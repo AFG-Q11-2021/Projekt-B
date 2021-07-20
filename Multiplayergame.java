@@ -46,13 +46,12 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movemPlayer();
-
+        s = con.getSpieler();
         // Karte malen
 
         con.getCast().paintMapMulti(g, kartetest, s);
 
         twod(s);
-
         paintfps();
         paintlives();
         g.dispose();
@@ -91,6 +90,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
             System.err.println("Fehler beim Auslesen der Datenbank: " + e);
             System.exit(0);
         }
+
     }
 
     private void paintlives() {
@@ -99,6 +99,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         tempi.getChars(0, tempi.length(), tulo, 0);
         g.setColor(Color.GREEN);
         g.drawChars(tulo, 0, tempi.length(), 900, 150);
+
     }
 
     private void paintfps() {
@@ -107,6 +108,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         tempi.getChars(0, tempi.length(), tulo, 0);
         g.setColor(Color.GREEN);
         g.drawChars(tulo, 0, tempi.length(), 900, 100);
+
     }
 
     private void paintPlayer(Spieler s) {
@@ -123,19 +125,21 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         tempi.getChars(0, tempi.length(), tulo, 0);
         g.setColor(Color.GREEN);
         g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
+
     }
 
     public void dealDamage() {
         Sprite su = con.getCast().getLastsprite();
         if (su != null) {
             if (su.getID() > 0) {
-                // int damage = (int) Math.random() * 5;
-                int damage = s.getUsedWeapon().getDamagePerBullet();
+                int damage = (int) Math.random() * 5;
+                //int damage = s.getUsedWeapon().getDamagePerBullet();
                 String sql = "UPDATE multiplayer SET leben = leben-" + damage + " WHERE name = '" + su.getName() + "'";
                 datenbankupdaten(sql);
                 System.out.println("Schaden gegeben");
             }
         }
+
     }
 
     private void datenbankupdaten(String sql) {
@@ -149,8 +153,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
             System.err.println("Fehler beim Einfuegen des Datensatzes: " + e);
             System.exit(0);
         }
-        abbau(verbindung);
-    }
+        abbau(verbindung);}
 
     private Connection aufbau(Connection ver) {
         try {
@@ -161,6 +164,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
             System.exit(0);
             return null;
         }
+
     }
 
     private void abbau(Connection ver) {
@@ -169,39 +173,46 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         } catch (SQLException e) {
             System.err.println("Fehler beim schliesen der Verbindung:" + e);
             System.exit(0);
-        }
-    }
+        }}
 
     public int gibWidth() {
         return WIDTH;
+
     }
 
     public int gibHeight() {
         return HEIGHT;
+
     }
 
     public Graphics getGraphics() {
         return this.g;
+
     }
 
     public void setSpieler(Spieler spiler) {
         s = spiler;
+
     }
 
     public void returne() {
         frame1.setVisible(true);
+
     }
 
     public void setSpeed(double spielers) {
         s.setSpeed(spielers);
+
     }
 
     public void setSpeedr(double speedr) {
         s.setSpeedr(speedr);
+
     }
 
     public JFrame getFrame() {
         return frame1;
+
     }
 
     private void setupframe() {
