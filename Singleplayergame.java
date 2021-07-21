@@ -39,7 +39,6 @@ public class Singleplayergame extends Canvas implements Game, Returner {
         this.createBufferStrategy(2);
         bs = this.getBufferStrategy();
         this.addKeyListener(key);
-        this.addMouseListener(key);
 
         // con.getCast().updategame();
     }
