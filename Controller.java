@@ -24,6 +24,7 @@ public class Controller {
         katver = new KartenVerwalter();
         katver.setActiveMap(0);
         kartetest = katver.getMap();
+        System.out.println("test");
         cast = new Caster(this);
 
         // Startmenu oeffnen
@@ -96,8 +97,6 @@ public class Controller {
         return this.cast;
     }
 
-    
-    
     public double getFPS(){
         return fps;
     }
