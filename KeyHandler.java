@@ -74,7 +74,7 @@ public class KeyHandler extends KeyAdapter {
         double y9 = s.getY();
         double r9 = s.getRotation();
         String sql = "UPDATE multiplayer SET xposition = " + x9 + ", yposition = " + y9 + ", rotation = " + r9
-                + " WHERE name = '" + s.getUsername() + "'";
+            + " WHERE name = '" + s.getUsername() + "'";
         datenbankupdaten(sql);
         if (exit == true) {
             datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
