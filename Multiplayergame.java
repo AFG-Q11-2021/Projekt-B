@@ -67,6 +67,10 @@ public class Multiplayergame extends Canvas implements Game, Returner {
             System.err.println("Fehler beim Auslesen der Datenbank: " + e);
             System.exit(0);
         }
+        if (s.getLeben()<=0) {
+            datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
+            System.exit(0);
+        }
 
         twod(s);
         paintfps();
