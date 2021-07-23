@@ -41,7 +41,7 @@ public class Caster {
         sprites.clear();
         Connection verbindung = null;
         String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer WHERE name !='"
-                + sp.getUsername() + "'";
+            + sp.getUsername() + "'";
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
@@ -167,10 +167,10 @@ public class Caster {
                 xdraw = screenWidth - x;
                 if (side == 1) {
                     g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                            topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 } else {
                     g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                            topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 }
                 for (int i = 0; i < stepSize; i++) {
                     depthBuffer[x + i] = perpWallDist;
@@ -283,10 +283,10 @@ public class Caster {
                 xdraw = screenWidth - x;
                 if (side == 1) {
                     g.drawImage(texManager.getTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                            topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 } else {
                     g.drawImage(texManager.getDarkTexture(texID), xdraw - stepSize - 1, topPixel, xdraw + stepSize,
-                            topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
+                        topPixel + columnHeight, texX, 0, texX + 1, texRes, null);
                 }
                 for (int i = 0; i < stepSize; i++) {
                     depthBuffer[x + i] = perpWallDist;
@@ -301,14 +301,14 @@ public class Caster {
 
     private void sortSprites() {
         Collections.sort(sprites, new Comparator<Sprite>() {
-            @Override
-            public int compare(Sprite s1, Sprite s2) {
-                double dsts1 = (xPos - s1.x) * (xPos - s1.x) + (yPos - s1.y) * (yPos - s1.y);
-                double dsts2 = (xPos - s2.x) * (xPos - s2.x) + (yPos - s2.y) * (yPos - s2.y);
+                @Override
+                public int compare(Sprite s1, Sprite s2) {
+                    double dsts1 = (xPos - s1.x) * (xPos - s1.x) + (yPos - s1.y) * (yPos - s1.y);
+                    double dsts2 = (xPos - s2.x) * (xPos - s2.x) + (yPos - s2.y) * (yPos - s2.y);
 
-                return new Double(dsts2).compareTo(dsts1);
-            }
-        });
+                    return new Double(dsts2).compareTo(dsts1);
+                }
+            });
     }
 
     private void drawSprites(Graphics g) {
@@ -343,7 +343,7 @@ public class Caster {
                 int texx = (int) (((ix - startDrawX) * 1.0 / dWidth * 1.0) * spriteResX);
                 if (tranY > 0 && ix > 0 && ix < screenWidth && tranY < depthBuffer[ix]) {
                     g.drawImage(s.getDirectTexture(xPos, yPos), screenWidth - ix, startDrawY, screenWidth - ix + 1,
-                            endDrawY, spriteResX - texx, 0, spriteResX - texx - 1, spriteResY, null);
+                        endDrawY, spriteResX - texx, 0, spriteResX - texx - 1, spriteResY, null);
                     painted = true;
                 }
                 if (Math.abs(ix - (screenWidth / 2)) < 3) {
@@ -355,7 +355,7 @@ public class Caster {
                 g.drawString(s.getName(), screenWidth - ((startDrawX + endDrawX) / 2), startDrawY + 40);
             }
             if (startDrawX < (screenWidth / 2) && (screenWidth / 2) < endDrawX && startDrawY < (screenWidth / 2)
-                    && (screenWidth / 2) < endDrawY) {
+            && (screenWidth / 2) < endDrawY) {
                 lastsprite = s;
             }
 
@@ -377,7 +377,7 @@ public class Caster {
                 texX -= 1000;
             }
             g.drawImage(texManager.getSkyTexture(0), x - stepSize - 1, 0, x + stepSize, screenHeight, texX, 100,
-                    texX + 1, 250, null);
+                texX + 1, 250, null);
         }
         // g.setColor(new Color(90, 90, 90));
         // g.fillRect(0, screenHeight / 2, (int) game.gibWidth(), ((int)
@@ -469,7 +469,11 @@ public class Caster {
     }
 
     public void drawGUI(Graphics g, Spieler s) {
-        g.drawImage(texManager.getGuiTexture(0), 100, 100, null);
+      /*  if(s.getState() == 0){
+            g.drawImage(s.getUsedWeapon().getStandardTexture(), 100, 100, null);
+        } else {
+              g.drawImage(s.getUsedWeapon().getShootingTexture(), 100, 100, null);
+        }*/
     }
 
     public void setwallRes(int r) {
