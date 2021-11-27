@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class Controller {
     // instance variables - replace the example below with your own
-    private static int FPS = 60;
+    private static int FPS = 61;
     private static boolean running = false;
     private double fps;
     private Game game;
