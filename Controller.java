@@ -6,12 +6,6 @@
 import javax.swing.*;
 
 public class Controller {
-<<<<<<< HEAD
-    // instance variables - replace the example below with your own
-    private static int FPS = 61;
-    private static boolean running = false;
-=======
->>>>>>> fdccf2b76d40963074afb66115bc461917bc7699
     private double fps;
     private Game game;
     private Spieler spieler;
