@@ -1,24 +1,24 @@
 /**
  * Framee Class
- * @author Christopher ScherÃ¼bl, Timon Weiss, Julius Rommel (07.05.2021 n.Chr);
+ * @author Christopher Scherübl, Timon Weiss, Julius Rommel (07.05.2021 n.Chr);
  * @version 0.2
  */
 import java.awt.event.*;
 import javax.swing.*;
 
+
 @SuppressWarnings("serial")
 public class Framee extends JFrame implements ActionListener, Returner {
-    private JButton single, multi, settings, ende;
-    private Bild build;
+    private final JButton single, ende, settings, multi;
     private static Karte kartetest;
     private double spielerspeed, speedr;
-    private Controller con;
+    private final Controller con;
 
     public Framee(String title, Karte k, Controller c) {
         super(title);
         kartetest = k;
         con = c;
-        single = new JButton("Single Player");
+        single = new JButton("Single Player TEST");
         single.setBounds(280, 590, 750, 50);
         single.addActionListener(this);
         add(single);
@@ -38,7 +38,7 @@ public class Framee extends JFrame implements ActionListener, Returner {
         ende.addActionListener(this);
         add(ende);
 
-        build = new Bild();
+        Bild build = new Bild();
         build.setBounds(0, 0, 1290, 1100);
         add(build);
 
@@ -64,12 +64,15 @@ public class Framee extends JFrame implements ActionListener, Returner {
     }
 
     private void singel() {
-        Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest,con);
-
+        Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest, con);
         con.setSpieler(sppileri);
-        Singleplayergame gamee = new Singleplayergame(kartetest, con);
+        Singleplayergame gamee = new Singleplayergame( con);
+        MulticastSingle cast = new MulticastSingle(con, gamee);
+        Thread t = new Thread(cast);
         gamee.setSpieler(sppileri);
         con.setGame(gamee);
+        cast.updategame();
+        t.start();
     }
 
     private void mluti() {
@@ -101,6 +104,6 @@ public class Framee extends JFrame implements ActionListener, Returner {
         this.speedr = speedrr;
     }
 
-    public void dealDamage() {        
+    public void dealDamage() {
     }
 }

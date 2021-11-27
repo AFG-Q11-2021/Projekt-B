@@ -1,45 +1,40 @@
-
 /**
- * @author Laurens Birkenbach, Christopher ScherÃ¼bl, Julius Rommel, Niklas RÃ¶sner, Samuel Titt (13.07.2021 n.Chr);
+ * @author Laurens Birkenbach, Christopher Scherübl, Julius Rommel, Niklas Rösner, Samuel Titt (13.07.2021 n.Chr);
  * @version 0.2
  */
+
 import javax.swing.*;
 
 public class Controller {
-    // instance variables - replace the example below with your own
-    private static int FPS = 60;
-    private static boolean running = false;
     private double fps;
     private Game game;
     private Spieler spieler;
-    private Framee frame;
-    private Karte kartetest;
+    private final Framee frame;
     private TextureManager textureManager;
-    private Caster cast;
-
-    private KartenVerwalter katver;
+    private final Caster cast;
+    private final int FPS = 60;
 
     public Controller() {
-        running = true;
+        boolean running = true;
         setTextureManager(new TextureManager());
-        katver = new KartenVerwalter();
+        KartenVerwalter katver = new KartenVerwalter();
         katver.setActiveMap(0);
-        kartetest = katver.getMap();
+        Karte kartetest = katver.getMap();
         cast = new Caster(this);
-
         // Startmenu oeffnen
-        frame = new Framee("StartmenÃ¼", kartetest, this);
+        frame = new Framee("Startmenü", kartetest, this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1290, 1100);
         frame.setLayout(null);
         frame.setVisible(true);
 
         long lastupdate = System.nanoTime();
-        long currentTime = System.nanoTime();
+        long currentTime;
         while (running) {
             currentTime = System.nanoTime();
+            // instance variables - replace the example below with your own
             if (currentTime - lastupdate > 1000000000 / FPS) {
-                // Update();
+                //Update();
                 Render();
                 fps = 1000000000.0 / (currentTime - lastupdate);
                 lastupdate = currentTime;
