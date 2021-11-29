@@ -17,8 +17,9 @@ public class Singleplayergame extends Canvas implements Game, Returner {
     private final Controller con;
     // private boolean shoot = false;
 
-    public Singleplayergame( Controller c) {
+    public Singleplayergame(Controller c, Spieler sp) {
         con = c;
+        s = sp;
         key = new KeyHandler(con, this);
         frame1 = new JFrame();
         frame1.setPreferredSize(new Dimension(1000, 1000));

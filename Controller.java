@@ -34,8 +34,8 @@ public class Controller {
             currentTime = System.nanoTime();
             // instance variables - replace the example below with your own
             if (currentTime - lastupdate > 1000000000 / FPS) {
-                //Update();
-                Render();
+                Update();
+                //Render();
                 fps = 1000000000.0 / (currentTime - lastupdate);
                 lastupdate = currentTime;
             }

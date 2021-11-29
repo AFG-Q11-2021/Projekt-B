@@ -17,7 +17,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
     private Karte kartetest;// fuer den Darsteller umschreiben
     private Graphics g;
     private BufferStrategy bs;
-    private int csizeX, csizeY;
 
     public Multiplayergame(Karte k, Controller c) {
         kartetest = k;
@@ -29,15 +28,14 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         this.setPreferredSize(size);
         this.addKeyListener(key);
         setupframe();
-        csizeX = (int) gibWidth() / kartetest.getSizeX() / 2;
-        csizeY = (int) gibHeight() / kartetest.getSizeY() / 2;
 
         this.createBufferStrategy(3);
         bs = this.getBufferStrategy();
     }
 
     public void update() {
-
+    	key.movemPlayer();
+    	updatelives();
     }
 
     public void render() {
@@ -45,20 +43,26 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         g.setColor(new Color(37, 150, 190));
         g.fillRect(0, 0, WIDTH, HEIGHT);
         key.movemPlayer();
-        s = con.getSpieler();
+        updatelives();
+        
         // Karte malen
-
         con.getCast().paintMapMulti(g, kartetest, s);
-        String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
+        paintfps();
+        paintlives();
+        
+        g.dispose();
+        bs.show();
+    }
+
+	private void updatelives() {
+		String sql2 = "SELECT leben FROM multiplayer WHERE name = '" + s.getUsername() + "'";
         Connection verbindung = null;
         verbindung = aufbau(verbindung);
         try {
             Statement st = verbindung.createStatement();
             ResultSet ergebnis = st.executeQuery(sql2);
             while (ergebnis.next()) {
-
                 s.setLeben(ergebnis.getInt(1));
-
             }
             ergebnis.close();
             st.close();
@@ -71,47 +75,7 @@ public class Multiplayergame extends Canvas implements Game, Returner {
             datenbankupdaten("DELETE FROM multiplayer WHERE name = '" + s.getUsername() + "'");
             System.exit(0);
         }
-
-        twod(s);
-        paintfps();
-        paintlives();
-        g.dispose();
-        bs.show();
-    }
-
-    private void twod(Spieler sp) {
-        g.setColor(Color.BLACK);
-        for (int x = 0; x < kartetest.getSizeX(); x++) {
-            for (int y = 0; y < kartetest.getSizeY(); y++) {
-                if (kartetest.getCoordinate(x, y) != 0) {
-                    g.fillRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                } else {
-                    g.drawRect(x * csizeX, y * csizeY, csizeX, csizeY);
-                }
-            }
-        }
-        Spieler h;
-        Connection verbindung = null;
-        String sql2 = "SELECT name, xposition, yposition, rotation, ID FROM multiplayer";
-        verbindung = aufbau(verbindung);
-        try {
-            Statement st = verbindung.createStatement();
-            ResultSet ergebnis = st.executeQuery(sql2);
-            while (ergebnis.next()) {
-                h = new Spieler(ergebnis.getString(1));
-                h.setX(ergebnis.getDouble(2));
-                h.setY(ergebnis.getDouble(3));
-                h.setRotation(ergebnis.getDouble(4));
-                paintPlayer(h);
-            }
-            ergebnis.close();
-            st.close();
-            abbau(verbindung);
-        } catch (SQLException e) {
-            System.err.println("Fehler beim Auslesen der Datenbank: " + e);
-            System.exit(0);
-        }
-    }
+	}
 
     private void paintlives() {
         String tempi = Integer.toString(s.getLeben());
@@ -127,24 +91,6 @@ public class Multiplayergame extends Canvas implements Game, Returner {
         tempi.getChars(0, tempi.length(), tulo, 0);
         g.setColor(Color.GREEN);
         g.drawChars(tulo, 0, tempi.length(), 900, 100);
-
-    }
-
-    private void paintPlayer(Spieler s) {
-        double rotRad = Math.toRadians(s.getRotation());
-        int xc = (int) (s.getX() * csizeX);
-        int xl = (int) (Math.sin(rotRad) * 20);
-        int yc = (int) (s.getY() * csizeY);
-        int yl = (int) (Math.cos(rotRad) * 20);
-        g.setColor(Color.RED);
-        g.fillOval(xc - 5, yc - 5, 10, 10);
-        g.drawLine(xc, yc, xc + xl, yc + yl);
-        String tempi = s.getUsername();
-        char[] tulo = new char[tempi.length()];
-        tempi.getChars(0, tempi.length(), tulo, 0);
-        g.setColor(Color.GREEN);
-        g.drawChars(tulo, 0, tempi.length(), xc - 10, yc - 6);
-
     }
 
     public void dealDamage() {

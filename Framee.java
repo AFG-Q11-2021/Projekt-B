@@ -66,11 +66,10 @@ public class Framee extends JFrame implements ActionListener, Returner {
     private void singel() {
         Spieler sppileri = new Spieler("Spieler", spielerspeed, speedr, kartetest, con);
         con.setSpieler(sppileri);
-        Singleplayergame gamee = new Singleplayergame( con);
+        Singleplayergame gamee = new Singleplayergame(con, sppileri);
+        con.setGame(gamee);
         MulticastSingle cast = new MulticastSingle(con, gamee);
         Thread t = new Thread(cast);
-        gamee.setSpieler(sppileri);
-        con.setGame(gamee);
         cast.updategame();
         t.start();
     }
