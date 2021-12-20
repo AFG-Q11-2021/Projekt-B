@@ -80,6 +80,10 @@ public class Multiplayer extends JFrame implements ActionListener, KeyListener {
         con.setSpieler(spieleri);
         Multiplayergame game = new Multiplayergame(kartetest, con);
         con.setGame(game);
+        MulticastMulti cast = new MulticastMulti(con, game);
+        Thread t = new Thread(cast);
+        cast.updategame();
+        t.start();
     }
 
     private void datenbankinsert(String sql) {
